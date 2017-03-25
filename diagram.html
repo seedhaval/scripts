@@ -1,0 +1,81 @@
+<!DOCTYPE HTML>
+<html>
+<head>
+<style>
+	body {
+		margin: 0px;
+		padding: 0px;
+	}
+</style>
+<script type='text/javascript'>
+var canvas;
+var context;
+
+function drawrect(x,y,w,h){
+	context.beginPath();
+	context.rect(x, y, w, h);
+	context.strokeStyle = 'black';
+	context.stroke();
+	context.closePath();
+}
+
+function drawline(x1,y1,x2,y2){
+	context.beginPath();
+	context.moveTo(x1,y1)
+	context.lineTo(x2, y2);
+	context.stroke();
+	context.closePath();
+}
+
+function clearcanvas(){
+	context.clearRect(0, 0, canvas.width, canvas.height);
+	drawrect(1,1,canvas.width - 2, canvas.height - 2);
+}
+
+function resize(w,h){
+	canvas.width = w;
+	canvas.height = h;
+	clearcanvas();
+}
+
+function init(){
+	canvas = document.getElementById('myCanvas');
+	context = canvas.getContext('2d');
+
+	clearcanvas();
+	document.getElementById('text').focus();
+}
+
+function draw(){
+var lines = document.getElementById('text').value.split("\n");
+
+	for(var i = 0; i < lines.length; i++){
+		var typ = lines[i].split(" ");
+		switch(typ[0]){
+			case 'rect':
+					drawrect(typ[1],typ[2],typ[3],typ[4]);
+					break;
+			case 'line':
+					drawline(typ[1],typ[2],typ[3],typ[4]);
+					break;
+			case 'resize':
+					resize(typ[1],typ[2]);
+					break;
+			case 'clear':
+					clearcanvas();
+					break;
+		}
+	}
+	document.getElementById('text').focus();
+}
+
+</script>
+</head>
+<body onload='init()'>
+<textarea id="text" cols="80" rows="10"></textarea>
+<br />
+<button type='button' onclick='draw()'>Draw</button>
+<br />
+<canvas id="myCanvas" width="578" height="200"></canvas>
+</body>
+</html>
