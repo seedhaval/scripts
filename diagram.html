@@ -1,12 +1,6 @@
 <!DOCTYPE HTML>
 <html>
 <head>
-<style>
-	body {
-		margin: 0px;
-		padding: 0px;
-	}
-</style>
 <script type='text/javascript'>
 var canvas;
 var context;
@@ -19,11 +13,42 @@ function drawrect(x,y,w,h){
 	context.closePath();
 }
 
+function drawtext(x,y,t){
+	context.beginPath();
+	context.font = "14px Arial";
+	context.fillText(t,x,y);
+	context.closePath();
+}
+
 function drawline(x1,y1,x2,y2){
 	context.beginPath();
 	context.moveTo(x1,y1)
 	context.lineTo(x2, y2);
 	context.stroke();
+	context.closePath();
+}
+
+function drawarrow(x1,y1,x2,y2){
+	var headlen = 7;
+	var angle = Math.atan2(y2-y1, x2-x1);
+	var v1 = Math.PI / 6;
+	var x3 = x2 - headlen * Math.cos( angle - v1 );
+	var y3 = y2 - headlen * Math.sin( angle - v1 );
+	var x4 = x2 - headlen * Math.cos( angle + v1 );
+	var y4 = y2 - headlen * Math.sin( angle + v1 );
+
+	context.beginPath();
+	context.moveTo(x1, y1);
+	context.lineTo(x2, y2);
+	context.stroke();
+	context.closePath();
+
+	context.beginPath();
+	context.moveTo(x2, y2);
+	context.lineTo(x3, y3);
+	context.lineTo(x4, y4);
+	context.stroke();
+	context.fill();
 	context.closePath();
 }
 
@@ -58,8 +83,18 @@ var lines = document.getElementById('text').value.split("\n");
 			case 'line':
 					drawline(typ[1],typ[2],typ[3],typ[4]);
 					break;
+			case 'text':
+					var s1 = lines[i].indexOf(' ');
+					var s2 = lines[i].indexOf(' ', s1 + 1);
+					var s3 = lines[i].indexOf(' ', s2 + 1);
+					var t = lines[i].substring(s3);
+					drawtext(typ[1],typ[2],t);
+					break;
 			case 'resize':
 					resize(typ[1],typ[2]);
+					break;
+			case 'arrow':
+					drawarrow(typ[1],typ[2],typ[3],typ[4]);
 					break;
 			case 'clear':
 					clearcanvas();
