@@ -8,9 +8,37 @@ var context;
 function drawrect(x,y,w,h){
 	context.beginPath();
 	context.rect(x, y, w, h);
-	context.strokeStyle = 'black';
 	context.stroke();
 	context.closePath();
+}
+
+function drawcircle(x,y,r){
+	context.beginPath();
+	context.arc(x, y, r, 0, 2*Math.PI);
+	context.stroke();
+	context.closePath();
+}
+
+function drawkite(x,y,w,h){
+	x = x * 1;
+	y = y * 1;
+	w = w * 1;
+	h = h * 1;
+
+	var x1 = x + (w/2);
+	var x2 = x;
+	var x3 = x1;
+	var x4 = x + w;
+
+	var y1 = y;
+	var y2 = y + (h/2);
+	var y3 = y + h;
+	var y4 = y2;
+
+	drawline(x1,y1,x2,y2);
+	drawline(x2,y2,x3,y3);
+	drawline(x3,y3,x4,y4);
+	drawline(x4,y4,x1,y1);
 }
 
 function drawtext(x,y,t){
@@ -80,8 +108,14 @@ var lines = document.getElementById('text').value.split("\n");
 			case 'rect':
 					drawrect(typ[1],typ[2],typ[3],typ[4]);
 					break;
+			case 'kite':
+					drawkite(typ[1],typ[2],typ[3],typ[4]);
+					break;
 			case 'line':
 					drawline(typ[1],typ[2],typ[3],typ[4]);
+					break;
+			case 'circle':
+					drawcircle(typ[1],typ[2],typ[3]);
 					break;
 			case 'text':
 					var s1 = lines[i].indexOf(' ');
