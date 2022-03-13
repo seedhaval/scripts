@@ -1,0 +1,37 @@
+grep
+   context
+      -A
+         after
+      -B
+         before
+      -C
+         context
+      -n
+         line number
+   expression
+      -e
+         pattern. multiple -e can
+be specified
+      -P
+         perl regex
+      modifier
+         -v
+            invert match
+         -i
+            ignore case
+   output
+      -s
+         suppress warnings
+      -m
+         max matches in file
+      -o
+         only matching
+      -c
+         count
+   file / folder
+      -h
+         hide filename
+      -H
+         show filename
+      -r
+         recursive
