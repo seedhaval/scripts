@@ -1,0 +1,3 @@
+mogrify -flop tmp.gif
+
+

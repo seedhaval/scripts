@@ -1,0 +1,10 @@
+conffile=$1
+scriptfile=$2.imm
+
+echo ". $conffile" > ./tmp.sh
+. $conffile
+sed -f $confdir/sed.conf $scriptfile >> ./tmp.sh
+
+dos2unix ./tmp.sh
+sh ./tmp.sh
+
