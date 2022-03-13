@@ -1,7 +1,12 @@
+"Highlight matches on search
 set hlsearch
-set smartindent
-filetype indent on
-nnoremap <leader>p :w<cr>:!python3 %<cr>
-set ts=4 sw=4
+
+"Allow to move between files even with unsaved changes
 set hidden
-nnoremap <leader>q :qa!<cr>
+
+"mappings
+nnoremap <f2> :w<cr>
+nnoremap <f3> :ls<cr>:b
+nnoremap <f4> :qa!<cr>
+
+
