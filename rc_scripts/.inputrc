@@ -1,0 +1,8 @@
+$include /etc/inputrc
+
+# ignore file names in tab completion
+set completion-ignore-case on
+
+# mimic double tab behaviour using single tab
+set show-all-if-ambiguous on
+

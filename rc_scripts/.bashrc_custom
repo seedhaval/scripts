@@ -1,0 +1,9 @@
+### Custom bash script. Call this script from .bashrc like so
+# . ~/.bashrc_custom
+
+# Include bin scripts in path
+export PATH=$PATH:~/scripts/bin/
+
+# Use VI mode for editing
+set -o vi
+

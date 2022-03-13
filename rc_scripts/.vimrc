@@ -30,6 +30,8 @@ set wildmode=list:longest
 set wrap
 
 "allow undo after restart
+"one time activity. Create undo dir
+"mkdir -p ~/.vim/undo
 set undofile
 set undodir=~/.vim/undo
 set undolevels=1000
