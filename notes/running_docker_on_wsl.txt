@@ -1,0 +1,26 @@
+Step 1 - Install docker on the Ubuntu prompt in WSL
+======================================================
+sudo apt-get install ca-certificates curl gnupg lsb-release
+curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg
+echo "deb [arch=$(dpkg --print-architecture) signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null
+sudo apt-get update
+sudo apt-get install docker-ce docker-ce-cli containerd.io
+
+Step 2 - configure to run as non root user
+======================================================
+sudo groupadd docker
+sudo usermod -aG docker $USER
+
+Step 3 - Install docker on windows
+======================================================
+Install from here - https://www.docker.com/get-started
+It will ask to sign out and sign in again
+start docker desktop on sign in. wait till it shows started
+in settings - enable -> Expose daemon on tcp://localhost:2375 without TLS -> apply and restart
+
+Step 4 - test docker
+======================================================
+docker run hello-world
+docker run -d -p 80:80 docker/getting-started
+
+
