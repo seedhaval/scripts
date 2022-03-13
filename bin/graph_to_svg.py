@@ -35,7 +35,8 @@ def process_file(fl):
         G.add_edge(stack[p_idx], c_nid)
 
     G.layout(prog='sfdp')
-    G.draw(str(fl).replace('.txt', '.svg'))
+    G.draw('/mnt/c/Users/Dell/Desktop/mind_maps/' +
+           fl.name.replace('.txt', '.svg'))
 
 
 for fl in fldr.rglob('*.txt'):
