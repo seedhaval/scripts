@@ -10,8 +10,7 @@ grep
          line number
    expression
       -e
-         pattern. multiple -e can
-be specified
+         pattern. multiple -e can be specified
       -P
          perl regex
       modifier
