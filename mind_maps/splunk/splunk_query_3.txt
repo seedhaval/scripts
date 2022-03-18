@@ -1,0 +1,29 @@
+splunk query
+    append
+        add results of subsearch to current results
+        subsearch is evaluated first, cannot use output from main search
+        ... | append [ search ... ]
+        maxtime
+            stop subsearch after these seconds
+            default 60
+        maxout
+            max number of rows to take from subsearch
+            default 50 K
+    appendcols
+        add fields of subsearch to current results
+        first main merged with first subsearch ... and so on
+    appendpipe
+        add results to current results
+        inner search not evaluated first. It is evaluated when the command appears
+        can use output from main search
+        useful for subtotal kind of scenario
+        ... | appendpipe [ stats ... ]
+    bin
+        put continuous values into discrete sets
+        bins=10
+            max number of bins
+            bin size bins=10
+        start=30 end=50
+            start and end for numerical fields
+        span
+            bin _time span=5m
