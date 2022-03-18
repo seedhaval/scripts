@@ -12,7 +12,7 @@ def add_node(lbl,  G):
     nid = str(uuid.uuid4())
     G.add_node(nid)
     n = G.get_node(nid)
-    n.attr['label'] = lbl
+    n.attr['label'] = lbl.replace('\\','\\\\')
     return nid
 
 
@@ -33,7 +33,7 @@ def process_file(fl):
         stack[c_idx] = c_nid
         G.add_edge(stack[p_idx], c_nid)
 
-    tgt_pth = '/mnt/c/Users/Dell/Desktop/' + \
+    tgt_pth = '/mnt/c/Users/Dell/Desktop/google_drive_bkp/' + \
         str(fl.parents[0]).replace('/home/dvs/scripts/', '') + '/'
     if not os.path.exists(tgt_pth):
         os.makedirs(tgt_pth)

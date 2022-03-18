@@ -1,23 +1,23 @@
 Splunk query 1
-   regular expression
-      rex
-         extract fields using regular expressions
-         rex field=_raw "(?<account>\d+)"
-      regex
-         filter results based on regular expression
-         regex -raw="\d+"
-   must have in search
-      index
-      source / sourcetype
-      earliest
-   earliest
-      -1h@h
-      -2d@d
-      -10d@d
-   |
-      Send output of one command
+    regular expression
+        rex
+            extract fields using regular expressions
+            rex field=_raw "(?<account>\d+)"
+        regex
+            filter results based on regular expression
+            regex -raw="\d+"
+    must have in search
+        index
+        source / sourcetype
+        earliest
+    earliest
+        -1h@h
+        -2d@d
+        -10d@d
+    |
+        Send output of one command
 to input of another command
-   dedup
-      remove duplicates
-      consecutive=true
-         only remove if events are consecutive
+    dedup
+        remove duplicates
+        consecutive=true
+            only remove if events are consecutive

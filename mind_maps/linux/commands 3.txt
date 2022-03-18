@@ -1,24 +1,24 @@
 commands 3
-   watch
-      execute command every n seconds
-      -n
-         specify interval
-   tr
-      translate
-      [:upper:]
-      [:lower:]
-      -d
-         delete
-   cut
-      -c
-         columns
-      -f
-         fields
-      -d
-         delimiter
-   rev
-      reverse string
-   sed
-      's/find/replace/g'
-      -i
-         in place substitute
+    watch
+        execute command every n seconds
+        -n
+            specify interval
+    tr
+        translate
+        [:upper:]
+        [:lower:]
+        -d
+            delete
+    cut
+        -c
+            columns
+        -f
+            fields
+        -d
+            delimiter
+    rev
+        reverse string
+    sed
+        's/find/replace/g'
+        -i
+            in place substitute

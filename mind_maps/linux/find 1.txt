@@ -1,41 +1,41 @@
 find
-   run commands
-      -ok
-         ask before executing
-      -okdir
-      -exec
-         {}
-            replaced with file path
-         \;
-      -execdir
-         cd into directory and then run command
-   -type
-      f
-         file
-      d
-         directory
-   -links
-      2
-         folders with no subfolders.
+    run commands
+        -ok
+            ask before executing
+        -okdir
+        -exec
+            {}
+                replaced with file path
+            \;
+        -execdir
+            cd into directory and then run command
+    -type
+        f
+            file
+        d
+            directory
+    -links
+        2
+            folders with no subfolders.
 can have files
-   -mtime
-      +2
-         file modified less than today - 2 days
-      -2
-         file modified greater than today - 2 days
-      2
-         file modified exactly 2 days ago
-   depth
-      -mindepth
-      -maxdepth
-      -depth
-         walk children before parents
-   name
-      -name
-      -iname
-      -regex
-      -iregex
-      -path
-      -ipath
-   -empty
-      empty files or directories
+    -mtime
+        +2
+            file modified less than today - 2 days
+        -2
+            file modified greater than today - 2 days
+        2
+            file modified exactly 2 days ago
+    depth
+        -mindepth
+        -maxdepth
+        -depth
+            walk children before parents
+    name
+        -name
+        -iname
+        -regex
+        -iregex
+        -path
+        -ipath
+    -empty
+        empty files or directories

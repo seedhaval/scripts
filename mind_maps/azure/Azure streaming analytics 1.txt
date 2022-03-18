@@ -1,14 +1,14 @@
 data streams
-   stages
-      event producer
-      event processor
-      event consumer
-   run computation in sliding windows
-   Azure stream analytics
-      development
-         dotnet SDK
-         stream analytics query language
-      ingest
-         event hub
-         iot hub
-         Azure blob Store
+    stages
+        event producer
+        event processor
+        event consumer
+    run computation in sliding windows
+    Azure stream analytics
+        development
+            dotnet SDK
+            stream analytics query language
+        ingest
+            event hub
+            iot hub
+            Azure blob Store

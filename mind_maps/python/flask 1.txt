@@ -1,22 +1,22 @@
 flask
-   route
-      @app.route('/abc')
-      methods=['GET','POST']
-      '/abc/<string:pqr>'
-         def abc(pqr)
-   request
-      .json
-         content-type header must be set
-   return
-      redirect
-      jsonify
-      render_template
-   static content
-      static folder
-   return code
-      200
-         success
-      404
-         page not found
-      500
-         internal server error
+    route
+        @app.route('/abc')
+        methods=['GET','POST']
+        '/abc/<string:pqr>'
+            def abc(pqr)
+    request
+        .json
+            content-type header must be set
+    return
+        redirect
+        jsonify
+        render_template
+    static content
+        static folder
+    return code
+        200
+            success
+        404
+            page not found
+        500
+            internal server error

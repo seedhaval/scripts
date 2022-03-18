@@ -1,14 +1,14 @@
 Azure synapse analytics
-   synapse analytics studio
-      IDE
-      SQL Java python scala
-   backend
-      SQL engine
-      spark engine
-   components
-      synapse spark
-      synapse SQL
-      synapse studio
-      synapse pipeline
-      synapse link
-         connecting to Cosmos DB
+    synapse analytics studio
+        IDE
+        SQL Java python scala
+    backend
+        SQL engine
+        spark engine
+    components
+        synapse spark
+        synapse SQL
+        synapse studio
+        synapse pipeline
+        synapse link
+            connecting to Cosmos DB

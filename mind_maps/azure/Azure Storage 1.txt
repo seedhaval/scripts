@@ -1,27 +1,27 @@
 Azure Storage
-   Azure Datalake Storage
-      Gen V2
-         hierarchical namespace
-         optimised for big data workloads
-      Hadoop Compatible
-      security
-         authentication
-            data Lake Store
-               anonymous
-               shared access signature
-               user identity
-               managed identity
-            dedicated SQL pool
-               SQL authentication
-               Azure active directory authentication
-            serverless SQL pool
-               role based access
-         authorisation
-         access to storage accounts
-      use cases
-         modern data warehouses
-         advanced analytics
-         real time analytics
-      structured and unstructured
-   Azure BLOB store
-      flat namespace
+    Azure Datalake Storage
+        Gen V2
+            hierarchical namespace
+            optimised for big data workloads
+        Hadoop Compatible
+        security
+            authentication
+                data Lake Store
+                    anonymous
+                    shared access signature
+                    user identity
+                    managed identity
+                dedicated SQL pool
+                    SQL authentication
+                    Azure active directory authentication
+                serverless SQL pool
+                    role based access
+            authorisation
+            access to storage accounts
+        use cases
+            modern data warehouses
+            advanced analytics
+            real time analytics
+        structured and unstructured
+    Azure BLOB store
+        flat namespace

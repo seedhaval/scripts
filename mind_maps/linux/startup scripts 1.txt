@@ -1,7 +1,7 @@
 startup scripts 1
-   .vimrc
-      vim startup script
-   .bashrc
-      bash startup script
-   .inputrc
-      readline startup script
+    .vimrc
+        vim startup script
+    .bashrc
+        bash startup script
+    .inputrc
+        readline startup script

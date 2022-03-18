@@ -1,17 +1,17 @@
 shell scripting 3
-   /proc/cpuinfo
-      get CPU details
-   /proc/meminfo
-      get memory details
-   /etc/lsb-release
-      get the Unix system information
-   uname
-      get operating system name
-   uptime
-      see for how much time the system is up and running
-   ping
-      ping another server to see if it is reachable
-      -c
-         stop after count number of pings
-   /proc/12345
-      files related to process ID 12345
+    /proc/cpuinfo
+        get CPU details
+    /proc/meminfo
+        get memory details
+    /etc/lsb-release
+        get the Unix system information
+    uname
+        get operating system name
+    uptime
+        see for how much time the system is up and running
+    ping
+        ping another server to see if it is reachable
+        -c
+            stop after count number of pings
+    /proc/12345
+        files related to process ID 12345

@@ -1,24 +1,24 @@
 unittest 2
-   command line options
-      -f
-         failfast
-            stop on first failure
-   inherit
-      setUp(self)
-         called before every test
-      tearDown(self)
-      setUpClass(cls)
-         @classmethod
-      tearDownClass(cls)
-         @classmethod
-   decorators
-      @unittest.
-      skip
-         can be added to functions as well as classes
-      skipIf
-      skipUnless
-      expectedFailure
-   force
-      self.
-      fail('reason')
-      skipTest('reason'
+    command line options
+        -f
+            failfast
+                stop on first failure
+    inherit
+        setUp(self)
+            called before every test
+        tearDown(self)
+        setUpClass(cls)
+            @classmethod
+        tearDownClass(cls)
+            @classmethod
+    decorators
+        @unittest.
+        skip
+            can be added to functions as well as classes
+        skipIf
+        skipUnless
+        expectedFailure
+    force
+        self.
+        fail('reason')
+        skipTest('reason'

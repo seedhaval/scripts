@@ -1,16 +1,16 @@
 command line 1
-   ^r
-      reverse I search
-      search in command history
-      ^s
-         search forward
-   PS1
-      set the prompt
-   ctrl + ins
-      copy selected text
-   shift + ins
-      paste content from clipboard
-   clear
-      clear screen
-   reset
-      clear screen and also try to clear scrollback if possible
+    ^r
+        reverse I search
+        search in command history
+        ^s
+            search forward
+    PS1
+        set the prompt
+    ctrl + ins
+        copy selected text
+    shift + ins
+        paste content from clipboard
+    clear
+        clear screen
+    reset
+        clear screen and also try to clear scrollback if possible

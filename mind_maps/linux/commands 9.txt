@@ -1,23 +1,23 @@
 commands 9
-   xargs
-      run command with arguments from standard input
-   |
-      pipe output of one command to input of another command
-   ;
-      end command
-      used to write more than one commands in a single line
-   PATH
-      places where command name will be searched
-      multiple folders can be separated with a colon
-   .bash_history
-      place where history of commands stored
-   cron
-      schedule command to run at specific intervals
-   od
-      get octal dump of file
-      -x
-         get hexdump
-      -a
-         show ASCII whenever possible
-   tee
-      show output on console and also write to file
+    xargs
+        run command with arguments from standard input
+    |
+        pipe output of one command to input of another command
+    ;
+        end command
+        used to write more than one commands in a single line
+    PATH
+        places where command name will be searched
+        multiple folders can be separated with a colon
+    .bash_history
+        place where history of commands stored
+    cron
+        schedule command to run at specific intervals
+    od
+        get octal dump of file
+        -x
+            get hexdump
+        -a
+            show ASCII whenever possible
+    tee
+        show output on console and also write to file
