@@ -1,0 +1,43 @@
+regular expressions
+   extended notation
+      (?i)
+         ignore case
+      (?P<name>\w+)
+         named groups
+   quantifiers
+      +
+         one or more
+      *
+         zero or more
+      {2}
+         exactly two times
+      {,3}
+         at most 3 times
+      {2,}
+         at least two times
+      {4,6}
+         between 4 and 6 times
+      ?
+         0 or 1 time
+      *?
+         non greedy match
+   zero width match
+      ^
+         beginning of string
+      $
+         end of string
+      \b
+         word boundary
+   character classes
+      custom
+         [a-z_]
+      \d
+         digits
+      \s
+         whitespace characters
+      \w
+         word characters
+a-z, _, 0-9
+   substitution
+      \1
+         first group

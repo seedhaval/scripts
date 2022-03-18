@@ -1,0 +1,19 @@
+ssh 1
+   ssh
+      login to a remote server
+      -P
+         use a different port number
+   ssh-keygen
+      generate public and private pair of keys
+   ssh-copy-id
+      copy public key to the remote server
+   scp
+      securely copy files to a remote server
+      -p
+         use a non standard ssh port
+   ~/.ssh
+      directory that contains ssh related files
+   authorized_keys
+      details of host that are allowed to do ssh
+   sftp
+      secure FTP

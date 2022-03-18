@@ -1,0 +1,15 @@
+commands 6
+   locate
+      search for a file by name
+   alias
+      give an aliens name to a big command
+      aliases are not exported in subshells
+   type
+      get type of a command name
+      whether the command name is a function or alias or script
+   bind
+      bind keyboard mappings for readline
+   export
+      export variable so that it can be accessed from subshell
+   fg
+      bring process to the foreground

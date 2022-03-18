@@ -1,0 +1,18 @@
+Azure databricks dataframe
+   optimisation
+      .cache()
+      .count()
+   functions
+      distinct
+      df.show()
+      drop duplicates
+      df.select(col('col1'))
+      df.printSchema()
+      df.filter(col('col1') > 0)
+      .groupBy(col('col1'))
+      .orderBy(col('col1'))
+      .filter(year(col('col1')) > 1990)
+      df.limit(10)
+      drop
+      display(df)
+   create cluster

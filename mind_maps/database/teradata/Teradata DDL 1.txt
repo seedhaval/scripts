@@ -1,0 +1,23 @@
+Teradata DDL 1
+   table
+      volatile table
+         structure and data dropped
+      show table
+      global temporary table
+         structure maintained but data dropped
+      set table
+         cannot hold duplicate rows
+      multiset table
+         can hold duplicate rows
+   macro
+      exec
+      show micro
+   view
+      show select * from view
+         get nested view definition
+      replace view
+      locking row for access
+      show view
+   stored procedure
+      call
+      show procedure

@@ -1,0 +1,22 @@
+commands 4
+   sleep
+      pause for specified time
+   touch
+      change modified time of file
+      create empty file if not present
+   $?
+      get return code of last command
+   ${var}
+      expand variable var
+   $(( 2 + 4 ))
+      maths
+   $( ls )
+      execute command and get output
+      $( can be nested
+   date
+      +
+         format
+      -d
+         custom dates
+   set -o vi
+      edit command in vi mode

@@ -1,0 +1,33 @@
+unittest 1
+   inherit
+      class TestAbc(unittest.TestCase)
+      unittest.main()
+         invoke once in main program
+      function name starts with test_
+   concepts
+      test fixture
+         preparation
+         cleanup
+      test case
+      test suite
+         collection of test case / suite
+      test runner
+         orchestrate execution
+         show results
+   assertion
+      self.assertEqual
+      self.assertTrue
+      self.assertFalse
+      self.assertRaises
+   command line
+      -v
+         verbose
+      python -m unittest
+         test_m1
+         test_m1.TestAbc
+         test_m1.testAbc.test_func1
+         tests/a.py
+         nothing
+            test discovery
+         -h
+            help

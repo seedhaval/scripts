@@ -1,0 +1,28 @@
+commands 2
+   pushd
+      add current directory to stack and cd
+   popd
+      pop from stack and cd to that location
+   head
+      first 10 lines
+      -n
+         specify number of lines
+   tail
+      last 10 lines
+      -n
+         specify number of lines
+      -f
+         follow file
+            watch for updates to file
+   rm
+      -r
+         recursive
+      -f
+         force remove
+         do not complain about missing file
+   mv
+      multiple files can be specified
+         last parameter should be directory
+   cp
+      -r
+         recursive

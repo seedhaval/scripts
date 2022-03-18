@@ -1,0 +1,9 @@
+Azure delta lake
+   built on existing data lake
+   bronze layer
+      ingestion tables
+   silver layer
+      refined tables
+   gold layer
+      feature or aggregate data store
+   single pipeline for streaming and batch
