@@ -4,6 +4,7 @@ import re
 import uuid
 from pathlib import Path
 import os
+import textwrap
 
 fldr = Path('/home/dvs/scripts/mind_maps/')
 
@@ -12,7 +13,7 @@ def add_node(lbl,  G):
     nid = str(uuid.uuid4())
     G.add_node(nid)
     n = G.get_node(nid)
-    n.attr['label'] = lbl.replace('\\', '\\\\')
+    n.attr['label'] = textwrap.fill( lbl.replace('\\', '\\\\'), width=20 )
     return nid
 
 
@@ -32,6 +33,8 @@ def process_file(fl):
         data = f.read().strip().splitlines()
 
     G = pgv.AGraph(directed=True, rankdir='LR')
+    G.graph_attr['size'] = "8,11"
+    G.graph_attr['ratio'] = "compress"
 
     root_nid = add_node(data[0],  G)
     stack = [root_nid]*10

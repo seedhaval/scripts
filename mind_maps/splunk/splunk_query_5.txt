@@ -15,4 +15,8 @@ splunk query
         calculate correlation between fields
         default limit is 1000 rows
         finds for all and presented as nxn matrix
- 
+    erex
+        generate regular expression from examples
+        erex monthday example="7/01"
+        erex monthday example="7/02, 07/02" counterexample="99/2"
+        click the job menu to see generated regular expression 

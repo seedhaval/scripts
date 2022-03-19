@@ -1,0 +1,29 @@
+splunk query
+    eval
+        calculate expression
+        eval velocity=distance/time
+        eval error = if(status = 200, "OK", "Problem" )
+        eval full_name = first_name." ".last_name, low_name = lower(full_name)
+            separate multiple expressions with a comma
+    eventstats
+        generate summary statistics and save to a new field in event
+        eventstats avg(duration) as avgDur
+        eventstats avg(duration) as avgDur by date_minute
+    fieldformat
+        change format of field
+        use it as late in the search as possible
+        format does not apply to exported data
+            to apply to exported data, use eval
+        fieldformat totalCount = toString( totalCount, "commas" )
+        fieldformat starttime = strftime(start_time, "%H:%M:%S" )
+    fields
+        keep or remove fields
+        by default _raw, _time are retained
+        wildcard fields can be provided
+        +
+            keep provided fields
+        -
+            remove provided fields
+        fields - _*
+        fields + _bkt
+        fields host, ip, source, err*

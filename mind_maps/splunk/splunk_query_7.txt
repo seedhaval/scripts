@@ -1,0 +1,18 @@
+splunk query
+    cluster
+        t=
+            threshold. between 0.0 and 1.0
+            default 0.8
+            more near to 1 means stricter grouping
+        delims=
+            delimiters used to tokenize string
+            default - everything EXCEPT 0-9, a-z, A-Z, _
+        shwocount=
+            default is false
+            if false, clustering is done on indexers before sending to search head
+            if false, count field is not added to events
+        cluster showcount=t
+        cluster t=0.9 showcount=t
+        labelonly
+            if true, add labels to events
+            if false, output is list of new events with description and count of events

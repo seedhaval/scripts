@@ -1,7 +1,0 @@
-SQLite
-    .help
-    main database
-    get ddl info
-        .tables
-        .schema table1
-        .databases

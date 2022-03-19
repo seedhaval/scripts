@@ -1,5 +1,0 @@
-hive
-    format output
-        !set outputformat vertical
-        !set showheader false
-        !set outputformat tsv2
