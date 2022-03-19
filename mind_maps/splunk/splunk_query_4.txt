@@ -1,0 +1,36 @@
+splunk query
+    chart
+        wildcard field names can be used
+        span=5m
+        chart sum(sales)
+        chart max(delay) over foo
+        chart max(delay) over foo by bar
+        chart eval(avg(size)/max(delay)) as ratio by host user
+        chart max(delay) by size bins=10
+    cluster
+        group events together based on similarity
+        anomalous events are not grouped into big clusters
+        field=
+            default _raw
+            cluster based on given field
+        adds 2 fields to each event
+            cluster_count
+                change name with countfield=
+            cluster_label
+                change name with labelfield=
+        t=
+            threshold. between 0.0 and 1.0
+            default 0.8
+            more near to 1 means stricter grouping
+        delims=
+            delimiters used to tokenize string
+            default - everything EXCEPT 0-9, a-z, A-Z, _
+        shwocount=
+            default is false
+            if false, clustering is done on indexers before sending to search head
+            if false, count field is not added to events
+        cluster showcount=t
+        cluster t=0.9 showcount=t
+        labelonly
+            if true, add labels to events
+            if false, output is list of new events with description and count of events

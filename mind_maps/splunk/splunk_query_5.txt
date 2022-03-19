@@ -1,0 +1,18 @@
+splunk query
+    convert
+        convert to number
+        convert auto(*)
+            convert all fields to numbers
+        convert auto(*) none(foo)
+            convert all except foo
+        convert dur2sec(delay)
+            convert duration to seconds
+        convert memk(virt)
+            convert to KB. all k,m,g converted to k
+        convert timeformat='%H:%M:%S' ctime(_time) as c_time
+            convert unix time to human readable
+    correlate
+        calculate correlation between fields
+        default limit is 1000 rows
+        finds for all and presented as nxn matrix
+ 
