@@ -1,0 +1,25 @@
+python standard library
+    build in functions
+        isinstance( object, classinfo )
+            check if object is instance of class
+            tuple of types can be provided for classinfo argument
+        issubclass( class, classinfo )
+            check if class is subclass of classinfo
+            tuple of types can be provided for classinfo argument
+        iter( object )
+            return iterator of object
+        len(x)
+            return count of objects in x
+        list( [iterable] )
+            convert iterable to list
+        locals()
+            return a dictionary containing local symbol table
+        map( function, iterable, ... )
+            call function with iterables as parameters
+            list( map( pow, (1,2,3), (2,3,4) ) ) -> (1,8,81)
+        max
+            return maximum from iterable
+            default=
+                return value when iterator is empty
+            key=
+                function to be used for sorting

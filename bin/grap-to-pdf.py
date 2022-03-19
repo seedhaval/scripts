@@ -9,11 +9,19 @@ import textwrap
 fldr = Path('/home/dvs/scripts/mind_maps/')
 
 
+def escape_str(txt):
+    out = txt
+    out = out.replace('\\', '\\\\')
+    out = out.replace('<', '\\<')
+    out = out.replace('>', '\\>')
+    return out
+
+
 def add_node(lbl,  G):
     nid = str(uuid.uuid4())
     G.add_node(nid)
     n = G.get_node(nid)
-    n.attr['label'] = textwrap.fill( lbl.replace('\\', '\\\\'), width=20 )
+    n.attr['label'] = textwrap.fill(escape_str(lbl), width=20)
     return nid
 
 

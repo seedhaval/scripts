@@ -1,0 +1,23 @@
+splunk query
+    iconify
+        display an icon for each different value
+        iconify eventtype
+        iconify clientip method
+            display different icon for each pair of clientip method pairs
+    inputcsv
+        event generating command
+        append
+            true = append to current result set
+            false = replace current result set
+            default = false
+        events
+            true = treat as events
+                input csv must have _raw and _time fields    
+            false = treat as table
+            default = false
+        max
+            maximum number of events to be read from file
+            default 1 billion
+        start
+            0 based offset of first event to be read
+        inputcsv abc.csv

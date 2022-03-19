@@ -1,0 +1,20 @@
+splunk query
+    filldown
+        replace null values with non null value
+        if there are no previous values, then they will be left null
+        wildcard supported in field list
+    fillnull
+        replace null value with a specified value
+        default = 0
+        fillnull value=NULL
+            fill null with string 'NULL'
+        fillnull value=unknown host kbps
+            fill null with string 'unknown' only for given fields
+    folderize
+        creating higher level grouping. for e.g. replacing filenames with directories
+        folderize size=count(url) attr=url sep="/"
+    gauge
+        used for gauge charts
+            radial, filler, marker
+        gauge mycount 750 1000 1250 1500
+            see results in visualisation tab

@@ -1,0 +1,19 @@
+splunk query
+    head
+        return first n results
+        default 10
+        head limit=10 (1==1)
+            return first 10 results
+        head limit=10 (1==0)
+            does not return any results
+        head (timerange<100)
+            return results until timerange < 100
+    highlight
+        highlight specific terms in events
+        highlight login,logout
+        highlight "access denied"
+    history
+        show your search history
+        | history
+        | history events=true
+            show history as events

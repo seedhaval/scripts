@@ -1,0 +1,21 @@
+splunk query
+    join
+        combine results of main search and subsearch
+        type
+            inner, outer, left
+        join cola colb colc
+            join based on cola, colb, colc
+        left=L
+            left alias
+        right=product
+            right alias
+        where L.cola=RT.colb
+        overwrite
+            true - if cola present in both main and subsearch, use subsearch value
+            default - true
+        max
+            how many rows from subsearch can match with 1 row from main search
+            default = 1
+            use 0 for no limit
+        join productid [ search vendoes ]
+        join left=L right=R where L.product_id = R.pid [ search vendoes ]

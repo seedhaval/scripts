@@ -1,0 +1,23 @@
+python standard library
+    built in functions
+        hasattr( object, name )
+            check if object has attribute with name - name
+        hash( object )
+            get hash value of object as integer
+        help( [object] )
+            get help
+        hex(x)
+            convert integer to hex
+            lowercase
+            prefix with 0x
+        id( object )
+            return identity of object
+            cpython - return memory address of object
+        input( [prompt] )
+            read line from input
+            no newline after prompt message
+            trailing newline is trimmed
+        int([x, base=10])
+            convert x to integer
+            int( '011', 8 ) -> 9
+            int( 'aa', 16 ) -> 170
