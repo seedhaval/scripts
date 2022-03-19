@@ -1,0 +1,13 @@
+python standard library
+    difflib
+        HtmlDiff
+            wrapcolumn=None
+                specify number of column to wrap
+            make_file( fromlines, tolines, fromdesc='', todesc='', context=False, numlines=5,.. )
+                create html code
+                if context=True, only numlines before and after differences are shown
+                if context=False, show whole file
+                fromlines and tolines should be list of strings
+            make_table
+                same as make_file, but instead of whole html, only table code is generated    
+                used to embed table in another html

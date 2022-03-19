@@ -1,0 +1,23 @@
+python standard library
+    string.Template
+        $var1
+        substitute
+            dictionary or keyword arguments can be provided
+            if variable not found return error
+        safe_substitute
+            dictionary or keyword arguments can be provided
+            if variable not found do not expand that $var1
+    string
+        capwords
+            capitalize first letter of each word
+    re
+        r''
+            raw string. do not treat / as escape
+        search( pattern, string, flags )    
+            search anywhere in string
+            return match object with first location
+            return none if not found
+        match( pattern, string, flags )    
+            search at begining of string
+            return match object
+            return none if not found

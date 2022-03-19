@@ -1,0 +1,23 @@
+python standard library
+    re
+        fullmatch( pattern, string, flags=0 )
+            match whole string
+        split( pattern, string, maxsplit=0, flags=0 )
+            split string by pattern
+            if capturing groups are used, the groups are also included in output
+                r'\W+', 'ab, de. '
+                    ['ab','de','']
+                r'(\W+)', 'ab, de. '
+                    ['ab',', ','de','. ','']
+        findall( pattern, string, flags=0 )
+            return all matches
+            if no capturing groups, list of strings
+            if single capturing group, list of strings matching group
+            if more than one group, list of tuple of strings matching groups
+        finditer
+            similar to findall but iterator
+        sub( pattern, repl, string, count=0, flags=0 )
+            regex replace
+            \1
+            \g<var> -> (?P<name>...)
+            \g<2> same as \2 but unambiguous
