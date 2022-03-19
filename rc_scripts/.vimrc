@@ -40,4 +40,11 @@ set undoreload=10000
 "allow using mouse
 set mouse=a
 
+"change tab to space for insert mode
+inoremap <tab> <space><space><space><space>
 
+"show line numbers
+set number
+
+"shift tab to minus 4 spaces
+inoremap <S-tab> <c-o>3h
