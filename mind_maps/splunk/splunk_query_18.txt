@@ -1,0 +1,24 @@
+splunk query
+    sort
+        sorts results
+        if first argument is number, it is number of records returned
+            default is 10 K
+            0 - all records
+        sort num(ipaddress), -str(url)
+        sort 100 -num(size), +str(source)
+        sort _time, -host
+    spath
+        extract information from XML and JSON
+        when path is not extracted, extracts all fields
+        spath output=myfield path=server.name
+        spath output=myfield path=foo{1}
+        spath output=myfield path=foo.bar{}.baz
+        spath output=locDesc path=pSet.product.desc.locDesc{@locale}
+    stats
+        calculate aggregate statistics
+        an eval function can be used as part of stats function
+            stats count(eval(status="404"))
+        if stats functions does not contain field
+            for count, gets count of records
+            for others applies to all fields
+                | stats avg -> | stats avg(*) -> apply avg to all possible fields

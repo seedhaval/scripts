@@ -1,0 +1,7 @@
+splunk query
+    streamstats
+        window
+            specify number of events to be used in window
+            default=0 -> all previous and current event is used
+        streamstats count by shift reset_on_change=true
+        streamstats avg(foo) window=5

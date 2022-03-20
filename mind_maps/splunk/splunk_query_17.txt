@@ -1,0 +1,19 @@
+splunk query
+    replace
+        replace single occurence of search string with replace string
+        more than one field names can be provided
+        wildcards can be used in string ( both search and replace )
+        replace *localhost with localhost
+        replace 127.0.0.1 with localhost in host server
+        replace "* localhost" with "localhost *" in host
+        replace 0 with critical, 1 with error, 2 with none in msg_level
+    search
+        used to explicitly mention search in subquery
+        append [ search ... ]
+    set
+        perform set operations
+        union diff intersect
+        | set union [ search ... ] [ search ... ]
+        should be the first command in search
+        there is limit on number of records returned by set
+        | set diff [ search 404 | fields url ] [ search 303 | fields url ]
