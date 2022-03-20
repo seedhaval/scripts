@@ -1,0 +1,17 @@
+python standard library
+    datetime
+        datetime
+            instance methods
+                same behavior as date functions
+                    timetuple, toordinal, timestamp, weekday, isoweekday, isocalendar
+                    ctime, strftime
+                isoformat( sep=T, timespec='auto' )
+                    return datetime in ISO formatted string
+        time
+            time
+                arguments - hour, minute, second, microsecond, tzinfo, fold
+                    by default all none and tzinfo None
+                instance attributes
+                    hour, minute, second, microsecond, tzinfo, fold
+                same behavior and date / datetime functions
+                    fromisoformat, isoformat, replace, strftime, utcoffset, tzname
