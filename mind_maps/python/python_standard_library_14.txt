@@ -15,10 +15,3 @@ python standard library
             predicate - function to decide which line prefix is to be added
                 indent( s, '+', lambda line: True )
                     add prefix to all lines ( including empty / whitespace only )
-        attribute description
-            replace_whitespace
-                after tab expansion but before wrapping
-                replace all whitespace character with single space
-            drop_whitespace
-                drop whitespace at begining and ending of every line
-                whitespace at begining of paragraph is not dropped

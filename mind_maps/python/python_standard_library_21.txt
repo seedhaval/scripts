@@ -1,0 +1,9 @@
+python standard library
+    textwrap
+        attribute description
+            replace_whitespace
+                after tab expansion but before wrapping
+                replace all whitespace character with single space
+            drop_whitespace
+                drop whitespace at begining and ending of every line
+                whitespace at begining of paragraph is not dropped

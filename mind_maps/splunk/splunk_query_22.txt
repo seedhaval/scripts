@@ -1,0 +1,22 @@
+splunk query
+    transpose
+        convert rows to columns
+    uniq
+        remove exact duplicate events
+    untable
+        convert output from table to output like stats events
+        untable x-field y-name-field y-data-field
+        similar to unpivot
+    where
+        filter search results
+        where like( ipaddress, '198.%' )
+        where distance/time > 100
+    xmlkv
+        extract key value pairs from xml formatted data
+        | xmlkv
+    xmlunescape
+        unescape xml characters
+        | xmlunescape
+    xpath
+        extract xpath value from field
+        | xpath outfield=name "//bar/@nickname"

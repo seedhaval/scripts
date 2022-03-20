@@ -1,0 +1,22 @@
+splunk query
+    timewrap
+        wrap output of timechart so that every period of time is a different series
+        day-over-day
+        month-over-month
+        timechart count span=1d | timewrap 1week
+    tojson
+        convert events into json
+        field names can be specified as wildcards
+        default converts all fields
+        | tojson
+        | tojson num(date_hour) str(data_*)
+        | tojson auto(name) auto(age)
+            automatically convert data types
+        | tojson auto(*)
+            auto convert data types for all fields
+        | tojson include_internal=true fill_null=true
+    top
+        find most common values for fields
+        | top limit=20 referer
+        | top action by referer_domain
+        | top 5 product by category showperc=false countfield=total
