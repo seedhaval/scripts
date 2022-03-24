@@ -1,0 +1,431 @@
+==============================
+base64.MAXBINSIZE
+int([x]) -> integer
+int(x, base=10) -> integer
+
+Convert a number or string to an integer, or return 0 if no arguments
+are given
+ If x is a number, return x.__int__()
+ For floating point
+numbers, this truncates towards zero.
+
+If x is not a number or if base is given, then x must be a string,
+bytes, or bytearray instance representing an integer literal in the
+given base
+ The literal can be preceded by '+' or '-' and be surrounded
+by whitespace
+ The base defaults to 10
+ Valid bases are 0 and 2-36.
+Base 0 means to interpret the base from the string as an integer literal.
+>>> int('0b100', base=0)
+4
+
+==============================
+base64.MAXLINESIZE
+int([x]) -> integer
+int(x, base=10) -> integer
+
+Convert a number or string to an integer, or return 0 if no arguments
+are given
+ If x is a number, return x.__int__()
+ For floating point
+numbers, this truncates towards zero.
+
+If x is not a number or if base is given, then x must be a string,
+bytes, or bytearray instance representing an integer literal in the
+given base
+ The literal can be preceded by '+' or '-' and be surrounded
+by whitespace
+ The base defaults to 10
+ Valid bases are 0 and 2-36.
+Base 0 means to interpret the base from the string as an integer literal.
+>>> int('0b100', base=0)
+4
+
+==============================
+base64.a85decode
+(b, *, foldspaces=False, adobe=False, ignorechars=b' \t\n\r\x0b')
+Decode the Ascii85 encoded bytes-like object or ASCII string b.
+
+foldspaces is a flag that specifies whether the 'y' short sequence should be
+accepted as shorthand for 4 consecutive spaces (ASCII 0x20)
+This feature is
+not supported by the "standard" Adobe encoding.
+
+adobe controls whether the input sequence is in Adobe Ascii85 format (i.e.
+is framed with <~ and ~>).
+
+ignorechars should be a byte string containing characters to ignore from the
+input
+This should only contain whitespace characters, and by default
+contains all whitespace characters in ASCII.
+
+The result is returned as a bytes object.
+
+==============================
+base64.a85encode
+(b, *, foldspaces=False, wrapcol=0, pad=False, adobe=False)
+Encode bytes-like object b using Ascii85 and return a bytes object.
+
+foldspaces is an optional flag that uses the special short sequence 'y'
+instead of 4 consecutive spaces (ASCII 0x20) as supported by 'btoa'
+This
+feature is not supported by the "standard" Adobe encoding.
+
+wrapcol controls whether the output should have newline (b'\n') characters
+added to it
+If this is non-zero, each output line will be at most this
+many characters long.
+
+pad controls whether the input is padded to a multiple of 4 before
+encoding
+Note that the btoa implementation always pads.
+
+adobe controls whether the encoded byte sequence is framed with <~ and ~>,
+which is used by the Adobe implementation.
+
+==============================
+base64.b16decode
+(s, casefold=False)
+Decode the Base16 encoded bytes-like object or ASCII string s.
+
+Optional casefold is a flag specifying whether a lowercase alphabet is
+acceptable as input
+ For security purposes, the default is False.
+
+The result is returned as a bytes object
+ A binascii.Error is raised if
+s is incorrectly padded or if there are non-alphabet characters present
+in the input.
+
+==============================
+base64.b16encode
+(s)
+Encode the bytes-like object s using Base16 and return a bytes object.
+    
+
+==============================
+base64.b32decode
+(s, casefold=False, map01=None)
+Decode the Base32 encoded bytes-like object or ASCII string s.
+
+Optional casefold is a flag specifying whether a lowercase alphabet is
+acceptable as input
+ For security purposes, the default is False.
+
+RFC 3548 allows for optional mapping of the digit 0 (zero) to the
+letter O (oh), and for optional mapping of the digit 1 (one) to
+either the letter I (eye) or letter L (el)
+ The optional argument
+map01 when not None, specifies which letter the digit 1 should be
+mapped to (when map01 is not None, the digit 0 is always mapped to
+the letter O)
+ For security purposes the default is None, so that
+0 and 1 are not allowed in the input.
+
+The result is returned as a bytes object
+ A binascii.Error is raised if
+the input is incorrectly padded or if there are non-alphabet
+characters present in the input.
+
+==============================
+base64.b32encode
+(s)
+Encode the bytes-like object s using Base32 and return a bytes object.
+    
+
+==============================
+base64.b64decode
+(s, altchars=None, validate=False)
+Decode the Base64 encoded bytes-like object or ASCII string s.
+
+Optional altchars must be a bytes-like object or ASCII string of length 2
+which specifies the alternative alphabet used instead of the '+' and '/'
+characters.
+
+The result is returned as a bytes object
+ A binascii.Error is raised if
+s is incorrectly padded.
+
+If validate is False (the default), characters that are neither in the
+normal base-64 alphabet nor the alternative alphabet are discarded prior
+to the padding check
+ If validate is True, these non-alphabet characters
+in the input result in a binascii.Error.
+
+==============================
+base64.b64encode
+(s, altchars=None)
+Encode the bytes-like object s using Base64 and return a bytes object.
+
+Optional altchars should be a byte string of length 2 which specifies an
+alternative alphabet for the '+' and '/' characters
+ This allows an
+application to e.g
+generate url or filesystem safe Base64 strings.
+
+==============================
+base64.b85decode
+(b)
+Decode the base85-encoded bytes-like object or ASCII string b
+
+The result is returned as a bytes object.
+
+==============================
+base64.b85encode
+(b, pad=False)
+Encode bytes-like object b in base85 format and return a bytes object.
+
+If pad is true, the input is padded with b'\0' so its length is a multiple of
+4 bytes before encoding.
+
+==============================
+base64.binascii
+Conversion between binary data and ASCII
+
+==============================
+base64.bytes_types
+Built-in immutable sequence.
+
+If no argument is given, the constructor returns an empty tuple.
+If iterable is specified the tuple is initialized from iterable's items.
+
+If the argument is a tuple, the return value is the same object.
+
+==============================
+base64.decode
+(input, output)
+Decode a file; input and output are binary files.
+
+==============================
+base64.decodebytes
+(s)
+Decode a bytestring of base-64 data into a bytes object.
+
+==============================
+base64.decodestring
+(s)
+Legacy alias of decodebytes().
+
+==============================
+base64.encode
+(input, output)
+Encode a file; input and output are binary files.
+
+==============================
+base64.encodebytes
+(s)
+Encode a bytestring into a bytes object containing multiple lines
+of base-64 data.
+
+==============================
+base64.encodestring
+(s)
+Legacy alias of encodebytes().
+
+==============================
+base64.main
+()
+Small main program
+
+==============================
+base64.re
+Support for regular expressions (RE).
+
+This module provides regular expression matching operations similar to
+those found in Perl
+ It supports both 8-bit and Unicode strings; both
+the pattern and the strings being processed can contain null bytes and
+characters outside the US ASCII range.
+
+Regular expressions can contain both special and ordinary characters.
+Most ordinary characters, like "A", "a", or "0", are the simplest
+regular expressions; they simply match themselves
+ You can
+concatenate ordinary characters, so last matches the string 'last'.
+
+The special characters are:
+    "."      Matches any character except a newline.
+    "^"      Matches the start of the string.
+    "$"      Matches the end of the string or just before the newline at
+             the end of the string.
+    "*"      Matches 0 or more (greedy) repetitions of the preceding RE.
+             Greedy means that it will match as many repetitions as possible.
+    "+"      Matches 1 or more (greedy) repetitions of the preceding RE.
+    "?"      Matches 0 or 1 (greedy) of the preceding RE.
+    *?,+?,?? Non-greedy versions of the previous three special characters.
+    {m,n}    Matches from m to n repetitions of the preceding RE.
+    {m,n}?   Non-greedy version of the above.
+    "\\"     Either escapes special characters or signals a special sequence.
+    []       Indicates a set of characters.
+             A "^" as the first character indicates a complementing set.
+    "|"      A|B, creates an RE that will match either A or B.
+    (...)    Matches the RE inside the parentheses.
+             The contents can be retrieved or matched later in the string.
+    (?aiLmsux) The letters set the corresponding flags defined below.
+    (?:...)  Non-grouping version of regular parentheses.
+    (?P<name>...) The substring matched by the group is accessible by name.
+    (?P=name)     Matches the text matched earlier by the group named name.
+    (?#...)  A comment; ignored.
+    (?=...)  Matches if ..
+matches next, but doesn't consume the string.
+    (?!...)  Matches if ..
+doesn't match next.
+    (?<=...) Matches if preceded by ..
+(must be fixed length).
+    (?<!...) Matches if not preceded by ..
+(must be fixed length).
+    (?(id/name)yes|no) Matches yes pattern if the group with id/name matched,
+                       the (optional) no pattern otherwise.
+
+The special sequences consist of "\\" and a character from the list
+below
+ If the ordinary character is not on the list, then the
+resulting RE will match the second character.
+    \number  Matches the contents of the group of the same number.
+    \A       Matches only at the start of the string.
+    \Z       Matches only at the end of the string.
+    \b       Matches the empty string, but only at the start or end of a word.
+    \B       Matches the empty string, but not at the start or end of a word.
+    \d       Matches any decimal digit; equivalent to the set [0-9] in
+             bytes patterns or string patterns with the ASCII flag.
+             In string patterns without the ASCII flag, it will match the whole
+             range of Unicode digits.
+    \D       Matches any non-digit character; equivalent to [^\d].
+    \s       Matches any whitespace character; equivalent to [ \t\n\r\f\v] in
+             bytes patterns or string patterns with the ASCII flag.
+             In string patterns without the ASCII flag, it will match the whole
+             range of Unicode whitespace characters.
+    \S       Matches any non-whitespace character; equivalent to [^\s].
+    \w       Matches any alphanumeric character; equivalent to [a-zA-Z0-9_]
+             in bytes patterns or string patterns with the ASCII flag.
+             In string patterns without the ASCII flag, it will match the
+             range of Unicode alphanumeric characters (letters plus digits
+             plus underscore).
+             With LOCALE, it will match the set [0-9_] plus characters defined
+             as letters for the current locale.
+    \W       Matches the complement of \w.
+    \\       Matches a literal backslash.
+
+This module exports the following functions:
+    match     Match a regular expression pattern to the beginning of a string.
+    fullmatch Match a regular expression pattern to all of a string.
+    search    Search a string for the presence of a pattern.
+    sub       Substitute occurrences of a pattern found in a string.
+    subn      Same as sub, but also return the number of substitutions made.
+    split     Split a string by the occurrences of a pattern.
+    findall   Find all occurrences of a pattern in a string.
+    finditer  Return an iterator yielding a Match object for each match.
+    compile   Compile a pattern into a Pattern object.
+    purge     Clear the regular expression cache.
+    escape    Backslash all non-alphanumerics in a string.
+
+Each function other than purge and escape can take an optional 'flags' argument
+consisting of one or more of the following module constants, joined by "|".
+A, L, and U are mutually exclusive.
+    A  ASCII       For string patterns, make \w, \W, \b, \B, \d, \D
+                   match the corresponding ASCII character categories
+                   (rather than the whole Unicode categories, which is the
+                   default).
+                   For bytes patterns, this flag is the only available
+                   behaviour and needn't be specified.
+    I  IGNORECASE  Perform case-insensitive matching.
+    L  LOCALE      Make \w, \W, \b, \B, dependent on the current locale.
+    M  MULTILINE   "^" matches the beginning of lines (after a newline)
+                   as well as the string.
+                   "$" matches the end of lines (before a newline) as well
+                   as the end of the string.
+    S  DOTALL      "." matches any character at all, including the newline.
+    X  VERBOSE     Ignore whitespace and comments for nicer looking RE's.
+    U  UNICODE     For compatibility only
+Ignored for string patterns (it
+                   is the default), and forbidden for bytes patterns.
+
+This module also defines an exception 'error'.
+
+==============================
+base64.standard_b64decode
+(s)
+Decode bytes encoded with the standard Base64 alphabet.
+
+Argument s is a bytes-like object or ASCII string to decode
+ The result
+is returned as a bytes object
+ A binascii.Error is raised if the input
+is incorrectly padded
+ Characters that are not in the standard alphabet
+are discarded prior to the padding check.
+
+==============================
+base64.standard_b64encode
+(s)
+Encode bytes-like object s using the standard Base64 alphabet.
+
+The result is returned as a bytes object.
+
+==============================
+base64.struct
+Functions to convert between Python values and C structs.
+Python bytes objects are used to hold the data representing the C struct
+and also as format strings (explained below) to describe the layout of data
+in the C struct.
+
+The optional first format char indicates byte order, size and alignment:
+  @: native order, size & alignment (default)
+  =: native order, std
+size & alignment
+  <: little-endian, std
+size & alignment
+  >: big-endian, std
+size & alignment
+  !: same as >
+
+The remaining chars indicate types of args and must match exactly;
+these can be preceded by a decimal repeat count:
+  x: pad byte (no data); c:char; b:signed byte; B:unsigned byte;
+  ?: _Bool (requires C99; if not available, char is used instead)
+  h:short; H:unsigned short; i:int; I:unsigned int;
+  l:long; L:unsigned long; f:float; d:double; e:half-float.
+Special cases (preceding decimal count indicates length):
+  s:string (array of char); p: pascal string (with count byte).
+Special cases (only available in native format):
+  n:ssize_t; N:size_t;
+  P:an integer type that is wide enough to hold a pointer.
+Special case (not in native mode unless 'long long' in platform C):
+  q:long long; Q:unsigned long long
+Whitespace between formats is ignored.
+
+The variable struct.error is an exception raised on errors.
+
+==============================
+base64.test
+()
+None
+
+==============================
+base64.urlsafe_b64decode
+(s)
+Decode bytes using the URL- and filesystem-safe Base64 alphabet.
+
+Argument s is a bytes-like object or ASCII string to decode
+ The result
+is returned as a bytes object
+ A binascii.Error is raised if the input
+is incorrectly padded
+ Characters that are not in the URL-safe base-64
+alphabet, and are not a plus '+' or slash '/', are discarded prior to the
+padding check.
+
+The alphabet uses '-' instead of '+' and '_' instead of '/'.
+
+==============================
+base64.urlsafe_b64encode
+(s)
+Encode bytes using the URL- and filesystem-safe Base64 alphabet.
+
+Argument s is a bytes-like object to encode
+ The result is returned as a
+bytes object
+ The alphabet uses '-' instead of '+' and '_' instead of
+'/'.
+

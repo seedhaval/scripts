@@ -1,0 +1,1972 @@
+==============================
+inspect.ArgInfo
+(args, varargs, keywords, locals)
+ArgInfo(args, varargs, keywords, locals)
+
+==============================
+inspect.ArgInfo.args
+Alias for field number 0
+
+==============================
+inspect.ArgInfo.count
+(self, value, /)
+Return number of occurrences of value.
+
+==============================
+inspect.ArgInfo.index
+(self, value, start=0, stop=9223372036854775807, /)
+Return first index of value.
+
+Raises ValueError if the value is not present.
+
+==============================
+inspect.ArgInfo.keywords
+Alias for field number 2
+
+==============================
+inspect.ArgInfo.locals
+Alias for field number 3
+
+==============================
+inspect.ArgInfo.varargs
+Alias for field number 1
+
+==============================
+inspect.ArgSpec
+(args, varargs, keywords, defaults)
+ArgSpec(args, varargs, keywords, defaults)
+
+==============================
+inspect.ArgSpec.args
+Alias for field number 0
+
+==============================
+inspect.ArgSpec.count
+(self, value, /)
+Return number of occurrences of value.
+
+==============================
+inspect.ArgSpec.defaults
+Alias for field number 3
+
+==============================
+inspect.ArgSpec.index
+(self, value, start=0, stop=9223372036854775807, /)
+Return first index of value.
+
+Raises ValueError if the value is not present.
+
+==============================
+inspect.ArgSpec.keywords
+Alias for field number 2
+
+==============================
+inspect.ArgSpec.varargs
+Alias for field number 1
+
+==============================
+inspect.Arguments
+(args, varargs, varkw)
+Arguments(args, varargs, varkw)
+
+==============================
+inspect.Arguments.args
+Alias for field number 0
+
+==============================
+inspect.Arguments.count
+(self, value, /)
+Return number of occurrences of value.
+
+==============================
+inspect.Arguments.index
+(self, value, start=0, stop=9223372036854775807, /)
+Return first index of value.
+
+Raises ValueError if the value is not present.
+
+==============================
+inspect.Arguments.varargs
+Alias for field number 1
+
+==============================
+inspect.Arguments.varkw
+Alias for field number 2
+
+==============================
+inspect.Attribute
+(name, kind, defining_class, object)
+Attribute(name, kind, defining_class, object)
+
+==============================
+inspect.Attribute.count
+(self, value, /)
+Return number of occurrences of value.
+
+==============================
+inspect.Attribute.defining_class
+Alias for field number 2
+
+==============================
+inspect.Attribute.index
+(self, value, start=0, stop=9223372036854775807, /)
+Return first index of value.
+
+Raises ValueError if the value is not present.
+
+==============================
+inspect.Attribute.kind
+Alias for field number 1
+
+==============================
+inspect.Attribute.name
+Alias for field number 0
+
+==============================
+inspect.Attribute.object
+Alias for field number 3
+
+==============================
+inspect.BlockFinder
+()
+Provide a tokeneater() method to detect the end of a code block.
+
+==============================
+inspect.BlockFinder.tokeneater
+(self, type, token, srowcol, erowcol, line)
+None
+
+==============================
+inspect.BoundArguments
+(signature, arguments)
+Result of `Signature.bind` call
+ Holds the mapping of arguments
+to the function's parameters.
+
+Has the following public attributes:
+
+* arguments : OrderedDict
+    An ordered mutable mapping of parameters' names to arguments' values.
+    Does not contain arguments' default values.
+* signature : Signature
+    The Signature object that created this instance.
+* args : tuple
+    Tuple of positional arguments values.
+* kwargs : dict
+    Dict of keyword arguments values.
+
+==============================
+inspect.BoundArguments.apply_defaults
+(self)
+Set default values for missing arguments.
+
+For variable-positional arguments (*args) the default is an
+empty tuple.
+
+For variable-keyword arguments (**kwargs) the default is an
+empty dict.
+
+==============================
+inspect.BoundArguments.args
+None
+
+==============================
+inspect.BoundArguments.arguments
+None
+
+==============================
+inspect.BoundArguments.kwargs
+None
+
+==============================
+inspect.BoundArguments.signature
+None
+
+==============================
+inspect.CORO_CLOSED
+str(object='') -> str
+str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+Create a new string object from the given object
+If encoding or
+errors is specified, then the object must expose a data buffer
+that will be decoded using the given encoding and error handler.
+Otherwise, returns the result of object.__str__() (if defined)
+or repr(object).
+encoding defaults to sys.getdefaultencoding().
+errors defaults to 'strict'.
+
+==============================
+inspect.CORO_CREATED
+str(object='') -> str
+str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+Create a new string object from the given object
+If encoding or
+errors is specified, then the object must expose a data buffer
+that will be decoded using the given encoding and error handler.
+Otherwise, returns the result of object.__str__() (if defined)
+or repr(object).
+encoding defaults to sys.getdefaultencoding().
+errors defaults to 'strict'.
+
+==============================
+inspect.CORO_RUNNING
+str(object='') -> str
+str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+Create a new string object from the given object
+If encoding or
+errors is specified, then the object must expose a data buffer
+that will be decoded using the given encoding and error handler.
+Otherwise, returns the result of object.__str__() (if defined)
+or repr(object).
+encoding defaults to sys.getdefaultencoding().
+errors defaults to 'strict'.
+
+==============================
+inspect.CORO_SUSPENDED
+str(object='') -> str
+str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+Create a new string object from the given object
+If encoding or
+errors is specified, then the object must expose a data buffer
+that will be decoded using the given encoding and error handler.
+Otherwise, returns the result of object.__str__() (if defined)
+or repr(object).
+encoding defaults to sys.getdefaultencoding().
+errors defaults to 'strict'.
+
+==============================
+inspect.CO_ASYNC_GENERATOR
+int([x]) -> integer
+int(x, base=10) -> integer
+
+Convert a number or string to an integer, or return 0 if no arguments
+are given
+ If x is a number, return x.__int__()
+ For floating point
+numbers, this truncates towards zero.
+
+If x is not a number or if base is given, then x must be a string,
+bytes, or bytearray instance representing an integer literal in the
+given base
+ The literal can be preceded by '+' or '-' and be surrounded
+by whitespace
+ The base defaults to 10
+ Valid bases are 0 and 2-36.
+Base 0 means to interpret the base from the string as an integer literal.
+>>> int('0b100', base=0)
+4
+
+==============================
+inspect.CO_COROUTINE
+int([x]) -> integer
+int(x, base=10) -> integer
+
+Convert a number or string to an integer, or return 0 if no arguments
+are given
+ If x is a number, return x.__int__()
+ For floating point
+numbers, this truncates towards zero.
+
+If x is not a number or if base is given, then x must be a string,
+bytes, or bytearray instance representing an integer literal in the
+given base
+ The literal can be preceded by '+' or '-' and be surrounded
+by whitespace
+ The base defaults to 10
+ Valid bases are 0 and 2-36.
+Base 0 means to interpret the base from the string as an integer literal.
+>>> int('0b100', base=0)
+4
+
+==============================
+inspect.CO_GENERATOR
+int([x]) -> integer
+int(x, base=10) -> integer
+
+Convert a number or string to an integer, or return 0 if no arguments
+are given
+ If x is a number, return x.__int__()
+ For floating point
+numbers, this truncates towards zero.
+
+If x is not a number or if base is given, then x must be a string,
+bytes, or bytearray instance representing an integer literal in the
+given base
+ The literal can be preceded by '+' or '-' and be surrounded
+by whitespace
+ The base defaults to 10
+ Valid bases are 0 and 2-36.
+Base 0 means to interpret the base from the string as an integer literal.
+>>> int('0b100', base=0)
+4
+
+==============================
+inspect.CO_ITERABLE_COROUTINE
+int([x]) -> integer
+int(x, base=10) -> integer
+
+Convert a number or string to an integer, or return 0 if no arguments
+are given
+ If x is a number, return x.__int__()
+ For floating point
+numbers, this truncates towards zero.
+
+If x is not a number or if base is given, then x must be a string,
+bytes, or bytearray instance representing an integer literal in the
+given base
+ The literal can be preceded by '+' or '-' and be surrounded
+by whitespace
+ The base defaults to 10
+ Valid bases are 0 and 2-36.
+Base 0 means to interpret the base from the string as an integer literal.
+>>> int('0b100', base=0)
+4
+
+==============================
+inspect.CO_NESTED
+int([x]) -> integer
+int(x, base=10) -> integer
+
+Convert a number or string to an integer, or return 0 if no arguments
+are given
+ If x is a number, return x.__int__()
+ For floating point
+numbers, this truncates towards zero.
+
+If x is not a number or if base is given, then x must be a string,
+bytes, or bytearray instance representing an integer literal in the
+given base
+ The literal can be preceded by '+' or '-' and be surrounded
+by whitespace
+ The base defaults to 10
+ Valid bases are 0 and 2-36.
+Base 0 means to interpret the base from the string as an integer literal.
+>>> int('0b100', base=0)
+4
+
+==============================
+inspect.CO_NEWLOCALS
+int([x]) -> integer
+int(x, base=10) -> integer
+
+Convert a number or string to an integer, or return 0 if no arguments
+are given
+ If x is a number, return x.__int__()
+ For floating point
+numbers, this truncates towards zero.
+
+If x is not a number or if base is given, then x must be a string,
+bytes, or bytearray instance representing an integer literal in the
+given base
+ The literal can be preceded by '+' or '-' and be surrounded
+by whitespace
+ The base defaults to 10
+ Valid bases are 0 and 2-36.
+Base 0 means to interpret the base from the string as an integer literal.
+>>> int('0b100', base=0)
+4
+
+==============================
+inspect.CO_NOFREE
+int([x]) -> integer
+int(x, base=10) -> integer
+
+Convert a number or string to an integer, or return 0 if no arguments
+are given
+ If x is a number, return x.__int__()
+ For floating point
+numbers, this truncates towards zero.
+
+If x is not a number or if base is given, then x must be a string,
+bytes, or bytearray instance representing an integer literal in the
+given base
+ The literal can be preceded by '+' or '-' and be surrounded
+by whitespace
+ The base defaults to 10
+ Valid bases are 0 and 2-36.
+Base 0 means to interpret the base from the string as an integer literal.
+>>> int('0b100', base=0)
+4
+
+==============================
+inspect.CO_OPTIMIZED
+int([x]) -> integer
+int(x, base=10) -> integer
+
+Convert a number or string to an integer, or return 0 if no arguments
+are given
+ If x is a number, return x.__int__()
+ For floating point
+numbers, this truncates towards zero.
+
+If x is not a number or if base is given, then x must be a string,
+bytes, or bytearray instance representing an integer literal in the
+given base
+ The literal can be preceded by '+' or '-' and be surrounded
+by whitespace
+ The base defaults to 10
+ Valid bases are 0 and 2-36.
+Base 0 means to interpret the base from the string as an integer literal.
+>>> int('0b100', base=0)
+4
+
+==============================
+inspect.CO_VARARGS
+int([x]) -> integer
+int(x, base=10) -> integer
+
+Convert a number or string to an integer, or return 0 if no arguments
+are given
+ If x is a number, return x.__int__()
+ For floating point
+numbers, this truncates towards zero.
+
+If x is not a number or if base is given, then x must be a string,
+bytes, or bytearray instance representing an integer literal in the
+given base
+ The literal can be preceded by '+' or '-' and be surrounded
+by whitespace
+ The base defaults to 10
+ Valid bases are 0 and 2-36.
+Base 0 means to interpret the base from the string as an integer literal.
+>>> int('0b100', base=0)
+4
+
+==============================
+inspect.CO_VARKEYWORDS
+int([x]) -> integer
+int(x, base=10) -> integer
+
+Convert a number or string to an integer, or return 0 if no arguments
+are given
+ If x is a number, return x.__int__()
+ For floating point
+numbers, this truncates towards zero.
+
+If x is not a number or if base is given, then x must be a string,
+bytes, or bytearray instance representing an integer literal in the
+given base
+ The literal can be preceded by '+' or '-' and be surrounded
+by whitespace
+ The base defaults to 10
+ Valid bases are 0 and 2-36.
+Base 0 means to interpret the base from the string as an integer literal.
+>>> int('0b100', base=0)
+4
+
+==============================
+inspect.ClosureVars
+(nonlocals, globals, builtins, unbound)
+ClosureVars(nonlocals, globals, builtins, unbound)
+
+==============================
+inspect.ClosureVars.builtins
+Alias for field number 2
+
+==============================
+inspect.ClosureVars.count
+(self, value, /)
+Return number of occurrences of value.
+
+==============================
+inspect.ClosureVars.globals
+Alias for field number 1
+
+==============================
+inspect.ClosureVars.index
+(self, value, start=0, stop=9223372036854775807, /)
+Return first index of value.
+
+Raises ValueError if the value is not present.
+
+==============================
+inspect.ClosureVars.nonlocals
+Alias for field number 0
+
+==============================
+inspect.ClosureVars.unbound
+Alias for field number 3
+
+==============================
+inspect.EndOfBlock
+Common base class for all non-exit exceptions.
+
+==============================
+inspect.EndOfBlock.args
+None
+
+==============================
+inspect.EndOfBlock.with_traceback
+Exception.with_traceback(tb) --
+set self.__traceback__ to tb and return self.
+
+==============================
+inspect.FrameInfo
+(frame, filename, lineno, function, code_context, index)
+FrameInfo(frame, filename, lineno, function, code_context, index)
+
+==============================
+inspect.FrameInfo.code_context
+Alias for field number 4
+
+==============================
+inspect.FrameInfo.count
+(self, value, /)
+Return number of occurrences of value.
+
+==============================
+inspect.FrameInfo.filename
+Alias for field number 1
+
+==============================
+inspect.FrameInfo.frame
+Alias for field number 0
+
+==============================
+inspect.FrameInfo.function
+Alias for field number 3
+
+==============================
+inspect.FrameInfo.index
+Alias for field number 5
+
+==============================
+inspect.FrameInfo.lineno
+Alias for field number 2
+
+==============================
+inspect.FullArgSpec
+(args, varargs, varkw, defaults, kwonlyargs, kwonlydefaults, annotations)
+FullArgSpec(args, varargs, varkw, defaults, kwonlyargs, kwonlydefaults, annotations)
+
+==============================
+inspect.FullArgSpec.annotations
+Alias for field number 6
+
+==============================
+inspect.FullArgSpec.args
+Alias for field number 0
+
+==============================
+inspect.FullArgSpec.count
+(self, value, /)
+Return number of occurrences of value.
+
+==============================
+inspect.FullArgSpec.defaults
+Alias for field number 3
+
+==============================
+inspect.FullArgSpec.index
+(self, value, start=0, stop=9223372036854775807, /)
+Return first index of value.
+
+Raises ValueError if the value is not present.
+
+==============================
+inspect.FullArgSpec.kwonlyargs
+Alias for field number 4
+
+==============================
+inspect.FullArgSpec.kwonlydefaults
+Alias for field number 5
+
+==============================
+inspect.FullArgSpec.varargs
+Alias for field number 1
+
+==============================
+inspect.FullArgSpec.varkw
+Alias for field number 2
+
+==============================
+inspect.GEN_CLOSED
+str(object='') -> str
+str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+Create a new string object from the given object
+If encoding or
+errors is specified, then the object must expose a data buffer
+that will be decoded using the given encoding and error handler.
+Otherwise, returns the result of object.__str__() (if defined)
+or repr(object).
+encoding defaults to sys.getdefaultencoding().
+errors defaults to 'strict'.
+
+==============================
+inspect.GEN_CREATED
+str(object='') -> str
+str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+Create a new string object from the given object
+If encoding or
+errors is specified, then the object must expose a data buffer
+that will be decoded using the given encoding and error handler.
+Otherwise, returns the result of object.__str__() (if defined)
+or repr(object).
+encoding defaults to sys.getdefaultencoding().
+errors defaults to 'strict'.
+
+==============================
+inspect.GEN_RUNNING
+str(object='') -> str
+str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+Create a new string object from the given object
+If encoding or
+errors is specified, then the object must expose a data buffer
+that will be decoded using the given encoding and error handler.
+Otherwise, returns the result of object.__str__() (if defined)
+or repr(object).
+encoding defaults to sys.getdefaultencoding().
+errors defaults to 'strict'.
+
+==============================
+inspect.GEN_SUSPENDED
+str(object='') -> str
+str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+Create a new string object from the given object
+If encoding or
+errors is specified, then the object must expose a data buffer
+that will be decoded using the given encoding and error handler.
+Otherwise, returns the result of object.__str__() (if defined)
+or repr(object).
+encoding defaults to sys.getdefaultencoding().
+errors defaults to 'strict'.
+
+==============================
+inspect.OrderedDict
+Dictionary that remembers insertion order
+
+==============================
+inspect.OrderedDict.clear
+od.clear() -> None
+ Remove all items from od.
+
+==============================
+inspect.OrderedDict.copy
+od.copy() -> a shallow copy of od
+
+==============================
+inspect.OrderedDict.fromkeys
+(iterable, value=None)
+Create a new ordered dictionary with keys from iterable and values set to value.
+
+==============================
+inspect.OrderedDict.get
+(self, key, default=None, /)
+Return the value for key if key is in the dictionary, else default.
+
+==============================
+inspect.OrderedDict.items
+D.items() -> a set-like object providing a view on D's items
+
+==============================
+inspect.OrderedDict.keys
+D.keys() -> a set-like object providing a view on D's keys
+
+==============================
+inspect.OrderedDict.move_to_end
+(self, /, key, last=True)
+Move an existing element to the end (or beginning if last is false).
+
+Raise KeyError if the element does not exist.
+
+==============================
+inspect.OrderedDict.pop
+od.pop(k[,d]) -> v, remove specified key and return the corresponding
+value
+ If key is not found, d is returned if given, otherwise KeyError
+is raised.
+
+==============================
+inspect.OrderedDict.popitem
+(self, /, last=True)
+Remove and return a (key, value) pair from the dictionary.
+
+Pairs are returned in LIFO order if last is true or FIFO order if false.
+
+==============================
+inspect.OrderedDict.setdefault
+(self, /, key, default=None)
+Insert key with a value of default if key is not in the dictionary.
+
+Return the value for key if key is in the dictionary, else default.
+
+==============================
+inspect.OrderedDict.update
+D.update([E, ]**F) -> None
+ Update D from dict/iterable E and F.
+If E is present and has a .keys() method, then does:  for k in E: D[k] = E[k]
+If E is present and lacks a .keys() method, then does:  for k, v in E: D[k] = v
+In either case, this is followed by: for k in F:  D[k] = F[k]
+
+==============================
+inspect.OrderedDict.values
+D.values() -> an object providing a view on D's values
+
+==============================
+inspect.Parameter
+(name, kind, *, default, annotation)
+Represents a parameter in a function signature.
+
+Has the following public attributes:
+
+* name : str
+    The name of the parameter as a string.
+* default : object
+    The default value for the parameter if specified
+ If the
+    parameter has no default value, this attribute is set to
+    `Parameter.empty`.
+* annotation
+    The annotation for the parameter if specified
+ If the
+    parameter has no annotation, this attribute is set to
+    `Parameter.empty`.
+* kind : str
+    Describes how argument values are bound to the parameter.
+    Possible values: `Parameter.POSITIONAL_ONLY`,
+    `Parameter.POSITIONAL_OR_KEYWORD`, `Parameter.VAR_POSITIONAL`,
+    `Parameter.KEYWORD_ONLY`, `Parameter.VAR_KEYWORD`.
+
+==============================
+inspect.Parameter.KEYWORD_ONLY
+An enumeration.
+
+==============================
+inspect.Parameter.POSITIONAL_ONLY
+An enumeration.
+
+==============================
+inspect.Parameter.POSITIONAL_OR_KEYWORD
+An enumeration.
+
+==============================
+inspect.Parameter.VAR_KEYWORD
+An enumeration.
+
+==============================
+inspect.Parameter.VAR_POSITIONAL
+An enumeration.
+
+==============================
+inspect.Parameter.annotation
+None
+
+==============================
+inspect.Parameter.default
+None
+
+==============================
+inspect.Parameter.empty
+()
+Marker object for Signature.empty and Parameter.empty.
+
+==============================
+inspect.Parameter.kind
+None
+
+==============================
+inspect.Parameter.name
+None
+
+==============================
+inspect.Parameter.replace
+(self, *, name=<class 'inspect._void'>, kind=<class 'inspect._void'>, annotation=<class 'inspect._void'>, default=<class 'inspect._void'>)
+Creates a customized copy of the Parameter.
+
+==============================
+inspect.Signature
+(parameters=None, *, return_annotation, __validate_parameters__=True)
+A Signature object represents the overall signature of a function.
+It stores a Parameter object for each parameter accepted by the
+function, as well as information specific to the function itself.
+
+A Signature object has the following public attributes and methods:
+
+* parameters : OrderedDict
+    An ordered mapping of parameters' names to the corresponding
+    Parameter objects (keyword-only arguments are in the same order
+    as listed in `code.co_varnames`).
+* return_annotation : object
+    The annotation for the return type of the function if specified.
+    If the function has no annotation for its return type, this
+    attribute is set to `Signature.empty`.
+* bind(*args, **kwargs) -> BoundArguments
+    Creates a mapping from positional and keyword arguments to
+    parameters.
+* bind_partial(*args, **kwargs) -> BoundArguments
+    Creates a partial mapping from positional and keyword arguments
+    to parameters (simulating 'functools.partial' behavior.)
+
+==============================
+inspect.Signature.bind
+(self, /, *args, **kwargs)
+Get a BoundArguments object, that maps the passed `args`
+and `kwargs` to the function's signature
+ Raises `TypeError`
+if the passed arguments can not be bound.
+
+==============================
+inspect.Signature.bind_partial
+(self, /, *args, **kwargs)
+Get a BoundArguments object, that partially maps the
+passed `args` and `kwargs` to the function's signature.
+Raises `TypeError` if the passed arguments can not be bound.
+
+==============================
+inspect.Signature.empty
+()
+Marker object for Signature.empty and Parameter.empty.
+
+==============================
+inspect.Signature.from_builtin
+(func)
+Constructs Signature for the given builtin function.
+
+Deprecated since Python 3.5, use `Signature.from_callable()`.
+
+==============================
+inspect.Signature.from_callable
+(obj, *, follow_wrapped=True)
+Constructs Signature for the given callable object.
+
+==============================
+inspect.Signature.from_function
+(func)
+Constructs Signature for the given python function.
+
+Deprecated since Python 3.5, use `Signature.from_callable()`.
+
+==============================
+inspect.Signature.parameters
+None
+
+==============================
+inspect.Signature.replace
+(self, *, parameters=<class 'inspect._void'>, return_annotation=<class 'inspect._void'>)
+Creates a customized copy of the Signature.
+Pass 'parameters' and/or 'return_annotation' arguments
+to override them in the new copy.
+
+==============================
+inspect.Signature.return_annotation
+None
+
+==============================
+inspect.TPFLAGS_IS_ABSTRACT
+int([x]) -> integer
+int(x, base=10) -> integer
+
+Convert a number or string to an integer, or return 0 if no arguments
+are given
+ If x is a number, return x.__int__()
+ For floating point
+numbers, this truncates towards zero.
+
+If x is not a number or if base is given, then x must be a string,
+bytes, or bytearray instance representing an integer literal in the
+given base
+ The literal can be preceded by '+' or '-' and be surrounded
+by whitespace
+ The base defaults to 10
+ Valid bases are 0 and 2-36.
+Base 0 means to interpret the base from the string as an integer literal.
+>>> int('0b100', base=0)
+4
+
+==============================
+inspect.Traceback
+(filename, lineno, function, code_context, index)
+Traceback(filename, lineno, function, code_context, index)
+
+==============================
+inspect.Traceback.code_context
+Alias for field number 3
+
+==============================
+inspect.Traceback.count
+(self, value, /)
+Return number of occurrences of value.
+
+==============================
+inspect.Traceback.filename
+Alias for field number 0
+
+==============================
+inspect.Traceback.function
+Alias for field number 2
+
+==============================
+inspect.Traceback.index
+Alias for field number 4
+
+==============================
+inspect.Traceback.lineno
+Alias for field number 1
+
+==============================
+inspect.abc
+Abstract Base Classes (ABCs) according to PEP 3119.
+
+==============================
+inspect.attrgetter
+attrgetter(attr, ...) --> attrgetter object
+
+Return a callable object that fetches the given attribute(s) from its operand.
+After f = attrgetter('name'), the call f(r) returns r.name.
+After g = attrgetter('name', 'date'), the call g(r) returns (r.name, r.date).
+After h = attrgetter('name.first', 'name.last'), the call h(r) returns
+(r.name.first, r.name.last).
+
+==============================
+inspect.builtins
+Built-in functions, exceptions, and other objects.
+
+Noteworthy: None is the `nil' object; Ellipsis represents `...' in slices.
+
+==============================
+inspect.classify_class_attrs
+(cls)
+Return list of attribute-descriptor tuples.
+
+For each name in dir(cls), the return list contains a 4-tuple
+with these elements:
+
+    0
+The name (a string).
+
+    1
+The kind of attribute this is, one of these strings:
+           'class method'    created via classmethod()
+           'static method'   created via staticmethod()
+           'property'        created via property()
+           'method'          any other flavor of method or descriptor
+           'data'            not a method
+
+    2
+The class which defined this attribute (a class).
+
+    3
+The object as obtained by calling getattr; if this fails, or if the
+       resulting object does not live anywhere in the class' mro (including
+       metaclasses) then the object is looked up in the defining class's
+       dict (found by walking the mro).
+
+If one of the items in dir(cls) is stored in the metaclass it will now
+be discovered and not have None be listed as the class in which it was
+defined
+ Any items whose home class cannot be discovered are skipped.
+
+==============================
+inspect.cleandoc
+(doc)
+Clean up indentation from docstrings.
+
+Any whitespace that can be uniformly removed from the second line
+onwards is removed.
+
+==============================
+inspect.collections
+This module implements specialized container datatypes providing
+alternatives to Python's general purpose built-in containers, dict,
+list, set, and tuple.
+
+* namedtuple   factory function for creating tuple subclasses with named fields
+* deque        list-like container with fast appends and pops on either end
+* ChainMap     dict-like class for creating a single view of multiple mappings
+* Counter      dict subclass for counting hashable objects
+* OrderedDict  dict subclass that remembers the order entries were added
+* defaultdict  dict subclass that calls a factory function to supply missing values
+* UserDict     wrapper around dictionary objects for easier dict subclassing
+* UserList     wrapper around list objects for easier list subclassing
+* UserString   wrapper around string objects for easier string subclassing
+
+==============================
+inspect.currentframe
+()
+Return the frame of the caller or None if this is not possible.
+
+==============================
+inspect.dis
+Disassembler of Python byte code into mnemonics.
+
+==============================
+inspect.enum
+None
+
+==============================
+inspect.findsource
+(object)
+Return the entire source file and starting line number for an object.
+
+The argument may be a module, class, method, function, traceback, frame,
+or code object
+ The source code is returned as a list of all the lines
+in the file and the line number indexes a line in that list
+ An OSError
+is raised if the source code cannot be retrieved.
+
+==============================
+inspect.formatannotation
+(annotation, base_module=None)
+None
+
+==============================
+inspect.formatannotationrelativeto
+(object)
+None
+
+==============================
+inspect.formatargspec
+(args, varargs=None, varkw=None, defaults=None, kwonlyargs=(), kwonlydefaults={}, annotations={}, formatarg=<class 'str'>, formatvarargs=<function <lambda> at 0x7f8015acfb80>, formatvarkw=<function <lambda> at 0x7f8015acfc10>, formatvalue=<function <lambda> at 0x7f8015acfca0>, formatreturns=<function <lambda> at 0x7f8015acfd30>, formatannotation=<function formatannotation at 0x7f8015acfa60>)
+Format an argument spec from the values returned by getfullargspec.
+
+The first seven arguments are (args, varargs, varkw, defaults,
+kwonlyargs, kwonlydefaults, annotations)
+ The other five arguments
+are the corresponding optional formatting functions that are called to
+turn names and values into strings
+ The last argument is an optional
+function to format the sequence of arguments.
+
+Deprecated since Python 3.5: use the `signature` function and `Signature`
+objects.
+
+==============================
+inspect.formatargvalues
+(args, varargs, varkw, locals, formatarg=<class 'str'>, formatvarargs=<function <lambda> at 0x7f8015acfee0>, formatvarkw=<function <lambda> at 0x7f8015acff70>, formatvalue=<function <lambda> at 0x7f8015ad1040>)
+Format an argument spec from the 4 values returned by getargvalues.
+
+The first four arguments are (args, varargs, varkw, locals)
+ The
+next four arguments are the corresponding optional formatting functions
+that are called to turn names and values into strings
+ The ninth
+argument is an optional function to format the sequence of arguments.
+
+==============================
+inspect.functools
+functools.py - Tools for working with functions and callable objects
+
+==============================
+inspect.getabsfile
+(object, _filename=None)
+Return an absolute path to the source or compiled file for an object.
+
+The idea is for each object to have a unique origin, so this routine
+normalizes the result as much as possible.
+
+==============================
+inspect.getargs
+(co)
+Get information about the arguments accepted by a code object.
+
+Three things are returned: (args, varargs, varkw), where
+'args' is the list of argument names
+Keyword-only arguments are
+appended
+'varargs' and 'varkw' are the names of the * and **
+arguments or None.
+
+==============================
+inspect.getargspec
+(func)
+Get the names and default values of a function's parameters.
+
+A tuple of four things is returned: (args, varargs, keywords, defaults).
+'args' is a list of the argument names, including keyword-only argument names.
+'varargs' and 'keywords' are the names of the * and ** parameters or None.
+'defaults' is an n-tuple of the default values of the last n parameters.
+
+This function is deprecated, as it does not support annotations or
+keyword-only parameters and will raise ValueError if either is present
+on the supplied callable.
+
+For a more structured introspection API, use inspect.signature() instead.
+
+Alternatively, use getfullargspec() for an API with a similar namedtuple
+based interface, but full support for annotations and keyword-only
+parameters.
+
+Deprecated since Python 3.5, use `inspect.getfullargspec()`.
+
+==============================
+inspect.getargvalues
+(frame)
+Get information about arguments passed into a particular frame.
+
+A tuple of four things is returned: (args, varargs, varkw, locals).
+'args' is a list of the argument names.
+'varargs' and 'varkw' are the names of the * and ** arguments or None.
+'locals' is the locals dictionary of the given frame.
+
+==============================
+inspect.getattr_static
+(obj, attr, default=<object object at 0x7f8015cd0f20>)
+Retrieve attributes without triggering dynamic lookup via the
+descriptor protocol,  __getattr__ or __getattribute__.
+
+Note: this function may not be able to retrieve all attributes
+that getattr can fetch (like dynamically created attributes)
+and may find attributes that getattr can't (like descriptors
+that raise AttributeError)
+It can also return descriptor objects
+instead of instance members in some cases
+See the
+documentation for details.
+
+==============================
+inspect.getblock
+(lines)
+Extract the block of code at the top of the given list of lines.
+
+==============================
+inspect.getcallargs
+(func, /, *positional, **named)
+Get the mapping of arguments to values.
+
+A dict is returned, with keys the function argument names (including the
+names of the * and ** arguments, if any), and values the respective bound
+values from 'positional' and 'named'.
+
+==============================
+inspect.getclasstree
+(classes, unique=False)
+Arrange the given list of classes into a hierarchy of nested lists.
+
+Where a nested list appears, it contains classes derived from the class
+whose entry immediately precedes the list
+ Each entry is a 2-tuple
+containing a class and a tuple of its base classes
+ If the 'unique'
+argument is true, exactly one entry appears in the returned structure
+for each class in the given list
+ Otherwise, classes using multiple
+inheritance and their descendants will appear multiple times.
+
+==============================
+inspect.getclosurevars
+(func)
+Get the mapping of free variables to their current values.
+
+Returns a named tuple of dicts mapping the current nonlocal, global
+and builtin references as seen by the body of the function
+A final
+set of unbound names that could not be resolved is also provided.
+
+==============================
+inspect.getcomments
+(object)
+Get lines of comments immediately preceding an object's source code.
+
+Returns None when source can't be found.
+
+==============================
+inspect.getcoroutinelocals
+(coroutine)
+Get the mapping of coroutine local variables to their current values.
+
+A dict is returned, with the keys the local variable names and values the
+bound values.
+
+==============================
+inspect.getcoroutinestate
+(coroutine)
+Get current state of a coroutine object.
+
+Possible states are:
+  CORO_CREATED: Waiting to start execution.
+  CORO_RUNNING: Currently being executed by the interpreter.
+  CORO_SUSPENDED: Currently suspended at an await expression.
+  CORO_CLOSED: Execution has completed.
+
+==============================
+inspect.getdoc
+(object)
+Get the documentation string for an object.
+
+All tabs are expanded to spaces
+ To clean up docstrings that are
+indented to line up with blocks of code, any whitespace than can be
+uniformly removed from the second line onwards is removed.
+
+==============================
+inspect.getfile
+(object)
+Work out which source or compiled file an object was defined in.
+
+==============================
+inspect.getframeinfo
+(frame, context=1)
+Get information about a frame or traceback object.
+
+A tuple of five things is returned: the filename, the line number of
+the current line, the function name, a list of lines of context from
+the source code, and the index of the current line within that list.
+The optional second argument specifies the number of lines of context
+to return, which are centered around the current line.
+
+==============================
+inspect.getfullargspec
+(func)
+Get the names and default values of a callable object's parameters.
+
+A tuple of seven things is returned:
+(args, varargs, varkw, defaults, kwonlyargs, kwonlydefaults, annotations).
+'args' is a list of the parameter names.
+'varargs' and 'varkw' are the names of the * and ** parameters or None.
+'defaults' is an n-tuple of the default values of the last n parameters.
+'kwonlyargs' is a list of keyword-only parameter names.
+'kwonlydefaults' is a dictionary mapping names from kwonlyargs to defaults.
+'annotations' is a dictionary mapping parameter names to annotations.
+
+Notable differences from inspect.signature():
+  - the "self" parameter is always reported, even for bound methods
+  - wrapper chains defined by __wrapped__ *not* unwrapped automatically
+
+==============================
+inspect.getgeneratorlocals
+(generator)
+Get the mapping of generator local variables to their current values.
+
+A dict is returned, with the keys the local variable names and values the
+bound values.
+
+==============================
+inspect.getgeneratorstate
+(generator)
+Get current state of a generator-iterator.
+
+Possible states are:
+  GEN_CREATED: Waiting to start execution.
+  GEN_RUNNING: Currently being executed by the interpreter.
+  GEN_SUSPENDED: Currently suspended at a yield expression.
+  GEN_CLOSED: Execution has completed.
+
+==============================
+inspect.getinnerframes
+(tb, context=1)
+Get a list of records for a traceback's frame and all lower frames.
+
+Each record contains a frame object, filename, line number, function
+name, a list of lines of context, and index within the context.
+
+==============================
+inspect.getlineno
+(frame)
+Get the line number from a frame object, allowing for optimization.
+
+==============================
+inspect.getmembers
+(object, predicate=None)
+Return all members of an object as (name, value) pairs sorted by name.
+Optionally, only return members that satisfy a given predicate.
+
+==============================
+inspect.getmodule
+(object, _filename=None)
+Return the module an object was defined in, or None if not found.
+
+==============================
+inspect.getmodulename
+(path)
+Return the module name for a given file, or None.
+
+==============================
+inspect.getmro
+(cls)
+Return tuple of base classes (including cls) in method resolution order.
+
+==============================
+inspect.getouterframes
+(frame, context=1)
+Get a list of records for a frame and all higher (calling) frames.
+
+Each record contains a frame object, filename, line number, function
+name, a list of lines of context, and index within the context.
+
+==============================
+inspect.getsource
+(object)
+Return the text of the source code for an object.
+
+The argument may be a module, class, method, function, traceback, frame,
+or code object
+ The source code is returned as a single string
+ An
+OSError is raised if the source code cannot be retrieved.
+
+==============================
+inspect.getsourcefile
+(object)
+Return the filename that can be used to locate an object's source.
+Return None if no way can be identified to get the source.
+
+==============================
+inspect.getsourcelines
+(object)
+Return a list of source lines and starting line number for an object.
+
+The argument may be a module, class, method, function, traceback, frame,
+or code object
+ The source code is returned as a list of the lines
+corresponding to the object and the line number indicates where in the
+original source file the first line of code was found
+ An OSError is
+raised if the source code cannot be retrieved.
+
+==============================
+inspect.importlib
+A pure Python implementation of import.
+
+==============================
+inspect.indentsize
+(line)
+Return the indent size, in spaces, at the start of a line of text.
+
+==============================
+inspect.isabstract
+(object)
+Return true if the object is an abstract base class (ABC).
+
+==============================
+inspect.isasyncgen
+(object)
+Return true if the object is an asynchronous generator.
+
+==============================
+inspect.isasyncgenfunction
+(obj)
+Return true if the object is an asynchronous generator function.
+
+Asynchronous generator functions are defined with "async def"
+syntax and have "yield" expressions in their body.
+
+==============================
+inspect.isawaitable
+(object)
+Return true if object can be passed to an ``await`` expression.
+
+==============================
+inspect.isbuiltin
+(object)
+Return true if the object is a built-in function or method.
+
+Built-in functions and methods provide these attributes:
+    __doc__         documentation string
+    __name__        original name of this function or method
+    __self__        instance to which a method is bound, or None
+
+==============================
+inspect.isclass
+(object)
+Return true if the object is a class.
+
+Class objects provide these attributes:
+    __doc__         documentation string
+    __module__      name of module in which this class was defined
+
+==============================
+inspect.iscode
+(object)
+Return true if the object is a code object.
+
+Code objects provide these attributes:
+    co_argcount         number of arguments (not including *, ** args
+                        or keyword only arguments)
+    co_code             string of raw compiled bytecode
+    co_cellvars         tuple of names of cell variables
+    co_consts           tuple of constants used in the bytecode
+    co_filename         name of file in which this code object was created
+    co_firstlineno      number of first line in Python source code
+    co_flags            bitmap: 1=optimized | 2=newlocals | 4=*arg | 8=**arg
+                        | 16=nested | 32=generator | 64=nofree | 128=coroutine
+                        | 256=iterable_coroutine | 512=async_generator
+    co_freevars         tuple of names of free variables
+    co_posonlyargcount  number of positional only arguments
+    co_kwonlyargcount   number of keyword only arguments (not including ** arg)
+    co_lnotab           encoded mapping of line numbers to bytecode indices
+    co_name             name with which this code object was defined
+    co_names            tuple of names of local variables
+    co_nlocals          number of local variables
+    co_stacksize        virtual machine stack space required
+    co_varnames         tuple of names of arguments and local variables
+
+==============================
+inspect.iscoroutine
+(object)
+Return true if the object is a coroutine.
+
+==============================
+inspect.iscoroutinefunction
+(obj)
+Return true if the object is a coroutine function.
+
+Coroutine functions are defined with "async def" syntax.
+
+==============================
+inspect.isdatadescriptor
+(object)
+Return true if the object is a data descriptor.
+
+Data descriptors have a __set__ or a __delete__ attribute
+ Examples are
+properties (defined in Python) and getsets and members (defined in C).
+Typically, data descriptors will also have __name__ and __doc__ attributes
+(properties, getsets, and members have both of these attributes), but this
+is not guaranteed.
+
+==============================
+inspect.isframe
+(object)
+Return true if the object is a frame object.
+
+Frame objects provide these attributes:
+    f_back          next outer frame object (this frame's caller)
+    f_builtins      built-in namespace seen by this frame
+    f_code          code object being executed in this frame
+    f_globals       global namespace seen by this frame
+    f_lasti         index of last attempted instruction in bytecode
+    f_lineno        current line number in Python source code
+    f_locals        local namespace seen by this frame
+    f_trace         tracing function for this frame, or None
+
+==============================
+inspect.isfunction
+(object)
+Return true if the object is a user-defined function.
+
+Function objects provide these attributes:
+    __doc__         documentation string
+    __name__        name with which this function was defined
+    __code__        code object containing compiled function bytecode
+    __defaults__    tuple of any default values for arguments
+    __globals__     global namespace in which this function was defined
+    __annotations__ dict of parameter annotations
+    __kwdefaults__  dict of keyword only parameters with defaults
+
+==============================
+inspect.isgenerator
+(object)
+Return true if the object is a generator.
+
+Generator objects provide these attributes:
+    __iter__        defined to support iteration over container
+    close           raises a new GeneratorExit exception inside the
+                    generator to terminate the iteration
+    gi_code         code object
+    gi_frame        frame object or possibly None once the generator has
+                    been exhausted
+    gi_running      set to 1 when generator is executing, 0 otherwise
+    next            return the next item from the container
+    send            resumes the generator and "sends" a value that becomes
+                    the result of the current yield-expression
+    throw           used to raise an exception inside the generator
+
+==============================
+inspect.isgeneratorfunction
+(obj)
+Return true if the object is a user-defined generator function.
+
+Generator function objects provide the same attributes as functions.
+See help(isfunction) for a list of attributes.
+
+==============================
+inspect.isgetsetdescriptor
+(object)
+Return true if the object is a getset descriptor.
+
+getset descriptors are specialized descriptors defined in extension
+modules.
+
+==============================
+inspect.ismemberdescriptor
+(object)
+Return true if the object is a member descriptor.
+
+Member descriptors are specialized descriptors defined in extension
+modules.
+
+==============================
+inspect.ismethod
+(object)
+Return true if the object is an instance method.
+
+Instance method objects provide these attributes:
+    __doc__         documentation string
+    __name__        name with which this method was defined
+    __func__        function object containing implementation of method
+    __self__        instance to which this method is bound
+
+==============================
+inspect.ismethoddescriptor
+(object)
+Return true if the object is a method descriptor.
+
+But not if ismethod() or isclass() or isfunction() are true.
+
+This is new in Python 2.2, and, for example, is true of int.__add__.
+An object passing this test has a __get__ attribute but not a __set__
+attribute, but beyond that the set of attributes varies
+ __name__ is
+usually sensible, and __doc__ often is.
+
+Methods implemented via descriptors that also pass one of the other
+tests return false from the ismethoddescriptor() test, simply because
+the other tests promise more -- you can, e.g., count on having the
+__func__ attribute (etc) when an object passes ismethod().
+
+==============================
+inspect.ismodule
+(object)
+Return true if the object is a module.
+
+Module objects provide these attributes:
+    __cached__      pathname to byte compiled file
+    __doc__         documentation string
+    __file__        filename (missing for built-in modules)
+
+==============================
+inspect.isroutine
+(object)
+Return true if the object is any kind of function or method.
+
+==============================
+inspect.istraceback
+(object)
+Return true if the object is a traceback.
+
+Traceback objects provide these attributes:
+    tb_frame        frame object at this level
+    tb_lasti        index of last attempted instruction in bytecode
+    tb_lineno       current line number in Python source code
+    tb_next         next inner traceback object (called by this level)
+
+==============================
+inspect.itertools
+Functional tools for creating and using iterators.
+
+Infinite iterators:
+count(start=0, step=1) --> start, start+step, start+2*step, ...
+cycle(p) --> p0, p1, ..
+plast, p0, p1, ...
+repeat(elem [,n]) --> elem, elem, elem, ..
+endlessly or up to n times
+
+Iterators terminating on the shortest input sequence:
+accumulate(p[, func]) --> p0, p0+p1, p0+p1+p2
+chain(p, q, ...) --> p0, p1, ..
+plast, q0, q1, ...
+chain.from_iterable([p, q, ...]) --> p0, p1, ..
+plast, q0, q1, ...
+compress(data, selectors) --> (d[0] if s[0]), (d[1] if s[1]), ...
+dropwhile(pred, seq) --> seq[n], seq[n+1], starting when pred fails
+groupby(iterable[, keyfunc]) --> sub-iterators grouped by value of keyfunc(v)
+filterfalse(pred, seq) --> elements of seq where pred(elem) is False
+islice(seq, [start,] stop [, step]) --> elements from
+       seq[start:stop:step]
+starmap(fun, seq) --> fun(*seq[0]), fun(*seq[1]), ...
+tee(it, n=2) --> (it1, it2 , ..
+itn) splits one iterator into n
+takewhile(pred, seq) --> seq[0], seq[1], until pred fails
+zip_longest(p, q, ...) --> (p[0], q[0]), (p[1], q[1]), ...
+
+Combinatoric generators:
+product(p, q, ..
+[repeat=1]) --> cartesian product
+permutations(p[, r])
+combinations(p, r)
+combinations_with_replacement(p, r)
+
+==============================
+inspect.k
+int([x]) -> integer
+int(x, base=10) -> integer
+
+Convert a number or string to an integer, or return 0 if no arguments
+are given
+ If x is a number, return x.__int__()
+ For floating point
+numbers, this truncates towards zero.
+
+If x is not a number or if base is given, then x must be a string,
+bytes, or bytearray instance representing an integer literal in the
+given base
+ The literal can be preceded by '+' or '-' and be surrounded
+by whitespace
+ The base defaults to 10
+ Valid bases are 0 and 2-36.
+Base 0 means to interpret the base from the string as an integer literal.
+>>> int('0b100', base=0)
+4
+
+==============================
+inspect.linecache
+Cache lines from Python source files.
+
+This is intended to read lines from modules imported -- hence if a filename
+is not found, it will look down the module search path for a file by
+that name.
+
+==============================
+inspect.mod_dict
+dict() -> new empty dictionary
+dict(mapping) -> new dictionary initialized from a mapping object's
+    (key, value) pairs
+dict(iterable) -> new dictionary initialized as if via:
+    d = {}
+    for k, v in iterable:
+        d[k] = v
+dict(**kwargs) -> new dictionary initialized with the name=value pairs
+    in the keyword argument list
+ For example:  dict(one=1, two=2)
+
+==============================
+inspect.modulesbyfile
+dict() -> new empty dictionary
+dict(mapping) -> new dictionary initialized from a mapping object's
+    (key, value) pairs
+dict(iterable) -> new dictionary initialized as if via:
+    d = {}
+    for k, v in iterable:
+        d[k] = v
+dict(**kwargs) -> new dictionary initialized with the name=value pairs
+    in the keyword argument list
+ For example:  dict(one=1, two=2)
+
+==============================
+inspect.namedtuple
+(typename, field_names, *, rename=False, defaults=None, module=None)
+Returns a new subclass of tuple with named fields.
+
+>>> Point = namedtuple('Point', ['x', 'y'])
+>>> Point.__doc__                   # docstring for the new class
+'Point(x, y)'
+>>> p = Point(11, y=22)             # instantiate with positional args or keywords
+>>> p[0] + p[1]                     # indexable like a plain tuple
+33
+>>> x, y = p                        # unpack like a regular tuple
+>>> x, y
+(11, 22)
+>>> p.x + p.y                       # fields also accessible by name
+33
+>>> d = p._asdict()                 # convert to a dictionary
+>>> d['x']
+11
+>>> Point(**d)                      # convert from a dictionary
+Point(x=11, y=22)
+>>> p._replace(x=100)               # _replace() is like str.replace() but targets named fields
+Point(x=100, y=22)
+
+==============================
+inspect.os
+OS routines for NT or Posix depending on what system we're on.
+
+This exports:
+  - all functions from posix or nt, e.g
+unlink, stat, etc.
+  - os.path is either posixpath or ntpath
+  - os.name is either 'posix' or 'nt'
+  - os.curdir is a string representing the current directory (always '.')
+  - os.pardir is a string representing the parent directory (always '..')
+  - os.sep is the (or a most common) pathname separator ('/' or '\\')
+  - os.extsep is the extension separator (always '.')
+  - os.altsep is the alternate pathname separator (None or '/')
+  - os.pathsep is the component separator used in $PATH etc
+  - os.linesep is the line separator in text files ('\r' or '\n' or '\r\n')
+  - os.defpath is the default search path for executables
+  - os.devnull is the file path of the null device ('/dev/null', etc.)
+
+Programs that import and use 'os' stand a better chance of being
+portable between different platforms
+ Of course, they must then
+only use functions that are defined by all platforms (e.g., unlink
+and opendir), and leave all pathname manipulation to os.path
+(e.g., split and join).
+
+==============================
+inspect.re
+Support for regular expressions (RE).
+
+This module provides regular expression matching operations similar to
+those found in Perl
+ It supports both 8-bit and Unicode strings; both
+the pattern and the strings being processed can contain null bytes and
+characters outside the US ASCII range.
+
+Regular expressions can contain both special and ordinary characters.
+Most ordinary characters, like "A", "a", or "0", are the simplest
+regular expressions; they simply match themselves
+ You can
+concatenate ordinary characters, so last matches the string 'last'.
+
+The special characters are:
+    "."      Matches any character except a newline.
+    "^"      Matches the start of the string.
+    "$"      Matches the end of the string or just before the newline at
+             the end of the string.
+    "*"      Matches 0 or more (greedy) repetitions of the preceding RE.
+             Greedy means that it will match as many repetitions as possible.
+    "+"      Matches 1 or more (greedy) repetitions of the preceding RE.
+    "?"      Matches 0 or 1 (greedy) of the preceding RE.
+    *?,+?,?? Non-greedy versions of the previous three special characters.
+    {m,n}    Matches from m to n repetitions of the preceding RE.
+    {m,n}?   Non-greedy version of the above.
+    "\\"     Either escapes special characters or signals a special sequence.
+    []       Indicates a set of characters.
+             A "^" as the first character indicates a complementing set.
+    "|"      A|B, creates an RE that will match either A or B.
+    (...)    Matches the RE inside the parentheses.
+             The contents can be retrieved or matched later in the string.
+    (?aiLmsux) The letters set the corresponding flags defined below.
+    (?:...)  Non-grouping version of regular parentheses.
+    (?P<name>...) The substring matched by the group is accessible by name.
+    (?P=name)     Matches the text matched earlier by the group named name.
+    (?#...)  A comment; ignored.
+    (?=...)  Matches if ..
+matches next, but doesn't consume the string.
+    (?!...)  Matches if ..
+doesn't match next.
+    (?<=...) Matches if preceded by ..
+(must be fixed length).
+    (?<!...) Matches if not preceded by ..
+(must be fixed length).
+    (?(id/name)yes|no) Matches yes pattern if the group with id/name matched,
+                       the (optional) no pattern otherwise.
+
+The special sequences consist of "\\" and a character from the list
+below
+ If the ordinary character is not on the list, then the
+resulting RE will match the second character.
+    \number  Matches the contents of the group of the same number.
+    \A       Matches only at the start of the string.
+    \Z       Matches only at the end of the string.
+    \b       Matches the empty string, but only at the start or end of a word.
+    \B       Matches the empty string, but not at the start or end of a word.
+    \d       Matches any decimal digit; equivalent to the set [0-9] in
+             bytes patterns or string patterns with the ASCII flag.
+             In string patterns without the ASCII flag, it will match the whole
+             range of Unicode digits.
+    \D       Matches any non-digit character; equivalent to [^\d].
+    \s       Matches any whitespace character; equivalent to [ \t\n\r\f\v] in
+             bytes patterns or string patterns with the ASCII flag.
+             In string patterns without the ASCII flag, it will match the whole
+             range of Unicode whitespace characters.
+    \S       Matches any non-whitespace character; equivalent to [^\s].
+    \w       Matches any alphanumeric character; equivalent to [a-zA-Z0-9_]
+             in bytes patterns or string patterns with the ASCII flag.
+             In string patterns without the ASCII flag, it will match the
+             range of Unicode alphanumeric characters (letters plus digits
+             plus underscore).
+             With LOCALE, it will match the set [0-9_] plus characters defined
+             as letters for the current locale.
+    \W       Matches the complement of \w.
+    \\       Matches a literal backslash.
+
+This module exports the following functions:
+    match     Match a regular expression pattern to the beginning of a string.
+    fullmatch Match a regular expression pattern to all of a string.
+    search    Search a string for the presence of a pattern.
+    sub       Substitute occurrences of a pattern found in a string.
+    subn      Same as sub, but also return the number of substitutions made.
+    split     Split a string by the occurrences of a pattern.
+    findall   Find all occurrences of a pattern in a string.
+    finditer  Return an iterator yielding a Match object for each match.
+    compile   Compile a pattern into a Pattern object.
+    purge     Clear the regular expression cache.
+    escape    Backslash all non-alphanumerics in a string.
+
+Each function other than purge and escape can take an optional 'flags' argument
+consisting of one or more of the following module constants, joined by "|".
+A, L, and U are mutually exclusive.
+    A  ASCII       For string patterns, make \w, \W, \b, \B, \d, \D
+                   match the corresponding ASCII character categories
+                   (rather than the whole Unicode categories, which is the
+                   default).
+                   For bytes patterns, this flag is the only available
+                   behaviour and needn't be specified.
+    I  IGNORECASE  Perform case-insensitive matching.
+    L  LOCALE      Make \w, \W, \b, \B, dependent on the current locale.
+    M  MULTILINE   "^" matches the beginning of lines (after a newline)
+                   as well as the string.
+                   "$" matches the end of lines (before a newline) as well
+                   as the end of the string.
+    S  DOTALL      "." matches any character at all, including the newline.
+    X  VERBOSE     Ignore whitespace and comments for nicer looking RE's.
+    U  UNICODE     For compatibility only
+Ignored for string patterns (it
+                   is the default), and forbidden for bytes patterns.
+
+This module also defines an exception 'error'.
+
+==============================
+inspect.signature
+(obj, *, follow_wrapped=True)
+Get a signature object for the passed callable.
+
+==============================
+inspect.stack
+(context=1)
+Return a list of records for the stack above the caller's frame.
+
+==============================
+inspect.sys
+This module provides access to some objects used or maintained by the
+interpreter and to functions that interact strongly with the interpreter.
+
+Dynamic objects:
+
+argv -- command line arguments; argv[0] is the script pathname if known
+path -- module search path; path[0] is the script directory, else ''
+modules -- dictionary of loaded modules
+
+displayhook -- called to show results in an interactive session
+excepthook -- called to handle any uncaught exception other than SystemExit
+  To customize printing in an interactive session or to install a custom
+  top-level exception handler, assign other functions to replace these.
+
+stdin -- standard input file object; used by input()
+stdout -- standard output file object; used by print()
+stderr -- standard error object; used for error messages
+  By assigning other file objects (or objects that behave like files)
+  to these, it is possible to redirect all of the interpreter's I/O.
+
+last_type -- type of last uncaught exception
+last_value -- value of last uncaught exception
+last_traceback -- traceback of last uncaught exception
+  These three are only available in an interactive session after a
+  traceback has been printed.
+
+Static objects:
+
+builtin_module_names -- tuple of module names built into this interpreter
+copyright -- copyright notice pertaining to this interpreter
+exec_prefix -- prefix used to find the machine-specific Python library
+executable -- absolute path of the executable binary of the Python interpreter
+float_info -- a named tuple with information about the float implementation.
+float_repr_style -- string indicating the style of repr() output for floats
+hash_info -- a named tuple with information about the hash algorithm.
+hexversion -- version information encoded as a single integer
+implementation -- Python implementation information.
+int_info -- a named tuple with information about the int implementation.
+maxsize -- the largest supported length of containers.
+maxunicode -- the value of the largest Unicode code point
+platform -- platform identifier
+prefix -- prefix used to find the Python library
+thread_info -- a named tuple with information about the thread implementation.
+version -- the version of this interpreter as a string
+version_info -- version information as a named tuple
+__stdin__ -- the original stdin; don't touch!
+__stdout__ -- the original stdout; don't touch!
+__stderr__ -- the original stderr; don't touch!
+__displayhook__ -- the original displayhook; don't touch!
+__excepthook__ -- the original excepthook; don't touch!
+
+Functions:
+
+displayhook() -- print an object to the screen, and save it in builtins._
+excepthook() -- print an exception and its traceback to sys.stderr
+exc_info() -- return thread-safe information about the current exception
+exit() -- exit the interpreter by raising SystemExit
+getdlopenflags() -- returns flags to be used for dlopen() calls
+getprofile() -- get the global profiling function
+getrefcount() -- return the reference count for an object (plus one :-)
+getrecursionlimit() -- return the max recursion depth for the interpreter
+getsizeof() -- return the size of an object in bytes
+gettrace() -- get the global debug tracing function
+setcheckinterval() -- control how often the interpreter checks for events
+setdlopenflags() -- set the flags to be used for dlopen() calls
+setprofile() -- set the global profiling function
+setrecursionlimit() -- set the max recursion depth for the interpreter
+settrace() -- set the global debug tracing function
+
+==============================
+inspect.token
+Token constants.
+
+==============================
+inspect.tokenize
+Tokenization help for Python programs.
+
+tokenize(readline) is a generator that breaks a stream of bytes into
+Python tokens
+ It decodes the bytes according to PEP-0263 for
+determining source file encoding.
+
+It accepts a readline-like method which is called repeatedly to get the
+next line of input (or b"" for EOF)
+ It generates 5-tuples with these
+members:
+
+    the token type (see token.py)
+    the token (a string)
+    the starting (row, column) indices of the token (a 2-tuple of ints)
+    the ending (row, column) indices of the token (a 2-tuple of ints)
+    the original line (string)
+
+It is designed to match the working of the Python tokenizer exactly, except
+that it produces COMMENT tokens for comments and gives type OP for all
+operators
+ Additionally, all token lists start with an ENCODING token
+which tells you which encoding was used to decode the bytes stream.
+
+==============================
+inspect.trace
+(context=1)
+Return a list of records for the stack below the current exception.
+
+==============================
+inspect.types
+Define names for built-in types that aren't directly accessible as a builtin.
+
+==============================
+inspect.unwrap
+(func, *, stop=None)
+Get the object wrapped by *func*.
+
+Follows the chain of :attr:`__wrapped__` attributes returning the last
+object in the chain.
+
+*stop* is an optional callback accepting an object in the wrapper chain
+as its sole argument that allows the unwrapping to be terminated early if
+the callback returns a true value
+If the callback never returns a true
+value, the last object in the chain is returned as usual
+For example,
+:func:`signature` uses this to stop unwrapping if any object in the
+chain has a ``__signature__`` attribute defined.
+
+:exc:`ValueError` is raised if a cycle is encountered.
+
+ 
+
+==============================
+inspect.v
+str(object='') -> str
+str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+Create a new string object from the given object
+If encoding or
+errors is specified, then the object must expose a data buffer
+that will be decoded using the given encoding and error handler.
+Otherwise, returns the result of object.__str__() (if defined)
+or repr(object).
+encoding defaults to sys.getdefaultencoding().
+errors defaults to 'strict'.
+
+==============================
+inspect.walktree
+(classes, children, parent)
+Recursive helper function for getclasstree().
+
+==============================
+inspect.warnings
+Python part of the warnings subsystem.
+

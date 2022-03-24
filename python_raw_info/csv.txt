@@ -1,0 +1,793 @@
+==============================
+csv.Dialect
+()
+Describe a CSV dialect.
+
+This must be subclassed (see csv.excel)
+ Valid attributes are:
+delimiter, quotechar, escapechar, doublequote, skipinitialspace,
+lineterminator, quoting.
+
+==============================
+csv.Dialect.delimiter
+None
+
+==============================
+csv.Dialect.doublequote
+None
+
+==============================
+csv.Dialect.escapechar
+None
+
+==============================
+csv.Dialect.lineterminator
+None
+
+==============================
+csv.Dialect.quotechar
+None
+
+==============================
+csv.Dialect.quoting
+None
+
+==============================
+csv.Dialect.skipinitialspace
+None
+
+==============================
+csv.DictReader
+(f, fieldnames=None, restkey=None, restval=None, dialect='excel', *args, **kwds)
+None
+
+==============================
+csv.DictReader.fieldnames
+None
+
+==============================
+csv.DictWriter
+(f, fieldnames, restval='', extrasaction='raise', dialect='excel', *args, **kwds)
+None
+
+==============================
+csv.DictWriter.writeheader
+(self)
+None
+
+==============================
+csv.DictWriter.writerow
+(self, rowdict)
+None
+
+==============================
+csv.DictWriter.writerows
+(self, rowdicts)
+None
+
+==============================
+csv.Error
+Common base class for all non-exit exceptions.
+
+==============================
+csv.Error.args
+None
+
+==============================
+csv.Error.with_traceback
+Exception.with_traceback(tb) --
+set self.__traceback__ to tb and return self.
+
+==============================
+csv.QUOTE_ALL
+int([x]) -> integer
+int(x, base=10) -> integer
+
+Convert a number or string to an integer, or return 0 if no arguments
+are given
+ If x is a number, return x.__int__()
+ For floating point
+numbers, this truncates towards zero.
+
+If x is not a number or if base is given, then x must be a string,
+bytes, or bytearray instance representing an integer literal in the
+given base
+ The literal can be preceded by '+' or '-' and be surrounded
+by whitespace
+ The base defaults to 10
+ Valid bases are 0 and 2-36.
+Base 0 means to interpret the base from the string as an integer literal.
+>>> int('0b100', base=0)
+4
+
+==============================
+csv.QUOTE_MINIMAL
+int([x]) -> integer
+int(x, base=10) -> integer
+
+Convert a number or string to an integer, or return 0 if no arguments
+are given
+ If x is a number, return x.__int__()
+ For floating point
+numbers, this truncates towards zero.
+
+If x is not a number or if base is given, then x must be a string,
+bytes, or bytearray instance representing an integer literal in the
+given base
+ The literal can be preceded by '+' or '-' and be surrounded
+by whitespace
+ The base defaults to 10
+ Valid bases are 0 and 2-36.
+Base 0 means to interpret the base from the string as an integer literal.
+>>> int('0b100', base=0)
+4
+
+==============================
+csv.QUOTE_NONE
+int([x]) -> integer
+int(x, base=10) -> integer
+
+Convert a number or string to an integer, or return 0 if no arguments
+are given
+ If x is a number, return x.__int__()
+ For floating point
+numbers, this truncates towards zero.
+
+If x is not a number or if base is given, then x must be a string,
+bytes, or bytearray instance representing an integer literal in the
+given base
+ The literal can be preceded by '+' or '-' and be surrounded
+by whitespace
+ The base defaults to 10
+ Valid bases are 0 and 2-36.
+Base 0 means to interpret the base from the string as an integer literal.
+>>> int('0b100', base=0)
+4
+
+==============================
+csv.QUOTE_NONNUMERIC
+int([x]) -> integer
+int(x, base=10) -> integer
+
+Convert a number or string to an integer, or return 0 if no arguments
+are given
+ If x is a number, return x.__int__()
+ For floating point
+numbers, this truncates towards zero.
+
+If x is not a number or if base is given, then x must be a string,
+bytes, or bytearray instance representing an integer literal in the
+given base
+ The literal can be preceded by '+' or '-' and be surrounded
+by whitespace
+ The base defaults to 10
+ Valid bases are 0 and 2-36.
+Base 0 means to interpret the base from the string as an integer literal.
+>>> int('0b100', base=0)
+4
+
+==============================
+csv.Sniffer
+()
+"Sniffs" the format of a CSV file (i.e
+delimiter, quotechar)
+Returns a Dialect object.
+
+==============================
+csv.Sniffer.has_header
+(self, sample)
+None
+
+==============================
+csv.Sniffer.sniff
+(self, sample, delimiters=None)
+Returns a dialect (or None) corresponding to the sample
+
+==============================
+csv.StringIO
+(initial_value='', newline='\n')
+Text I/O implementation using an in-memory buffer.
+
+The initial_value argument sets the value of object
+ The newline
+argument is like the one of TextIOWrapper's constructor.
+
+==============================
+csv.StringIO.close
+(self, /)
+Close the IO object.
+
+Attempting any further operation after the object is closed
+will raise a ValueError.
+
+This method has no effect if the file is already closed.
+
+==============================
+csv.StringIO.closed
+None
+
+==============================
+csv.StringIO.detach
+Separate the underlying buffer from the TextIOBase and return it.
+
+After the underlying buffer has been detached, the TextIO is in an
+unusable state.
+
+==============================
+csv.StringIO.encoding
+Encoding of the text stream.
+
+Subclasses should override.
+
+==============================
+csv.StringIO.errors
+The error setting of the decoder or encoder.
+
+Subclasses should override.
+
+==============================
+csv.StringIO.fileno
+(self, /)
+Returns underlying file descriptor if one exists.
+
+OSError is raised if the IO object does not use a file descriptor.
+
+==============================
+csv.StringIO.flush
+(self, /)
+Flush write buffers, if applicable.
+
+This is not implemented for read-only and non-blocking streams.
+
+==============================
+csv.StringIO.getvalue
+(self, /)
+Retrieve the entire contents of the object.
+
+==============================
+csv.StringIO.isatty
+(self, /)
+Return whether this is an 'interactive' stream.
+
+Return False if it can't be determined.
+
+==============================
+csv.StringIO.line_buffering
+None
+
+==============================
+csv.StringIO.newlines
+Line endings translated so far.
+
+Only line endings translated during reading are considered.
+
+Subclasses should override.
+
+==============================
+csv.StringIO.read
+(self, size=-1, /)
+Read at most size characters, returned as a string.
+
+If the argument is negative or omitted, read until EOF
+is reached
+Return an empty string at EOF.
+
+==============================
+csv.StringIO.readable
+(self, /)
+Returns True if the IO object can be read.
+
+==============================
+csv.StringIO.readline
+(self, size=-1, /)
+Read until newline or EOF.
+
+Returns an empty string if EOF is hit immediately.
+
+==============================
+csv.StringIO.readlines
+(self, hint=-1, /)
+Return a list of lines from the stream.
+
+hint can be specified to control the number of lines read: no more
+lines will be read if the total size (in bytes/characters) of all
+lines so far exceeds hint.
+
+==============================
+csv.StringIO.seek
+(self, pos, whence=0, /)
+Change stream position.
+
+Seek to character offset pos relative to position indicated by whence:
+    0  Start of stream (the default)
+ pos should be >= 0;
+    1  Current position - pos must be 0;
+    2  End of stream - pos must be 0.
+Returns the new absolute position.
+
+==============================
+csv.StringIO.seekable
+(self, /)
+Returns True if the IO object can be seeked.
+
+==============================
+csv.StringIO.tell
+(self, /)
+Tell the current file position.
+
+==============================
+csv.StringIO.truncate
+(self, pos=None, /)
+Truncate size to pos.
+
+The pos argument defaults to the current file position, as
+returned by tell()
+ The current file position is unchanged.
+Returns the new absolute position.
+
+==============================
+csv.StringIO.writable
+(self, /)
+Returns True if the IO object can be written.
+
+==============================
+csv.StringIO.write
+(self, s, /)
+Write string to file.
+
+Returns the number of characters written, which is always equal to
+the length of the string.
+
+==============================
+csv.StringIO.writelines
+(self, lines, /)
+Write a list of lines to stream.
+
+Line separators are not added, so it is usual for each of the
+lines provided to have a line separator at the end.
+
+==============================
+csv.excel
+()
+Describe the usual properties of Excel-generated CSV files.
+
+==============================
+csv.excel.delimiter
+str(object='') -> str
+str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+Create a new string object from the given object
+If encoding or
+errors is specified, then the object must expose a data buffer
+that will be decoded using the given encoding and error handler.
+Otherwise, returns the result of object.__str__() (if defined)
+or repr(object).
+encoding defaults to sys.getdefaultencoding().
+errors defaults to 'strict'.
+
+==============================
+csv.excel.doublequote
+bool(x) -> bool
+
+Returns True when the argument x is true, False otherwise.
+The builtins True and False are the only two instances of the class bool.
+The class bool is a subclass of the class int, and cannot be subclassed.
+
+==============================
+csv.excel.escapechar
+None
+
+==============================
+csv.excel.lineterminator
+str(object='') -> str
+str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+Create a new string object from the given object
+If encoding or
+errors is specified, then the object must expose a data buffer
+that will be decoded using the given encoding and error handler.
+Otherwise, returns the result of object.__str__() (if defined)
+or repr(object).
+encoding defaults to sys.getdefaultencoding().
+errors defaults to 'strict'.
+
+==============================
+csv.excel.quotechar
+str(object='') -> str
+str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+Create a new string object from the given object
+If encoding or
+errors is specified, then the object must expose a data buffer
+that will be decoded using the given encoding and error handler.
+Otherwise, returns the result of object.__str__() (if defined)
+or repr(object).
+encoding defaults to sys.getdefaultencoding().
+errors defaults to 'strict'.
+
+==============================
+csv.excel.quoting
+int([x]) -> integer
+int(x, base=10) -> integer
+
+Convert a number or string to an integer, or return 0 if no arguments
+are given
+ If x is a number, return x.__int__()
+ For floating point
+numbers, this truncates towards zero.
+
+If x is not a number or if base is given, then x must be a string,
+bytes, or bytearray instance representing an integer literal in the
+given base
+ The literal can be preceded by '+' or '-' and be surrounded
+by whitespace
+ The base defaults to 10
+ Valid bases are 0 and 2-36.
+Base 0 means to interpret the base from the string as an integer literal.
+>>> int('0b100', base=0)
+4
+
+==============================
+csv.excel.skipinitialspace
+bool(x) -> bool
+
+Returns True when the argument x is true, False otherwise.
+The builtins True and False are the only two instances of the class bool.
+The class bool is a subclass of the class int, and cannot be subclassed.
+
+==============================
+csv.excel_tab
+()
+Describe the usual properties of Excel-generated TAB-delimited files.
+
+==============================
+csv.excel_tab.delimiter
+str(object='') -> str
+str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+Create a new string object from the given object
+If encoding or
+errors is specified, then the object must expose a data buffer
+that will be decoded using the given encoding and error handler.
+Otherwise, returns the result of object.__str__() (if defined)
+or repr(object).
+encoding defaults to sys.getdefaultencoding().
+errors defaults to 'strict'.
+
+==============================
+csv.excel_tab.doublequote
+bool(x) -> bool
+
+Returns True when the argument x is true, False otherwise.
+The builtins True and False are the only two instances of the class bool.
+The class bool is a subclass of the class int, and cannot be subclassed.
+
+==============================
+csv.excel_tab.escapechar
+None
+
+==============================
+csv.excel_tab.lineterminator
+str(object='') -> str
+str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+Create a new string object from the given object
+If encoding or
+errors is specified, then the object must expose a data buffer
+that will be decoded using the given encoding and error handler.
+Otherwise, returns the result of object.__str__() (if defined)
+or repr(object).
+encoding defaults to sys.getdefaultencoding().
+errors defaults to 'strict'.
+
+==============================
+csv.excel_tab.quotechar
+str(object='') -> str
+str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+Create a new string object from the given object
+If encoding or
+errors is specified, then the object must expose a data buffer
+that will be decoded using the given encoding and error handler.
+Otherwise, returns the result of object.__str__() (if defined)
+or repr(object).
+encoding defaults to sys.getdefaultencoding().
+errors defaults to 'strict'.
+
+==============================
+csv.excel_tab.quoting
+int([x]) -> integer
+int(x, base=10) -> integer
+
+Convert a number or string to an integer, or return 0 if no arguments
+are given
+ If x is a number, return x.__int__()
+ For floating point
+numbers, this truncates towards zero.
+
+If x is not a number or if base is given, then x must be a string,
+bytes, or bytearray instance representing an integer literal in the
+given base
+ The literal can be preceded by '+' or '-' and be surrounded
+by whitespace
+ The base defaults to 10
+ Valid bases are 0 and 2-36.
+Base 0 means to interpret the base from the string as an integer literal.
+>>> int('0b100', base=0)
+4
+
+==============================
+csv.excel_tab.skipinitialspace
+bool(x) -> bool
+
+Returns True when the argument x is true, False otherwise.
+The builtins True and False are the only two instances of the class bool.
+The class bool is a subclass of the class int, and cannot be subclassed.
+
+==============================
+csv.field_size_limit
+Sets an upper limit on parsed fields.
+    csv.field_size_limit([limit])
+
+Returns old limit
+If limit is not given, no new limit is set and
+the old limit is returned
+
+==============================
+csv.get_dialect
+Return the dialect instance associated with name.
+dialect = csv.get_dialect(name)
+
+==============================
+csv.list_dialects
+Return a list of all know dialect names.
+names = csv.list_dialects()
+
+==============================
+csv.re
+Support for regular expressions (RE).
+
+This module provides regular expression matching operations similar to
+those found in Perl
+ It supports both 8-bit and Unicode strings; both
+the pattern and the strings being processed can contain null bytes and
+characters outside the US ASCII range.
+
+Regular expressions can contain both special and ordinary characters.
+Most ordinary characters, like "A", "a", or "0", are the simplest
+regular expressions; they simply match themselves
+ You can
+concatenate ordinary characters, so last matches the string 'last'.
+
+The special characters are:
+    "."      Matches any character except a newline.
+    "^"      Matches the start of the string.
+    "$"      Matches the end of the string or just before the newline at
+             the end of the string.
+    "*"      Matches 0 or more (greedy) repetitions of the preceding RE.
+             Greedy means that it will match as many repetitions as possible.
+    "+"      Matches 1 or more (greedy) repetitions of the preceding RE.
+    "?"      Matches 0 or 1 (greedy) of the preceding RE.
+    *?,+?,?? Non-greedy versions of the previous three special characters.
+    {m,n}    Matches from m to n repetitions of the preceding RE.
+    {m,n}?   Non-greedy version of the above.
+    "\\"     Either escapes special characters or signals a special sequence.
+    []       Indicates a set of characters.
+             A "^" as the first character indicates a complementing set.
+    "|"      A|B, creates an RE that will match either A or B.
+    (...)    Matches the RE inside the parentheses.
+             The contents can be retrieved or matched later in the string.
+    (?aiLmsux) The letters set the corresponding flags defined below.
+    (?:...)  Non-grouping version of regular parentheses.
+    (?P<name>...) The substring matched by the group is accessible by name.
+    (?P=name)     Matches the text matched earlier by the group named name.
+    (?#...)  A comment; ignored.
+    (?=...)  Matches if ..
+matches next, but doesn't consume the string.
+    (?!...)  Matches if ..
+doesn't match next.
+    (?<=...) Matches if preceded by ..
+(must be fixed length).
+    (?<!...) Matches if not preceded by ..
+(must be fixed length).
+    (?(id/name)yes|no) Matches yes pattern if the group with id/name matched,
+                       the (optional) no pattern otherwise.
+
+The special sequences consist of "\\" and a character from the list
+below
+ If the ordinary character is not on the list, then the
+resulting RE will match the second character.
+    \number  Matches the contents of the group of the same number.
+    \A       Matches only at the start of the string.
+    \Z       Matches only at the end of the string.
+    \b       Matches the empty string, but only at the start or end of a word.
+    \B       Matches the empty string, but not at the start or end of a word.
+    \d       Matches any decimal digit; equivalent to the set [0-9] in
+             bytes patterns or string patterns with the ASCII flag.
+             In string patterns without the ASCII flag, it will match the whole
+             range of Unicode digits.
+    \D       Matches any non-digit character; equivalent to [^\d].
+    \s       Matches any whitespace character; equivalent to [ \t\n\r\f\v] in
+             bytes patterns or string patterns with the ASCII flag.
+             In string patterns without the ASCII flag, it will match the whole
+             range of Unicode whitespace characters.
+    \S       Matches any non-whitespace character; equivalent to [^\s].
+    \w       Matches any alphanumeric character; equivalent to [a-zA-Z0-9_]
+             in bytes patterns or string patterns with the ASCII flag.
+             In string patterns without the ASCII flag, it will match the
+             range of Unicode alphanumeric characters (letters plus digits
+             plus underscore).
+             With LOCALE, it will match the set [0-9_] plus characters defined
+             as letters for the current locale.
+    \W       Matches the complement of \w.
+    \\       Matches a literal backslash.
+
+This module exports the following functions:
+    match     Match a regular expression pattern to the beginning of a string.
+    fullmatch Match a regular expression pattern to all of a string.
+    search    Search a string for the presence of a pattern.
+    sub       Substitute occurrences of a pattern found in a string.
+    subn      Same as sub, but also return the number of substitutions made.
+    split     Split a string by the occurrences of a pattern.
+    findall   Find all occurrences of a pattern in a string.
+    finditer  Return an iterator yielding a Match object for each match.
+    compile   Compile a pattern into a Pattern object.
+    purge     Clear the regular expression cache.
+    escape    Backslash all non-alphanumerics in a string.
+
+Each function other than purge and escape can take an optional 'flags' argument
+consisting of one or more of the following module constants, joined by "|".
+A, L, and U are mutually exclusive.
+    A  ASCII       For string patterns, make \w, \W, \b, \B, \d, \D
+                   match the corresponding ASCII character categories
+                   (rather than the whole Unicode categories, which is the
+                   default).
+                   For bytes patterns, this flag is the only available
+                   behaviour and needn't be specified.
+    I  IGNORECASE  Perform case-insensitive matching.
+    L  LOCALE      Make \w, \W, \b, \B, dependent on the current locale.
+    M  MULTILINE   "^" matches the beginning of lines (after a newline)
+                   as well as the string.
+                   "$" matches the end of lines (before a newline) as well
+                   as the end of the string.
+    S  DOTALL      "." matches any character at all, including the newline.
+    X  VERBOSE     Ignore whitespace and comments for nicer looking RE's.
+    U  UNICODE     For compatibility only
+Ignored for string patterns (it
+                   is the default), and forbidden for bytes patterns.
+
+This module also defines an exception 'error'.
+
+==============================
+csv.reader
+csv_reader = reader(iterable [, dialect='excel']
+                        [optional keyword args])
+    for row in csv_reader:
+        process(row)
+
+The "iterable" argument can be any object that returns a line
+of input for each iteration, such as a file object or a list
+ The
+optional "dialect" parameter is discussed below
+ The function
+also accepts optional keyword arguments which override settings
+provided by the dialect.
+
+The returned object is an iterator
+ Each iteration returns a row
+of the CSV file (which can span multiple input lines).
+
+==============================
+csv.register_dialect
+Create a mapping from a string name to a dialect class.
+dialect = csv.register_dialect(name[, dialect[, **fmtparams]])
+
+==============================
+csv.unix_dialect
+()
+Describe the usual properties of Unix-generated CSV files.
+
+==============================
+csv.unix_dialect.delimiter
+str(object='') -> str
+str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+Create a new string object from the given object
+If encoding or
+errors is specified, then the object must expose a data buffer
+that will be decoded using the given encoding and error handler.
+Otherwise, returns the result of object.__str__() (if defined)
+or repr(object).
+encoding defaults to sys.getdefaultencoding().
+errors defaults to 'strict'.
+
+==============================
+csv.unix_dialect.doublequote
+bool(x) -> bool
+
+Returns True when the argument x is true, False otherwise.
+The builtins True and False are the only two instances of the class bool.
+The class bool is a subclass of the class int, and cannot be subclassed.
+
+==============================
+csv.unix_dialect.escapechar
+None
+
+==============================
+csv.unix_dialect.lineterminator
+str(object='') -> str
+str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+Create a new string object from the given object
+If encoding or
+errors is specified, then the object must expose a data buffer
+that will be decoded using the given encoding and error handler.
+Otherwise, returns the result of object.__str__() (if defined)
+or repr(object).
+encoding defaults to sys.getdefaultencoding().
+errors defaults to 'strict'.
+
+==============================
+csv.unix_dialect.quotechar
+str(object='') -> str
+str(bytes_or_buffer[, encoding[, errors]]) -> str
+
+Create a new string object from the given object
+If encoding or
+errors is specified, then the object must expose a data buffer
+that will be decoded using the given encoding and error handler.
+Otherwise, returns the result of object.__str__() (if defined)
+or repr(object).
+encoding defaults to sys.getdefaultencoding().
+errors defaults to 'strict'.
+
+==============================
+csv.unix_dialect.quoting
+int([x]) -> integer
+int(x, base=10) -> integer
+
+Convert a number or string to an integer, or return 0 if no arguments
+are given
+ If x is a number, return x.__int__()
+ For floating point
+numbers, this truncates towards zero.
+
+If x is not a number or if base is given, then x must be a string,
+bytes, or bytearray instance representing an integer literal in the
+given base
+ The literal can be preceded by '+' or '-' and be surrounded
+by whitespace
+ The base defaults to 10
+ Valid bases are 0 and 2-36.
+Base 0 means to interpret the base from the string as an integer literal.
+>>> int('0b100', base=0)
+4
+
+==============================
+csv.unix_dialect.skipinitialspace
+bool(x) -> bool
+
+Returns True when the argument x is true, False otherwise.
+The builtins True and False are the only two instances of the class bool.
+The class bool is a subclass of the class int, and cannot be subclassed.
+
+==============================
+csv.unregister_dialect
+Delete the name/dialect mapping associated with a string name.
+csv.unregister_dialect(name)
+
+==============================
+csv.writer
+csv_writer = csv.writer(fileobj [, dialect='excel']
+                            [optional keyword args])
+    for row in sequence:
+        csv_writer.writerow(row)
+
+    [or]
+
+    csv_writer = csv.writer(fileobj [, dialect='excel']
+                            [optional keyword args])
+    csv_writer.writerows(rows)
+
+The "fileobj" argument can be any object that supports the file API.
+

@@ -1,0 +1,538 @@
+==============================
+hashlib.algorithms_available
+set() -> new empty set object
+set(iterable) -> new set object
+
+Build an unordered collection of unique elements.
+
+==============================
+hashlib.algorithms_guaranteed
+set() -> new empty set object
+set(iterable) -> new set object
+
+Build an unordered collection of unique elements.
+
+==============================
+hashlib.blake2b
+(data=b'', /, *, digest_size=64, key=b'', salt=b'', person=b'', fanout=1, depth=1, leaf_size=0, node_offset=0, node_depth=0, inner_size=0, last_node=False)
+Return a new BLAKE2b hash object.
+
+==============================
+hashlib.blake2b.MAX_DIGEST_SIZE
+int([x]) -> integer
+int(x, base=10) -> integer
+
+Convert a number or string to an integer, or return 0 if no arguments
+are given
+ If x is a number, return x.__int__()
+ For floating point
+numbers, this truncates towards zero.
+
+If x is not a number or if base is given, then x must be a string,
+bytes, or bytearray instance representing an integer literal in the
+given base
+ The literal can be preceded by '+' or '-' and be surrounded
+by whitespace
+ The base defaults to 10
+ Valid bases are 0 and 2-36.
+Base 0 means to interpret the base from the string as an integer literal.
+>>> int('0b100', base=0)
+4
+
+==============================
+hashlib.blake2b.MAX_KEY_SIZE
+int([x]) -> integer
+int(x, base=10) -> integer
+
+Convert a number or string to an integer, or return 0 if no arguments
+are given
+ If x is a number, return x.__int__()
+ For floating point
+numbers, this truncates towards zero.
+
+If x is not a number or if base is given, then x must be a string,
+bytes, or bytearray instance representing an integer literal in the
+given base
+ The literal can be preceded by '+' or '-' and be surrounded
+by whitespace
+ The base defaults to 10
+ Valid bases are 0 and 2-36.
+Base 0 means to interpret the base from the string as an integer literal.
+>>> int('0b100', base=0)
+4
+
+==============================
+hashlib.blake2b.PERSON_SIZE
+int([x]) -> integer
+int(x, base=10) -> integer
+
+Convert a number or string to an integer, or return 0 if no arguments
+are given
+ If x is a number, return x.__int__()
+ For floating point
+numbers, this truncates towards zero.
+
+If x is not a number or if base is given, then x must be a string,
+bytes, or bytearray instance representing an integer literal in the
+given base
+ The literal can be preceded by '+' or '-' and be surrounded
+by whitespace
+ The base defaults to 10
+ Valid bases are 0 and 2-36.
+Base 0 means to interpret the base from the string as an integer literal.
+>>> int('0b100', base=0)
+4
+
+==============================
+hashlib.blake2b.SALT_SIZE
+int([x]) -> integer
+int(x, base=10) -> integer
+
+Convert a number or string to an integer, or return 0 if no arguments
+are given
+ If x is a number, return x.__int__()
+ For floating point
+numbers, this truncates towards zero.
+
+If x is not a number or if base is given, then x must be a string,
+bytes, or bytearray instance representing an integer literal in the
+given base
+ The literal can be preceded by '+' or '-' and be surrounded
+by whitespace
+ The base defaults to 10
+ Valid bases are 0 and 2-36.
+Base 0 means to interpret the base from the string as an integer literal.
+>>> int('0b100', base=0)
+4
+
+==============================
+hashlib.blake2b.block_size
+None
+
+==============================
+hashlib.blake2b.copy
+(self, /)
+Return a copy of the hash object.
+
+==============================
+hashlib.blake2b.digest
+(self, /)
+Return the digest value as a bytes object.
+
+==============================
+hashlib.blake2b.digest_size
+None
+
+==============================
+hashlib.blake2b.hexdigest
+(self, /)
+Return the digest value as a string of hexadecimal digits.
+
+==============================
+hashlib.blake2b.name
+None
+
+==============================
+hashlib.blake2b.update
+(self, data, /)
+Update this hash object's state with the provided bytes-like object.
+
+==============================
+hashlib.blake2s
+(data=b'', /, *, digest_size=32, key=b'', salt=b'', person=b'', fanout=1, depth=1, leaf_size=0, node_offset=0, node_depth=0, inner_size=0, last_node=False)
+Return a new BLAKE2s hash object.
+
+==============================
+hashlib.blake2s.MAX_DIGEST_SIZE
+int([x]) -> integer
+int(x, base=10) -> integer
+
+Convert a number or string to an integer, or return 0 if no arguments
+are given
+ If x is a number, return x.__int__()
+ For floating point
+numbers, this truncates towards zero.
+
+If x is not a number or if base is given, then x must be a string,
+bytes, or bytearray instance representing an integer literal in the
+given base
+ The literal can be preceded by '+' or '-' and be surrounded
+by whitespace
+ The base defaults to 10
+ Valid bases are 0 and 2-36.
+Base 0 means to interpret the base from the string as an integer literal.
+>>> int('0b100', base=0)
+4
+
+==============================
+hashlib.blake2s.MAX_KEY_SIZE
+int([x]) -> integer
+int(x, base=10) -> integer
+
+Convert a number or string to an integer, or return 0 if no arguments
+are given
+ If x is a number, return x.__int__()
+ For floating point
+numbers, this truncates towards zero.
+
+If x is not a number or if base is given, then x must be a string,
+bytes, or bytearray instance representing an integer literal in the
+given base
+ The literal can be preceded by '+' or '-' and be surrounded
+by whitespace
+ The base defaults to 10
+ Valid bases are 0 and 2-36.
+Base 0 means to interpret the base from the string as an integer literal.
+>>> int('0b100', base=0)
+4
+
+==============================
+hashlib.blake2s.PERSON_SIZE
+int([x]) -> integer
+int(x, base=10) -> integer
+
+Convert a number or string to an integer, or return 0 if no arguments
+are given
+ If x is a number, return x.__int__()
+ For floating point
+numbers, this truncates towards zero.
+
+If x is not a number or if base is given, then x must be a string,
+bytes, or bytearray instance representing an integer literal in the
+given base
+ The literal can be preceded by '+' or '-' and be surrounded
+by whitespace
+ The base defaults to 10
+ Valid bases are 0 and 2-36.
+Base 0 means to interpret the base from the string as an integer literal.
+>>> int('0b100', base=0)
+4
+
+==============================
+hashlib.blake2s.SALT_SIZE
+int([x]) -> integer
+int(x, base=10) -> integer
+
+Convert a number or string to an integer, or return 0 if no arguments
+are given
+ If x is a number, return x.__int__()
+ For floating point
+numbers, this truncates towards zero.
+
+If x is not a number or if base is given, then x must be a string,
+bytes, or bytearray instance representing an integer literal in the
+given base
+ The literal can be preceded by '+' or '-' and be surrounded
+by whitespace
+ The base defaults to 10
+ Valid bases are 0 and 2-36.
+Base 0 means to interpret the base from the string as an integer literal.
+>>> int('0b100', base=0)
+4
+
+==============================
+hashlib.blake2s.block_size
+None
+
+==============================
+hashlib.blake2s.copy
+(self, /)
+Return a copy of the hash object.
+
+==============================
+hashlib.blake2s.digest
+(self, /)
+Return the digest value as a bytes object.
+
+==============================
+hashlib.blake2s.digest_size
+None
+
+==============================
+hashlib.blake2s.hexdigest
+(self, /)
+Return the digest value as a string of hexadecimal digits.
+
+==============================
+hashlib.blake2s.name
+None
+
+==============================
+hashlib.blake2s.update
+(self, data, /)
+Update this hash object's state with the provided bytes-like object.
+
+==============================
+hashlib.md5
+(string=b'')
+Returns a md5 hash object; optionally initialized with a string
+
+==============================
+hashlib.new
+(name, data=b'', **kwargs)
+new(name, data=b'') - Return a new hashing object using the named algorithm;
+optionally initialized with data (which must be a bytes-like object).
+
+==============================
+hashlib.pbkdf2_hmac
+(hash_name, password, salt, iterations, dklen=None)
+Password based key derivation function 2 (PKCS #5 v2.0) with HMAC as pseudorandom function.
+
+==============================
+hashlib.scrypt
+(password, *, salt=None, n=None, r=None, p=None, maxmem=0, dklen=64)
+scrypt password-based key derivation function.
+
+==============================
+hashlib.sha1
+(string=b'')
+Returns a sha1 hash object; optionally initialized with a string
+
+==============================
+hashlib.sha224
+(string=b'')
+Returns a sha224 hash object; optionally initialized with a string
+
+==============================
+hashlib.sha256
+(string=b'')
+Returns a sha256 hash object; optionally initialized with a string
+
+==============================
+hashlib.sha384
+(string=b'')
+Returns a sha384 hash object; optionally initialized with a string
+
+==============================
+hashlib.sha3_224
+sha3_224([data]) -> SHA3 object
+
+Return a new SHA3 hash object with a hashbit length of 28 bytes.
+
+==============================
+hashlib.sha3_224.block_size
+None
+
+==============================
+hashlib.sha3_224.copy
+(self, /)
+Return a copy of the hash object.
+
+==============================
+hashlib.sha3_224.digest
+(self, /)
+Return the digest value as a bytes object.
+
+==============================
+hashlib.sha3_224.digest_size
+None
+
+==============================
+hashlib.sha3_224.hexdigest
+(self, /)
+Return the digest value as a string of hexadecimal digits.
+
+==============================
+hashlib.sha3_224.name
+None
+
+==============================
+hashlib.sha3_224.update
+(self, data, /)
+Update this hash object's state with the provided bytes-like object.
+
+==============================
+hashlib.sha3_256
+sha3_256([data]) -> SHA3 object
+
+Return a new SHA3 hash object with a hashbit length of 32 bytes.
+
+==============================
+hashlib.sha3_256.block_size
+None
+
+==============================
+hashlib.sha3_256.copy
+(self, /)
+Return a copy of the hash object.
+
+==============================
+hashlib.sha3_256.digest
+(self, /)
+Return the digest value as a bytes object.
+
+==============================
+hashlib.sha3_256.digest_size
+None
+
+==============================
+hashlib.sha3_256.hexdigest
+(self, /)
+Return the digest value as a string of hexadecimal digits.
+
+==============================
+hashlib.sha3_256.name
+None
+
+==============================
+hashlib.sha3_256.update
+(self, data, /)
+Update this hash object's state with the provided bytes-like object.
+
+==============================
+hashlib.sha3_384
+sha3_384([data]) -> SHA3 object
+
+Return a new SHA3 hash object with a hashbit length of 48 bytes.
+
+==============================
+hashlib.sha3_384.block_size
+None
+
+==============================
+hashlib.sha3_384.copy
+(self, /)
+Return a copy of the hash object.
+
+==============================
+hashlib.sha3_384.digest
+(self, /)
+Return the digest value as a bytes object.
+
+==============================
+hashlib.sha3_384.digest_size
+None
+
+==============================
+hashlib.sha3_384.hexdigest
+(self, /)
+Return the digest value as a string of hexadecimal digits.
+
+==============================
+hashlib.sha3_384.name
+None
+
+==============================
+hashlib.sha3_384.update
+(self, data, /)
+Update this hash object's state with the provided bytes-like object.
+
+==============================
+hashlib.sha3_512
+sha3_512([data]) -> SHA3 object
+
+Return a new SHA3 hash object with a hashbit length of 64 bytes.
+
+==============================
+hashlib.sha3_512.block_size
+None
+
+==============================
+hashlib.sha3_512.copy
+(self, /)
+Return a copy of the hash object.
+
+==============================
+hashlib.sha3_512.digest
+(self, /)
+Return the digest value as a bytes object.
+
+==============================
+hashlib.sha3_512.digest_size
+None
+
+==============================
+hashlib.sha3_512.hexdigest
+(self, /)
+Return the digest value as a string of hexadecimal digits.
+
+==============================
+hashlib.sha3_512.name
+None
+
+==============================
+hashlib.sha3_512.update
+(self, data, /)
+Update this hash object's state with the provided bytes-like object.
+
+==============================
+hashlib.sha512
+(string=b'')
+Returns a sha512 hash object; optionally initialized with a string
+
+==============================
+hashlib.shake_128
+shake_128([data]) -> SHAKE object
+
+Return a new SHAKE hash object.
+
+==============================
+hashlib.shake_128.block_size
+None
+
+==============================
+hashlib.shake_128.copy
+(self, /)
+Return a copy of the hash object.
+
+==============================
+hashlib.shake_128.digest
+(self, length, /)
+Return the digest value as a bytes object.
+
+==============================
+hashlib.shake_128.digest_size
+None
+
+==============================
+hashlib.shake_128.hexdigest
+(self, length, /)
+Return the digest value as a string of hexadecimal digits.
+
+==============================
+hashlib.shake_128.name
+None
+
+==============================
+hashlib.shake_128.update
+(self, data, /)
+Update this hash object's state with the provided bytes-like object.
+
+==============================
+hashlib.shake_256
+shake_256([data]) -> SHAKE object
+
+Return a new SHAKE hash object.
+
+==============================
+hashlib.shake_256.block_size
+None
+
+==============================
+hashlib.shake_256.copy
+(self, /)
+Return a copy of the hash object.
+
+==============================
+hashlib.shake_256.digest
+(self, length, /)
+Return the digest value as a bytes object.
+
+==============================
+hashlib.shake_256.digest_size
+None
+
+==============================
+hashlib.shake_256.hexdigest
+(self, length, /)
+Return the digest value as a string of hexadecimal digits.
+
+==============================
+hashlib.shake_256.name
+None
+
+==============================
+hashlib.shake_256.update
+(self, data, /)
+Update this hash object's state with the provided bytes-like object.
+

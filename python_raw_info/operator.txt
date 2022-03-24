@@ -1,0 +1,288 @@
+==============================
+operator.abs
+(a, /)
+Same as abs(a).
+
+==============================
+operator.add
+(a, b, /)
+Same as a + b.
+
+==============================
+operator.and_
+(a, b, /)
+Same as a & b.
+
+==============================
+operator.attrgetter
+attrgetter(attr, ...) --> attrgetter object
+
+Return a callable object that fetches the given attribute(s) from its operand.
+After f = attrgetter('name'), the call f(r) returns r.name.
+After g = attrgetter('name', 'date'), the call g(r) returns (r.name, r.date).
+After h = attrgetter('name.first', 'name.last'), the call h(r) returns
+(r.name.first, r.name.last).
+
+==============================
+operator.concat
+(a, b, /)
+Same as a + b, for a and b sequences.
+
+==============================
+operator.contains
+(a, b, /)
+Same as b in a (note reversed operands).
+
+==============================
+operator.countOf
+(a, b, /)
+Return the number of times b occurs in a.
+
+==============================
+operator.delitem
+(a, b, /)
+Same as del a[b].
+
+==============================
+operator.eq
+(a, b, /)
+Same as a == b.
+
+==============================
+operator.floordiv
+(a, b, /)
+Same as a // b.
+
+==============================
+operator.ge
+(a, b, /)
+Same as a >= b.
+
+==============================
+operator.getitem
+(a, b, /)
+Same as a[b].
+
+==============================
+operator.gt
+(a, b, /)
+Same as a > b.
+
+==============================
+operator.iadd
+(a, b, /)
+Same as a += b.
+
+==============================
+operator.iand
+(a, b, /)
+Same as a &= b.
+
+==============================
+operator.iconcat
+(a, b, /)
+Same as a += b, for a and b sequences.
+
+==============================
+operator.ifloordiv
+(a, b, /)
+Same as a //= b.
+
+==============================
+operator.ilshift
+(a, b, /)
+Same as a <<= b.
+
+==============================
+operator.imatmul
+(a, b, /)
+Same as a @= b.
+
+==============================
+operator.imod
+(a, b, /)
+Same as a %= b.
+
+==============================
+operator.imul
+(a, b, /)
+Same as a *= b.
+
+==============================
+operator.index
+(a, /)
+Same as a.__index__()
+
+==============================
+operator.indexOf
+(a, b, /)
+Return the first index of b in a.
+
+==============================
+operator.inv
+(a, /)
+Same as ~a.
+
+==============================
+operator.invert
+(a, /)
+Same as ~a.
+
+==============================
+operator.ior
+(a, b, /)
+Same as a |= b.
+
+==============================
+operator.ipow
+(a, b, /)
+Same as a **= b.
+
+==============================
+operator.irshift
+(a, b, /)
+Same as a >>= b.
+
+==============================
+operator.is_
+(a, b, /)
+Same as a is b.
+
+==============================
+operator.is_not
+(a, b, /)
+Same as a is not b.
+
+==============================
+operator.isub
+(a, b, /)
+Same as a -= b.
+
+==============================
+operator.itemgetter
+itemgetter(item, ...) --> itemgetter object
+
+Return a callable object that fetches the given item(s) from its operand.
+After f = itemgetter(2), the call f(r) returns r[2].
+After g = itemgetter(2, 5, 3), the call g(r) returns (r[2], r[5], r[3])
+
+==============================
+operator.itruediv
+(a, b, /)
+Same as a /= b.
+
+==============================
+operator.ixor
+(a, b, /)
+Same as a ^= b.
+
+==============================
+operator.le
+(a, b, /)
+Same as a <= b.
+
+==============================
+operator.length_hint
+(obj, default=0, /)
+Return an estimate of the number of items in obj.
+
+This is useful for presizing containers when building from an iterable.
+
+If the object supports len(), the result will be exact.
+Otherwise, it may over- or under-estimate by an arbitrary amount.
+The result will be an integer >= 0.
+
+==============================
+operator.lshift
+(a, b, /)
+Same as a << b.
+
+==============================
+operator.lt
+(a, b, /)
+Same as a < b.
+
+==============================
+operator.matmul
+(a, b, /)
+Same as a @ b.
+
+==============================
+operator.methodcaller
+methodcaller(name, ...) --> methodcaller object
+
+Return a callable object that calls the given method on its operand.
+After f = methodcaller('name'), the call f(r) returns r.name().
+After g = methodcaller('name', 'date', foo=1), the call g(r) returns
+r.name('date', foo=1).
+
+==============================
+operator.mod
+(a, b, /)
+Same as a % b.
+
+==============================
+operator.mul
+(a, b, /)
+Same as a * b.
+
+==============================
+operator.ne
+(a, b, /)
+Same as a != b.
+
+==============================
+operator.neg
+(a, /)
+Same as -a.
+
+==============================
+operator.not_
+(a, /)
+Same as not a.
+
+==============================
+operator.or_
+(a, b, /)
+Same as a | b.
+
+==============================
+operator.pos
+(a, /)
+Same as +a.
+
+==============================
+operator.pow
+(a, b, /)
+Same as a ** b.
+
+==============================
+operator.rshift
+(a, b, /)
+Same as a >> b.
+
+==============================
+operator.setitem
+(a, b, c, /)
+Same as a[b] = c.
+
+==============================
+operator.sub
+(a, b, /)
+Same as a - b.
+
+==============================
+operator.truediv
+(a, b, /)
+Same as a / b.
+
+==============================
+operator.truth
+(a, /)
+Return True if a is true, False otherwise.
+
+==============================
+operator.xor
+(a, b, /)
+Same as a ^ b.
+
