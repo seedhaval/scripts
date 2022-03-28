@@ -1,0 +1,667 @@
+os.DirEntry.inode
+(self, /)
+Return inode of the entry; cached per entry.
+==============================
+os.DirEntry.is_dir
+(self, /, *, follow_symlinks=True)
+Return True if the entry is a directory; cached per entry.
+==============================
+os.DirEntry.is_file
+(self, /, *, follow_symlinks=True)
+Return True if the entry is a file; cached per entry.
+==============================
+os.DirEntry.is_symlink
+(self, /)
+Return True if the entry is a symbolic link; cached per entry.
+==============================
+os.DirEntry.name
+the entry's base filename, relative to scandir() "path" argument
+==============================
+os.DirEntry.path
+the entry's full path name; equivalent to os.path.join(scandir_path, entry.name)
+==============================
+os.DirEntry.stat
+(self, /, *, follow_symlinks=True)
+Return stat_result object for the entry; cached per entry.
+==============================
+os.abort
+()
+ This function never returns.
+==============================
+os.access
+(path, mode, *, dir_fd=None, effective_ids=False, follow_symlinks=True)
+Use the real uid/gid to test for access to a path.
+  path Path to be tested; can be string, bytes, or a path-like object.
+  mode Operating-system mode bitfield
+ Can be F_OK to test existence, or the inclusive-OR of R_OK, W_OK, and X_OK.
+  dir_fd If not None, it should be a file descriptor open to a directory, and path should be relative; path will then be relative to that directory.
+  effective_ids
+    If True, access will use the effective uid/gid instead of the real uid/gid.
+==============================
+os.chdir
+(path)
+Change the current working directory to the specified path.
+==============================
+os.chmod
+(path, mode, *, dir_fd=None, follow_symlinks=True)
+Change the access permissions of a file.
+==============================
+os.chown
+(path, uid, gid, *, dir_fd=None, follow_symlinks=True)
+Change the owner and group id of path to the numeric uid and gid.\
+==============================
+os.chroot
+(path)
+Change root directory to path.
+==============================
+os.close
+(fd)
+Close a file descriptor.
+==============================
+os.closerange
+(fd_low, fd_high, /)
+Closes all file descriptors in [fd_low, fd_high), ignoring errors.
+==============================
+os.cpu_count
+()
+Return the number of CPUs in the system; return None if indeterminable.
+==============================
+os.curdir
+==============================
+os.environ
+==============================
+os.execl
+(file, *args)
+execl(file, *args)
+Execute the executable file with argument list args, replacing the current process
+==============================
+os.execle
+(file, *args)
+execle(file, *args, env)
+Execute the executable file with argument list args and environment env, replacing the current process
+==============================
+os.execlp
+(file, *args)
+execlp(file, *args)
+Execute the executable file (which is searched for along $PATH) with argument list args, replacing the current process
+==============================
+os.execlpe
+(file, *args)
+execlpe(file, *args, env)
+Execute the executable file (which is searched for along $PATH)
+with argument list args and environment env, replacing the current process
+==============================
+os.execv
+(path, argv, /)
+Execute an executable path with arguments, replacing current process.
+==============================
+os.execve
+(path, argv, env)
+Execute an executable path with arguments, replacing current process.
+env Dictionary of strings mapping to strings.
+==============================
+os.execvp
+(file, args)
+execvp(file, args)
+Execute the executable file (which is searched for along $PATH) with argument list args, replacing the current process.
+==============================
+os.execvpe
+(file, args, env)
+execvpe(file, args, env)
+Execute the executable file (which is searched for along $PATH) with argument list args and environment env, replacing the current process.
+==============================
+os.fork
+()
+Fork a child process.
+Return 0 to child process and PID of child to parent process.
+==============================
+os.forkpty
+()
+Fork a new process with a new pseudo-terminal as controlling tty.
+Returns a tuple of (pid, master_fd).
+Like fork(), return pid of 0 to the child process, and pid of child to the parent process.
+To both, return fd of newly opened pseudo-terminal.
+==============================
+os.fspath
+(path)
+Return the file system path representation of the object.
+==============================
+os.get_exec_path
+(env=None)
+Returns the sequence of directories that will be searched for the named executable (similar to a shell) when launching a process.
+*env* must be an environment variable dict or None
+ If *env* is None, os.environ will be used.
+==============================
+os.get_terminal_size
+Return the size of the terminal window as (columns, lines).
+==============================
+os.getcwd
+()
+Return a unicode string representing the current working directory.
+==============================
+os.getegid
+()
+Return the current process's effective group id.
+==============================
+os.getenv
+(key, default=None)
+Get an environment variable, return None if it doesn't exist.
+The optional second argument can specify an alternate default.
+key, default and the result are str.
+==============================
+os.geteuid
+()
+Return the current process's effective user id.
+==============================
+os.getgid
+()
+Return the current process's group id.
+==============================
+os.getgrouplist
+getgrouplist(user, group) -> list of groups to which a user belongs
+Returns a list of groups to which a user belongs.
+user: username to lookup
+group: base group id of the user
+==============================
+os.getgroups
+()
+Return list of supplemental group IDs for the process.
+==============================
+os.getloadavg
+()
+Return average recent system load information.
+Return the number of processes in the system run queue averaged over the last 1, 5, and 15 minutes as a tuple of three floats.
+==============================
+os.getlogin
+()
+Return the actual login name.
+==============================
+os.getpgid
+(pid)
+Call the system call getpgid(), and return the result.
+==============================
+os.getpgrp
+()
+Return the current process group id.
+==============================
+os.getpid
+()
+Return the current process id.
+==============================
+os.getppid
+()
+Return the parent's process id.
+If the parent process has already exited, Windows machines will still return its id; others systems will return the id of the 'init' process (1).
+==============================
+os.getrandom
+(size, flags=0)
+Obtain a series of random bytes.
+==============================
+os.getresgid
+()
+Return a tuple of the current process's real, effective, and saved group ids.
+==============================
+os.getresuid
+()
+Return a tuple of the current process's real, effective, and saved user ids.
+==============================
+os.getsid
+(pid, /)
+Call the system call getsid(pid) and return the result.
+==============================
+os.getuid
+()
+Return the current process's user id.
+==============================
+os.isatty
+(fd, /)
+Return True if the fd is connected to a terminal.
+Return True if the file descriptor is an open file descriptor connected to the slave end of a terminal.
+==============================
+os.kill
+(pid, signal, /)
+Kill a process with a signal.
+==============================
+os.killpg
+(pgid, signal, /)
+Kill a process group with a signal.
+==============================
+os.linesep
+==============================
+os.link
+(src, dst, *, src_dir_fd=None, dst_dir_fd=None, follow_symlinks=True)
+Create a hard link to a file.
+==============================
+os.listdir
+(path=None)
+Return a list containing the names of the files in the directory.
+If path is None, uses the path='.'.
+The list is in arbitrary order It does not include the special entries '.' and '..' even if they are present in the directory.
+==============================
+os.makedirs
+(name, mode=511, exist_ok=False)
+makedirs(name [, mode=0o777][, exist_ok=False])
+Super-mkdir; create a leaf directory and all intermediate ones
+==============================
+os.mkdir
+(path, mode=511, *, dir_fd=None)
+Create a directory.
+==============================
+os.mkfifo
+(path, mode=438, *, dir_fd=None)
+Create a "fifo" (a POSIX named pipe).
+==============================
+os.name
+==============================
+os.pathsep
+==============================
+os.pipe
+()
+Create a pipe.
+Returns a tuple of two file descriptors: (read_fd, write_fd)
+==============================
+os.pipe2
+(flags, /)
+Create a pipe with flags set atomically.
+Returns a tuple of two file descriptors: (read_fd, write_fd)
+flags can be constructed by ORing together one or more of these values: O_NONBLOCK, O_CLOEXEC.
+==============================
+os.popen
+(cmd, mode='r', buffering=-1)
+==============================
+os.putenv
+(name, value, /)
+Change or add an environment variable.
+==============================
+os.read
+(fd, length, /)
+Read from a file descriptor
+ Returns a bytes object.
+==============================
+os.readlink
+(path, *, dir_fd=None)
+Return a string representing the path to which the symbolic link points.
+==============================
+os.remove
+(path, *, dir_fd=None)
+Remove a file (same as unlink()).
+==============================
+os.removedirs
+(name)
+removedirs(name)
+Super-rmdir; remove a leaf directory and all empty intermediate
+ones
+==============================
+os.rename
+(src, dst, *, src_dir_fd=None, dst_dir_fd=None)
+Rename a file or directory.
+==============================
+os.renames
+(old, new)
+renames(old, new)
+Super-rename; create directories as necessary and delete any left empty
+==============================
+os.replace
+(src, dst, *, src_dir_fd=None, dst_dir_fd=None)
+Rename a file or directory, overwriting the destination.
+==============================
+os.rmdir
+(path, *, dir_fd=None)
+Remove a directory.
+==============================
+os.scandir
+(path=None)
+Return an iterator of DirEntry objects for given path.
+==============================
+os.setgid
+(gid, /)
+Set the current process's group id.
+==============================
+os.setgroups
+(groups, /)
+Set the groups of the current process to list.
+==============================
+os.setpgid
+(pid, pgrp, /)
+Call the system call setpgid(pid, pgrp).
+==============================
+os.setpgrp
+()
+Make the current process the leader of its process group.
+==============================
+os.setregid
+(rgid, egid, /)
+Set the current process's real and effective group ids.
+==============================
+os.setresgid
+(rgid, egid, sgid, /)
+Set the current process's real, effective, and saved group ids.
+==============================
+os.setresuid
+(ruid, euid, suid, /)
+Set the current process's real, effective, and saved user ids.
+==============================
+os.setreuid
+(ruid, euid, /)
+Set the current process's real and effective user ids.
+==============================
+os.setsid
+()
+Call the system call setsid().
+==============================
+os.setuid
+(uid, /)
+Set the current process's user id.
+==============================
+os.spawnl
+(mode, file, *args)
+spawnl(mode, file, *args) -> integer
+Execute file with arguments from args in a subprocess.
+If mode == P_NOWAIT return the pid of the process.
+If mode == P_WAIT return the process's exit code if it exits normally;
+otherwise return -SIG, where SIG is the signal that killed it
+==============================
+os.spawnle
+(mode, file, *args)
+spawnle(mode, file, *args, env) -> integer
+Execute file with arguments from args in a subprocess with the supplied environment.
+==============================
+os.spawnlp
+(mode, file, *args)
+spawnlp(mode, file, *args) -> integer
+Execute file (which is looked for along $PATH) with arguments from args in a subprocess with the supplied environment.
+==============================
+os.spawnlpe
+(mode, file, *args)
+spawnlpe(mode, file, *args, env) -> integer
+Execute file (which is looked for along $PATH) with arguments from args in a subprocess with the supplied environment.
+==============================
+os.spawnv
+(mode, file, args)
+spawnv(mode, file, args) -> integer
+Execute file with arguments from args in a subprocess.
+==============================
+os.spawnve
+(mode, file, args, env)
+spawnve(mode, file, args, env) -> integer
+Execute file with arguments from args in a subprocess with the specified environment.
+==============================
+os.spawnvp
+(mode, file, args)
+spawnvp(mode, file, args) -> integer
+Execute file (which is looked for along $PATH) with arguments from args in a subprocess.
+==============================
+os.spawnvpe
+(mode, file, args, env)
+spawnvpe(mode, file, args, env) -> integer
+Execute file (which is looked for along $PATH) with arguments from args in a subprocess with the supplied environment.
+==============================
+os.stat
+(path, *, dir_fd=None, follow_symlinks=True)
+Perform a stat system call on the given path.
+==============================
+os.stat_result
+(iterable=(), /)
+stat_result: Result from stat, fstat, or lstat.
+This object may be accessed either as a tuple of (mode, ino, dev, nlink, uid, gid, size, atime, mtime, ctime) or via the attributes st_mode, st_ino, st_dev, st_nlink, st_uid, and so on.
+==============================
+os.stat_result.count
+(self, value, /)
+Return number of occurrences of value.
+==============================
+os.stat_result.index
+(self, value, start=0, stop=9223372036854775807, /)
+Return first index of value.
+==============================
+os.stat_result.st_atime
+time of last access
+==============================
+os.stat_result.st_atime_ns
+time of last access in nanoseconds
+==============================
+os.stat_result.st_blksize
+blocksize for filesystem I/O
+==============================
+os.stat_result.st_blocks
+number of blocks allocated
+==============================
+os.stat_result.st_ctime
+time of last change
+==============================
+os.stat_result.st_ctime_ns
+time of last change in nanoseconds
+==============================
+os.stat_result.st_dev
+device
+==============================
+os.stat_result.st_gid
+group ID of owner
+==============================
+os.stat_result.st_ino
+inode
+==============================
+os.stat_result.st_mode
+protection bits
+==============================
+os.stat_result.st_mtime
+time of last modification
+==============================
+os.stat_result.st_mtime_ns
+time of last modification in nanoseconds
+==============================
+os.stat_result.st_nlink
+number of hard links
+==============================
+os.stat_result.st_rdev
+device type (if inode device)
+==============================
+os.stat_result.st_size
+total size, in bytes
+==============================
+os.stat_result.st_uid
+user ID of owner
+==============================
+os.statvfs
+(path)
+Perform a statvfs system call on the given path.
+==============================
+os.statvfs_result
+(iterable=(), /)
+statvfs_result: Result from statvfs or fstatvfs.
+This object may be accessed either as a tuple of (bsize, frsize, blocks, bfree, bavail, files, ffree, favail, flag, namemax), or via the attributes f_bsize, f_frsize, f_blocks, f_bfree, and so on.
+==============================
+os.statvfs_result.count
+(self, value, /)
+Return number of occurrences of value.
+==============================
+os.statvfs_result.f_bavail
+None
+==============================
+os.statvfs_result.f_bfree
+None
+==============================
+os.statvfs_result.f_blocks
+None
+==============================
+os.statvfs_result.f_bsize
+None
+==============================
+os.statvfs_result.f_favail
+None
+==============================
+os.statvfs_result.f_ffree
+None
+==============================
+os.statvfs_result.f_files
+None
+==============================
+os.statvfs_result.f_flag
+None
+==============================
+os.statvfs_result.f_frsize
+None
+==============================
+os.statvfs_result.f_fsid
+None
+==============================
+os.statvfs_result.f_namemax
+None
+==============================
+os.statvfs_result.index
+(self, value, start=0, stop=9223372036854775807, /)
+Return first index of value.
+==============================
+os.strerror
+(code, /)
+Translate an error code to a message string.
+==============================
+os.symlink
+(src, dst, target_is_directory=False, *, dir_fd=None)
+Create a symbolic link pointing to src named dst.
+==============================
+os.system
+(command)
+Execute the command in a subshell.
+==============================
+os.terminal_size
+(iterable=(), /)
+A tuple of (columns, lines) for holding terminal window size
+==============================
+os.terminal_size.columns
+width of the terminal window in characters
+==============================
+os.terminal_size.count
+(self, value, /)
+Return number of occurrences of value.
+==============================
+os.terminal_size.index
+(self, value, start=0, stop=9223372036854775807, /)
+Return first index of value.
+==============================
+os.terminal_size.lines
+height of the terminal window in characters
+==============================
+os.times
+()
+Return a collection containing process timing information.
+The object returned behaves like a named tuple with these fields: (utime, stime, cutime, cstime, elapsed_time)
+==============================
+os.times_result
+(iterable=(), /)
+times_result: Result from os.times().
+This object may be accessed either as a tuple of (user, system, children_user, children_system, elapsed), or via the attributes user, system, children_user, children_system, and elapsed.
+==============================
+os.times_result.children_system
+system time of children
+==============================
+os.times_result.children_user
+user time of children
+==============================
+os.times_result.count
+(self, value, /)
+Return number of occurrences of value.
+==============================
+os.times_result.elapsed
+elapsed time since an arbitrary point in the past
+==============================
+os.times_result.index
+(self, value, start=0, stop=9223372036854775807, /)
+Return first index of value.
+==============================
+os.times_result.system
+system time
+==============================
+os.times_result.user
+user time
+==============================
+os.truncate
+(path, length)
+Truncate a file, specified by path, to a specific length.
+==============================
+os.ttyname
+(fd, /)
+Return the name of the terminal device connected to 'fd'.
+fd Integer file descriptor handle.
+==============================
+os.umask
+(mask, /)
+Set the current numeric umask and return the previous umask.
+==============================
+os.uname
+()
+Return an object identifying the current operating system.
+The object behaves like a named tuple with the following fields: (sysname, nodename, release, version, machine)
+==============================
+os.uname_result
+(iterable=(), /)
+uname_result: Result from os.uname().
+This object may be accessed either as a tuple of (sysname, nodename, release, version, machine), or via the attributes sysname, nodename, release, version, and machine.
+==============================
+os.uname_result.machine
+hardware identifier
+==============================
+os.unlink
+(path, *, dir_fd=None)
+Remove a file (same as remove()).
+==============================
+os.unsetenv
+(name, /)
+Delete an environment variable.
+==============================
+os.urandom
+(size, /)
+Return a bytes object containing random bytes suitable for cryptographic use.
+==============================
+os.utime
+Set the access and modified time of path.
+==============================
+os.wait
+()
+Wait for completion of a child process.
+Returns a tuple of information about the child process: (pid, status)
+==============================
+os.wait3
+(options)
+Wait for completion of a child process.
+Returns a tuple of information about the child process: (pid, status, rusage)
+==============================
+os.waitid
+(idtype, id, options, /)
+Returns the result of waiting for a process or processes.
+==============================
+os.waitpid
+(pid, options, /)
+Wait for completion of a given child process.
+Returns a tuple of information regarding the child process: (pid, status)
+==============================
+os.walk
+(top, topdown=True, onerror=None, followlinks=False)
+Directory tree generator.
+For each directory in the directory tree rooted at top (including top itself, but excluding '.' and '..'), yields a 3-tuple dirpath, dirnames, filenames
+dirpath is a string, the path to the directory
+ dirnames is a list of
+the names of the subdirectories in dirpath (excluding '.' and '..').
+filenames is a list of the names of the non-directory files in dirpath.
+Note that the names in the lists are just names, with no path components.
+To get a full path (which begins with top) to a file or directory in
+dirpath, do os.path.join(dirpath, name).
+If optional arg 'topdown' is true or not specified, the triple for a
+directory is generated before the triples for any of its subdirectories
+(directories are generated top down)
+ If topdown is false, the triple
+for a directory is generated after the triples for all of its
+subdirectories (directories are generated bottom up).
+When topdown is true, the caller can modify the dirnames list in-place (e.g., via del or slice assignment), and walk will only recurse into the subdirectories whose names remain in dirnames; this can be used to prune the search, or to impose a specific order of visiting
+ Modifying dirnames when topdown is false has no effect on the behavior of os.walk(), since the
+directories in dirnames have already been generated by the time dirnames itself is generated
+No matter the value of topdown, the list of subdirectories is retrieved before the tuples for the directory and its subdirectories are generated.
+ If optional arg 'onerror' is specified, it should be a function; it will be called with one argument, an OSError instance
+ It can report the error to continue with the walk, or raise the exception to abort the walk
+ Note that the filename is available as the
+filename attribute of the exception object.
+By default, os.walk does not follow symbolic links to subdirectories on systems that support them
+ In order to get this functionality, set the optional argument 'followlinks' to true.
+==============================
+os.write
+(fd, data, /)
+Write a bytes object to a file descriptor.

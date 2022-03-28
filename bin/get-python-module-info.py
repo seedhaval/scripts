@@ -14,10 +14,10 @@ def show_info( elm, pnm, nm ):
 
 def get_info( obj, pnm ):
     for nm, elm in inspect.getmembers( obj ):
-        if not nm.startswith('_'):
+        if not nm.startswith('_') and not nm == nm.upper():
             show_info( elm, pnm, nm )
             if inspect.isclass( elm ):
                 get_info( elm, pnm + '.' + nm )
 
-import sys
-get_info( sys, 'sys' )
+import os
+get_info( os, 'os' )
