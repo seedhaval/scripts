@@ -1,0 +1,21 @@
+python standard library
+    requests
+        requests.PreparedRequest.prepare_body
+            (self, data, files, json=None)
+            Prepares the given HTTP body data.
+        requests.PreparedRequest.prepare_content_length
+            (self, body)
+            Prepare Content-Length header based on request method and body
+        requests.PreparedRequest.prepare_cookies
+            (self, cookies)
+            Prepares the given HTTP cookie data.
+            This function eventually generates a ``Cookie`` header from the given cookies using cookielib
+        requests.PreparedRequest.prepare_headers
+            (self, headers)
+            Prepares the given HTTP headers.
+        requests.PreparedRequest.prepare_hooks
+            (self, hooks)
+            Prepares the given hooks.
+        requests.PreparedRequest.prepare_method
+            (self, method)
+            Prepares the given HTTP method.

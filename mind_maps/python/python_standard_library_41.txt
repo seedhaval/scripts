@@ -1,0 +1,19 @@
+python standard library
+    os
+        os.stat
+            (path, *, dir_fd=None, follow_symlinks=True)
+            Perform a stat system call on the given path.
+        os.stat_result
+            (iterable=(), /)
+            stat_result: Result from stat, fstat, or lstat.
+            This object may be accessed either as a tuple of (mode, ino, dev, nlink, uid, gid, size, atime, mtime, ctime) or via the attributes st_mode, st_ino, st_dev, st_nlink, st_uid, and so on.
+        os.stat_result.count
+            (self, value, /)
+            Return number of occurrences of value.
+        os.stat_result.index
+            (self, value, start=0, stop=9223372036854775807, /)
+            Return first index of value.
+        os.stat_result.st_atime
+            time of last access
+        os.stat_result.st_atime_ns
+            time of last access in nanoseconds

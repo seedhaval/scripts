@@ -1,0 +1,20 @@
+python standard library
+    os
+        os.link
+            (src, dst, *, src_dir_fd=None, dst_dir_fd=None, follow_symlinks=True)
+            Create a hard link to a file.
+        os.listdir
+            (path=None)
+            Return a list containing the names of the files in the directory.
+            If path is None, uses the path='.'.
+            The list is in arbitrary order It does not include the special entries '.' and '..' even if they are present in the directory.
+        os.makedirs
+            (name, mode=511, exist_ok=False)
+            makedirs(name [, mode=0o777][, exist_ok=False])
+            Super-mkdir; create a leaf directory and all intermediate ones
+        os.mkdir
+            (path, mode=511, *, dir_fd=None)
+            Create a directory.
+        os.mkfifo
+            (path, mode=438, *, dir_fd=None)
+            Create a "fifo" (a POSIX named pipe).

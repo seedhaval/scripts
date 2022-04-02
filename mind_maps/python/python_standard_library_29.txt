@@ -1,0 +1,20 @@
+python standard library
+    os
+        os.fork
+            ()
+            Fork a child process.
+            Return 0 to child process and PID of child to parent process.
+        os.forkpty
+            ()
+            Fork a new process with a new pseudo-terminal as controlling tty.
+            Returns a tuple of (pid, master_fd).
+            Like fork(), return pid of 0 to the child process, and pid of child to the parent process.
+            To both, return fd of newly opened pseudo-terminal.
+        os.fspath
+            (path)
+            Return the file system path representation of the object.
+        os.get_exec_path
+            (env=None)
+            Returns the sequence of directories that will be searched for the named executable (similar to a shell) when launching a process.
+            *env* must be an environment variable dict or None
+            If *env* is None, os.environ will be used.

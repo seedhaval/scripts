@@ -1,0 +1,25 @@
+python standard library
+    requests
+        requests.Session.merge_environment_settings
+            (self, url, proxies, stream, verify, cert)
+            Check the environment and merge it with some settings.
+            :rtype: dict
+        requests.Session.mount
+            (self, prefix, adapter)
+            Registers a connection adapter to a prefix.
+            Adapters are sorted in descending order by prefix length.
+        requests.Session.options
+            (self, url, **kwargs)
+            Sends a OPTIONS request
+            Returns :class:`Response` object.
+            :param url: URL for the new :class:`Request` object.
+            :param \*\*kwargs: Optional arguments that ``request`` takes.
+            :rtype: requests.Response
+        requests.Session.patch
+            (self, url, data=None, **kwargs)
+            Sends a PATCH request
+            Returns :class:`Response` object.
+            :param url: URL for the new :class:`Request` object.
+            :param data: (optional) Dictionary, list of tuples, bytes, or file-like object to send in the body of the :class:`Request`.
+            :param \*\*kwargs: Optional arguments that ``request`` takes.
+            :rtype: requests.Response

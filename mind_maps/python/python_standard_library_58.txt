@@ -1,0 +1,20 @@
+python standard library
+    zipfile
+        zipfile.CompleteDirs.open
+            (self, name, mode='r', pwd=None, *, force_zip64=False)
+            Return file-like object for 'name'.
+            name is a string for the file name within the ZIP file, or a ZipInfo object.
+            mode should be 'r' to read a file already in the ZIP file, or 'w' to write to a file newly added to the archive.
+            pwd is the password to decrypt files (only used for reading).
+        zipfile.CompleteDirs.printdir
+            (self, file=None)
+            Print a table of contents for the zip file.
+        zipfile.CompleteDirs.read
+            (self, name, pwd=None)
+            Return file bytes for name.
+        zipfile.CompleteDirs.resolve_dir
+            (self, name)
+            If the name represents a directory, return that name as a directory (with the trailing slash).
+        zipfile.CompleteDirs.setpassword
+            (self, pwd)
+            Set default password for encrypted files.

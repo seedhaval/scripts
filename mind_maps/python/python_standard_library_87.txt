@@ -1,0 +1,21 @@
+python standard library
+    argparse
+        argparse.PARSER
+        argparse.REMAINDER
+        argparse.SUPPRESS
+        argparse.ZERO_OR_MORE
+        argparse.ngettext
+            (msgid1, msgid2, n)
+            None
+    csv
+        csv.DictReader
+            (f, fieldnames=None, restkey=None, restval=None, dialect='excel', *args, **kwds)
+            None
+        csv.DictReader.fieldnames
+            None
+        csv.DictWriter
+            (f, fieldnames, restval='', extrasaction='raise', dialect='excel', *args, **kwds)
+            None
+        csv.DictWriter.writeheader
+            (self)
+            None

@@ -1,0 +1,19 @@
+python standard library
+    requests
+        requests.Session.request
+            (self, method, url, params=None, data=None, headers=None, cookies=None, files=None, auth=None, timeout=None, allow_redirects=True, proxies=None, hooks=None, stream=None, verify=None, cert=None, json=None)
+            Constructs a :class:`Request <Request>`, prepares it and sends it.
+        requests.Session.resolve_redirects
+            (self, resp, req, stream=False, timeout=None, verify=True, cert=None, proxies=None, yield_requests=False, **adapter_kwargs)
+            Receives a Response
+            Returns a generator of Responses or Requests.
+        requests.Session.send
+            (self, request, **kwargs)
+            Send a given PreparedRequest.
+            :rtype: requests.Response
+        requests.Session.should_strip_auth
+            (self, old_url, new_url)
+            Decide whether Authorization header should be removed when redirecting
+        requests.codes
+            Dictionary lookup object.
+        requests.cryptography_version

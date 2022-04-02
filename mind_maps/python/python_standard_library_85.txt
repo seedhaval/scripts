@@ -1,0 +1,20 @@
+python standard library
+    argparse
+        argparse.ArgumentParser.parse_intermixed_args
+            (self, args=None, namespace=None)
+            None
+        argparse.ArgumentParser.parse_known_args
+            (self, args=None, namespace=None)
+            None
+        argparse.ArgumentParser.parse_known_intermixed_args
+            (self, args=None, namespace=None)
+            None
+        argparse.ArgumentParser.print_help
+            (self, file=None)
+            None
+        argparse.ArgumentParser.print_usage
+            (self, file=None)
+            None
+        argparse.ArgumentParser.register
+            (self, registry_name, value, object)
+            None

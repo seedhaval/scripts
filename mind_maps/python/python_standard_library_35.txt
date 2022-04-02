@@ -1,0 +1,22 @@
+python standard library
+    os
+        os.name
+        os.pathsep
+        os.pipe
+            ()
+            Create a pipe.
+            Returns a tuple of two file descriptors: (read_fd, write_fd)
+        os.pipe2
+            (flags, /)
+            Create a pipe with flags set atomically.
+            Returns a tuple of two file descriptors: (read_fd, write_fd)
+            flags can be constructed by ORing together one or more of these values: O_NONBLOCK, O_CLOEXEC.
+        os.popen
+            (cmd, mode='r', buffering=-1)
+        os.putenv
+            (name, value, /)
+            Change or add an environment variable.
+        os.read
+            (fd, length, /)
+            Read from a file descriptor
+            Returns a bytes object.

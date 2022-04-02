@@ -1,0 +1,20 @@
+python standard library
+    os
+        os.setpgrp
+            ()
+            Make the current process the leader of its process group.
+        os.setregid
+            (rgid, egid, /)
+            Set the current process's real and effective group ids.
+        os.setresgid
+            (rgid, egid, sgid, /)
+            Set the current process's real, effective, and saved group ids.
+        os.setresuid
+            (ruid, euid, suid, /)
+            Set the current process's real, effective, and saved user ids.
+        os.setreuid
+            (ruid, euid, /)
+            Set the current process's real and effective user ids.
+        os.setsid
+            ()
+            Call the system call setsid().

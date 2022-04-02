@@ -1,0 +1,19 @@
+python standard library
+    os
+        os.uname_result.machine
+            hardware identifier
+        os.unlink
+            (path, *, dir_fd=None)
+            Remove a file (same as remove()).
+        os.unsetenv
+            (name, /)
+            Delete an environment variable.
+        os.urandom
+            (size, /)
+            Return a bytes object containing random bytes suitable for cryptographic use.
+        os.utime
+            Set the access and modified time of path.
+        os.wait
+            ()
+            Wait for completion of a child process.
+            Returns a tuple of information about the child process: (pid, status)

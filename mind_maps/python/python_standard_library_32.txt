@@ -1,0 +1,21 @@
+python standard library
+    os
+        os.getpgrp
+            ()
+            Return the current process group id.
+        os.getpid
+            ()
+            Return the current process id.
+        os.getppid
+            ()
+            Return the parent's process id.
+            If the parent process has already exited, Windows machines will still return its id; others systems will return the id of the 'init' process (1).
+        os.getrandom
+            (size, flags=0)
+            Obtain a series of random bytes.
+        os.getresgid
+            ()
+            Return a tuple of the current process's real, effective, and saved group ids.
+        os.getresuid
+            ()
+            Return a tuple of the current process's real, effective, and saved user ids.

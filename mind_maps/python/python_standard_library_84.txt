@@ -1,0 +1,20 @@
+python standard library
+    argparse
+        argparse.ArgumentParser.add_argument_group
+            (self, *args, **kwargs)
+            None
+        argparse.ArgumentParser.add_mutually_exclusive_group
+            (self, **kwargs)
+            None
+        argparse.ArgumentParser.add_subparsers
+            (self, **kwargs)
+            None
+        argparse.ArgumentParser.convert_arg_line_to_args
+            (self, arg_line)
+            None
+        argparse.ArgumentParser.get_default
+            (self, dest)
+            None
+        argparse.ArgumentParser.parse_args
+            (self, args=None, namespace=None)
+            None

@@ -1,0 +1,20 @@
+python standard library
+    requests
+        requests.RequestException.errno
+            POSIX exception code
+        requests.RequestException.filename
+            exception filename
+        requests.RequestException.filename2
+            second exception filename
+        requests.RequestException.strerror
+            exception strerror
+        requests.RequestException.with_traceback
+            Exception.with_traceback(tb) --
+            set self.__traceback__ to tb and return self.
+        requests.RequestsDependencyWarning
+            An imported dependency doesn't match the expected version range.
+        requests.RequestsDependencyWarning.args
+            None
+        requests.RequestsDependencyWarning.with_traceback
+            Exception.with_traceback(tb) --
+            set self.__traceback__ to tb and return self.

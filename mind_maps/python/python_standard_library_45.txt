@@ -1,0 +1,19 @@
+python standard library
+    os
+        os.statvfs_result.f_flag
+            None
+        os.statvfs_result.f_frsize
+            None
+        os.statvfs_result.f_fsid
+            None
+        os.statvfs_result.f_namemax
+            None
+        os.statvfs_result.index
+            (self, value, start=0, stop=9223372036854775807, /)
+            Return first index of value.
+        os.strerror
+            (code, /)
+            Translate an error code to a message string.
+        os.symlink
+            (src, dst, target_is_directory=False, *, dir_fd=None)
+            Create a symbolic link pointing to src named dst.

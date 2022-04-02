@@ -1,0 +1,19 @@
+python standard library
+    argparse
+        argparse.ArgumentParser.set_defaults
+            (self, **kwargs)
+            None
+        argparse.FileType
+            (mode='r', bufsize=-1, encoding=None, errors=None)
+            Factory for creating file object types
+            Instances of FileType are typically passed as type= arguments to the ArgumentParser add_argument() method.
+            - mode -- A string indicating how the file is to be opened Accepts the same values as the builtin open() function.
+            - bufsize -- The file's desired buffer size Accepts the same values as the builtin open() function.
+            - encoding -- The file's encoding Accepts the same values as the builtin open() function.
+            - errors -- A string indicating how encoding and decoding errors are to be handled Accepts the same value as the builtin open() function.
+        argparse.Namespace
+            (**kwargs)
+            Simple object for storing attributes.
+            Implements equality by attribute names and values, and provides a simple string representation.
+        argparse.ONE_OR_MORE
+        argparse.OPTIONAL

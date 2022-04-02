@@ -1,0 +1,21 @@
+python standard library
+    math
+        math.prod
+            (iterable, /, *, start=1)
+            Calculate the product of all the elements in the input iterable.
+        math.radians
+            (x, /)
+            Convert angle x from degrees to radians.
+        math.remainder
+            (x, y, /)
+            Difference between x and the closest integer multiple of y.
+        math.sqrt
+            (x, /)
+            Return the square root of x.
+    os
+        os.DirEntry.inode
+            (self, /)
+            Return inode of the entry; cached per entry.
+        os.DirEntry.is_dir
+            (self, /, *, follow_symlinks=True)
+            Return True if the entry is a directory; cached per entry.

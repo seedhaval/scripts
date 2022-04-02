@@ -1,0 +1,19 @@
+python standard library
+    os
+        os.statvfs_result.count
+            (self, value, /)
+            Return number of occurrences of value.
+        os.statvfs_result.f_bavail
+            None
+        os.statvfs_result.f_bfree
+            None
+        os.statvfs_result.f_blocks
+            None
+        os.statvfs_result.f_bsize
+            None
+        os.statvfs_result.f_favail
+            None
+        os.statvfs_result.f_ffree
+            None
+        os.statvfs_result.f_files
+            None

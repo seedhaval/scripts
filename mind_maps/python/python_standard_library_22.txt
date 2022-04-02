@@ -1,0 +1,22 @@
+python standard library
+    math
+        math.ceil
+            (x, /)
+            Return the ceiling of x as an Integral.
+            This is the smallest integer >= x.
+        math.comb
+            (n, k, /)
+            Number of ways to choose k items from n items without repetition and without order.
+        math.copysign
+            (x, y, /)
+            Return a float with the magnitude (absolute value) of x but the sign of y.
+        math.degrees
+            (x, /)
+            Convert angle x from radians to degrees.
+        math.factorial
+            (x, /)
+            Find x!.
+        math.floor
+            (x, /)
+            Return the floor of x as an Integral.
+            This is the largest integer <= x.

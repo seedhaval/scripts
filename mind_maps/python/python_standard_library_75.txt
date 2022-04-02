@@ -1,0 +1,19 @@
+python standard library
+    requests
+        requests.Session.post
+            (self, url, data=None, json=None, **kwargs)
+            Sends a POST request
+            Returns :class:`Response` object.
+            :param url: URL for the new :class:`Request` object.
+            :param data: (optional) Dictionary, list of tuples, bytes, or file-like object to send in the body of the :class:`Request`.
+            :param json: (optional) json to send in the body of the :class:`Request`.
+            :param \*\*kwargs: Optional arguments that ``request`` takes.
+            :rtype: requests.Response
+        requests.Session.prepare_request
+            (self, request)
+            Constructs a :class:`PreparedRequest <PreparedRequest>` for
+            transmission and returns it
+            The :class:`PreparedRequest` has settings merged from the :class:`Request <Request>` instance and those of the
+            :class:`Session`.
+            :param request: :class:`Request` instance to prepare with this session's settings.
+            :rtype: requests.PreparedRequest

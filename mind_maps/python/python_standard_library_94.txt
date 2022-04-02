@@ -1,0 +1,19 @@
+python standard library
+    csv
+        csv.excel.skipinitialspace
+            bool(x) -> bool
+        csv.excel_tab
+            ()
+            Describe the usual properties of Excel-generated TAB-delimited files.
+        csv.excel_tab.delimiter
+            str(object='') -> str
+        csv.excel_tab.doublequote
+            bool(x) -> bool
+        csv.excel_tab.escapechar
+            None
+        csv.excel_tab.lineterminator
+            str(object='') -> str
+        csv.excel_tab.quotechar
+            str(object='') -> str
+        csv.excel_tab.quoting
+            int([x]) -> integer

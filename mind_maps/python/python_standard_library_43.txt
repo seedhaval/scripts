@@ -1,0 +1,19 @@
+python standard library
+    os
+        os.stat_result.st_mtime_ns
+            time of last modification in nanoseconds
+        os.stat_result.st_nlink
+            number of hard links
+        os.stat_result.st_rdev
+            device type (if inode device)
+        os.stat_result.st_size
+            total size, in bytes
+        os.stat_result.st_uid
+            user ID of owner
+        os.statvfs
+            (path)
+            Perform a statvfs system call on the given path.
+        os.statvfs_result
+            (iterable=(), /)
+            statvfs_result: Result from statvfs or fstatvfs.
+            This object may be accessed either as a tuple of (bsize, frsize, blocks, bfree, bavail, files, ffree, favail, flag, namemax), or via the attributes f_bsize, f_frsize, f_blocks, f_bfree, and so on.

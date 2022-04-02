@@ -1,0 +1,25 @@
+python standard library
+    requests
+        requests.Response
+            ()
+            The :class:`Response <Response>` object, which contains a
+            server's response to an HTTP request.
+        requests.Response.apparent_encoding
+            The apparent encoding, provided by the chardet library.
+        requests.Response.close
+            (self)
+        requests.Response.content
+            Content of the response, in bytes.
+        requests.Response.is_permanent_redirect
+            True if this Response one of the permanent versions of redirect.
+        requests.Response.is_redirect
+            True if this Response is a well-formed HTTP redirect that could have
+            been processed automatically (by :meth:`Session.resolve_redirects`).
+        requests.Response.iter_content
+            (self, chunk_size=1, decode_unicode=False)
+            Iterates over the response data
+            When stream=True is set on the request, this avoids reading the content at once into memory for large responses
+            The chunk size is the number of bytes it should read into memory This is not necessarily the length of each item returned as decoding can take place.  chunk_size must be of type int or None
+            A value of None will function differently depending on the value of `stream`.  stream=True will read data as it arrives in whatever size the chunks are received
+            If stream=False, data is returned as a single chunk.
+            If decode_unicode is True, content will be decoded using the best available encoding based on the response.

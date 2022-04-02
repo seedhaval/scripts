@@ -1,0 +1,235 @@
+==============================
+csv.DictReader
+(f, fieldnames=None, restkey=None, restval=None, dialect='excel', *args, **kwds)
+None
+==============================
+csv.DictReader.fieldnames
+None
+==============================
+csv.DictWriter
+(f, fieldnames, restval='', extrasaction='raise', dialect='excel', *args, **kwds)
+None
+==============================
+csv.DictWriter.writeheader
+(self)
+None
+==============================
+csv.DictWriter.writerow
+(self, rowdict)
+None
+==============================
+csv.DictWriter.writerows
+(self, rowdicts)
+None
+==============================
+csv.QUOTE_ALL
+==============================
+csv.QUOTE_MINIMAL
+==============================
+csv.QUOTE_NONE
+==============================
+csv.QUOTE_NONNUMERIC
+==============================
+csv.Sniffer
+()
+"Sniffs" the format of a CSV file (i.e delimiter, quotechar)
+Returns a Dialect object.
+==============================
+csv.Sniffer.has_header
+(self, sample)
+None
+==============================
+csv.Sniffer.sniff
+(self, sample, delimiters=None)
+Returns a dialect (or None) corresponding to the sample
+==============================
+csv.StringIO
+(initial_value='', newline='\n')
+Text I/O implementation using an in-memory buffer.
+The initial_value argument sets the value of object
+The newline argument is like the one of TextIOWrapper's constructor.
+==============================
+csv.StringIO.close
+(self, /)
+Close the IO object.
+==============================
+csv.StringIO.closed
+None
+==============================
+csv.StringIO.detach
+Separate the underlying buffer from the TextIOBase and return it.
+==============================
+csv.StringIO.getvalue
+(self, /)
+Retrieve the entire contents of the object.
+==============================
+csv.StringIO.isatty
+(self, /)
+Return whether this is an 'interactive' stream.
+Return False if it can't be determined.
+==============================
+csv.StringIO.line_buffering
+None
+==============================
+csv.StringIO.newlines
+Line endings translated so far.
+Only line endings translated during reading are considered.
+Subclasses should override.
+==============================
+csv.StringIO.read
+(self, size=-1, /)
+Read at most size characters, returned as a string.
+If the argument is negative or omitted, read until EOF is reached
+Return an empty string at EOF.
+==============================
+csv.StringIO.readable
+(self, /)
+Returns True if the IO object can be read.
+==============================
+csv.StringIO.readline
+(self, size=-1, /)
+Read until newline or EOF.
+Returns an empty string if EOF is hit immediately.
+==============================
+csv.StringIO.readlines
+(self, hint=-1, /)
+Return a list of lines from the stream.
+hint can be specified to control the number of lines read: no more lines will be read if the total size (in bytes/characters) of all lines so far exceeds hint.
+==============================
+csv.StringIO.seek
+(self, pos, whence=0, /)
+Change stream position.
+Seek to character offset pos relative to position indicated by whence:
+0  Start of stream (the default)
+pos should be >= 0;
+1  Current position - pos must be 0;
+2  End of stream - pos must be 0.
+Returns the new absolute position.
+==============================
+csv.StringIO.seekable
+(self, /)
+Returns True if the IO object can be seeked.
+==============================
+csv.StringIO.tell
+(self, /)
+Tell the current file position.
+==============================
+csv.StringIO.truncate
+(self, pos=None, /)
+Truncate size to pos.
+The pos argument defaults to the current file position, as returned by tell()
+The current file position is unchanged.
+Returns the new absolute position.
+==============================
+csv.StringIO.writable
+(self, /)
+Returns True if the IO object can be written.
+==============================
+csv.StringIO.write
+(self, s, /)
+Write string to file.
+Returns the number of characters written, which is always equal to the length of the string.
+==============================
+csv.StringIO.writelines
+(self, lines, /)
+Write a list of lines to stream.
+Line separators are not added, so it is usual for each of the
+lines provided to have a line separator at the end.
+==============================
+csv.excel
+()
+Describe the usual properties of Excel-generated CSV files.
+==============================
+csv.excel.doublequote
+bool(x) -> bool
+==============================
+csv.excel.escapechar
+None
+==============================
+csv.excel.lineterminator
+==============================
+csv.excel.quotechar
+str(object='') -> str
+==============================
+csv.excel.quoting
+int([x]) -> integer
+==============================
+csv.excel.skipinitialspace
+bool(x) -> bool
+==============================
+csv.excel_tab
+()
+Describe the usual properties of Excel-generated TAB-delimited files.
+==============================
+csv.excel_tab.delimiter
+str(object='') -> str
+==============================
+csv.excel_tab.doublequote
+bool(x) -> bool
+==============================
+csv.excel_tab.escapechar
+None
+==============================
+csv.excel_tab.lineterminator
+str(object='') -> str
+==============================
+csv.excel_tab.quotechar
+str(object='') -> str
+==============================
+csv.excel_tab.quoting
+int([x]) -> integer
+==============================
+csv.excel_tab.skipinitialspace
+bool(x) -> bool
+==============================
+csv.field_size_limit
+Sets an upper limit on parsed fields.
+csv.field_size_limit([limit])
+Returns old limit
+If limit is not given, no new limit is set and the old limit is returned
+==============================
+csv.get_dialect
+Return the dialect instance associated with name.
+dialect = csv.get_dialect(name)
+==============================
+csv.list_dialects
+Return a list of all know dialect names.
+names = csv.list_dialects()
+==============================
+csv.reader
+csv_reader = reader(iterable [, dialect='excel']
+The "iterable" argument can be any object that returns a line of input for each iteration, such as a file object or a list
+The returned object is an iterator
+Each iteration returns a row of the CSV file (which can span multiple input lines).
+==============================
+csv.register_dialect
+Create a mapping from a string name to a dialect class.
+dialect = csv.register_dialect(name[, dialect[, **fmtparams]])
+==============================
+csv.unix_dialect
+()
+Describe the usual properties of Unix-generated CSV files.
+==============================
+csv.unix_dialect.delimiter
+str(object='') -> str
+==============================
+csv.unix_dialect.doublequote
+bool(x) -> bool
+==============================
+csv.unix_dialect.escapechar
+None
+==============================
+csv.unix_dialect.lineterminator
+str(object='') -> str
+==============================
+csv.unix_dialect.quotechar
+str(object='') -> str
+==============================
+csv.unix_dialect.quoting
+int([x]) -> integer
+==============================
+csv.unix_dialect.skipinitialspace
+bool(x) -> bool
+==============================
+csv.writer
+csv_writer = csv.writer(fileobj [, dialect='excel']

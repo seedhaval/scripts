@@ -1,0 +1,22 @@
+python standard library
+    zipfile
+        zipfile.ZipInfo.orig_filename
+        zipfile.binascii
+            Conversion between binary data and ASCII
+        zipfile.is_zipfile
+            (filename)
+            Quickly see if a file is a ZIP file by checking the magic number.
+            The filename argument may be a file or file-like object too.
+    operator
+        operator.attrgetter
+            After f = attrgetter('name'), the call f(r) returns r.name.
+            After g = attrgetter('name', 'date'), the call g(r) returns (r.name, r.date).
+            After h = attrgetter('name.first', 'name.last'), the call h(r) returns
+            (r.name.first, r.name.last).
+        operator.itemgetter
+            After f = itemgetter(2), the call f(r) returns r[2].
+            After g = itemgetter(2, 5, 3), the call g(r) returns (r[2], r[5], r[3])
+        operator.methodcaller
+            After f = methodcaller('name'), the call f(r) returns r.name().
+            After g = methodcaller('name', 'date', foo=1), the call g(r) returns
+            r.name('date', foo=1).

@@ -1,0 +1,20 @@
+python standard library
+    os
+        os.stat_result.st_blksize
+            blocksize for filesystem I/O
+        os.stat_result.st_blocks
+            number of blocks allocated
+        os.stat_result.st_ctime
+            time of last change
+        os.stat_result.st_ctime_ns
+            time of last change in nanoseconds
+        os.stat_result.st_dev
+            device
+        os.stat_result.st_gid
+            group ID of owner
+        os.stat_result.st_ino
+            inode
+        os.stat_result.st_mode
+            protection bits
+        os.stat_result.st_mtime
+            time of last modification
