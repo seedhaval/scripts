@@ -1,0 +1,21 @@
+python standard library
+    hashlib
+        hashlib.sha224
+            (string=b'')
+            Returns a sha224 hash object; optionally initialized with a string
+        hashlib.sha256
+            (string=b'')
+            Returns a sha256 hash object; optionally initialized with a string
+        hashlib.sha384
+            (string=b'')
+            Returns a sha384 hash object; optionally initialized with a string
+        hashlib.sha3_224
+            sha3_224([data]) -> SHA3 object
+            Return a new SHA3 hash object with a hashbit length of 28 bytes.
+        hashlib.sha3_224.block_size
+        hashlib.sha3_224.copy
+            (self, /)
+            Return a copy of the hash object.
+        hashlib.sha3_224.digest
+            (self, /)
+            Return the digest value as a bytes object.

@@ -1,0 +1,19 @@
+python standard library
+    tempfile
+        tempfile.SpooledTemporaryFile
+            (max_size=0, mode='w+b', buffering=-1, encoding=None, newline=None, suffix=None, prefix=None, dir=None, *, errors=None)
+            Temporary file wrapper, specialized to switch from BytesIO or StringIO to a real file when it exceeds a certain size or when a fileno is needed.
+        tempfile.SpooledTemporaryFile.close
+            (self)
+        tempfile.SpooledTemporaryFile.closed
+        tempfile.SpooledTemporaryFile.encoding
+        tempfile.SpooledTemporaryFile.errors
+        tempfile.SpooledTemporaryFile.fileno
+            (self)
+        tempfile.SpooledTemporaryFile.flush
+            (self)
+        tempfile.SpooledTemporaryFile.isatty
+            (self)
+        tempfile.SpooledTemporaryFile.mode
+        tempfile.SpooledTemporaryFile.name
+        tempfile.SpooledTemporaryFile.newlines

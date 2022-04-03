@@ -1,0 +1,22 @@
+python standard library
+    functools
+        functools.singledispatchmethod.register
+            (self, cls, method=None)
+            generic_method.register(cls, func) -> func
+            Registers a new implementation for the given *cls* on a *generic_method*.
+        functools.total_ordering
+            (cls)
+            Class decorator that fills in missing ordering methods
+    getpass
+        getpass.getpass
+            (prompt='Password: ', stream=None)
+            Prompt for a password, with echo turned off.
+            prompt: Written on stream to ask for the input Default: 'Password: '
+            stream: A writable file object to display the prompt Defaults to the tty
+            If no tty is available defaults to sys.stderr.
+            The seKr3t input.
+        getpass.getuser
+            ()
+            Get the username from the environment or password database.
+            First try various environment variables, then the password database
+            This works on Windows as long as USERNAME is set.

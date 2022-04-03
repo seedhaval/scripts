@@ -1,0 +1,21 @@
+python standard library
+    functools
+        functools.namedtuple
+            (typename, field_names, *, rename=False, defaults=None, module=None)
+            Returns a new subclass of tuple with named fields.
+            >>> Point = namedtuple('Point', ['x', 'y'])
+            >>> p = Point(11, y=22)             # instantiate with positional args or keywords
+            >>> p[0] + p[1]                     # indexable like a plain tuple
+            >>> p.x + p.y                       # fields also accessible by name
+        functools.partial
+            partial(func, *args, **keywords) - new function with partial application of the given arguments and keywords.
+        functools.partial.args
+            tuple of arguments to future partial calls
+        functools.partial.func
+            function object to use in future partial calls
+        functools.partial.keywords
+            dictionary of keyword arguments to future partial calls
+        functools.partialmethod
+            (func, /, *args, **keywords)
+            Method descriptor with partial application of the given arguments and keywords.
+            Supports wrapping existing descriptors and handles non-descriptor callables as instance methods.

@@ -1,0 +1,19 @@
+python standard library
+    time
+        time.strptime
+            strptime(string, format) -> struct_time
+            Parse a string to a time tuple according to a format specification.
+        time.struct_time
+            (iterable=(), /)
+            The time value as returned by gmtime(), localtime(), and strptime(), and accepted by asctime(), mktime() and strftime()
+            May be considered as a sequence of 9 integers.
+            Note that several fields' values are not the same as those defined by the C language standard for struct tm
+            For example, the value of the field tm_year is the actual year, not year - 1900
+        time.struct_time.tm_gmtoff
+            offset from UTC in seconds
+        time.struct_time.tm_hour
+            hours, range [0, 23]
+        time.struct_time.tm_isdst
+            1 if summer time is in effect, 0 if not, and -1 if unknown
+        time.struct_time.tm_mday
+            day of month, range [1, 31]

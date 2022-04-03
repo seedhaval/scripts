@@ -1,0 +1,21 @@
+python standard library
+    base64
+        base64.encodebytes
+            (s)
+            Encode a bytestring into a bytes object containing multiple lines of base-64 data.
+        base64.encodestring
+            (s)
+            Legacy alias of encodebytes().
+        base64.main
+            ()
+            Small main program
+        base64.standard_b64decode
+            (s)
+            Decode bytes encoded with the standard Base64 alphabet.
+            Argument s is a bytes-like object or ASCII string to decode
+            The result is returned as a bytes object
+            Characters that are not in the standard alphabet are discarded prior to the padding check.
+        base64.standard_b64encode
+            (s)
+            Encode bytes-like object s using the standard Base64 alphabet.
+            The result is returned as a bytes object.

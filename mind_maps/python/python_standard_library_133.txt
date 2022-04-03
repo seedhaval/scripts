@@ -1,0 +1,20 @@
+python standard library
+    hashlib
+        hashlib.sha3_256.digest_size
+        hashlib.sha3_256.hexdigest
+            (self, /)
+            Return the digest value as a string of hexadecimal digits.
+        hashlib.sha3_256.name
+        hashlib.sha3_256.update
+            (self, data, /)
+            Update this hash object's state with the provided bytes-like object.
+        hashlib.sha3_384
+            sha3_384([data]) -> SHA3 object
+            Return a new SHA3 hash object with a hashbit length of 48 bytes.
+        hashlib.sha3_384.block_size
+        hashlib.sha3_384.copy
+            (self, /)
+            Return a copy of the hash object.
+        hashlib.sha3_384.digest
+            (self, /)
+            Return the digest value as a bytes object.

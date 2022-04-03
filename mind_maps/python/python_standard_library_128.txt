@@ -1,0 +1,19 @@
+python standard library
+    time
+        time.struct_time.tm_min
+            minutes, range [0, 59]
+        time.struct_time.tm_mon
+            month of year, range [1, 12]
+        time.struct_time.tm_sec
+            seconds, range [0, 61])
+        time.struct_time.tm_wday
+            day of week, range [0, 6], Monday is 0
+        time.struct_time.tm_yday
+            day of year, range [1, 366]
+        time.struct_time.tm_year
+            year, for example, 1993
+        time.struct_time.tm_zone
+            abbreviation of timezone name
+        time.thread_time
+            thread_time() -> float
+            Thread time for profiling: sum of the kernel and user-space CPU time.

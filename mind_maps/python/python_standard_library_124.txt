@@ -1,0 +1,20 @@
+python standard library
+    time
+        time.daylight
+            int([x]) -> integer
+        time.get_clock_info
+            get_clock_info(name: str) -> dict
+            Get information of the specified clock.
+        time.gmtime
+            gmtime([seconds]) -> (tm_year, tm_mon, tm_mday, tm_hour, tm_min, tm_sec, tm_wday, tm_yday, tm_isdst)
+            Convert seconds since the Epoch to a time tuple expressing UTC (a.k.a.  GMT)
+            When 'seconds' is not passed in, convert the current time instead.
+            If the platform supports the tm_gmtoff and tm_zone, they are available as attributes only.
+        time.localtime
+            localtime([seconds]) -> (tm_year,tm_mon,tm_mday,tm_hour,tm_min, tm_sec,tm_wday,tm_yday,tm_isdst)
+            Convert seconds since the Epoch to a time tuple expressing local time.
+            When 'seconds' is not passed in, convert the current time instead.
+        time.mktime
+            mktime(tuple) -> floating point number
+            Convert a time tuple in local time to seconds since the Epoch.
+            Note that mktime(gmtime(0)) will not generally return zero for most time zones; instead the returned value will either be equal to that of the timezone or altzone attributes on the time module.

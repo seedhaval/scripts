@@ -1,0 +1,25 @@
+python standard library
+    json
+        json.scanner
+            JSON token scanner
+    filecmp
+        filecmp.clear_cache
+            ()
+            Clear the filecmp cache.
+        filecmp.cmp
+            (f1, f2, shallow=True)
+            Compare two files.
+            f1 -- First file name
+            f2 -- Second file name
+            shallow -- Just check stat signature (do not read the files).  defaults to True.
+            True if the files are the same, False otherwise.
+            This function uses a cache for past comparisons and the results,
+            with cache entries invalidated if their stat information changes
+            The cache may be cleared by calling clear_cache().
+        filecmp.cmpfiles
+            (a, b, common, shallow=True)
+            Compare common files in two directories.
+            a, b -- directory names
+            common -- list of file names found in both directories
+            shallow -- if true, do comparison based solely on stat() information
+            Returns a tuple of three lists: files that compare equal files that are different filenames that aren't regular files.

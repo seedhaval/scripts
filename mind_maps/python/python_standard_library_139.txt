@@ -1,0 +1,19 @@
+python standard library
+    cmd
+        cmd.Cmd.completenames
+            (self, text, *ignored)
+        cmd.Cmd.default
+            (self, line)
+            Called on an input line when the command prefix is not recognized.
+            If this method is not overridden, it prints an error message and returns.
+        cmd.Cmd.do_help
+            (self, arg)
+            List available commands with "help" or detailed help with "help cmd".
+        cmd.Cmd.doc_header
+            str(object='') -> str
+        cmd.Cmd.doc_leader
+            str(object='') -> str
+        cmd.Cmd.emptyline
+            (self)
+            Called when an empty line is entered in response to the prompt.
+            If this method is not overridden, it repeats the last nonempty command entered.

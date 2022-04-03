@@ -1,0 +1,19 @@
+python standard library
+    tempfile
+        tempfile.SpooledTemporaryFile.read
+            (self, *args)
+        tempfile.SpooledTemporaryFile.readline
+            (self, *args)
+        tempfile.SpooledTemporaryFile.readlines
+            (self, *args)
+        tempfile.SpooledTemporaryFile.rollover
+            (self)
+        tempfile.SpooledTemporaryFile.seek
+            (self, *args)
+        tempfile.SpooledTemporaryFile.softspace
+        tempfile.SpooledTemporaryFile.tell
+            (self)
+        tempfile.SpooledTemporaryFile.truncate
+            (self, size=None)
+        tempfile.SpooledTemporaryFile.write
+            (self, s)

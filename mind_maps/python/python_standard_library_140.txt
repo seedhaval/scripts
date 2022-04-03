@@ -1,0 +1,19 @@
+python standard library
+    cmd
+        cmd.Cmd.get_names
+            (self)
+        cmd.Cmd.identchars
+            str(object='') -> str
+        cmd.Cmd.intro
+        cmd.Cmd.lastcmd
+            str(object='') -> str
+        cmd.Cmd.misc_header
+            str(object='') -> str
+        cmd.Cmd.nohelp
+            str(object='') -> str
+        cmd.Cmd.onecmd
+            (self, line)
+            Interpret the argument as though it had been typed in response to the prompt.
+            This may be overridden, but should not normally need to be;
+            see the precmd() and postcmd() methods for useful execution hooks.
+            The return value is a flag indicating whether interpretation of commands by the interpreter should stop.

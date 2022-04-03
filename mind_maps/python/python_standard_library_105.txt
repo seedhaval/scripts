@@ -1,0 +1,20 @@
+python standard library
+    glob
+        glob.fnmatch
+            Filename matching with shell patterns.
+            fnmatch(FILENAME, PATTERN) matches according to the local convention.
+            fnmatchcase(FILENAME, PATTERN) always takes case in account.
+            The functions operate by translating the pattern into a regular expression
+            They cache the compiled regular expressions for speed.
+            The function translate(PATTERN) returns a regular expression corresponding to PATTERN
+            (It does not compile it.)
+        glob.glob
+            (pathname, *, recursive=False)
+            Return a list of paths matching a pathname pattern.
+            The pattern may contain simple shell-style wildcards a la fnmatch
+            However, unlike fnmatch, filenames starting with a dot are special cases that are not matched by '*' and '?' patterns.
+            If recursive is true, the pattern '**' will match any files and zero or more directories and subdirectories.
+        glob.glob0
+            (dirname, pattern)
+        glob.glob1
+            (dirname, pattern)
