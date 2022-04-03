@@ -1,0 +1,19 @@
+Teradata
+    BTEQ sequence control tags
+        = ( EQUAL )
+            Repeats the previous Teradata SQL request a specified number of times
+        ERRORLEVEL
+            This control enables users to specify how database errors map to severity levels
+        ERRORONDBSWARNING
+            This control enables users to specify that database warnings are to be treated as though they are errors
+            This allows the ERRORLEVEL status value to also be assigned to the severity level associated with each encountered warning
+        EXIT or QUIT
+            Logs off all database sessions and then exits BTEQ
+        EXITONDELAY
+            This control enables users to specify the maximum time duration within which to allow a submitted SQL request to be processed before CLI will time out the request
+            When a timeout occurs, the BTEQ process will terminate
+            The timeout is triggered when either the database goes down or the duration is exceeded
+        GOTO
+            Skips over all intervening BTEQ commands and SQL statements until a specified label is encountered, then resumes processing as usual
+        HANG
+            Causes BTEQ to pause for a specified period of time

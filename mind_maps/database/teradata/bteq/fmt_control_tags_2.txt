@@ -1,0 +1,16 @@
+Teradata
+    BTEQ format control tags
+        FULLYEAR
+            This control enables users to specify whether to use a four-digit year format (YYYY) in a report's header, footer and title lines
+            The default is a two-digit year format (YY)
+        HEADING and RTITLE
+            HEADING – This control allows users to specify a header that appears at the top of each page of a report
+            RTITLE – This control allows users to specify a title which automatically includes the date and page number, that appears at the top of each page of a report
+        NULL
+            This control enables users to specify a character string, rather that the default "?", to represent a null field value for Field Mode reports
+        OMIT
+            This control enables users to specify whether any columns are to be excluded from Field Mode reports for subsequent data-returning SQL statements
+        PAGEBREAK
+            This control enables users to specify whether a page eject is to be done whenever values for one or more specified columns change
+        PAGELENGTH
+            This control enables users to specify the maximum number of lines for report form output
