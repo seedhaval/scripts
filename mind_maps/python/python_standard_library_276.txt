@@ -1,0 +1,27 @@
+python standard library
+    logging
+        logging.Formatter.usesTime
+            (self)
+            Check if the format uses the creation time of the record.
+        logging.INFO
+            int([x]) -> integer
+        logging.LogRecord
+            (name, level, pathname, lineno, msg, args, exc_info, func=None, sinfo=None, **kwargs)
+            A LogRecord instance represents an event being logged.
+            LogRecord instances are created every time something is logged
+            They contain all the information pertinent to the event being logged
+            The main information passed in is in msg and args, which are combined using str(msg) % args to create the message field of the record
+            The record also includes information such as when the record was created, the source line where the logging call was made, and any exception information to be logged.
+        logging.LogRecord.getMessage
+            (self)
+            Return the message for this LogRecord.
+            Return the message for this LogRecord after merging any user-supplied arguments with the message.
+        logging.Logger
+            (name, level=0)
+            Instances of the Logger class represent a single logging channel
+            A "logging channel" indicates an area of an application
+            Exactly how an "area" is defined is up to the application developer
+            Since an application can have any number of areas, logging channels are identified by a unique string
+            channel names are organized into a namespace hierarchy where levels are separated by periods, much like the Java or Python package namespace
+            in the instance given above, channel names might be "input" for the upper level, and "input.csv", "input.xls" and "input.gnu" for the sub-levels.
+            There is no arbitrary limit to the depth of nesting.

@@ -1,0 +1,22 @@
+python standard library
+    configparser
+        configparser.ConverterMapping.GETTERCRE
+            Compiled regular expression object.
+        configparser.ConverterMapping.clear
+            (self)
+            D.clear() -> None
+            Remove all items from D.
+        configparser.ConverterMapping.get
+            (self, key, default=None)
+            D.get(k[,d]) -> D[k] if k in D, else d
+            d defaults to None.
+        configparser.ConverterMapping.items
+            (self)
+            D.items() -> a set-like object providing a view on D's items
+        configparser.ConverterMapping.keys
+            (self)
+            D.keys() -> a set-like object providing a view on D's keys
+        configparser.ConverterMapping.pop
+            (self, key, default=<object object at 0x7f5f0e4f1160>)
+            D.pop(k[,d]) -> v, remove specified key and return the corresponding value.
+            If key is not found, d is returned if given, otherwise KeyError is raised.

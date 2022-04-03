@@ -1,0 +1,19 @@
+python standard library
+    calendar
+        calendar.HTMLCalendar.yeardays2calendar
+            (self, year, width=3)
+            Return the data for the specified year ready for formatting (similar to yeardatescalendar())
+            Entries in the week lists are (day number, weekday number) tuples
+            Day numbers outside this month are zero.
+        calendar.HTMLCalendar.yeardayscalendar
+            (self, year, width=3)
+            Return the data for the specified year ready for formatting (similar to yeardatescalendar())
+            Entries in the week lists are day numbers.
+            Day numbers outside this month are zero.
+        calendar.IllegalMonthError
+            (month)
+            Inappropriate argument value (of correct type).
+        calendar.IllegalMonthError.args
+        calendar.IllegalMonthError.with_traceback
+            Exception.with_traceback(tb) --
+            set self.__traceback__ to tb and return self.

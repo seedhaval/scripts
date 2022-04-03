@@ -1,0 +1,26 @@
+python standard library
+    stat
+        stat.S_IWGRP
+        stat.S_IWOTH
+        stat.S_IWRITE
+        stat.S_IWUSR
+        stat.S_IXGRP
+        stat.S_IXOTH
+        stat.S_IXUSR
+        stat.UF_APPEND
+        stat.UF_COMPRESSED
+        stat.UF_HIDDEN
+        stat.UF_IMMUTABLE
+        stat.UF_NODUMP
+        stat.UF_NOUNLINK
+        stat.UF_OPAQUE
+        stat.filemode
+            Convert a file's mode to a string of the form '-rwxrwxrwx'
+    configparser
+        configparser.BasicInterpolation
+            ()
+            Interpolation as implemented in the classic ConfigParser.
+            The option values can contain format strings which refer to other values in the same section, or values in the special default section.
+            All reference expansions are done late, on demand
+            If a user needs to use a bare % in a configuration file, she can escape it by writing %%
+            Other % usage is considered a user error and raises `InterpolationSyntaxError'.

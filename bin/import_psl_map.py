@@ -5,7 +5,7 @@ from pathlib import Path
 raw_fl_dir = Path( '/home/dvs/scripts/python_raw_info/done/' )
 out_fldr = Path( '/home/dvs/tmp/' )
 
-i_cntr = 103
+i_cntr = 237
 
 map_tree = {}
 

@@ -1,0 +1,19 @@
+python standard library
+    logging
+        logging.PercentStyle.asctime_search
+            str(object='') -> str
+        logging.PercentStyle.default_format
+            str(object='') -> str
+        logging.PercentStyle.format
+            (self, record)
+        logging.PercentStyle.usesTime
+            (self)
+        logging.PercentStyle.validate
+            (self)
+            Validate the input format, ensure it matches the correct style
+        logging.PercentStyle.validation_pattern
+            Compiled regular expression object.
+        logging.StrFormatStyle
+            (fmt)
+        logging.StrFormatStyle.asctime_format
+            str(object='') -> str

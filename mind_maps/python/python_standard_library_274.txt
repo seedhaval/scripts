@@ -1,0 +1,22 @@
+python standard library
+    logging
+        logging.Formatter.converter
+            localtime([seconds]) -> (tm_year,tm_mon,tm_mday,tm_hour,tm_min, tm_sec,tm_wday,tm_yday,tm_isdst)
+            Convert seconds since the Epoch to a time tuple expressing local time.
+            When 'seconds' is not passed in, convert the current time instead.
+        logging.Formatter.default_msec_format
+            str(object='') -> str
+            str(bytes_or_buffer[, encoding[, errors]]) -> str
+            Create a new string object from the given object If encoding or errors is specified, then the object must expose a data buffer that will be decoded using the given encoding and error handler.
+            Otherwise, returns the result of object.__str__() (if defined) or repr(object).
+            encoding defaults to sys.getdefaultencoding().
+            errors defaults to 'strict'.
+        logging.Formatter.default_time_format
+            str(object='') -> str
+        logging.Formatter.format
+            (self, record)
+            Format the specified record as text.
+            The record's attribute dictionary is used as the operand to a string formatting operation which yields the returned string.
+            Before formatting the dictionary, a couple of preparatory steps are carried out The message attribute of the record is computed using LogRecord.getMessage()
+            If the formatting string uses the time (as determined by a call to usesTime(), formatTime() is called to format the event time
+            If there is exception information, it is formatted using formatException() and appended to the message.

@@ -1,0 +1,19 @@
+python standard library
+    configparser
+        configparser.RawConfigParser.keys
+            (self)
+            D.keys() -> a set-like object providing a view on D's keys
+        configparser.RawConfigParser.options
+            (self, section)
+            Return a list of option names for the given section name.
+        configparser.RawConfigParser.optionxform
+            (self, optionstr)
+        configparser.RawConfigParser.pop
+            (self, key, default=<object object at 0x7f5f0e4f1160>)
+            D.pop(k[,d]) -> v, remove specified key and return the corresponding value.
+            If key is not found, d is returned if given, otherwise KeyError is raised.
+        configparser.RawConfigParser.popitem
+            (self)
+            Remove a section from the parser and return it as a (section_name, section_proxy) tuple
+            If no section is present, raise KeyError.
+            The section DEFAULT is never returned because it cannot be removed.

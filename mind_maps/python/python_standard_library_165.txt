@@ -1,0 +1,20 @@
+python standard library
+    collections
+        collections.UserString.partition
+            (self, sep)
+        collections.UserString.replace
+            (self, old, new, maxsplit=-1)
+        collections.UserString.rfind
+            (self, sub, start=0, end=9223372036854775807)
+        collections.UserString.rindex
+            (self, sub, start=0, end=9223372036854775807)
+        collections.UserString.rjust
+            (self, width, *args)
+        collections.UserString.rpartition
+            (self, sep)
+        collections.UserString.rsplit
+            (self, sep=None, maxsplit=-1)
+        collections.UserString.rstrip
+            (self, chars=None)
+        collections.UserString.split
+            (self, sep=None, maxsplit=-1)

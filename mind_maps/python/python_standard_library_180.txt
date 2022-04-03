@@ -1,0 +1,22 @@
+python standard library
+    calendar
+        calendar.Calendar.itermonthdays3
+            (self, year, month)
+            Like itermonthdates(), but will yield (year, month, day) tuples
+            Can be used for dates outside of datetime.date range.
+        calendar.Calendar.itermonthdays4
+            (self, year, month)
+            Like itermonthdates(), but will yield (year, month, day, day_of_week) tuples.
+            Can be used for dates outside of datetime.date range.
+        calendar.Calendar.iterweekdays
+            (self)
+            Return an iterator for one week of weekday numbers starting with the configured first one.
+        calendar.Calendar.monthdatescalendar
+            (self, year, month)
+            Return a matrix (list of lists) representing a month's calendar.
+            Each row represents a week; week entries are datetime.date values.
+        calendar.Calendar.monthdays2calendar
+            (self, year, month)
+            Return a matrix representing a month's calendar.
+            Each row represents a week; week entries are (day number, weekday number) tuples
+            Day numbers outside this month are zero.

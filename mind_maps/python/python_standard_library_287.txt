@@ -1,0 +1,19 @@
+python standard library
+    logging
+        logging.StringTemplateStyle.validate
+            (self)
+            Validate the input format, ensure it matches the correct style
+        logging.StringTemplateStyle.validation_pattern
+            Compiled regular expression object.
+        logging.Template
+            (template)
+            A string class for supporting $-substitutions.
+        logging.Template.braceidpattern
+        logging.Template.delimiter
+            str(object='') -> str
+        logging.Template.flags
+            An enumeration.
+        logging.Template.idpattern
+            str(object='') -> str
+        logging.Template.pattern
+            Compiled regular expression object.

@@ -1,0 +1,24 @@
+python standard library
+    calendar
+        calendar.HTMLCalendar.monthdatescalendar
+            (self, year, month)
+            Return a matrix (list of lists) representing a month's calendar.
+            Each row represents a week; week entries are datetime.date values.
+        calendar.HTMLCalendar.monthdays2calendar
+            (self, year, month)
+            Return a matrix representing a month's calendar.
+            Each row represents a week; week entries are (day number, weekday number) tuples
+            Day numbers outside this month are zero.
+        calendar.HTMLCalendar.monthdayscalendar
+            (self, year, month)
+            Return a matrix representing a month's calendar.
+            Each row represents a week; days outside this month are zero.
+        calendar.HTMLCalendar.setfirstweekday
+            (self, firstweekday)
+        calendar.HTMLCalendar.yeardatescalendar
+            (self, year, width=3)
+            Return the data for the specified year ready for formatting
+            The return value is a list of month rows
+            Each month row contains up to width months.
+            Each month contains between 4 and 6 weeks and each week contains 1-7 days
+            Days are datetime.date objects.

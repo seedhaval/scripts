@@ -1,0 +1,21 @@
+python standard library
+    logging
+        logging.FileHandler.set_name
+            (self, name)
+        logging.FileHandler.terminator
+            str(object='') -> str
+        logging.Filter
+            (name='')
+            Filter instances are used to perform arbitrary filtering of LogRecords.
+            Loggers and Handlers can optionally use Filter instances to filter records as desired
+            The base filter class only allows events which are below a certain point in the logger hierarchy
+            For example, a filter initialized with "A.B" will allow events logged by loggers "A.B", "A.B.C", "A.B.C.D", "A.B.D" etc but not "A.BB", "B.A.B" etc
+            If initialized with the empty string, all events are passed.
+        logging.Filter.filter
+            (self, record)
+            Determine if the specified record is to be logged.
+            Returns True if the record should be logged, or False otherwise.
+            If deemed appropriate, the record may be modified in-place.
+        logging.Filterer
+            ()
+            A base class for loggers and handlers which allows them to share common code.

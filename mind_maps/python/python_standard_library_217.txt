@@ -1,0 +1,20 @@
+python standard library
+    configparser
+        configparser.MissingSectionHeaderError.append
+            (self, lineno, line)
+        configparser.MissingSectionHeaderError.args
+        configparser.MissingSectionHeaderError.filename
+            Deprecated, use `source'.
+        configparser.MissingSectionHeaderError.with_traceback
+            Exception.with_traceback(tb) --
+            set self.__traceback__ to tb and return self.
+        configparser.MutableMapping
+            ()
+        configparser.MutableMapping.clear
+            (self)
+            D.clear() -> None
+            Remove all items from D.
+        configparser.MutableMapping.get
+            (self, key, default=None)
+            D.get(k[,d]) -> D[k] if k in D, else d
+            d defaults to None.

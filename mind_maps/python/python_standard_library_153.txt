@@ -1,0 +1,21 @@
+python standard library
+    collections
+        collections.Counter.get
+            (self, key, default=None, /)
+            Return the value for key if key is in the dictionary, else default.
+        collections.Counter.items
+            D.items() -> a set-like object providing a view on D's items
+        collections.Counter.keys
+            D.keys() -> a set-like object providing a view on D's keys
+        collections.Counter.most_common
+            (self, n=None)
+            List the n most common elements and their counts from the most common to the least
+            If n is None, then list all element counts.
+        collections.Counter.pop
+            D.pop(k[,d]) -> v, remove specified key and return the corresponding value.
+            If key is not found, d is returned if given, otherwise KeyError is raised
+        collections.Counter.popitem
+            (self, /)
+            Remove and return a (key, value) pair as a 2-tuple.
+            Pairs are returned in LIFO (last-in, first-out) order.
+            Raises KeyError if the dict is empty.

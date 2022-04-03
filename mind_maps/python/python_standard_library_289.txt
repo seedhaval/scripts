@@ -1,0 +1,20 @@
+python standard library
+    logging
+        logging.captureWarnings
+            (capture)
+            If capture is true, redirect all warnings to the logging package.
+            If capture is False, ensure that warnings are not redirected to logging
+            but to their original destinations.
+        logging.critical
+            (msg, *args, **kwargs)
+            Log a message with severity 'CRITICAL' on the root logger
+            If the logger has no handlers, call basicConfig() to add a console handler with a pre-defined format.
+        logging.currentframe
+            ()
+        logging.debug
+            (msg, *args, **kwargs)
+            Log a message with severity 'DEBUG' on the root logger
+            If the logger has no handlers, call basicConfig() to add a console handler with a pre-defined format.
+        logging.disable
+            (level=50)
+            Disable all logging calls of severity 'level' and below.

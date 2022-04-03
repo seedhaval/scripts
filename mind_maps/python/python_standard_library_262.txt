@@ -1,0 +1,21 @@
+python standard library
+    pathlib
+        pathlib.Path.resolve
+            (self, strict=False)
+            Make the path absolute, resolving all symlinks on the way and also normalizing it (for example turning slashes into backslashes under Windows).
+        pathlib.Path.rglob
+            (self, pattern)
+            Recursively yield all existing files (of any kind, including directories) matching the given relative pattern, anywhere in this subtree.
+        pathlib.Path.rmdir
+            (self)
+            Remove this directory
+            The directory must be empty.
+        pathlib.Path.root
+            The root of the path, if any.
+        pathlib.Path.samefile
+            (self, other_path)
+            Return whether other_path is the same or not as this file
+            (as returned by os.path.samefile()).
+        pathlib.Path.stat
+            (self)
+            Return the result of the stat() system call on this path, like os.stat() does.

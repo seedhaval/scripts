@@ -1,0 +1,19 @@
+python standard library
+    logging
+        logging.StreamHandler
+            (stream=None)
+            A handler class which writes logging records, appropriately formatted, to a stream
+            Note that this class does not close the stream, as
+            sys.stdout or sys.stderr may be used.
+        logging.StringTemplateStyle
+            (fmt)
+        logging.StringTemplateStyle.asctime_format
+            str(object='') -> str
+        logging.StringTemplateStyle.asctime_search
+            str(object='') -> str
+        logging.StringTemplateStyle.default_format
+            str(object='') -> str
+        logging.StringTemplateStyle.format
+            (self, record)
+        logging.StringTemplateStyle.usesTime
+            (self)

@@ -1,0 +1,19 @@
+python standard library
+    collections
+        collections.UserDict.values
+            (self)
+            D.values() -> an object providing a view on D's values
+        collections.UserList
+            (initlist=None)
+            A more or less complete user-defined wrapper around list objects.
+        collections.UserList.append
+            (self, item)
+            S.append(value) -- append value to the end of the sequence
+        collections.UserList.clear
+            (self)
+            S.clear() -> None -- remove all items from S
+        collections.UserList.copy
+            (self)
+        collections.UserList.count
+            (self, item)
+            S.count(value) -> integer -- return number of occurrences of value

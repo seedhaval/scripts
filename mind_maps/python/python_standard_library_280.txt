@@ -1,0 +1,21 @@
+python standard library
+    logging
+        logging.Logger.handle
+            (self, record)
+            Call the handlers for the specified record.
+            This method is used for unpickled records received from a socket, as well as those created locally
+            Logger-level filtering is applied.
+        logging.Logger.hasHandlers
+            (self)
+            See if this logger has any handlers configured.
+            Loop through all handlers for this logger and its parents in the logger hierarchy
+            Return True if a handler was found, else False.
+            Stop searching up the hierarchy whenever a logger with the "propagate" attribute set to zero is found - that will be the last logger which is checked for the existence of handlers.
+        logging.Logger.info
+            (self, msg, *args, **kwargs)
+            Log 'msg % args' with severity 'INFO'.
+            To pass exception information, use the keyword argument exc_info with a true value, e.g.
+            logger.info("Houston, we have a %s", "interesting problem", exc_info=1)
+        logging.Logger.isEnabledFor
+            (self, level)
+            Is this logger enabled for level 'level'?

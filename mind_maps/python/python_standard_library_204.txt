@@ -1,0 +1,19 @@
+python standard library
+    configparser
+        configparser.ConfigParser.OPTCRE
+            Compiled regular expression object.
+        configparser.ConfigParser.OPTCRE_NV
+            Compiled regular expression object.
+        configparser.ConfigParser.SECTCRE
+            Compiled regular expression object.
+        configparser.ConfigParser.add_section
+            (self, section)
+            Create a new section in the configuration
+            Extends RawConfigParser.add_section by validating if the section name is a string.
+        configparser.ConfigParser.clear
+            (self)
+            D.clear() -> None
+            Remove all items from D.
+        configparser.ConfigParser.converters
+        configparser.ConfigParser.defaults
+            (self)

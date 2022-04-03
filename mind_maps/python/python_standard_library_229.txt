@@ -1,0 +1,19 @@
+python standard library
+    configparser
+        configparser.SafeConfigParser.clear
+            (self)
+            D.clear() -> None
+            Remove all items from D.
+        configparser.SafeConfigParser.converters
+        configparser.SafeConfigParser.defaults
+            (self)
+        configparser.SafeConfigParser.get
+            (self, section, option, *, raw=False, vars=None, fallback=<object object at 0x7f5f0e4f1f40>)
+            Get an option value for a given section.
+            If `vars' is provided, it must be a dictionary
+            The option is looked up in `vars' (if provided), `section', and in `DEFAULTSECT' in that order.
+            If the key is not found and `fallback' is provided, it is used as a fallback value
+            `None' can be provided as a `fallback' value.
+            If interpolation is enabled and the optional argument `raw' is False, all interpolations are expanded in the return values.
+            Arguments `raw', `vars', and `fallback' are keyword only.
+            The section DEFAULT is special.

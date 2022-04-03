@@ -1,0 +1,20 @@
+python standard library
+    calendar
+        calendar.main
+            (args)
+        calendar.mdays
+            Built-in mutable sequence.
+            If no argument is given, the constructor creates a new empty list.
+            The argument must be an iterable if specified.
+        calendar.month
+            (theyear, themonth, w=0, l=0)
+            Return a month's calendar string (multi-line).
+        calendar.month_abbr
+        calendar.month_name
+        calendar.monthcalendar
+            (year, month)
+            Return a matrix representing a month's calendar.
+            Each row represents a week; days outside this month are zero.
+        calendar.monthrange
+            (year, month)
+            Return weekday (0-6 ~ Mon-Sun) and number of days (28-31) for year, month.

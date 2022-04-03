@@ -1,0 +1,20 @@
+python standard library
+    logging
+        logging.Logger.filter
+            (self, record)
+            Determine if a record is loggable by consulting all the filters.
+            The default is to allow the record to be logged; any filter can veto this and the record is then dropped
+            Returns a zero value if a record is to be dropped, else non-zero.
+        logging.Logger.findCaller
+            (self, stack_info=False, stacklevel=1)
+            Find the stack frame of the caller so that we can note the source file name, line number and function name.
+        logging.Logger.getChild
+            (self, suffix)
+            Get a logger which is a descendant to this one.
+            This is a convenience method, such that logging.getLogger('abc').getChild('def.ghi') is the same as logging.getLogger('abc.def.ghi')
+            It's useful, for example, when the parent logger is named using __name__ rather than a literal string.
+        logging.Logger.getEffectiveLevel
+            (self)
+            Get the effective level for this logger.
+            Loop through this logger and its parents in the logger hierarchy, looking for a non-zero logging level
+            Return the first one found.

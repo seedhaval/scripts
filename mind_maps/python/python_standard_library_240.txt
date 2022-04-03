@@ -1,0 +1,20 @@
+python standard library
+    tarfile
+        tarfile.TarFile.fileobject
+            (tarfile, tarinfo)
+            Create a new buffered reader using the given readable raw IO object.
+        tarfile.TarFile.fileobject.close
+            Flush and close the IO object.
+            This method has no effect if the file is already closed.
+        tarfile.TarFile.fileobject.closed
+        tarfile.TarFile.fileobject.detach
+            Disconnect this buffer from its underlying raw stream and return it.
+            After the raw stream has been detached, the buffer is in an unusable state.
+        tarfile.TarFile.fileobject.fileno
+            Returns underlying file descriptor if one exists.
+        tarfile.TarFile.fileobject.flush
+            Flush write buffers, if applicable.
+            This is not implemented for read-only and non-blocking streams.
+        tarfile.TarFile.fileobject.isatty
+            Return whether this is an 'interactive' stream.
+            Return False if it can't be determined.

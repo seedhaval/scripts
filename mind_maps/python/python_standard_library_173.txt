@@ -1,0 +1,20 @@
+python standard library
+    sys
+        sys.stdout
+        sys.version
+            str(object='') -> str
+        sys.version_info
+    subprocess
+        subprocess.CompletedProcess
+            (args, returncode, stdout=None, stderr=None)
+            A process that has finished running.
+            This is returned by run().
+            args: The list or str args passed to run().
+            returncode: The exit code of the process, negative for signals.
+            stdout: The standard output (None if not captured).
+            stderr: The standard error (None if not captured).
+        subprocess.CompletedProcess.check_returncode
+            (self)
+            Raise CalledProcessError if the exit code is non-zero.
+        subprocess.DEVNULL
+            int([x]) -> integer

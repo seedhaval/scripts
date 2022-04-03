@@ -1,0 +1,21 @@
+python standard library
+    calendar
+        calendar.HTMLCalendar.formatweekday
+            (self, day)
+            Return a weekday name as a table header.
+        calendar.HTMLCalendar.formatweekheader
+            (self)
+            Return a header for a week as a table row.
+        calendar.HTMLCalendar.formatyear
+            (self, theyear, width=3)
+            Return a formatted year as a table of tables.
+        calendar.HTMLCalendar.formatyearpage
+            (self, theyear, width=3, css='calendar.css', encoding=None)
+            Return a formatted year as a complete HTML page.
+        calendar.HTMLCalendar.getfirstweekday
+            (self)
+        calendar.HTMLCalendar.itermonthdates
+            (self, year, month)
+            Return an iterator for one month
+            The iterator will yield datetime.date values and will always iterate through complete weeks, so it will yield
+            dates outside the specified month.

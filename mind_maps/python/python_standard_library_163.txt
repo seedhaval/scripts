@@ -1,0 +1,20 @@
+python standard library
+    collections
+        collections.UserString.isalnum
+            (self)
+        collections.UserString.isalpha
+            (self)
+        collections.UserString.isascii
+            (self)
+        collections.UserString.isdecimal
+            (self)
+        collections.UserString.isdigit
+            (self)
+        collections.UserString.isidentifier
+            (self)
+        collections.UserString.islower
+            (self)
+        collections.UserString.isnumeric
+            (self)
+        collections.UserString.isprintable
+            (self)

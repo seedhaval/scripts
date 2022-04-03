@@ -1,0 +1,19 @@
+python standard library
+    logging
+        logging.FATAL
+            int([x]) -> integer
+        logging.FileHandler
+            (filename, mode='a', encoding=None, delay=False)
+            A handler class which writes formatted logging records to disk files.
+        logging.FileHandler.acquire
+            (self)
+            Acquire the I/O thread lock.
+        logging.FileHandler.addFilter
+            (self, filter)
+            Add the specified filter to this handler.
+        logging.FileHandler.close
+            (self)
+            Closes the stream.
+        logging.FileHandler.createLock
+            (self)
+            Acquire a thread lock for serializing access to the underlying I/O.

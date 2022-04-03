@@ -1,0 +1,20 @@
+python standard library
+    tarfile
+        tarfile.TarFile.getmembers
+            (self)
+            Return the members of the archive as a list of TarInfo objects
+            The list has the same order as the members in the archive.
+        tarfile.TarFile.getnames
+            (self)
+            Return the members of the archive as a list of their names
+            It has the same order as the list returned by getmembers().
+        tarfile.TarFile.gettarinfo
+            (self, name=None, arcname=None, fileobj=None)
+            Create a TarInfo object from the result of os.stat or equivalent on an existing file
+            The file is either named by `name', or specified as a file object `fileobj' with a file descriptor
+            If given, `arcname' specifies an alternative name for the file in the archive, otherwise, the name is taken from the 'name' attribute of 'fileobj', or the 'name' argument
+            The name should be a text string.
+        tarfile.TarFile.gzopen
+            (name, mode='r', fileobj=None, compresslevel=9, **kwargs)
+            Open gzip compressed tar archive name for reading or writing.
+            Appending is not allowed.

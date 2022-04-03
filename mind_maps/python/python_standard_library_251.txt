@@ -1,0 +1,20 @@
+python standard library
+    tarfile
+        tarfile.TarFile.tarinfo.isfile
+            (self)
+            Return True if the Tarinfo object is a regular file.
+        tarfile.TarFile.tarinfo.islnk
+            (self)
+            Return True if it is a hard link.
+        tarfile.TarFile.tarinfo.isreg
+            (self)
+            Return True if the Tarinfo object is a regular file.
+        tarfile.TarFile.tarinfo.issparse
+            (self)
+        tarfile.TarFile.tarinfo.issym
+            (self)
+            Return True if it is a symbolic link.
+        tarfile.TarFile.tarinfo.linkname
+            Name of the target file name, which is only present in TarInfo objects of type LNKTYPE and SYMTYPE.
+        tarfile.TarFile.tarinfo.linkpath
+            In pax headers, "linkname" is called "linkpath".

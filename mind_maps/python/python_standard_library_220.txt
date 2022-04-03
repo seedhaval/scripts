@@ -1,0 +1,20 @@
+python standard library
+    configparser
+        configparser.NoSectionError
+            (section)
+            Raised when no section matches a requested option.
+        configparser.NoSectionError.args
+        configparser.NoSectionError.with_traceback
+            Exception.with_traceback(tb) --
+            set self.__traceback__ to tb and return self.
+        configparser.ParsingError
+            (source=None, filename=None)
+            Raised when a configuration file does not follow legal syntax.
+        configparser.ParsingError.append
+            (self, lineno, line)
+        configparser.ParsingError.args
+        configparser.ParsingError.filename
+            Deprecated, use `source'.
+        configparser.ParsingError.with_traceback
+            Exception.with_traceback(tb) --
+            set self.__traceback__ to tb and return self.

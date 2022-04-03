@@ -1,0 +1,20 @@
+python standard library
+    stat
+        stat.S_ISGID
+        stat.S_ISLNK
+            S_ISLNK(mode) -> bool
+            Return True if mode is from a symbolic link.
+        stat.S_ISPORT
+            S_ISPORT(mode) -> bool
+            Return True if mode is from an event port.
+        stat.S_ISREG
+            S_ISREG(mode) -> bool
+            Return True if mode is from a regular file.
+        stat.S_ISSOCK
+            S_ISSOCK(mode) -> bool
+            Return True if mode is from a socket.
+        stat.S_ISUID
+        stat.S_ISVTX
+        stat.S_ISWHT
+            S_ISWHT(mode) -> bool
+            Return True if mode is from a whiteout.

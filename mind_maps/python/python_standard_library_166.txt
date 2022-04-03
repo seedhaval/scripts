@@ -1,0 +1,19 @@
+python standard library
+    collections
+        collections.UserString.splitlines
+            (self, keepends=False)
+        collections.UserString.startswith
+            (self, prefix, start=0, end=9223372036854775807)
+        collections.UserString.strip
+            (self, chars=None)
+        collections.UserString.swapcase
+            (self)
+        collections.UserString.title
+            (self)
+        collections.UserString.translate
+            (self, *args)
+        collections.UserString.upper
+            (self)
+        collections.UserString.zfill
+            (self, width)
+        collections.abc

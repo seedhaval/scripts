@@ -1,0 +1,20 @@
+python standard library
+    tarfile
+        tarfile.TarFile.xzopen
+            (name, mode='r', fileobj=None, preset=None, **kwargs)
+            Open lzma compressed tar archive name for reading or writing.
+            Appending is not allowed.
+        tarfile.is_tarfile
+            (name)
+            Return True if name points to a tar archive that we are able to handle, else return False.
+        tarfile.open
+            (name=None, mode='r', fileobj=None, bufsize=10240, **kwargs)
+            Open a tar archive for reading, writing or appending
+            Return an appropriate TarFile class.
+    pathlib
+        pathlib.Path
+            (*args, **kwargs)
+            PurePath subclass that can make system calls.
+            Path represents a filesystem path but unlike PurePath, also offers methods to do system calls on path objects
+            Depending on your system, instantiating a Path will return either a PosixPath or a WindowsPath object
+            You can also instantiate a PosixPath or WindowsPath directly, but cannot instantiate a WindowsPath on a POSIX system or vice versa.

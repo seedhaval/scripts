@@ -1,0 +1,19 @@
+python standard library
+    calendar
+        calendar.LocaleTextCalendar.formatmonthname
+            (self, theyear, themonth, width, withyear=True)
+            Return a formatted month name.
+        calendar.LocaleTextCalendar.formatweek
+            (self, theweek, width)
+            Returns a single week in a string (no newline).
+        calendar.LocaleTextCalendar.formatweekday
+            (self, day, width)
+            Returns a formatted week day name.
+        calendar.LocaleTextCalendar.formatweekheader
+            (self, width)
+            Return a header for a week.
+        calendar.LocaleTextCalendar.formatyear
+            (self, theyear, w=2, l=1, c=6, m=3)
+            Returns a year's calendar as a multi-line string.
+        calendar.LocaleTextCalendar.getfirstweekday
+            (self)

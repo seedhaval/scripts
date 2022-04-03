@@ -1,0 +1,19 @@
+python standard library
+    configparser
+        configparser.SectionProxy
+            (parser, name)
+            A proxy for a single section from a parser.
+        configparser.SectionProxy.clear
+            (self)
+            D.clear() -> None
+            Remove all items from D.
+        configparser.SectionProxy.get
+            (self, option, fallback=None, *, raw=False, vars=None, _impl=None, **kwargs)
+            Get an option value.
+            Unless `fallback` is provided, `None` will be returned if the option is not found.
+        configparser.SectionProxy.items
+            (self)
+            D.items() -> a set-like object providing a view on D's items
+        configparser.SectionProxy.keys
+            (self)
+            D.keys() -> a set-like object providing a view on D's keys

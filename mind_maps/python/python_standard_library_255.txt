@@ -1,0 +1,19 @@
+python standard library
+    pathlib
+        pathlib.Path.absolute
+            (self)
+            Return an absolute version of this path
+            This function works even if the path doesn't point to anything.
+            No normalization is done, i.e all '.' and '..' will be kept along.
+            Use resolve() to get the canonical path to a file.
+        pathlib.Path.anchor
+            The concatenation of the drive and root, or ''.
+        pathlib.Path.as_posix
+            (self)
+            Return the string representation of the path with forward (/) slashes.
+        pathlib.Path.as_uri
+            (self)
+            Return the path as a 'file' URI.
+        pathlib.Path.chmod
+            (self, mode)
+            Change the permissions of the path, like os.chmod().

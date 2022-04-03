@@ -1,0 +1,22 @@
+python standard library
+    logging
+        logging.error
+            (msg, *args, **kwargs)
+            Log a message with severity 'ERROR' on the root logger
+            If the logger has no handlers, call basicConfig() to add a console handler with a pre-defined format.
+        logging.exception
+            (msg, *args, exc_info=True, **kwargs)
+            Log a message with severity 'ERROR' on the root logger, with exception information
+            If the logger has no handlers, basicConfig() is called to add a console handler with a pre-defined format.
+        logging.fatal
+            (msg, *args, **kwargs)
+            Log a message with severity 'CRITICAL' on the root logger
+            If the logger has no handlers, call basicConfig() to add a console handler with a pre-defined format.
+        logging.getLevelName
+            (level)
+            Return the textual or numeric representation of logging level 'level'.
+            If the level is one of the predefined levels (CRITICAL, ERROR, WARNING, INFO, DEBUG) then you get the corresponding string
+            If you have associated levels with names using addLevelName then the name you have associated with 'level' is returned.
+            If a numeric value corresponding to one of the defined levels is passed in, the corresponding string representation is returned.
+            If a string representation of the level is passed in, the corresponding numeric value is returned.
+            If no matching numeric or string value is passed in, the string 'Level %s' % level is returned.

@@ -1,0 +1,19 @@
+python standard library
+    collections
+        collections.Counter.setdefault
+            (self, key, default=None, /)
+            Insert key with a value of default if key is not in the dictionary.
+            Return the value for key if key is in the dictionary, else default.
+        collections.Counter.subtract
+            (self, iterable=None, /, **kwds)
+            Like dict.update() but subtracts counts instead of replacing them.
+            Counts can be reduced below zero
+            Both the inputs and outputs are
+            allowed to contain zero and negative counts.
+            Source can be an iterable, a dictionary, or another Counter instance.
+        collections.Counter.update
+            (self, iterable=None, /, **kwds)
+            Like dict.update() but add counts instead of replacing them.
+            Source can be an iterable, a dictionary, or another Counter instance.
+        collections.Counter.values
+            D.values() -> an object providing a view on D's values

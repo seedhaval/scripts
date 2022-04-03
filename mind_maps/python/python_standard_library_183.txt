@@ -1,0 +1,19 @@
+python standard library
+    calendar
+        calendar.HTMLCalendar.cssclass_year
+        calendar.HTMLCalendar.cssclass_year_head
+        calendar.HTMLCalendar.cssclasses
+        calendar.HTMLCalendar.cssclasses_weekday_head
+        calendar.HTMLCalendar.firstweekday
+        calendar.HTMLCalendar.formatday
+            (self, day, weekday)
+            Return a day as a table cell.
+        calendar.HTMLCalendar.formatmonth
+            (self, theyear, themonth, withyear=True)
+            Return a formatted month as a table.
+        calendar.HTMLCalendar.formatmonthname
+            (self, theyear, themonth, withyear=True)
+            Return a month name as a table row.
+        calendar.HTMLCalendar.formatweek
+            (self, theweek)
+            Return a complete week as a table row.

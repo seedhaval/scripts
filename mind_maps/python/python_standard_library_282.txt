@@ -1,0 +1,20 @@
+python standard library
+    logging
+        logging.Logger.root
+            A root logger is not that different to any other logger, except that it must have a logging level and there is only one instance of it in the hierarchy.
+        logging.Logger.setLevel
+            (self, level)
+            Set the logging level of this logger level must be an int or a str.
+        logging.Logger.warn
+            (self, msg, *args, **kwargs)
+        logging.Logger.warning
+            (self, msg, *args, **kwargs)
+            Log 'msg % args' with severity 'WARNING'.
+            To pass exception information, use the keyword argument exc_info with a true value, e.g.
+            logger.warning("Houston, we have a %s", "bit of a problem", exc_info=1)
+        logging.LoggerAdapter
+            (logger, extra)
+            An adapter for loggers which makes it easier to specify contextual information in logging output.
+        logging.Manager
+            (rootnode)
+            There is [under normal circumstances] just one Manager instance, which holds the hierarchy of loggers.

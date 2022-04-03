@@ -1,0 +1,19 @@
+python standard library
+    collections
+        collections.deque.extendleft
+            Extend the left side of the deque with elements from the iterable
+        collections.deque.index
+            D.index(value, [start, [stop]]) -> integer -- return first index of value.
+            Raises ValueError if the value is not present.
+        collections.deque.insert
+            D.insert(index, object) -- insert object before index
+        collections.deque.maxlen
+            maximum size of a deque or None if unbounded
+        collections.deque.pop
+            Remove and return the rightmost element.
+        collections.deque.popleft
+            Remove and return the leftmost element.
+        collections.deque.remove
+            D.remove(value) -- remove first occurrence of value.
+        collections.deque.reverse
+            D.reverse() -- reverse *IN PLACE*

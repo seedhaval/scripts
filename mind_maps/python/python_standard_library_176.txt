@@ -1,0 +1,21 @@
+python standard library
+    subprocess
+        subprocess.Popen.send_signal
+            (self, sig)
+            Send a signal to the process.
+        subprocess.Popen.terminate
+            (self)
+            Terminate the process with SIGTERM
+        subprocess.Popen.universal_newlines
+        subprocess.Popen.wait
+            (self, timeout=None)
+            Wait for child process to terminate; returns self.returncode.
+        subprocess.STDOUT
+            int([x]) -> integer
+        subprocess.call
+            (*popenargs, timeout=None, **kwargs)
+            Run command with arguments
+            Wait for command to complete or timeout, then return the returncode attribute.
+            The arguments are the same as for the Popen constructor
+            Example:
+            retcode = call(["ls", "-l"])

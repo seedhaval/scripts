@@ -1,0 +1,19 @@
+python standard library
+    logging
+        logging.logMultiprocessing
+            bool(x) -> bool
+        logging.logProcesses
+            bool(x) -> bool
+        logging.logThreads
+            bool(x) -> bool
+        logging.makeLogRecord
+            (dict)
+            Make a LogRecord whose attributes are defined by the specified dictionary,
+            This function is useful for converting a logging event received over a socket connection (which is sent as a dictionary) into a LogRecord instance.
+        logging.raiseExceptions
+            bool(x) -> bool
+        logging.root
+            A root logger is not that different to any other logger, except that it must have a logging level and there is only one instance of it in the hierarchy.
+        logging.setLogRecordFactory
+            (factory)
+            Set the factory to be used when instantiating a log record.  :param factory: A callable which will be called to instantiate a log record.

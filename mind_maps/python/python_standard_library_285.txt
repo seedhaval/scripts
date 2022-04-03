@@ -1,0 +1,19 @@
+python standard library
+    logging
+        logging.StrFormatStyle.asctime_search
+            str(object='') -> str
+        logging.StrFormatStyle.default_format
+            str(object='') -> str
+        logging.StrFormatStyle.field_spec
+            Compiled regular expression object.
+        logging.StrFormatStyle.fmt_spec
+            Compiled regular expression object.
+        logging.StrFormatStyle.format
+            (self, record)
+        logging.StrFormatStyle.usesTime
+            (self)
+        logging.StrFormatStyle.validate
+            (self)
+            Validate the input format, ensure it is the correct string formatting style
+        logging.StrFormatStyle.validation_pattern
+            Compiled regular expression object.

@@ -1,0 +1,20 @@
+python standard library
+    tarfile
+        tarfile.TarFile.chmod
+            (self, tarinfo, targetpath)
+            Set file permissions of targetpath according to tarinfo.
+        tarfile.TarFile.chown
+            (self, tarinfo, targetpath, numeric_owner)
+            Set owner of targetpath according to tarinfo
+            If numeric_owner is True, use .gid/.uid instead of .gname/.uname
+            If numeric_owner is False, fall back to .gid/.uid when the search based on name fails.
+        tarfile.TarFile.close
+            (self)
+            Close the TarFile
+            In write-mode, two finishing zero blocks are appended to the archive.
+        tarfile.TarFile.debug
+            int([x]) -> integer
+        tarfile.TarFile.dereference
+            bool(x) -> bool
+        tarfile.TarFile.encoding
+            str(object='') -> str

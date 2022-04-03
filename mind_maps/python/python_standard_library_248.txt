@@ -1,0 +1,19 @@
+python standard library
+    tarfile
+        tarfile.TarFile.tarinfo
+            (name='')
+            Informational class which holds the details about an archive member given by a tar header block.
+            TarInfo objects are returned by TarFile.getmember(),
+            TarFile.getmembers() and TarFile.gettarinfo() and are usually created internally.
+        tarfile.TarFile.tarinfo.chksum
+            Header checksum.
+        tarfile.TarFile.tarinfo.create_gnu_header
+            (self, info, encoding, errors)
+            Return the object as a GNU header block sequence.
+        tarfile.TarFile.tarinfo.create_pax_global_header
+            (pax_headers)
+            Return the object as a pax global header block sequence.
+        tarfile.TarFile.tarinfo.create_pax_header
+            (self, info, encoding)
+            Return the object as a ustar header block
+            If it cannot be represented this way, prepend a pax extended header sequence with supplement information.

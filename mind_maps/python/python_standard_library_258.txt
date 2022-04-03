@@ -1,0 +1,21 @@
+python standard library
+    pathlib
+        pathlib.Path.is_file
+            (self)
+            Whether this path is a regular file (also True for symlinks pointing to regular files).
+        pathlib.Path.is_mount
+            (self)
+            Check if this path is a POSIX mount point
+        pathlib.Path.is_reserved
+            (self)
+            Return True if the path contains one of the special names reserved by the system, if any.
+        pathlib.Path.is_socket
+            (self)
+            Whether this path is a socket.
+        pathlib.Path.is_symlink
+            (self)
+            Whether this path is a symbolic link.
+        pathlib.Path.iterdir
+            (self)
+            Iterate over the files in this directory
+            Does not yield any result for the special paths '.' and '..'.

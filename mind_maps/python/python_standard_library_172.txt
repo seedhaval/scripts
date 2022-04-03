@@ -1,0 +1,19 @@
+python standard library
+    sys
+        sys.exit
+            (status=None, /)
+            Exit the interpreter by raising SystemExit(status).
+            If the status is omitted or None, it defaults to zero (i.e., success).
+            If the status is an integer, it will be used as the system exit status.
+            If it is another kind of object, it will be printed and the system exit status will be one (i.e., failure).
+        sys.getrefcount
+            (object, /)
+            Return the reference count of object.
+            The count returned is generally one higher than you might expect,
+            because it includes the (temporary) reference as an argument to
+            getrefcount().
+        sys.getsizeof
+            getsizeof(object [, default]) -> int
+            Return the size of object in bytes.
+        sys.stderr
+        sys.stdin

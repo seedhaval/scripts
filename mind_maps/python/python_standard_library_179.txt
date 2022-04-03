@@ -1,0 +1,21 @@
+python standard library
+    calendar
+        calendar.Calendar
+            (firstweekday=0)
+            Base calendar class
+            This class doesn't do any formatting It simply provides data to subclasses.
+        calendar.Calendar.firstweekday
+        calendar.Calendar.getfirstweekday
+            (self)
+        calendar.Calendar.itermonthdates
+            (self, year, month)
+            Return an iterator for one month
+            The iterator will yield datetime.date values and will always iterate through complete weeks, so it will yield dates outside the specified month.
+        calendar.Calendar.itermonthdays
+            (self, year, month)
+            Like itermonthdates(), but will yield day numbers
+            For days outside the specified month the day number is 0.
+        calendar.Calendar.itermonthdays2
+            (self, year, month)
+            Like itermonthdates(), but will yield (day number, weekday number) tuples
+            For days outside the specified month the day number is 0.
