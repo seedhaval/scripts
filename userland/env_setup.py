@@ -5,6 +5,8 @@ import shutil
 
 home_dir = '/home/dvs'
 scr_dir = '/home/dvs/scripts'
+pub_dir = '/storage/internal'
+
 ckpt_fl = f'{home_dir}/.install_ckpt'
 
 if not os.path.exists( ckpt_fl ):
@@ -42,6 +44,25 @@ def step_4():
     os.system( 'sudo pip install pillow blessed flask flask_login moviepy progressbar sqlalchemy pyyaml aggdraw getch imagehash numpy' )
     return 4
 
+def step_5():
+    print( 'Creating brython js' )
+    os.system( 'sudo pip install brython' )
+    os.makedirs( f'{home_dir}/tmp/brython' )
+    os.chdir( f'{home_dir}/tmp/brython' ) 
+    os.system( 'brython-cli --install' )
+    os.chdir( home_dir )
+    return 5
+
+def step_6():
+    print( 'creating public directories and symlinks' )
+    os.makedirs( f'{pub_dir}/bin', exist_ok=True )
+    os.makedirs( f'{pub_dir}/data', exist_ok=True )
+    os.makedirs( f'{pub_dir}/config', exist_ok=True )
+    os.symlink( f'{pub_dir}/bin', f'{home_dir}/bin', True )
+    os.symlink( f'{pub_dir}/data', f'{home_dir}/data', True )
+    os.symlink( f'{pub_dir}/config', f'{home_dir}/config', True )
+    return 6
+
 if ckpt < 1:
     ckpt = step_1()
     set_ckpt()
@@ -56,5 +77,13 @@ if ckpt < 3:
 
 if ckpt < 4:
     ckpt = step_4()
+    set_ckpt()
+
+if ckpt < 5:
+    ckpt = step_5()
+    set_ckpt()
+
+if ckpt < 6:
+    ckpt = step_6()
     set_ckpt()
 
