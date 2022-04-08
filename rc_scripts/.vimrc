@@ -6,12 +6,16 @@ set hidden
 
 "normal mode mappings
 nnoremap <f2> :w<cr>
+nnoremap F2 :w<cr>
 nnoremap <f3> :ls<cr>:b
+nnoremap F3 :ls<cr>:b
 nnoremap <f4> :qa!<cr>
+nnoremap F4 :qa!<cr>
 
 "insert mode mappings
 "expand file name
 inoremap <f3> <c-x><c-f>
+inoremap F3 <c-x><c-f>
 
 "do not allow equals sign in file name. Useful with var=fl type scenarios
 set isfname-==
