@@ -67,22 +67,12 @@ def step_6():
     os.makedirs( f'{pub_dir}/data', exist_ok=True )
     os.makedirs( f'{pub_dir}/data/priv_vid', exist_ok=True )
     os.makedirs( f'{pub_dir}/data/tmp', exist_ok=True )
+    os.makedirs( f'{pub_dir}/data/sel_vid', exist_ok=True )
     os.makedirs( f'{pub_dir}/config', exist_ok=True )
     os.symlink( f'{pub_dir}/bin', f'{home_dir}/bin', True )
     os.symlink( f'{pub_dir}/data', f'{home_dir}/data', True )
     os.symlink( f'{pub_dir}/config', f'{home_dir}/config', True )
     return 6
-
-def step_7():
-    print( 'configuring git' )
-    unm = input( 'Enter user name : ' )
-    eml = input( 'Enter email : ' )
-    exec_cmd( 'git config --global user.name ' + unm )
-    exec_cmd( 'git config --global user.email ' + eml )
-    exec_cmd( 'ssh-keygen' )
-    print( 'copy below key to github\n' )
-    exec_cmd( f'cat {home_dir}/.ssh/id_rsa.pub' )
-    return 7
 
 if ckpt < 1:
     ckpt = step_1()
@@ -106,9 +96,5 @@ if ckpt < 5:
 
 if ckpt < 6:
     ckpt = step_6()
-    set_ckpt()
-
-if ckpt < 7:
-    ckpt = step_7()
     set_ckpt()
 

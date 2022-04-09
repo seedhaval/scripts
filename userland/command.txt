@@ -1,0 +1,1 @@
+curl https://raw.githubusercontent.com/seedhaval/scripts/master/userland/env_setup.sh > a.sh; bash a.sh
