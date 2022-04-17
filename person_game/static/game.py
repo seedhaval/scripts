@@ -24,22 +24,21 @@ def load_act2( *args, **kwargs ):
 
 def populate_scenarios():
     ar = [x['name'] for x in obj['data']['scenarios']]
-    obj['scn'] = obj['dmain'].add_dropdown( ar, change_action_to, 'Select scenario' )
+    obj['scn'] = obj['dmain'].add_dropdown( ar, change_action_to, 'Scenario' )
     newline()
     
 def populate_actors():
-    obj['action_by'] = obj['dmain'].add_dropdown( ['Male', 'Female'], dummy, 'Action By' )
-    newline()
     obj['action_to'] = obj['dmain'].add_dropdown( ['Male', 'Female'], change_action_to, 'Action To' )
     newline()
-    obj['act1'] = obj['dmain'].add_dropdown( [], load_act2, 'Action Part 1' )
+    obj['act1'] = obj['dmain'].add_dropdown( [], load_act2, 'Object' )
     newline()
-    obj['act2'] = obj['dmain'].add_dropdown( [], dummy, 'Action Part 2' )
-    newline()
+    obj['act2'] = obj['dmain'].add_dropdown( [], dummy, 'Action' )
     change_action_to()
 
 def add_submit_button():
-    obj['dmain'].add_button( "Perform action", dummy )
+    pbtn = P( "" )
+    obj['dmain'].elm <= pbtn
+    pbtn <= BUTTON( "Perform action" )
 
 def data_loaded( rsp ):
     obj['data'] = rsp
@@ -49,9 +48,11 @@ def data_loaded( rsp ):
 
 def main():
     obj['dmain'] = doc.add_div('d1')
-    obj['person_1'] = obj['dmain'].add_text( 23, 'Person 1', dummy )
+    obj['dmain'].add_br()
+    obj['dmain'].elm <= P( 'ACTION GAME' )
+    obj['person_1'] = obj['dmain'].add_text( 23, 'Player 1', dummy )
     newline()
-    obj['person_2'] = obj['dmain'].add_text( 23, 'Person 2', dummy )
+    obj['person_2'] = obj['dmain'].add_text( 23, 'Player 2', dummy )
     newline()
     get_json( '../get_data', data_loaded )
     
