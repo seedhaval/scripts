@@ -1,0 +1,35 @@
+<html>
+
+<head>
+<meta charset="utf-8">
+<title>Game</title>
+<script src="bry_error_capture.js"></script>
+<style>
+body{
+    font-size: 14px;
+    font-family: Helvetica;
+}
+
+div.d1{
+    background-color: lightblue;
+    width: 950px;
+    height: 1600px;
+}
+
+</style>
+
+</head>
+
+<body onload="brython({debug: 1, indexedDB: false})">
+
+<script type="text/python">
+import game
+game.main()
+
+</script>
+<script src="brython.js"></script>
+<script src="brython_stdlib.js"></script>
+
+</body>
+
+</html>
