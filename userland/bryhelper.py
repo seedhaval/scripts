@@ -555,11 +555,17 @@ class Button():
         self.elm.classList.add( cls )
 
 class Text():
-    def __init__( self, prnt, sz, cb ):
+    def __init__( self, prnt, sz, lbl, cb ):
         self.prnt = prnt
         self.sz = sz
         self.cb = cb
+        self.lbl = lbl
         elm = INPUT( '', size=sz, type="text")
+        self.id = str(uuid.uuid4())
+        elm['id'] = self.id
+        lbl = LABEL( lbl )
+        lbl['for'] = self.id
+        self.prnt.elm <= lbl
         self.prnt.elm <= elm
         self.elm = elm
         self.elm.bind( 'input', cb )
@@ -600,8 +606,8 @@ class Div():
     def add_button( self, txt, cb ):
         return Button( self, txt, cb )
 
-    def add_text( self, sz, cb ):
-        return Text( self, sz, cb )
+    def add_text( self, sz, lbl, cb ):
+        return Text( self, sz, lbl, cb )
 
     def add_textarea( self, rows, cols ):
         return TextArea( self, rows, cols )
@@ -629,6 +635,9 @@ class Div():
 
     def add_hr( self ):
         self.elm <= HR('')
+
+    def add_space( self, cnt ):
+        self.elm <= SPAN( "&nbsp;"*cnt )
 
 class TextArea():
     def __init__( self, prnt, rows, cols ):
