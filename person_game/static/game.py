@@ -30,7 +30,7 @@ def populate_scenarios():
 def populate_actors():
     obj['action_by'] = obj['dmain'].add_dropdown( ['Male', 'Female'], dummy, 'Action By' )
     newline()
-    obj['action_to'] = obj['dmain'].add_dropdown( ['Male', 'Female'], dummy, 'Action To' )
+    obj['action_to'] = obj['dmain'].add_dropdown( ['Male', 'Female'], change_action_to, 'Action To' )
     newline()
     obj['act1'] = obj['dmain'].add_dropdown( [], load_act2, 'Action Part 1' )
     newline()
@@ -49,9 +49,9 @@ def data_loaded( rsp ):
 
 def main():
     obj['dmain'] = doc.add_div('d1')
-    obj['person_1'] = obj['dmain'].add_text( 30, 'Person 1', dummy )
+    obj['person_1'] = obj['dmain'].add_text( 23, 'Person 1', dummy )
     newline()
-    obj['person_2'] = obj['dmain'].add_text( 30, 'Person 2', dummy )
+    obj['person_2'] = obj['dmain'].add_text( 23, 'Person 2', dummy )
     newline()
     get_json( '../get_data', data_loaded )
     
