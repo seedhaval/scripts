@@ -1,0 +1,62 @@
+<html>
+
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=460, initial-scale=0.75">
+<title>Index</title>
+<script src="bry_error_capture.js"></script>
+<style>
+body{
+    font-size: 18px;
+    font-family: Verdana;
+    background-color: #845EC2;
+}
+
+div.d1{
+    background-color: #D65DB1;
+    width: 460px;
+    height: 720px;
+    border-radius: 2em;
+    text-align: center;
+}
+
+button{
+  height: 50px;
+  width: 400px;
+  font-size: 18px;
+  position: relative;
+  background-color: #FFC75F;
+  border-radius: 4em;
+  color: black;
+  padding: 0.8em 1.8em;
+  cursor:pointer;
+  user-select:none;
+  text-align: center;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+p {
+    font-size: 32px;
+    text-align: center;
+    color: #FFFFFF;
+    text-shadow: #474747 3px 5px 2px;
+}
+
+</style>
+
+</head>
+
+<body onload="brython({debug: 1, indexedDB: false})">
+
+<script type="text/python">
+import index
+index.main()
+
+</script>
+<script src="brython.js"></script>
+<script src="brython_stdlib.js"></script>
+
+</body>
+
+</html>
