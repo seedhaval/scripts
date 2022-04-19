@@ -9,7 +9,7 @@ def newline():
 def get_scn_typ():
     scn_nm = obj['scn'].get()
     scn = obj['data']['scenarios'][scn_nm]
-    typ = obj['action_to'].get()
+    typ = obj['prsn_rev'][obj['action_by'].get()]
     return (scn, typ)
 
 def get_obj_ar():
@@ -21,7 +21,7 @@ def get_act_ar():
     act1 = obj['act1'].get()
     return scn['actions'][typ][act1]
 
-def change_action_to( *args, **kwargs ):
+def change_action_by( *args, **kwargs ):
     obj['act1'].change( get_obj_ar() )
     load_act2()
 
@@ -35,15 +35,24 @@ def populate_scenarios( *args, **kwargs ):
 def populate_actors( *args, **kwargs ):
     scn_nm = obj['scn'].get()
     scn = obj['data']['scenarios'][scn_nm]
-    obj['action_to'].change( list(scn['actions'].keys()) )
-    change_action_to()
+    obj['action_by'].change( [obj[x] for x in list(scn['actions'].keys())] )
+    change_action_by()
 
 def reload_scn():
     populate_scenarios()
     populate_actors()
 
+def parse_person( *args, **kwargs ):
+    obj['female'],_,obj['male'] = obj['person_jodi'].get().split()
+    obj['prsn_rev'] = { obj['male']: 'male', obj['female']: 'female' }
+    if obj['scn'].get():
+        populate_actors()
+
 def data_loaded( rsp ):
-    obj['data'] = rsp
+    obj['data'] = rsp['action']
+    prsn_jodi = [x.replace(';',' &#x906;&#x923;&#x93f; ') for x in rsp['person']]
+    obj['person_jodi'].change( prsn_jodi )
+    parse_person()
     reload_scn()
 
 def add_submit_button():
@@ -56,16 +65,14 @@ def main():
     obj['dmain'].add_br()
     obj['dmain'].elm <= P( '&#x972;&#x915;&#x94d;&#x936;&#x928;&#x20;&#x917;&#x947;&#x92e;' )
 
-    obj['person_1'] = obj['dmain'].add_text( 23, '&#x92a;&#x94d;&#x932;&#x947;&#x905;&#x930;&#x20;&#x967;', dummy )
+    obj['person_jodi'] = obj['dmain'].add_dropdown( [], parse_person, '&#x91c;&#x94b;&#x921;&#x940;' )
     newline()
 
-    obj['person_2'] = obj['dmain'].add_text( 23, '&#x92a;&#x94d;&#x932;&#x947;&#x905;&#x930;&#x20;&#x968;', dummy )
-    newline()
 
     obj['scn'] = obj['dmain'].add_dropdown( [], populate_actors, '&#x938;&#x94d;&#x925;&#x93e;&#x928;' )
     newline()
 
-    obj['action_to'] = obj['dmain'].add_dropdown( [], change_action_to, '&#x909;&#x92a;&#x92d;&#x94b;&#x917;&#x924;&#x93e;' )
+    obj['action_by'] = obj['dmain'].add_dropdown( [], change_action_by, '&#x915;&#x930;&#x94d;&#x924;&#x93e;' )
     newline()
 
     obj['act1'] = obj['dmain'].add_dropdown( [], load_act2, '&#x905;&#x935;&#x92f;&#x935;/&#x935;&#x938;&#x94d;&#x924;&#x942;' )

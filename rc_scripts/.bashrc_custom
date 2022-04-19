@@ -7,3 +7,4 @@ export PATH=$PATH:~/scripts/bin/
 # Use VI mode for editing
 set -o vi
 
+alias py3=python3

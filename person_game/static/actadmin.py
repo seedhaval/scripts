@@ -9,7 +9,7 @@ def newline():
 def get_scn_typ():
     scn_nm = obj['scn'].get()
     scn = obj['data']['scenarios'][scn_nm]
-    typ = obj['action_to'].get()
+    typ = obj['action_by'].get()
     return (scn, typ)
 
 def get_obj_ar():
@@ -21,7 +21,7 @@ def get_act_ar():
     act1 = obj['act1'].get()
     return scn['actions'][typ][act1]
 
-def change_action_to( *args, **kwargs ):
+def change_action_by( *args, **kwargs ):
     obj['act1'].change( get_obj_ar() )
     load_act2()
 
@@ -35,15 +35,15 @@ def populate_scenarios( *args, **kwargs ):
 def populate_actors( *args, **kwargs ):
     scn_nm = obj['scn'].get()
     scn = obj['data']['scenarios'][scn_nm]
-    obj['action_to'].change( list(scn['actions'].keys()) )
-    change_action_to()
+    obj['action_by'].change( list(scn['actions'].keys()) )
+    change_action_by()
 
 def reload_scn():
     populate_scenarios()
     populate_actors()
 
 def data_loaded( rsp ):
-    obj['data'] = rsp
+    obj['data'] = rsp['action']
     reload_scn()
 
 def set_obj( val ):
@@ -51,7 +51,7 @@ def set_obj( val ):
     act1 = obj['act1'].get()
     scn['actions'][typ][val] = scn['actions'][typ][act1]
     del scn['actions'][typ][act1]
-    change_action_to()
+    change_action_by()
 
 def edit_obj( *args, **kwargs ):
     inp( set_obj, obj['act1'].get() )
@@ -59,7 +59,7 @@ def edit_obj( *args, **kwargs ):
 def new_obj( val ):
     scn, typ = get_scn_typ()
     scn['actions'][typ][ val ] = ["test"]
-    change_action_to()
+    change_action_by()
 
 def add_obj( *args, **kwargs ):
     inp( new_obj, "New Object" )
@@ -68,7 +68,7 @@ def del_obj( *args, **kwargs ):
     scn, typ = get_scn_typ()
     act1 = obj['act1'].get()
     del scn['actions'][typ][act1]
-    change_action_to()
+    change_action_by()
 
 def set_actee( val ):
     scn, typ = get_scn_typ()
@@ -77,7 +77,7 @@ def set_actee( val ):
     populate_actors()
 
 def edit_actee( *args, **kwargs ):
-    inp( set_actee, obj['action_to'].get() )
+    inp( set_actee, obj['action_by'].get() )
 
 def new_actee( val ):
     scn, typ = get_scn_typ()
@@ -89,7 +89,7 @@ def add_actee( *args, **kwargs ):
 
 def del_actee( *args, **kwargs ):
     scn, typ = get_scn_typ()
-    del obj['data']['scenarios'][scn][typ]
+    del scn['actions'][typ]
     populate_actors()
 
 def set_act( val ):
@@ -154,7 +154,7 @@ def main():
     obj['dmain'].add_button( "&#x274c;", del_scn )
     newline()
 
-    obj['action_to'] = obj['dmain'].add_dropdown( [], change_action_to, '&#x909;&#x92a;&#x92d;&#x94b;&#x917;&#x924;&#x93e;' )
+    obj['action_by'] = obj['dmain'].add_dropdown( [], change_action_by, '&#x915;&#x930;&#x94d;&#x924;&#x93e;' )
     obj['dmain'].add_button( "&#x2795;", add_actee )
     obj['dmain'].add_button( "&#x1f58a;&#xfe0f;", edit_actee )
     obj['dmain'].add_button( "&#x274c;", del_actee )
