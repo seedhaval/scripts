@@ -579,6 +579,10 @@ class Text():
     def set( self, val ):
         self.elm.value = val
 
+    def copy( self ):
+        self.elm.select()
+        document.execCommand('copy')
+
 class Video():
     def __init__( self, prnt ):
         self.prnt = prnt
@@ -703,8 +707,8 @@ def post_json( url, inp, cb ):
     data = json.dumps( inp, ensure_ascii=False )
     ajax.post( '../' + url, data=data, headers={"Content-Type": "application/json"}, oncomplete=cb_wrap )
 
-def inp( cb, title ):
-	d = EntryDialog( title, "Name" )
+def inp( cb, title, top=100, left=80 ):
+	d = EntryDialog( title, "Name" , top=top, left=left)
 	@bind( d, "entry" )
 	def entry( ev ):
 		val = d.value
