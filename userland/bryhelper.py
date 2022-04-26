@@ -554,6 +554,12 @@ class Button():
     def add_class( self, cls ):
         self.elm.classList.add( cls )
 
+    def hide( self ):
+        self.elm.style.visibility = 'hidden'
+
+    def show( self ):
+        self.elm.style.visibility = 'visible'
+
 class Text():
     def __init__( self, prnt, sz, lbl, cb ):
         self.prnt = prnt

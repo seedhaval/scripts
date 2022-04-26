@@ -1,4 +1,5 @@
 from bryhelper import *
+from datetime import datetime
 
 obj = {}
 
@@ -6,82 +7,109 @@ def newline():
     obj['dmain'].add_br()
     obj['dmain'].add_br()
 
-def get_scn_typ():
-    scn_nm = obj['scn'].get()
-    scn = obj['data']['scenarios'][scn_nm]
-    typ = obj['prsn_rev'][obj['action_by'].get()]
-    return (scn, typ)
+def curdate():
+    return datetime.now().strftime('%d/%m/%Y')
 
-def get_obj_ar():
-    scn, typ = get_scn_typ()
-    return list(scn['actions'][typ].keys())
+def validwindow( s ):
+    strt, nd = [int(x) for x in s[3].split(',')]
+    cur = int(datetime.now().strftime('%H'))
+    if strt <= cur <= nd:
+        return True
+    return False
 
-def get_act_ar():
-    scn, typ = get_scn_typ()
-    act1 = obj['act1'].get()
-    return scn['actions'][typ][act1]
+def get_days_since( dt ):
+   return ( datetime.now() - datetime.strptime( dt, '%d/%m/%Y' ) ).days
+ 
+def action( actobj, *args, **kwargs ):
+    d = { 'prsn': obj['prsn'].get(), 'newval': curdate(), 'act': actobj.typ }
+    post_json( '../update_act_data', d, prsn_chg )
+        
+class OncePerDay():
+    def __init__( self, e ):
+        self.ar = e
+        self.typ = e[0]
+        self.btntxt = e[4]
 
-def change_action_by( *args, **kwargs ):
-    obj['act1'].change( get_obj_ar() )
-    load_act2()
+        obj['dmain'].elm <= SPAN( e[0] )
+        self.button = obj['dmain'].add_button( self.btntxt, lambda *args: action( self ) )
+        newline()
 
-def load_act2( *args, **kwargs ):
-    obj['act2'].change( get_act_ar() )
+    def prsn_chg( self ):
+        dt = obj['pref'][self.typ]
+        if not validwindow(self.ar):
+            self.button.hide()
+            return
+        if dt != curdate():
+            self.button.show()
+        else:
+            self.button.hide()
 
-def populate_scenarios( *args, **kwargs ):
-    ar = list(obj['data']['scenarios'].keys())
-    obj['scn'].change( ar )
+    @staticmethod
+    def isvalid( ref ):
+        if ref[2] == 'once_per_day':
+            return True
+        return False
+
+class GrowAndCut():
+    def __init__( self, e ):
+        self.ar = e
+        self.typ = e[0]
+        self.btntxt = e[4]
+        self.per_day = float(e[1].split('=')[1])
+        self.thresh = float(e[2].split('=')[1].split('m')[0])
+
+        self.txtbox = obj['dmain'].add_text( 5, self.typ, None )
+        self.button = obj['dmain'].add_button( self.btntxt, lambda *args: action( self ) )
+        newline()
+
+    def prsn_chg( self ):
+        dt = obj['pref'][self.typ]
+        val = self.per_day*get_days_since(dt)
+        self.txtbox.set(f'{val:.2f}')
+        if not validwindow(self.ar):
+            self.button.hide()
+            return
+        if float(val) >= self.thresh:
+            self.button.show()
+        else:
+            self.button.hide()
+
+    @staticmethod
+    def isvalid( ref ):
+        if ref[5] == 'date' and ref[6] == 'length':
+            return True
+        return False
+
+def ui_data_loaded( rsp ):
+    obj['ui'] = rsp['out']
+    obj['act_ar'] = []
+    for e in rsp['out']:
+        if GrowAndCut.isvalid( e ):
+            obj['act_ar'].append( GrowAndCut(e) )
+        elif OncePerDay.isvalid(e):
+            obj['act_ar'].append( OncePerDay(e) )
+    prsn_chg()
+
+def prsn_data_loaded( rsp ):
+    obj['pdata'] = rsp['out']
+    obj['pref'] = {}
+    for e in obj['pdata']:
+        obj['pref'][e[0]] = e[1]
+    for e in obj['act_ar']:
+        e.prsn_chg()
+
+def prsn_chg( *args, **kwargs ):
+    get_json( '../get_person_data/' + obj['prsn'].get(), prsn_data_loaded )
     
-def populate_actors( *args, **kwargs ):
-    scn_nm = obj['scn'].get()
-    scn = obj['data']['scenarios'][scn_nm]
-    obj['action_by'].change( [obj[x] for x in list(scn['actions'].keys())] )
-    change_action_by()
-
-def reload_scn():
-    populate_scenarios()
-    populate_actors()
-
-def parse_person( *args, **kwargs ):
-    obj['female'],_,obj['male'] = obj['person_jodi'].get().split()
-    obj['prsn_rev'] = { obj['male']: 'male', obj['female']: 'female' }
-    if obj['scn'].get():
-        populate_actors()
-
-def data_loaded( rsp ):
-    obj['data'] = rsp['action']
-    prsn_jodi = [x.replace(';',' &#x906;&#x923;&#x93f; ') for x in rsp['person']]
-    obj['person_jodi'].change( prsn_jodi )
-    parse_person()
-    reload_scn()
-
-def add_submit_button():
-    pbtn = P( "" )
-    obj['dmain'].elm <= pbtn
-    pbtn <= BUTTON( "&#x915;&#x93e;&#x930;&#x94d;&#x92f;&#x20;&#x915;&#x930;&#x93e;" )
-
 def main():
     obj['dmain'] = doc.add_div('d1')
     obj['dmain'].add_br()
-    obj['dmain'].elm <= P( '&#x972;&#x915;&#x94d;&#x936;&#x928;&#x20;&#x917;&#x947;&#x92e;' )
+    obj['dmain'].elm <= P( 'Action Game' )
 
-    obj['person_jodi'] = obj['dmain'].add_dropdown( [], parse_person, '&#x91c;&#x94b;&#x921;&#x940;' )
+    prsn = ['dpm', 'ga', 'pdjm', '0pg', 'wgad.', '0a_dd', 'gma_pwg', '0a_pmgj', 'ga_.a', 'dg_m.']
+    obj['prsn'] = obj['dmain'].add_dropdown( prsn, prsn_chg, 'Person' )
     newline()
-
-
-    obj['scn'] = obj['dmain'].add_dropdown( [], populate_actors, '&#x938;&#x94d;&#x925;&#x93e;&#x928;' )
-    newline()
-
-    obj['action_by'] = obj['dmain'].add_dropdown( [], change_action_by, '&#x915;&#x930;&#x94d;&#x924;&#x93e;' )
-    newline()
-
-    obj['act1'] = obj['dmain'].add_dropdown( [], load_act2, '&#x905;&#x935;&#x92f;&#x935;/&#x935;&#x938;&#x94d;&#x924;&#x942;' )
-    newline()
-
-    obj['act2'] = obj['dmain'].add_dropdown( [], dummy, '&#x915;&#x94d;&#x930;&#x93f;&#x92f;&#x93e;' )
-
-    add_submit_button()
-
-    get_json( '../get_data', data_loaded )
     
+
+    get_json( '../get_ui_data', ui_data_loaded )
 
