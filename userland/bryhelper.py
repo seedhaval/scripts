@@ -555,10 +555,10 @@ class Button():
         self.elm.classList.add( cls )
 
     def hide( self ):
-        self.elm.style.visibility = 'hidden'
+        self.elm.style.display = 'none'
 
     def show( self ):
-        self.elm.style.visibility = 'visible'
+        self.elm.style.display = 'inline'
 
 class Text():
     def __init__( self, prnt, sz, lbl, cb ):
@@ -572,6 +572,7 @@ class Text():
         lbl = LABEL( lbl )
         lbl['for'] = self.id
         self.prnt.elm <= lbl
+        self.lbl = lbl
         self.prnt.elm <= elm
         self.elm = elm
         self.elm.bind( 'input', cb )
@@ -588,6 +589,14 @@ class Text():
     def copy( self ):
         self.elm.select()
         document.execCommand('copy')
+
+    def hide( self ):
+        self.elm.style.display = 'none'
+        self.lbl.style.display = 'none'
+
+    def show( self ):
+        self.elm.style.display = 'inline'
+        self.lbl.style.display = 'inline'
 
 class Video():
     def __init__( self, prnt ):
@@ -641,7 +650,9 @@ class Div():
         self.elm.innerHTML = ''
 
     def add_br( self ):
-        self.elm <= BR('')
+        a = BR('')
+        self.elm <= a
+        return a
 
     def add_hr( self ):
         self.elm <= HR('')

@@ -4,11 +4,17 @@ from datetime import datetime
 obj = {}
 
 def newline():
-    obj['dmain'].add_br()
-    obj['dmain'].add_br()
+    return (obj['dmain'].add_br(),
+    obj['dmain'].add_br())
 
 def curdate():
     return datetime.now().strftime('%d/%m/%Y')
+
+def maxdone():
+    dt = curdate()
+    if list(obj['pref'].values()).count(dt) >= 20:
+        return True
+    return False
 
 def validwindow( s ):
     strt, nd = [int(x) for x in s[3].split(',')]
@@ -30,19 +36,34 @@ class OncePerDay():
         self.typ = e[0]
         self.btntxt = e[4]
 
-        obj['dmain'].elm <= SPAN( e[0] )
+        self.txt = SPAN( e[0] )
+        obj['dmain'].elm <= self.txt
         self.button = obj['dmain'].add_button( self.btntxt, lambda *args: action( self ) )
-        newline()
+        self.nl_ar = newline()
+
+    def hide(self):
+        self.button.hide()
+        self.txt.style.display = 'none'
+        for e in self.nl_ar:
+            e.style.display = 'none'
+
+    def show(self):
+        self.button.show()
+        self.txt.style.display = 'inline'
+        for e in self.nl_ar:
+            e.style.display = 'inline'
+            
 
     def prsn_chg( self ):
+        m = maxdone()
         dt = obj['pref'][self.typ]
-        if not validwindow(self.ar):
-            self.button.hide()
+        if m or not validwindow(self.ar):
+            self.hide()
             return
         if dt != curdate():
-            self.button.show()
+            self.show()
         else:
-            self.button.hide()
+            self.hide()
 
     @staticmethod
     def isvalid( ref ):
@@ -60,19 +81,33 @@ class GrowAndCut():
 
         self.txtbox = obj['dmain'].add_text( 5, self.typ, None )
         self.button = obj['dmain'].add_button( self.btntxt, lambda *args: action( self ) )
-        newline()
+        self.nl_ar = newline()
+
+    def hide(self):
+        self.button.hide()
+        self.txtbox.hide()
+        for e in self.nl_ar:
+            e.style.display = 'none'
+
+    def show(self):
+        self.button.show()
+        self.txtbox.show()
+        for e in self.nl_ar:
+            e.style.display = 'inline'
+            
 
     def prsn_chg( self ):
+        m = maxdone()
         dt = obj['pref'][self.typ]
         val = self.per_day*get_days_since(dt)
         self.txtbox.set(f'{val:.2f}')
-        if not validwindow(self.ar):
-            self.button.hide()
+        if m or not validwindow(self.ar):
+            self.hide()
             return
         if float(val) >= self.thresh:
-            self.button.show()
+            self.show()
         else:
-            self.button.hide()
+            self.hide()
 
     @staticmethod
     def isvalid( ref ):
@@ -104,9 +139,9 @@ def prsn_chg( *args, **kwargs ):
 def main():
     obj['dmain'] = doc.add_div('d1')
     obj['dmain'].add_br()
-    obj['dmain'].elm <= P( 'Action Game' )
+    obj['dmain'].elm <= P( '&#x972;&#x915;&#x94d;&#x936;&#x928;&#x20;&#x917;&#x947;&#x92e;' )
 
-    prsn = ['dpm', 'ga', 'pdjm', '0pg', 'wgad.', '0a_dd', 'gma_pwg', '0a_pmgj', 'ga_.a', 'dg_m.']
+    prsn = sorted( ['dpm', 'ga', 'pdjm', '0pg', 'wgad.', '0a_dd', 'gma_pwg', '0a_pmgj', 'ga_.a', 'dg_m.', ".ww_p.", "wg._0d.a", ".wp_d..j", "mgp_m.", "ada_apj", "wmgap_wa.", "da0_.a.a", "0dg._d.", "agp_w0" ] )
     obj['prsn'] = obj['dmain'].add_dropdown( prsn, prsn_chg, 'Person' )
     newline()
     
