@@ -4,20 +4,20 @@ from datetime import datetime
 obj = {}
 
 def newline():
-    return (obj['dmain'].add_br(),
-    obj['dmain'].add_br())
+    return obj['dmain'].add_br(2)
 
 def curdate():
     return datetime.now().strftime('%d/%m/%Y')
 
 def maxdone():
+    return False
     dt = curdate()
     if list(obj['pref'].values()).count(dt) >= 20:
         return True
     return False
 
 def validwindow( s ):
-    strt, nd = [int(x) for x in s[3].split(',')]
+    strt, nd = [int(x) for x in s[4].split(',')]
     cur = int(datetime.now().strftime('%H'))
     if strt <= cur <= nd:
         return True
@@ -27,36 +27,32 @@ def get_days_since( dt ):
    return ( datetime.now() - datetime.strptime( dt, '%d/%m/%Y' ) ).days
  
 def action( actobj, *args, **kwargs ):
-    d = { 'prsn': obj['prsn'].get(), 'newval': curdate(), 'act': actobj.typ }
+    d = { 'prsn': obj['prsn'].get(), 'newval': curdate(), 'act': actobj.nm }
     post_json( '../update_act_data', d, prsn_chg )
         
 class OncePerDay():
     def __init__( self, e ):
         self.ar = e
-        self.typ = e[0]
-        self.btntxt = e[4]
+        self.nm = e[0]
+        self.btntxt = e[5]
 
-        self.txt = SPAN( e[0] )
-        obj['dmain'].elm <= self.txt
+        self.txt = obj['dmain'].add_span( e[0] )
         self.button = obj['dmain'].add_button( self.btntxt, lambda *args: action( self ) )
-        self.nl_ar = newline()
+        self.nl = newline()
 
     def hide(self):
         self.button.hide()
-        self.txt.style.display = 'none'
-        for e in self.nl_ar:
-            e.style.display = 'none'
+        self.txt.hide()
+        self.nl.hide()
 
     def show(self):
         self.button.show()
-        self.txt.style.display = 'inline'
-        for e in self.nl_ar:
-            e.style.display = 'inline'
-            
+        self.txt.show()
+        self.nl.show()
 
     def prsn_chg( self ):
         m = maxdone()
-        dt = obj['pref'][self.typ]
+        dt = obj['pref'][self.nm]
         if m or not validwindow(self.ar):
             self.hide()
             return
@@ -65,40 +61,31 @@ class OncePerDay():
         else:
             self.hide()
 
-    @staticmethod
-    def isvalid( ref ):
-        if ref[2] == 'once_per_day':
-            return True
-        return False
-
 class GrowAndCut():
     def __init__( self, e ):
         self.ar = e
-        self.typ = e[0]
-        self.btntxt = e[4]
-        self.per_day = float(e[1].split('=')[1])
-        self.thresh = float(e[2].split('=')[1].split('m')[0])
+        self.nm = e[0]
+        self.btntxt = e[5]
+        self.per_day = float(e[2])
+        self.thresh = float(e[3])
 
-        self.txtbox = obj['dmain'].add_text( 5, self.typ, None )
+        self.txtbox = obj['dmain'].add_text( 5, self.nm, None )
         self.button = obj['dmain'].add_button( self.btntxt, lambda *args: action( self ) )
-        self.nl_ar = newline()
+        self.nl = newline()
 
     def hide(self):
         self.button.hide()
         self.txtbox.hide()
-        for e in self.nl_ar:
-            e.style.display = 'none'
+        self.nl.hide()
 
     def show(self):
         self.button.show()
         self.txtbox.show()
-        for e in self.nl_ar:
-            e.style.display = 'inline'
-            
+        self.nl.show()
 
     def prsn_chg( self ):
         m = maxdone()
-        dt = obj['pref'][self.typ]
+        dt = obj['pref'][self.nm]
         val = self.per_day*get_days_since(dt)
         self.txtbox.set(f'{val:.2f}')
         if m or not validwindow(self.ar):
@@ -109,20 +96,15 @@ class GrowAndCut():
         else:
             self.hide()
 
-    @staticmethod
-    def isvalid( ref ):
-        if ref[5] == 'date' and ref[6] == 'length':
-            return True
-        return False
-
 def ui_data_loaded( rsp ):
     obj['ui'] = rsp['out']
     obj['act_ar'] = []
     for e in rsp['out']:
-        if GrowAndCut.isvalid( e ):
+        if e[1] == 'grow_and_cut':
             obj['act_ar'].append( GrowAndCut(e) )
-        elif OncePerDay.isvalid(e):
+        elif e[1] == 'once_per_day':
             obj['act_ar'].append( OncePerDay(e) )
+    obj['prsn'].change( sorted( rsp['prsn_list'] ) )
     prsn_chg()
 
 def prsn_data_loaded( rsp ):
@@ -138,13 +120,11 @@ def prsn_chg( *args, **kwargs ):
     
 def main():
     obj['dmain'] = doc.add_div('d1')
-    obj['dmain'].add_br()
+    newline()
     obj['dmain'].elm <= P( '&#x972;&#x915;&#x94d;&#x936;&#x928;&#x20;&#x917;&#x947;&#x92e;' )
 
-    prsn = sorted( ['dpm', 'ga', 'pdjm', '0pg', 'wgad.', '0a_dd', 'gma_pwg', '0a_pmgj', 'ga_.a', 'dg_m.', ".ww_p.", "wg._0d.a", ".wp_d..j", "mgp_m.", "ada_apj", "wmgap_wa.", "da0_.a.a", "0dg._d.", "agp_w0" ] )
-    obj['prsn'] = obj['dmain'].add_dropdown( prsn, prsn_chg, 'Person' )
+    obj['prsn'] = obj['dmain'].add_dropdown( [], prsn_chg, 'Person' )
     newline()
     
-
     get_json( '../get_ui_data', ui_data_loaded )
 

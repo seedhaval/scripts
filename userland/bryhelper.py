@@ -560,6 +560,37 @@ class Button():
     def show( self ):
         self.elm.style.display = 'inline'
 
+class NewLine():
+    def __init__( self, prnt, cnt ):
+        self.prnt = prnt
+        self.ar = []
+        for i in range(cnt):
+            elm = BR()
+            self.prnt.elm <= elm
+            self.ar.append( elm )
+
+    def hide( self ):
+        for e in self.ar:
+            e.style.display = 'none'
+
+    def show( self ):
+        for e in self.ar:
+            e.style.display = 'inline'
+
+class SpanText():
+    def __init__( self, prnt, lbl ):
+        self.prnt = prnt
+        self.lbl = lbl
+        elm = SPAN(lbl)
+        self.prnt.elm <= elm
+        self.elm = elm
+
+    def hide( self ):
+        self.elm.style.display = 'none'
+
+    def show( self ):
+        self.elm.style.display = 'inline'
+
 class Text():
     def __init__( self, prnt, sz, lbl, cb ):
         self.prnt = prnt
@@ -649,10 +680,11 @@ class Div():
     def clear( self ):
         self.elm.innerHTML = ''
 
-    def add_br( self ):
-        a = BR('')
-        self.elm <= a
-        return a
+    def add_br( self, cnt=1 ):
+        return NewLine( self, cnt )
+
+    def add_span( self, txt ):
+        return SpanText( self, txt )
 
     def add_hr( self ):
         self.elm <= HR('')

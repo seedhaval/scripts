@@ -6,6 +6,8 @@ import sqlite3
 app = Flask(__name__)
 dbfl = '/storage/internal/data/actions.db'
 
+action_cols = ["action_nm","typ","inc_rate","threshold","action_time_window","action_symbol"]
+
 def fetch_db_results( qry, prm ):
     con = sqlite3.connect( dbfl )
     cur = con.cursor()
@@ -21,11 +23,17 @@ def exec_query( qry, prm ):
     con.commit()
     con.close()
 
-qry_ui_get = "select actions, property, restrictions, action_time_window, action_symbol, record_fmt, show from action_data"
+qry_ui_get = "select %s from action_data" % (','.join( action_cols ))
 
-qry_prsn_info = 'select actions, "%s" from action_data'
+qry_prsn_info = 'select action_nm, "%s" from action_data'
 
-qry_updt = "update action_data set \"%s\" = '%s' where actions = '%s'"
+qry_updt = "update action_data set \"%s\" = '%s' where action_nm = '%s'"
+
+qry_add_user_alter = "alter table action_data add \"%s\" text"
+
+qry_add_user_update = "update action_data set \"%s\" = '01/04/2022'"
+
+qry_col_list = "pragma table_info(action_data)"
 
 @app.route('/')
 def home():
@@ -33,7 +41,9 @@ def home():
 
 @app.route('/get_ui_data')
 def get_ui_data():
-    return jsonify( {'out': fetch_db_results( qry_ui_get, [] ) } )
+    all_cols = [x[1] for x in fetch_db_results( qry_col_list, [] )]
+    prsn = set(all_cols) - set(action_cols)
+    return jsonify( {'out': fetch_db_results( qry_ui_get, [] ), 'prsn_list': list(prsn) } )
 
 @app.route('/get_person_data/<string:prsn>')
 def get_person_data( prsn ):
