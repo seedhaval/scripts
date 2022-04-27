@@ -15,8 +15,15 @@ body{
 div.d1{
     background-color: #f4a261;
     width: 460px;
-    height: 720px;
+    height: 3000px;
     border-radius: 2em;
+}
+
+span {
+    padding-left: 15px;
+    padding-right: 15px;
+    width: 100px;
+    height: 30px;
 }
 
 label {
@@ -24,7 +31,7 @@ label {
     padding-right: 15px;
     width: 100px;
     height: 30px;
-    display: block;
+    display: inline-block;
 }
 
 select {
@@ -46,13 +53,13 @@ input {
 }
 
 button{
-  height: 40px;
+  height: 50px;
   font-size: 18px;
   position: relative;
   background-color: #2a9d8f;
-  border-radius: 0.8em;
+  border-radius: 4em;
   color: white;
-  padding: 0.6em 0.6em;
+  padding: 0.8em 1.8em;
   cursor:pointer;
   user-select:none;
   text-align: center;
@@ -64,7 +71,30 @@ p {
     font-size: 32px;
     text-align: center;
     color: #FFFFFF;
-    text-shadow: #474747 3px 5px 2px;
+    text-shadow: 0 -1px 4px #FFF, 0 -2px 10px #ff0, 0 -10px 20px #ff8000, 0 -18px 40px #F00;
+}
+
+button:after {
+  content: "";
+  display: block;
+  position: absolute;
+  border-radius: 4em;
+  left: 0;
+  top:0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: all 5s;
+  box-shadow: 0 0 10px 40px white;
+}
+
+button:active:after {
+  box-shadow: 0 0 0 0 white;
+  position: absolute;
+  border-radius: 4em;
+  left: 0;
+  top:0;
+  opacity: 1;
 }
 
 </style>

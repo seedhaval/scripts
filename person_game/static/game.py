@@ -1,5 +1,6 @@
 from bryhelper import *
-from datetime import datetime
+from datetime import datetime, timedelta
+import random
 
 obj = {}
 
@@ -27,14 +28,55 @@ def get_days_since( dt ):
    return ( datetime.now() - datetime.strptime( dt, '%d/%m/%Y' ) ).days
  
 def action( actobj, *args, **kwargs ):
-    d = { 'prsn': obj['prsn'].get(), 'newval': curdate(), 'act': actobj.nm }
+    if actobj.typ != 'random':
+        dt = curdate()
+    else:
+        dt = actobj.get_next()
+    d = { 'prsn': obj['prsn'].get(), 'newval': dt, 'act': actobj.nm }
     post_json( '../update_act_data', d, prsn_chg )
         
+class RandAction():
+    def __init__( self, e ):
+        self.ar = e
+        self.nm = e[0]
+        self.btntxt = e[5]
+        self.typ = 'random'
+
+        self.txt = obj['dmain'].add_span( e[0] )
+        self.button = obj['dmain'].add_button( self.btntxt, lambda *args: action( self ) )
+        self.mn, self.mx = [int(x) for x in e[2].split(',')]
+        self.nl = newline()
+
+    def get_next(self):
+        return (datetime.now() + timedelta(days=random.randint(self.mn,self.mx))).strftime('%d/%m/%Y')
+
+    def hide(self):
+        self.button.hide()
+        self.txt.hide()
+        self.nl.hide()
+
+    def show(self):
+        self.button.show()
+        self.txt.show()
+        self.nl.show()
+
+    def prsn_chg( self ):
+        m = maxdone()
+        dt = obj['pref'][self.nm]
+        if m or get_days_since(dt) < 0:
+            self.hide()
+            return
+        if random.randint(0,2) == 0:
+            self.show()
+        else:
+            self.hide()
+
 class OncePerDay():
     def __init__( self, e ):
         self.ar = e
         self.nm = e[0]
         self.btntxt = e[5]
+        self.typ = 'once_per_day'
 
         self.txt = obj['dmain'].add_span( e[0] )
         self.button = obj['dmain'].add_button( self.btntxt, lambda *args: action( self ) )
@@ -68,6 +110,7 @@ class GrowAndCut():
         self.btntxt = e[5]
         self.per_day = float(e[2])
         self.thresh = float(e[3])
+        self.typ = 'grow_and_cut'
 
         self.txtbox = obj['dmain'].add_text( 5, self.nm, None )
         self.button = obj['dmain'].add_button( self.btntxt, lambda *args: action( self ) )
@@ -104,6 +147,8 @@ def ui_data_loaded( rsp ):
             obj['act_ar'].append( GrowAndCut(e) )
         elif e[1] == 'once_per_day':
             obj['act_ar'].append( OncePerDay(e) )
+        elif e[1] == 'random':
+            obj['act_ar'].append( RandAction(e) )
     obj['prsn'].change( sorted( rsp['prsn_list'] ) )
     prsn_chg()
 

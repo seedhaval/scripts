@@ -423,6 +423,7 @@ class DropDown():
         self.prnt.elm <= lbl
         self.prnt.elm <= elm
         self.elm = elm
+        self.lbl = lbl
         for o in ar:
             e = OPTION( o, value=o )
             self.elm <= e
@@ -432,6 +433,9 @@ class DropDown():
         if len( self.ar ) == 0:
             return ""
         return self.elm.options[ self.elm.selectedIndex ].value
+
+    def set( self, txt ):
+        self.elm.value = txt
 
     def clear( self ):
         for i in range( len(self.elm.options) )[::-1]:
@@ -443,6 +447,14 @@ class DropDown():
         for o in ar:
             e = OPTION( o, value=o )
             self.elm <= e
+
+    def hide( self ):
+        self.elm.style.display = 'none'
+        self.lbl.style.display = 'none'
+
+    def show( self ):
+        self.elm.style.display = 'inline'
+        self.lbl.style.display = 'inline'
 
 class MultiSelectDropDown():
     def __init__( self, prnt, ar, sz, lbl ):

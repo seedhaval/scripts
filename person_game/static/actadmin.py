@@ -3,177 +3,173 @@ from bryhelper import *
 obj = {}
 
 def newline():
-    obj['dmain'].add_br()
-    obj['dmain'].add_br()
+    return obj['dmain'].add_br(2)
 
-def get_scn_typ():
-    scn_nm = obj['scn'].get()
-    scn = obj['data']['scenarios'][scn_nm]
-    typ = obj['action_by'].get()
-    return (scn, typ)
+def ui_data_loaded( rsp ):
+    obj['prsn_list'] = rsp['prsn_list']
+    obj['act_ref'] = {}
+    for e in rsp['out']:
+        obj['act_ref'][e[0]] = e
 
-def get_obj_ar():
-    scn, typ = get_scn_typ()
-    return list(scn['actions'][typ].keys())
+    obj['edit_prsn'].update_names()
+    obj['edit_act'].update_names()
 
-def get_act_ar():
-    scn, typ = get_scn_typ()
-    act1 = obj['act1'].get()
-    return scn['actions'][typ][act1]
+class EditPerson():
+    def __init__(self):
+        o = obj['dmain']
+        o.add_span( 'Person' )
+        newline()
+        self.dd_act = o.add_dropdown( ['Add','Delete'], self.chg_action, 'Action' )
+        newline()
+        self.txt_nm = o.add_text( 15, 'Name', dummy )
+        self.dd_nm = o.add_dropdown( [], dummy, 'Name' )
+        newline()
+        o.add_button( '&#x2705;', self.perform_action )
+        self.chg_action()
 
-def change_action_by( *args, **kwargs ):
-    obj['act1'].change( get_obj_ar() )
-    load_act2()
+    def chg_action( self, *args, **kwargs ):
+        if self.dd_act.get() == 'Add':
+            self.txt_nm.clear()
+            self.txt_nm.show()
+            self.dd_nm.hide()
+        else:
+            self.txt_nm.hide()
+            self.dd_nm.show()
 
-def load_act2( *args, **kwargs ):
-    obj['act2'].change( get_act_ar() )
+    def perform_action( self, *args, **kwargs ):
+        if self.dd_act.get() == 'Add':
+            post_json( '../add_prsn', {'person': self.txt_nm.get()}, refresh_data )
+            self.txt_nm.clear()
+        else:
+            post_json( '../del_prsn', {'person': self.dd_nm.get()}, refresh_data )
 
-def populate_scenarios( *args, **kwargs ):
-    ar = list(obj['data']['scenarios'].keys())
-    obj['scn'].change( ar )
-    
-def populate_actors( *args, **kwargs ):
-    scn_nm = obj['scn'].get()
-    scn = obj['data']['scenarios'][scn_nm]
-    obj['action_by'].change( list(scn['actions'].keys()) )
-    change_action_by()
+    def update_names(self):
+        self.dd_nm.change( sorted( obj['prsn_list'] ) )
 
-def reload_scn():
-    populate_scenarios()
-    populate_actors()
+class EditAction():
+    def __init__( self ):
+        o = obj['dmain']
+        o.add_span( 'Actions' )
+        newline()
+        self.dd_act = o.add_dropdown( ['Add','Edit','Delete'], self.chg_action, 'Action' )
+        newline()
+        self.dd_nm = o.add_dropdown( [], self.nm_chg, 'Name' )
+        self.nl0 = newline()
+        self.txt_nm = o.add_text( 20, 'Name', dummy )
+        self.nl1 = newline()
+        self.dd_typ = o.add_dropdown( ['once_per_day','grow_and_cut','random'], dummy, 'Type' )
+        self.nl2 = newline()
+        self.inc_rate = o.add_text( 20, 'Inc Rate', dummy)
+        self.nl3 = newline()
+        self.threshold = o.add_text( 20, 'Threshold', dummy)
+        self.nl4 = newline()
+        self.window = o.add_text( 20, 'Window', dummy)
+        self.nl5 = newline()
+        self.symbol = o.add_text( 20, 'Symbol', dummy)
+        newline()
+        o.add_button( '&#x2705;', self.perform_action )
+        o.add_button( '&#x274c;', self.clear )
 
-def data_loaded( rsp ):
-    obj['data'] = rsp['action']
-    reload_scn()
+        self.chg_action()
 
-def set_obj( val ):
-    scn, typ = get_scn_typ()
-    act1 = obj['act1'].get()
-    scn['actions'][typ][val] = scn['actions'][typ][act1]
-    del scn['actions'][typ][act1]
-    change_action_by()
+    def chg_action( self, *args, **kwargs ):
+        self.hide_all()
+        if self.dd_act.get() == 'Add':
+            self.txt_nm.show()
+            self.nl1.show()
+            self.dd_typ.show()
+            self.nl2.show()
+            self.inc_rate.show()
+            self.nl3.show()
+            self.threshold.show()
+            self.nl4.show()
+            self.window.show()
+            self.nl5.show()
+            self.symbol.show()
+        elif self.dd_act.get() == 'Edit':
+            self.dd_nm.show()
+            self.nl0.show()
+            self.txt_nm.show()
+            self.nl1.show()
+            self.dd_typ.show()
+            self.nl2.show()
+            self.inc_rate.show()
+            self.nl3.show()
+            self.threshold.show()
+            self.nl4.show()
+            self.window.show()
+            self.nl5.show()
+            self.symbol.show()
+            self.nm_chg()
+        else:
+            self.dd_nm.show()
 
-def edit_obj( *args, **kwargs ):
-    inp( set_obj, obj['act1'].get() )
+    def perform_action( self, *args, **kwargs ):
+        if self.dd_act.get() == 'Add':
+            post_json( '../add_actn', self.get_dict(), refresh_data )
+        elif self.dd_act.get() == 'Edit':
+            post_json( '../upd_actn', self.get_dict(), refresh_data )
+        else:
+            post_json( '../del_actn', self.get_dict(), refresh_data )
 
-def new_obj( val ):
-    scn, typ = get_scn_typ()
-    scn['actions'][typ][ val ] = ["test"]
-    change_action_by()
+    def nm_chg( self, *args, **kwargs ):
+        e = obj['act_ref'][self.dd_nm.get()]
+        self.txt_nm.set( e[0] )
+        self.dd_typ.set( e[1] )
+        self.inc_rate.set( e[2] )
+        self.threshold.set( e[3] )
+        self.window.set( e[4] )
+        self.symbol.set( e[5] )
 
-def add_obj( *args, **kwargs ):
-    inp( new_obj, "New Object" )
+    def hide_all( self ):
+        self.txt_nm.hide()
+        self.dd_nm.hide()
+        self.nl0.hide()
+        self.nl1.hide()
+        self.dd_typ.hide()
+        self.nl2.hide()
+        self.inc_rate.hide()
+        self.nl3.hide()
+        self.threshold.hide()
+        self.nl4.hide()
+        self.window.hide()
+        self.nl5.hide()
+        self.symbol.hide()
 
-def del_obj( *args, **kwargs ):
-    scn, typ = get_scn_typ()
-    act1 = obj['act1'].get()
-    del scn['actions'][typ][act1]
-    change_action_by()
+    def clear( self, *args, **kwargs ):
+        self.txt_nm.clear()
+        self.inc_rate.clear()
+        self.threshold.clear()
+        self.window.clear()
+        self.symbol.clear()
+        
+    def get_dict(self):
+        d = {}
+        d['nm'] = self.dd_nm.get()
+        d['values'] = [
+            self.txt_nm.get()
+            ,self.dd_typ.get()
+            ,self.inc_rate.get()
+            ,self.threshold.get()
+            ,self.window.get()
+            ,self.symbol.get()
+        ] 
+        return d
 
-def set_actee( val ):
-    scn, typ = get_scn_typ()
-    scn['actions'][val] = scn['actions'][typ]
-    del scn['actions'][typ]
-    populate_actors()
+    def update_names(self):
+        self.dd_nm.change( sorted( obj['act_ref'].keys() ) )
+        self.nm_chg()
 
-def edit_actee( *args, **kwargs ):
-    inp( set_actee, obj['action_by'].get() )
-
-def new_actee( val ):
-    scn, typ = get_scn_typ()
-    scn['actions'][ val ] = {"test": ["test"]}
-    populate_actors()
-
-def add_actee( *args, **kwargs ):
-    inp( new_actee, "New Actee" )
-
-def del_actee( *args, **kwargs ):
-    scn, typ = get_scn_typ()
-    del scn['actions'][typ]
-    populate_actors()
-
-def set_act( val ):
-    scn, typ = get_scn_typ()
-    act1 = obj['act1'].get()
-    act2 = obj['act2'].get()
-    ar = scn['actions'][typ][act1]
-    ar[ ar.index( act2 ) ] = val
-    load_act2()
-
-def edit_act( *args, **kwargs ):
-    inp( set_act, obj['act2'].get() )
-
-def new_act( val ):
-    scn, typ = get_scn_typ()
-    act1 = obj['act1'].get()
-    ar = scn['actions'][typ][act1]
-    ar.append( val )
-    load_act2()
-
-def add_act( *args, **kwargs ):
-    inp( new_act, "New Action" )
-
-def del_act( *args, **kwargs ):
-    scn, typ = get_scn_typ()
-    act1 = obj['act1'].get()
-    act2 = obj['act2'].get()
-    scn['actions'][typ][act1].remove( act2 )
-    load_act2()
-
-def save_data( *args, **kwargs ):
-    post_json( '../update_data', obj['data'], dummy )
-    
-def del_scn( *args, **kwargs ):
-    del obj['data']['scenarios'][ obj['scn'].get() ]
-    reload_scn()
-
-def new_scn( val ):
-    obj['data']['scenarios'][val] = { "actions": {"test": { "test": [ "test" ] } } }
-    reload_scn()
-    
-def add_scn( *args, **kwargs ):
-    inp( new_scn, "New Scene" )
-
-def set_scn( val ):
-    scn_nm = obj['scn'].get()
-    obj['data']['scenarios'][val] = obj['data']['scenarios'][scn_nm]
-    del obj['data']['scenarios'][scn_nm]
-    populate_scenarios()
-
-def edit_scn( *args, **kwargs ):
-    inp( set_scn, obj['scn'].get() )
+def refresh_data( *args, **kwargs ):
+    get_json( '../get_ui_data', ui_data_loaded )
 
 def main():
     obj['dmain'] = doc.add_div('d1')
+    newline()
     obj['dmain'].add_br()
     obj['dmain'].elm <= P( '&#x915;&#x94d;&#x930;&#x93f;&#x92f;&#x93e;&#x20;&#x938;&#x942;&#x91a;&#x940;&#x20;&#x92a;&#x94d;&#x930;&#x936;&#x93e;&#x938;&#x928;' )
-
-    obj['scn'] = obj['dmain'].add_dropdown( [], populate_actors, '&#x938;&#x94d;&#x925;&#x93e;&#x928;' )
-    obj['dmain'].add_button( "&#x2795;", add_scn )
-    obj['dmain'].add_button( "&#x1f58a;&#xfe0f;", edit_scn )
-    obj['dmain'].add_button( "&#x274c;", del_scn )
+    obj['edit_prsn'] = EditPerson()
     newline()
+    obj['edit_act'] = EditAction()
 
-    obj['action_by'] = obj['dmain'].add_dropdown( [], change_action_by, '&#x915;&#x930;&#x94d;&#x924;&#x93e;' )
-    obj['dmain'].add_button( "&#x2795;", add_actee )
-    obj['dmain'].add_button( "&#x1f58a;&#xfe0f;", edit_actee )
-    obj['dmain'].add_button( "&#x274c;", del_actee )
-    newline()
-
-    obj['act1'] = obj['dmain'].add_dropdown( [], load_act2, '&#x905;&#x935;&#x92f;&#x935;/&#x935;&#x938;&#x94d;&#x924;&#x942;' )
-    obj['dmain'].add_button( "&#x2795;", add_obj )
-    obj['dmain'].add_button( "&#x1f58a;&#xfe0f;", edit_obj )
-    obj['dmain'].add_button( "&#x274c;", del_obj )
-    newline()
-
-    obj['act2'] = obj['dmain'].add_dropdown( [], dummy, '&#x915;&#x94d;&#x930;&#x93f;&#x92f;&#x93e;' )
-    obj['dmain'].add_button( "&#x2795;", add_act )
-    obj['dmain'].add_button( "&#x1f58a;&#xfe0f;", edit_act )
-    obj['dmain'].add_button( "&#x274c;", del_act )
-    newline()
-
-    obj['dmain'].add_button( "Save", save_data )
-
-    get_json( '../get_data', data_loaded )
-    
-
+    refresh_data()
