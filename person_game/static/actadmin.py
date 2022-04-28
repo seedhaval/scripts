@@ -6,9 +6,9 @@ def newline():
     return obj['dmain'].add_br(2)
 
 def ui_data_loaded( rsp ):
-    obj['prsn_list'] = rsp['prsn_list']
+    obj['prsn_list'] = [x[0] for x in rsp['person']]
     obj['act_ref'] = {}
-    for e in rsp['out']:
+    for e in rsp['action']:
         obj['act_ref'][e[0]] = e
 
     obj['edit_prsn'].update_names()
@@ -57,15 +57,13 @@ class EditAction():
         self.nl0 = newline()
         self.txt_nm = o.add_text( 20, 'Name', dummy )
         self.nl1 = newline()
-        self.dd_typ = o.add_dropdown( ['once_per_day','grow_and_cut','random'], dummy, 'Type' )
-        self.nl2 = newline()
-        self.inc_rate = o.add_text( 20, 'Inc Rate', dummy)
-        self.nl3 = newline()
         self.threshold = o.add_text( 20, 'Threshold', dummy)
+        self.nl2 = newline()
+        self.strt_hr = o.add_text( 20, 'Start Hour', dummy)
+        self.nl3 = newline()
+        self.end_hr = o.add_text( 20, 'End Hour', dummy)
         self.nl4 = newline()
-        self.window = o.add_text( 20, 'Window', dummy)
-        self.nl5 = newline()
-        self.symbol = o.add_text( 20, 'Symbol', dummy)
+        self.btn_txt = o.add_text( 20, 'Button Text', dummy)
         newline()
         o.add_button( '&#x2705;', self.perform_action )
         o.add_button( '&#x274c;', self.clear )
@@ -77,29 +75,25 @@ class EditAction():
         if self.dd_act.get() == 'Add':
             self.txt_nm.show()
             self.nl1.show()
-            self.dd_typ.show()
-            self.nl2.show()
-            self.inc_rate.show()
-            self.nl3.show()
             self.threshold.show()
+            self.nl2.show()
+            self.strt_hr.show()
+            self.nl3.show()
+            self.end_hr.show()
             self.nl4.show()
-            self.window.show()
-            self.nl5.show()
-            self.symbol.show()
+            self.btn_txt.show()
         elif self.dd_act.get() == 'Edit':
             self.dd_nm.show()
             self.nl0.show()
             self.txt_nm.show()
             self.nl1.show()
-            self.dd_typ.show()
-            self.nl2.show()
-            self.inc_rate.show()
-            self.nl3.show()
             self.threshold.show()
+            self.nl2.show()
+            self.strt_hr.show()
+            self.nl3.show()
+            self.end_hr.show()
             self.nl4.show()
-            self.window.show()
-            self.nl5.show()
-            self.symbol.show()
+            self.btn_txt.show()
             self.nm_chg()
         else:
             self.dd_nm.show()
@@ -115,45 +109,39 @@ class EditAction():
     def nm_chg( self, *args, **kwargs ):
         e = obj['act_ref'][self.dd_nm.get()]
         self.txt_nm.set( e[0] )
-        self.dd_typ.set( e[1] )
-        self.inc_rate.set( e[2] )
-        self.threshold.set( e[3] )
-        self.window.set( e[4] )
-        self.symbol.set( e[5] )
+        self.threshold.set( e[1] )
+        self.strt_hr.set( e[2] )
+        self.end_hr.set( e[3] )
+        self.btn_txt.set( e[4] )
 
     def hide_all( self ):
         self.txt_nm.hide()
         self.dd_nm.hide()
         self.nl0.hide()
         self.nl1.hide()
-        self.dd_typ.hide()
-        self.nl2.hide()
-        self.inc_rate.hide()
-        self.nl3.hide()
         self.threshold.hide()
+        self.nl2.hide()
+        self.strt_hr.hide()
+        self.nl3.hide()
+        self.end_hr.hide()
         self.nl4.hide()
-        self.window.hide()
-        self.nl5.hide()
-        self.symbol.hide()
+        self.btn_txt.hide()
 
     def clear( self, *args, **kwargs ):
         self.txt_nm.clear()
-        self.inc_rate.clear()
         self.threshold.clear()
-        self.window.clear()
-        self.symbol.clear()
+        self.strt_hr.clear()
+        self.end_hr.clear()
+        self.btn_txt.clear()
         
     def get_dict(self):
         d = {}
-        d['nm'] = self.dd_nm.get()
-        d['values'] = [
-            self.txt_nm.get()
-            ,self.dd_typ.get()
-            ,self.inc_rate.get()
-            ,self.threshold.get()
-            ,self.window.get()
-            ,self.symbol.get()
-        ] 
+        d['action_nm'] = self.dd_nm.get()
+        d['threshold'] = self.threshold.get()
+        d['new_nm'] = self.txt_nm.get()
+        d['strt_hr'] = self.strt_hr.get()
+        d['end_hr'] = self.end_hr.get()
+        d['btn_txt'] = self.btn_txt.get()
         return d
 
     def update_names(self):

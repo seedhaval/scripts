@@ -7,6 +7,7 @@ from browser import bind
 import json
 import random
 import math
+from datetime import datetime
 
 def interp( s, e ):
     return range( s, e, int( math.copysign( 1, e - s ) ) )
@@ -701,6 +702,9 @@ class Div():
     def add_hr( self ):
         self.elm <= HR('')
 
+    def add_div( self, cls ):
+        return Div( self, cls )
+
     def add_space( self, cnt ):
         self.elm <= SPAN( "&nbsp;"*cnt )
 
@@ -779,4 +783,15 @@ def inp( cb, title, top=100, left=80 ):
 def dummy( *args, **kwargs ):
     return 1
 
+class DebugInfo():
+    def __init__(self):
+        self.txt = ''
+
+    def add( self, txt ):
+        self.txt += datetime.now().strftime('%H:%M:%S.%f')[:-3] + " " + txt + "\n"
+
+    def show( self ):
+        alert( self.txt )
+
 doc = Doc()
+debug = DebugInfo()

@@ -2,11 +2,14 @@ from flask import Flask, jsonify, request
 import json
 import random
 import sqlite3
+from datetime import datetime
+from collections import defaultdict
 
 app = Flask(__name__)
 dbfl = '/storage/internal/data/actions.db'
 
-action_cols = ["action_nm","typ","inc_rate","threshold","action_time_window","action_symbol"]
+def curdate():
+    return int(datetime.now().strftime("%s"))/86400
 
 def fetch_db_results( qry, prm ):
     con = sqlite3.connect( dbfl )
@@ -23,86 +26,77 @@ def exec_query( qry, prm ):
     con.commit()
     con.close()
 
-qry_ui_get = "select %s from action_data" % (','.join( action_cols ))
-
-qry_prsn_info = 'select action_nm, "%s" from action_data'
-
-qry_updt = "update action_data set \"%s\" = '%s' where action_nm = '%s'"
-
-qry_add_user_alter = "alter table action_data add \"%s\" text"
-qry_add_user_update = "update action_data set \"%s\" = '01/04/2022'"
-
-qry_col_list = "pragma table_info(action_data)"
-
-qry_del_user_rename = "alter table action_data rename to action_data_bkp"
-qry_del_user_create = "create table action_data as select %s from action_data_bkp"
-qry_del_user_drop = "drop table action_data_bkp"
-
-qry_actn_add = "insert into action_data ( %s ) values ( %s )"
-qry_actn_del = "delete from action_data where action_nm = ?"
-qry_actn_updt = "update action_data set " + ','.join( [x+' = ?' for x in action_cols] ) + " where action_nm = ?"
-
 @app.route('/')
 def home():
     return 'Test succesful'
 
 @app.route('/get_ui_data')
 def get_ui_data():
-    all_cols = [x[1] for x in fetch_db_results( qry_col_list, [] )]
-    prsn = set(all_cols) - set(action_cols)
-    return jsonify( {'out': fetch_db_results( qry_ui_get, [] ), 'prsn_list': list(prsn) } )
+    out = {}
+    out['person'] = fetch_db_results( "select * from person", [] )
+    out['action'] = fetch_db_results( "select * from action", [] )
+    return jsonify( out )
 
-@app.route('/get_person_data/<string:prsn>')
-def get_person_data( prsn ):
-    return jsonify( {'out': fetch_db_results( qry_prsn_info % (prsn), [] ) } )
+@app.route('/get_all_person_data')
+def get_all_person_data():
+    out = defaultdict(list)
+    qry = "select * from active_action"
+    data = fetch_db_results( qry, () )
+    for r in data:
+        out[r[0]].append( [r[1],r[2]] )
+    return jsonify( out )
 
 @app.route('/update_act_data', methods=['POST'])
 def update_act_data():
+    qry = "update action_person_map set last_dt = ? where action_nm = ? and person_nm = ?"
     data = request.json
-    exec_query( qry_updt % (data['prsn'],data['newval'],data['act']), [] )
+    exec_query( qry, [curdate(), data['act'], data['prsn']] )
     return jsonify( {'out': 'done'} )
     
 @app.route('/add_prsn', methods=['POST'])
 def add_prsn():
     nm = request.json['person']
-    exec_query( qry_add_user_alter % (nm), [] )
-    exec_query( qry_add_user_update % (nm), [] )
+    qry = "insert into person select ?"
+    exec_query( qry, [nm] )
+    qry = "insert into action_person_map select action_nm, ?, ? from action"
+    exec_query( qry, [nm, curdate() - 10] )
     return jsonify( {'out': 'done'} )
 
 @app.route('/del_prsn', methods=['POST'])
 def del_prsn():
     nm = request.json['person']
-    cols = ','.join( ['"'+x[1]+'"' for x in fetch_db_results( qry_col_list, [] ) if x[1] != nm] )
-    exec_query( qry_del_user_rename, [] )
-    exec_query( qry_del_user_create % (cols), [] )
-    exec_query( qry_del_user_drop, [] )
+    qry = "delete from person where person_nm = ?"
+    exec_query( qry, [nm] )
+    qry = "delete from action_person_map where person_nm = ?"
+    exec_query( qry, [nm] )
     return jsonify( {'out': 'done'} )
 
 @app.route('/add_actn', methods=['POST'])
 def add_actn():
     data = request.json
-    prsn_cols = ['"'+x[1]+'"' for x in fetch_db_results( qry_col_list, [] ) if x[1] not in action_cols]
-
-    colnm = [x for x in action_cols]
-    colnm.extend( prsn_cols )
-    val = data['values']
-    val.extend( ['01/04/2022']*len(prsn_cols) )
-    colprm = ['?']*(len(action_cols) + len(prsn_cols))
-    exec_query( qry_actn_add % (','.join(colnm), ','.join(colprm)), val )
+    qry = "insert into action select ?, ?, ?, ?, ?"
+    exec_query( qry, [data['new_nm'], data['threshold'], data['strt_hr'], data['end_hr'], data['btn_txt']] )
+    qry = "insert into action_person_map select ?, person_nm, ?"
+    exec_query( qry, [data['action_nm'], curdate() - 10] )
     return jsonify( {'out': 'done'} )
 
 @app.route('/del_actn', methods=['POST'])
 def del_actn():
     data = request.json
-    exec_query( qry_actn_del, [data['nm']] )
+    qry = "delete from action where action_nm = ?"
+    exec_query( qry, [data['action_nm']] )
+    qry = "delete from action_person_map where action_nm = ?"
+    exec_query( qry, [data['action_nm']] )
     return jsonify( {'out': 'done'} )
 
 @app.route('/upd_actn', methods=['POST'])
 def upd_actn():
     data = request.json
-    ar = data['values']
-    ar.append( data['nm'] )
-    exec_query( qry_actn_updt, ar )
+    qry = 'update action set action_nm=?, threshold=?, strt_hr=?, end_hr=?, btn_txt=? where action_nm=?'
+    exec_query( qry, [data['new_nm'], data['threshold'], data['strt_hr'], data['end_hr'], data['btn_txt'], data['action_nm']] )
+    qry = 'update action_person_map set action_nm=? where action_nm=?'
+    if data['new_nm'] != data['action_nm']:
+        exec_query( qry, [data['new_nm'], data['action_nm']] )
     return jsonify( {'out': 'done'} )
 
 app.run( port=1257 )

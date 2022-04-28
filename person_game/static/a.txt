@@ -1,0 +1,12 @@
+drop view active_action ;
+CREATE VIEW active_action as
+select
+a.person_nm
+,a.action_nm
+,b.btn_txt
+from action_person_map a
+inner join action b
+on a.action_nm = b.action_nm
+and strftime( "%s", date('now','localtime') ) / 86400 >= a.last_dt + b.threshold
+and b.strt_hr <= cast(strftime("%H", time('now','localtime') ) as integer)
+and b.end_hr >= cast(strftime("%H", time('now','localtime') ) as integer) ;
