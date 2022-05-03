@@ -1,7 +1,6 @@
 from __future__ import annotations
 from pathlib import Path
-import sqlite3
-import configparser
+import json
 
 
 class File:
@@ -19,6 +18,10 @@ class File:
     def append(self, txt: str) -> None:
         with open(self.fl, 'a') as f:
             f.write(txt)
+
+    def load_json(self) -> dict:
+        with open(self.fl, 'r') as f:
+            return json.load(f)
 
 
 class Folder:
