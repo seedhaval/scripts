@@ -1,4 +1,5 @@
 from bryhelper import *
+from collections import defaultdict
 
 obj = {}
 
@@ -11,6 +12,16 @@ def ui_data_loaded( rsp ):
     for e in rsp['action']:
         obj['act_ref'][e[0]] = e
 
+    d = defaultdict(int)
+    for e in rsp['action']:
+        for i in range(e[2],e[3]+1):
+            d[i]+=1
+    txt = '<br><b>Counts</b><br>'
+    txt += '<br>'.join( [f'{k} -> {d[k]}' for k in sorted(d.keys())] )
+    txt += f'<br><b>Total :</b>{len(rsp["action"])}<br>'
+
+    obj['count'].set_text( txt )
+    obj['table'].set_data( sorted( rsp['action'], key=lambda x: x[2]) )
     obj['edit_prsn'].update_names()
     obj['edit_act'].update_names()
 
@@ -67,6 +78,7 @@ class EditAction():
         newline()
         o.add_button( '&#x2705;', self.perform_action )
         o.add_button( '&#x274c;', self.clear )
+        o.add_button( '&#x1f50d;', self.filter )
 
         self.chg_action()
 
@@ -100,7 +112,10 @@ class EditAction():
 
     def perform_action( self, *args, **kwargs ):
         if self.dd_act.get() == 'Add':
-            post_json( '../add_actn', self.get_dict(), refresh_data )
+            if self.txt_nm.get() in obj['act_ref']:
+                alert('Already present')
+            else:
+                post_json( '../add_actn', self.get_dict(), refresh_data )
         elif self.dd_act.get() == 'Edit':
             post_json( '../upd_actn', self.get_dict(), refresh_data )
         else:
@@ -148,6 +163,11 @@ class EditAction():
         self.dd_nm.change( sorted( obj['act_ref'].keys() ) )
         self.nm_chg()
 
+    def filter(self, *args, **kwargs):
+        s = obj['table'].get_filter()
+        self.dd_nm.change( [x for x in sorted( obj['act_ref'].keys() ) if s in x] )
+        self.nm_chg()
+
 def refresh_data( *args, **kwargs ):
     get_json( '../get_ui_data', ui_data_loaded )
 
@@ -159,5 +179,9 @@ def main():
     obj['edit_prsn'] = EditPerson()
     newline()
     obj['edit_act'] = EditAction()
+
+    newline()
+    obj['count'] = obj['dmain'].add_span( 'count' )
+    obj['table'] = MyTable( obj['dmain'] )
 
     refresh_data()

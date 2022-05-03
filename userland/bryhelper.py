@@ -598,6 +598,9 @@ class SpanText():
         self.prnt.elm <= elm
         self.elm = elm
 
+    def set_text( self, txt ):
+        self.elm.innerHTML = txt
+
     def hide( self ):
         self.elm.style.display = 'none'
 
@@ -659,6 +662,9 @@ class Div():
         elm = DIV( '', Class=cls)
         self.elm = elm
         self.prnt.elm <= elm
+
+    def remove( self ):
+        self.prnt.elm.removeChild( self.elm )
 
     def add_video( self ):
         return Video( self )
@@ -792,6 +798,50 @@ class DebugInfo():
 
     def show( self ):
         alert( self.txt )
+
+class MyTable():
+    def __init__( self, prnt ):
+        self.prnt = prnt
+        self.cntrl = prnt.add_div('dtable_cntrl')
+        self.body = prnt.add_span('dtable_body')
+        self.srch_txt = self.cntrl.add_text( 15, 'Search', dummy )
+        self.cntrl.add_br(2)
+        self.cntrl.add_button( '&#x1f50d;', self.filter )
+        self.cntrl.add_button( '&#x274c;', self.clear_filter )
+        self.cntrl.add_br(2)
+
+    def set_data( self, ar ):
+        self.ar = []
+        for row in ar:
+            self.ar.append( [str(x) for x in row] )
+        self.filter()
+
+    def show_data( self ):
+        txt = '<br><table>'
+        for row in self.fltr_data:
+            txt += '<tr><td>'
+            txt += '</td><td>'.join( row )
+            txt += '</td></tr>'
+        txt += '</table>'
+        self.body.set_text( txt )
+
+    def filter( self, *args, **kwargs ):
+        if self.srch_txt.get() == '':
+            self.clear_filter()
+            return
+        s = self.srch_txt.get()
+        self.fltr_data = [x for x in self.ar if any( [s in y for y in x] )]
+        self.show_data()
+
+    def clear_filter( self, *args, **kwargs ):
+        self.srch_txt.set('')
+        self.fltr_data = self.ar
+        self.show_data()
+
+    def get_filter( self, *args, **kwargs ):
+        return self.srch_txt.get()
+
+
 
 doc = Doc()
 debug = DebugInfo()

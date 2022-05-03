@@ -7,9 +7,14 @@ from collections import defaultdict
 
 app = Flask(__name__)
 dbfl = '/storage/internal/data/actions.db'
+logfl = '/storage/internal/data/log.txt'
+
+def log_entry(d):
+    with open(logfl,'a') as f:
+        f.write( f'{datetime.now().strftime("%Y-%m-%d %H:%M:%S")} - {d["prsn"]} - {d["act"]} - {d["btn_txt"]}\n' )
 
 def curdate():
-    return int(datetime.now().strftime("%s"))/86400
+    return int(int(datetime.now().strftime("%s"))/86400)
 
 def fetch_db_results( qry, prm ):
     con = sqlite3.connect( dbfl )
@@ -42,15 +47,15 @@ def get_all_person_data():
     out = defaultdict(list)
     qry = "select * from active_action"
     data = fetch_db_results( qry, () )
-    for r in data:
-        out[r[0]].append( [r[1],r[2]] )
-    return jsonify( out )
+    random.shuffle( data )
+    return jsonify( {'out':data[:random.randint(1,3)]} )
 
 @app.route('/update_act_data', methods=['POST'])
 def update_act_data():
     qry = "update action_person_map set last_dt = ? where action_nm = ? and person_nm = ?"
     data = request.json
     exec_query( qry, [curdate(), data['act'], data['prsn']] )
+    log_entry( data )
     return jsonify( {'out': 'done'} )
     
 @app.route('/add_prsn', methods=['POST'])
@@ -76,8 +81,8 @@ def add_actn():
     data = request.json
     qry = "insert into action select ?, ?, ?, ?, ?"
     exec_query( qry, [data['new_nm'], data['threshold'], data['strt_hr'], data['end_hr'], data['btn_txt']] )
-    qry = "insert into action_person_map select ?, person_nm, ?"
-    exec_query( qry, [data['action_nm'], curdate() - 10] )
+    qry = "insert into action_person_map select ?, person_nm, ? from person"
+    exec_query( qry, [data['new_nm'], curdate() - 10] )
     return jsonify( {'out': 'done'} )
 
 @app.route('/del_actn', methods=['POST'])
