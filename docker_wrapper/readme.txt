@@ -9,3 +9,16 @@ Steps
 1. get location of docker. If it is a symbolic link, you need to make changes to original location in next steps. Not the link. In my case
 it is not a symbolic link.
 
+ls -l $( which docker )
+
+
+2. Copy the docker executable to a new name -> docker_base
+
+mv /usr/bin/docker /usr/bin/docker_base
+
+
+3. create a file docker as present in this git folder
+
+
+4. make it executable
+chmod 755 /usr/bin/docker
