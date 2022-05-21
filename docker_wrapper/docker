@@ -1,0 +1,15 @@
+#!/bin/bash
+
+# perform checks only if script is running in interactive mode. not in a daemon mode
+if [ -t 0 ]; then
+        # check if first argument is --runby
+        if [ "${1}" != "--runby" ]; then
+                echo "pass --runby <user> as first argument to the command"
+                exit 8
+        else
+                shift
+                shift
+        fi
+fi
+
+/usr/bin/docker_base "$@"
