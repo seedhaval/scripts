@@ -6,7 +6,7 @@ sudo apt update
 sudo apt upgrade
 
 echo "Installing git and python3"
-sudo apt-get install git python3
+sudo apt-get install ssh git python3
 
 echo "setting up git"
 ssh-keygen
