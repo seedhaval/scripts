@@ -54,10 +54,10 @@ def step_4():
 
 def step_5():
     print( 'Creating brython js' )
-    exec_cmd( 'sudo pip3 install brython' )
-    os.makedirs( f'{home_dir}/tmp/brython' )
-    os.chdir( f'{home_dir}/tmp/brython' ) 
-    exec_cmd( 'brython-cli --install' )
+    #exec_cmd( 'sudo pip3 install brython' )
+    #os.makedirs( f'{home_dir}/tmp/brython' )
+    #os.chdir( f'{home_dir}/tmp/brython' ) 
+    #exec_cmd( 'brython-cli --install' )
     os.chdir( home_dir )
     return 5
 
