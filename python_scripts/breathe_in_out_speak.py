@@ -1,8 +1,8 @@
 import pyttsx3
 import time
 
-num_cycle=3
-pause_sec=3
+num_cycle = 3
+pause_sec = 3
 
 engine = pyttsx3.init()
 for i in range(num_cycle):
