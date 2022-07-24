@@ -1,3 +1,26 @@
+/**
+ * Call an API method
+ * @param {String} endpoint 
+ * @param {String} type 
+ * @param {*} data 
+ * @param {*} retfunc 
+ */
+function callapi( endpoint, type, data, retfunc ) {
+	var xhttp = new XMLHttpRequest();
+	if( retfunc ){
+		xhttp.onreadystatechange = function() {
+			if (this.readyState == 4 && this.status == 200) {
+				retfunc( JSON.parse(this.responseText) );
+			}else if( this.readyState == 4 && this.status != 200) {
+				alert( 'API Error' );
+			}
+		};
+	}
+	xhttp.open( type, endpoint, true);
+    xhttp.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+	xhttp.send( JSON.stringify(data) );
+}
+
 class Button{
     /**
      * Constructor method for Button class
@@ -29,6 +52,22 @@ class Textentry{
         this.parent = prnt;
         this.parent.elm.appendChild(this.lbl_elm);
         this.parent.elm.appendChild(this.inp_elm);
+    }
+
+    /**
+     * Get value of text box
+     * @returns {String}
+     */
+    get(){
+        return this.inp_elm.value;
+    }
+
+    /**
+     * Set the value of text box
+     * @param {String} txt 
+     */
+    set(txt){
+        this.inp_elm.value = txt;
     }
 }
 
@@ -227,7 +266,7 @@ class MongoAccess{
     /**
      * Refresh form based on action selected by user
      */
-    refresh_form(){
+    refresh_form(opt=undefined){
         this.div_form.clear();
         var typ = this.dd_action.get();
         if( typ == "Insert row" ){
@@ -287,14 +326,20 @@ class MongoAccess{
      * Process insert action
      */
     process_insert_form(){
-        alert("OK");
+        var data = {"document":{"empid": this.txt_empid.get(), 
+        "name": {"first": this.txt_frst_nm.get(), "last": this.txt_lst_nm.get()}
+        ,"phone": this.txt_phone.get()}};
+        callapi('../insert_data',"POST",data,this.refresh_form.bind(this));
     }
 
     /**
-     * Process read action
+     * Load employee details based on API response
+     * @param {*} rsp 
      */
-    process_read_form(){
-
+    load_emp_details( rsp ){
+        this.txt_frst_nm.set( rsp["name"]["first"]);
+        this.txt_lst_nm.set( rsp["name"]["last"]);
+        this.txt_phone.set( rsp["phone"] )
     }
 
     /**
@@ -308,13 +353,15 @@ class MongoAccess{
      * Process delete action
      */
     process_delete_form(){
-
+        var data = {"empid": this.txt_empid.get()};
+        callapi('../delete_data',"POST",data,this.refresh_form.bind(this));
     }
 
     /**
      * Run AJAX method to get employee details for selected employee ID
      */
     get_emp_details(){
-
+        var data = {"empid": this.txt_empid.get()};
+        callapi('../read_data',"POST",data,this.load_emp_details.bind(this));
     }
 }

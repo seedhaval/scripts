@@ -1,8 +1,7 @@
 {
-  "mongo_url": "localhost:27017"
+  "mongo_url": "mongodb://localhost:27017/"
   ,"mongo_dbase": "testdb"
-  ,"mongo_user": "mongouser"
-  ,"mongo_pswd": "mongouser"
+  ,"mongo_coll": "empcol"
   ,"api_bind_ip": "0.0.0.0"
   ,"api_bind_port": "3535"
 }
