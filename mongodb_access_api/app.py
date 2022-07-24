@@ -39,6 +39,7 @@ def update_data():
     data = request.json
     empid = data['empid']
     upd_data = data['new_values']
+    coll.update_one({"empid":empid},{ "$set": upd_data } )
     return jsonify({"out": "done"})
 
 
