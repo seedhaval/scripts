@@ -221,7 +221,7 @@ class MongoAccess{
 
         const actions = ["Insert row","Find row","Update row","Delete row"];
         this.dd_action = this.div_title.add_dropdown("Select action",actions,false);
-        this.div_title.add_button("Go",this.refresh_form.bind(this));
+        this.div_title.add_button("Go",this.refresh_form.bind(this),true);
     }
 
     /**
