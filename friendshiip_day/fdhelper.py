@@ -41,6 +41,9 @@ class MyButton(MyWidget):
 		self.elm = Button(self.prnt, text=text, command=cb)		
 		super().__init__(self.elm,xy)
 		
+	def set(self, text):		
+		self.elm['text'] = text
+		
 class MyDropdown(MyWidget):
 	def __init__(self, prnt, options: List[str], text: str, xy: List[int]):
 		self.prnt = prnt
@@ -127,20 +130,20 @@ class Scene:
 		self.is_finished = False		
 		self.cur_step = 0
 		self.pafter = pafter
+				
 		
-		
-
-	def init(self):		
-		self.strt = {k:(v.x,v.y) for k,v in self.obj.items()}
-		
-	def init_move(self, tgt):
+	def set_move(self, tgt):
+		self.tgt = tgt
 		self.steps = 15
 		self.delay_ms = 200
-		self.tgt = tgt
+		self.init = self.init_move
+		
+	def init_move(self):
+		self.strt = {k:(v.x,v.y) for k,v in self.obj.items()}				
 		self.delta = {}
-		for k,v in tgt.items():
-			dx = (tgt[k][0]-self.strt[k][0])*1.0/self.steps
-			dy = (tgt[k][1]-self.strt[k][1])*1.0/self.steps
+		for k,v in self.tgt.items():
+			dx = (self.tgt[k][0]-self.strt[k][0])*1.0/self.steps
+			dy = (self.tgt[k][1]-self.strt[k][1])*1.0/self.steps
 			self.delta[k] = (dx,dy)
 		self.action = self.move
 		
@@ -152,6 +155,56 @@ class Scene:
 		self.cur_step += 1
 		if self.cur_step >= self.steps:
 			self.is_finished = True
+
+	def set_show_once(self,wdgt,text,dly):
+		self.wdgt = wdgt
+		self.text = text
+		self.delay_ms = dly
+		self.init = dummy
+		self.action = self.show_once
+		
+
+	def show_once(self):
+		if self.cur_step == 0:
+			self.obj[self.wdgt].set(self.text)
+			self.obj[self.wdgt].show()		
+		elif self.cur_step == 1:
+			self.obj[self.wdgt].hide()
+			self.is_finished = True
+		self.cur_step += 1
+		
+	def set_flash(self,ar,clr,dly):
+		self.ar = ar
+		self.clr = clr
+		self.delay_ms = dly
+		self.action = self.flash
+		self.init = dummy
+
+	def flash(self):
+		if self.cur_step in (0,2):
+			for w in self.ar:
+				self.obj[w].bg(self.clr)
+		else:
+			for w in self.ar:
+				self.obj[w].reset_bg()
+		if self.cur_step >2:
+			self.is_finished = True
+		self.cur_step += 1
+		
+	def set_change_text(self,ar,dly):
+		self.ar = ar
+		self.delay_ms = dly
+		self.init = dummy
+		self.action = self.change_text
+
+	def change_text(self):
+		w,v = self.ar[self.cur_step]
+		self.obj[w].set(v)
+		if self.cur_step >= len(self.ar) -1:
+			self.is_finished = True
+		self.cur_step += 1
+		
+
 
 	def next_step(self):
 		self.action()
