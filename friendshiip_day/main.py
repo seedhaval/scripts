@@ -15,15 +15,43 @@ def load_window():
 	obj['txt2'] = fr.add_text('57',width=10,height=1,xy=[400,250])
 	obj['lbl4'] = fr.add_label('City',width=12,height=1,xy=[50,350])
 	obj['txt3'] = fr.add_text('Chennai',width=10,height=1,xy=[400,350])
-	obj['btn1'] = fr.add_button('submit',cb=None,xy=[300,450])
+	obj['btn1'] = fr.add_button('Submit',cb=None,xy=[300,450])
 	obj['lblovr'] = fr.add_label('To all the text boxes',width=32,height=3,xy=[10,150])
-	obj['lblovr'].hide()
+	obj['lblovr'].hide()	
 	
 
 def load_scenes():
-	scn.append( Scene(obj) )
-	scn[0].init()
-	scn[0].init_move({
+	scn.append( Scene(obj,2000) )
+	scn[-1].set_show_once('lblovr','To all the Text Boxes', 2000)
+	scn.append( Scene(obj,2000) )
+	scn[-1].set_flash('txt1 txt2 txt3'.split(),'#368BC1',200)
+	
+	scn.append( Scene(obj,2000) )
+	scn[-1].set_show_once('lblovr','And to all the Drop Downs', 2000)
+	scn.append( Scene(obj,2000) )
+	scn[-1].set_flash(['dd1'],'#FBB917',200)
+	
+	scn.append( Scene(obj,2000) )
+	scn[-1].set_show_once('lblovr','And to all the Labels', 2000)
+	scn.append( Scene(obj,2000) )
+	scn[-1].set_flash('lbl1 lbl2 lbl3 lbl4'.split(),'#B87333',200)
+	
+	scn.append( Scene(obj,2000) )
+	scn[-1].set_show_once('lblovr','And to all the Buttons', 2000)
+	scn.append( Scene(obj,2000) )
+	scn[-1].set_flash(['btn1'],'#FF8040',200)
+
+	scn.append( Scene(obj,2000) )
+	scn[-1].set_show_once('lblovr','Take a break', 2000)
+	scn.append( Scene(obj,2000) )
+	scn[-1].set_show_once('lblovr','And raise a toast', 2000)
+	scn.append( Scene(obj,2000) )
+	scn[-1].set_show_once('lblovr','To my best friend ...', 2000)
+	scn.append( Scene(obj,2000) )
+	scn[-1].set_show_once('lblovr','Mukesh !!!', 2000)
+	
+	scn.append( Scene(obj,2000) )
+	scn[-1].set_move({
 	'lbl4': (100,50)
 	,'dd1': (450,30)
 	,'lbl1': (50,150)
@@ -33,6 +61,19 @@ def load_scenes():
 	,'txt2': (300,250)
 	,'txt3': (550,250)
 	,'btn1': (300,350)})
+	scn.append( Scene(obj,2000) )
+	scn[-1].set_change_text(
+	(('lbl4','***')
+	,('dd1','***')
+	,('lbl1','Wish')
+	,('lbl2','You')
+	,('lbl3','A')
+	,('txt1','Happy')
+	,('txt2','Friendship')
+	,('txt3','Day')
+	,('btn1','Mukesh !!!')),400)
+	
+	scn[0].init()
 	
 
 def animate():
@@ -42,13 +83,14 @@ def animate():
 	if not s.is_finished:
 		app.top.after(s.delay_ms,animate)
 	elif scn_id < len(scn) - 1:
+		dly = s.pafter
 		scn_id += 1		
 		s = scn[scn_id]
 		s.init()
-		app.top.after(s.delay_ms,animate)
+		app.top.after(dly,animate)
 				
 app = MyApp('Happy Friendship Day !!',width=900,height=650)
 load_window()
 load_scenes()
-animate()
+app.top.after(3000,animate)
 app.show()
