@@ -14,10 +14,10 @@ function readMail( qry ) {
 
 function autoRead() {
   let ar = [
-    ['paytm','2d'], ['amazon','2d'], ['dominos','2d']
+    'paytm', 'amazon', 'dominos', 'nsdl', 'hdfcbank', 'irctc', 'nse.co.in'
   ];
   for( var j = 0; j < ar.length; j++ ){
-    var qry = 'from:' + ar[j][0] + ' label:inbox older_than:' + ar[j][1];
+    var qry = 'from:' + ar[j] + ' label:inbox older_than:2d';
     readMail( qry );
   }
 }
@@ -49,4 +49,3 @@ function autoClean(){
   autoRead();
   trashMail( 'older_than:3y' );
 }
-
