@@ -1,6 +1,6 @@
 from __future__ import annotations
 from tkinter import *
-from typing import List
+from typing import List, Callable
 
 
 def pos(elm, pos_ar: List[int]):
@@ -9,17 +9,48 @@ def pos(elm, pos_ar: List[int]):
 
 
 class MyListbox:
-    def __init__(self, prnt, ar: List[str], width: int, height: int, pos_ar: List[int]):
+    def __init__(self, prnt, ar: List[str], cb: Callable, width: int, height: int, pos_ar: List[int]):
         self.prnt = prnt
         self.ar = ar
         self.var: StringVar = StringVar()
         self.elm = Listbox(self.prnt, listvariable=self.var, width=width, height=height)
         pos(self.elm, pos_ar)
         self.load_list()
+        self.elm.bind("<<ListboxSelect>>", cb)
+
+    def clear(self):
+        self.elm.delete(0, END)
 
     def load_list(self):
+        self.clear()
         for i, v in enumerate(self.ar):
             self.elm.insert(i + 1, v)
+
+    def add_item(self, v: str):
+        self.ar.extend([v])
+        self.load_list()
+
+    def select(self, index: int):
+        self.elm.select_clear(0, END)
+        self.elm.selection_set(index)
+        self.elm.see(index)
+        self.elm.activate(index)
+        self.elm.selection_anchor(index)
+
+    def set(self, text):
+        self.var.set(text)
+
+    def get(self):
+        ar = [self.elm.get(i) for i in self.elm.curselection()]
+        if len(ar) > 0:
+            return ar[0]
+        return None
+
+    def get_active_index(self):
+        ar = self.elm.curselection()
+        if len(ar) > 0:
+            return ar[0]
+        return None
 
 
 class MyLabel:
@@ -79,8 +110,9 @@ class MyFrame:
         self.children[nm]: MyText = MyText(self.elm, text, width, height, pos_ar)
         return self.children[nm]
 
-    def add_listbox(self, nm: str, ar: List[str], width: int, height: int, pos_ar: List[int]) -> MyListbox:
-        self.children[nm]: MyListbox = MyListbox(self.elm, ar, width, height, pos_ar)
+    def add_listbox(self, nm: str, ar: List[str], cb: Callable, width: int, height: int,
+                    pos_ar: List[int]) -> MyListbox:
+        self.children[nm]: MyListbox = MyListbox(self.elm, ar, cb, width, height, pos_ar)
         return self.children[nm]
 
     def add_frame(self, title: str, width: int, height: int, pos_ar: List[int]) -> MyFrame:
