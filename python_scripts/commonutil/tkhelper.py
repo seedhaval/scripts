@@ -9,14 +9,13 @@ def pos(elm, pos_ar: List[int]):
 
 
 class MyListbox:
-    def __init__(self, prnt, ar: List[str], cb: Callable, width: int, height: int, pos_ar: List[int]):
+    def __init__(self, prnt, ar: List[str], width: int, height: int, pos_ar: List[int]):
         self.prnt = prnt
         self.ar = ar
         self.var: StringVar = StringVar()
         self.elm = Listbox(self.prnt, listvariable=self.var, width=width, height=height)
         pos(self.elm, pos_ar)
         self.load_list()
-        self.elm.bind("<<ListboxSelect>>", cb)
 
     def clear(self):
         self.elm.delete(0, END)
@@ -30,13 +29,6 @@ class MyListbox:
         self.ar.extend([v])
         self.load_list()
 
-    def select(self, index: int):
-        self.elm.select_clear(0, END)
-        self.elm.selection_set(index)
-        self.elm.see(index)
-        self.elm.activate(index)
-        self.elm.selection_anchor(index)
-
     def set(self, text):
         self.var.set(text)
 
@@ -48,6 +40,7 @@ class MyListbox:
 
     def get_active_index(self):
         ar = self.elm.curselection()
+        print(ar)
         if len(ar) > 0:
             return ar[0]
         return None
@@ -88,6 +81,9 @@ class MyText():
         self.clear()
         self.elm.insert(END, text)
 
+    def get(self):
+        return self.elm.get('1.0', 'end -1c')
+
 
 class MyFrame:
     def __init__(self, prnt, title: str, width: int, height: int, pos_ar: List[int]):
@@ -110,9 +106,8 @@ class MyFrame:
         self.children[nm]: MyText = MyText(self.elm, text, width, height, pos_ar)
         return self.children[nm]
 
-    def add_listbox(self, nm: str, ar: List[str], cb: Callable, width: int, height: int,
-                    pos_ar: List[int]) -> MyListbox:
-        self.children[nm]: MyListbox = MyListbox(self.elm, ar, cb, width, height, pos_ar)
+    def add_listbox(self, nm: str, ar: List[str], width: int, height: int, pos_ar: List[int]) -> MyListbox:
+        self.children[nm]: MyListbox = MyListbox(self.elm, ar, width, height, pos_ar)
         return self.children[nm]
 
     def add_frame(self, title: str, width: int, height: int, pos_ar: List[int]) -> MyFrame:
