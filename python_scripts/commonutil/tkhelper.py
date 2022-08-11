@@ -40,7 +40,6 @@ class MyListbox:
 
     def get_active_index(self):
         ar = self.elm.curselection()
-        print(ar)
         if len(ar) > 0:
             return ar[0]
         return None
