@@ -20,7 +20,7 @@ def load_ui():
     fr2.add_label("lbl2", "So that i can get this ...", width=25, height=1, pos_ar=[3, 1, 1, 1])
     fr2.add_label("lbl3", "Because it is my duty to ...", width=25, height=1, pos_ar=[3, 3, 1, 1])
     obj['txt2'] = fr2.add_text("txt2", "", width=25, height=3, pos_ar=[4, 1, 1, 1])
-    fr2.add_label("lbl4", "-->", width=4, height=1, pos_ar=[4, 2, 3, 1])
+    fr2.add_label("lbl4", "➜\n\n", width=4, height=3, pos_ar=[4, 2, 3, 1])
     obj['txt3'] = fr2.add_text("txt3", "", width=25, height=3, pos_ar=[4, 3, 1, 1])
     fr2.add_button("btn1", "Save", save, [5, 1, 1, 3])
 
