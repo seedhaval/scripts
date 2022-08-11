@@ -58,6 +58,9 @@ class MyLabel:
     def set(self, text):
         self.var.set(text)
 
+    def set_font_size(self,sz: int):
+        self.elm.config(font=("verdana",sz))
+
 
 class MyButton:
     def __init__(self, prnt, text: str, cb, pos_ar: List[int]):

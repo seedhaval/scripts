@@ -7,7 +7,6 @@ import os
 from nltk.corpus import stopwords
 from nltk.tokenize import word_tokenize
 from nltk.stem import PorterStemmer
-from collections import Counter
 
 s1 = "What you love"
 s2 = "What you are\ngood at"
