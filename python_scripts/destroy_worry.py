@@ -30,7 +30,7 @@ def show_img():
 
 
 def cut_circle(event):
-    x,y = event.x, event.y
+    x, y = event.x, event.y
     global imgtk
     r = random.randint(20, 40)
     mask_draw.ellipse((x - r, y - r, x + r, y + r), fill=0)
