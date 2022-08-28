@@ -40,7 +40,7 @@ class Car:
             self.left += self.speed
 
 def draw_img(car_ar,fid):
-    bg = Image.new('RGB',(1600,900),(255,255,255))
+    bg = Image.open('base.jpg')
     for car in car_ar:
         car.shift(fid)
         bg.paste(car.img,(car.left,car.top),car.img)
