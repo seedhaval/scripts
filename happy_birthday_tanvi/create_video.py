@@ -3,11 +3,13 @@ import glob
 import random
 from moviepy.editor import *
 
+car_lst_lr = list(glob.glob('car_img/lr/*.*'))
+car_lst_ud = list(glob.glob('car_img/ud/*.*'))
 cnv_width = 1600
 cnv_height = 900
 img_px = 150
 
-l, r, u, d = "l r u d".split()
+l, r, u, d = "left right up down".split()
 
 
 class Car:
@@ -17,7 +19,10 @@ class Car:
         self.dr = dr
         self.lftdx = lftdx
         self.topdx = topdx
-        self.fl = random.choice(list(glob.glob('car_img/%s/*.*' % dr)))
+        if dr in (l,r):
+            self.fl = random.choice(car_lst_lr)
+        else:
+            self.fl = random.choice(car_lst_ud)
         self.img = Image.open(self.fl)
         self.base_img = self.img.copy()
         self.speed = random.choice((15, 38))
@@ -31,7 +36,7 @@ class Car:
             self.left -= self.lftdx
             self.top -= self.topdx
             self.img = self.base_img.resize((sz, sz))
-            self.img = ImageEnhance.Brightness(self.img).enhance(1 + ((fid - 25) * .05))
+            self.img = ImageEnhance.Brightness(self.img).enhance(1+((fid-25)*.02))
         elif self.static:
             return
         elif self.dr == d:
