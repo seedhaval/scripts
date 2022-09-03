@@ -1,4 +1,4 @@
-from PIL import Image, ImageDraw
+from PIL import Image, ImageDraw, ImageOps
 import glob
 import random
 from moviepy.editor import *
@@ -130,67 +130,111 @@ class Gift:
         self.angle = 0
         self.fid = 0
         self.img = None
-        self.speed = 5
+        self.speed = 7
+        self.zoom_factor = 10
         self.mode = 'move up'
+        self.gift_top = None
+        self.gift_img = None
+        self.gift_img_top = None
+        self.gift_img_left = None
+        self.gift_width = 150
 
     def recreate_image(self):
-        self.img = Image.new('RGBA',(self.width,self.height))
+        self.img = Image.new('RGBA', (self.width, self.height))
+        if self.mode == 'pop out':
+            gift_img = ImageOps.pad(self.gift, (150, 150))
+            self.img.paste(gift_img, (0, self.gift_top), gift_img)
         draw = ImageDraw.Draw(self.img)
-        draw.rectangle((0,self.box_top,self.box_width,self.box_top+self.box_height),fill=self.color)
-        x1, y1 = rotate_point(-200,0,self.angle,200,self.box_top)
-        x2, y2 = (200,self.box_top)
-        draw.line((x1,y1,x2,y2),fill=self.color,width=30)
+        draw.rectangle((0, self.box_top, self.box_width, self.box_top + self.box_height), fill=self.color)
+        x1, y1 = rotate_point(-200, 0, self.angle, 200, self.box_top)
+        x2, y2 = (200, self.box_top)
+        draw.line((x1, y1, x2, y2), fill=self.color, width=30)
 
     def shift(self):
-        if self.mode == 'move up':
+        if self.mode == 'move up' and self.fid > 5:
             self.box_top -= self.speed
-        elif self.mode == 'open box':
+        elif self.mode == 'open box' and self.fid > 30:
             self.angle -= self.speed
+            self.gift_top = self.box_top
+        elif self.mode == 'pop out' and self.fid > 55:
+            self.gift_top -= self.speed
         self.recreate_image()
         self.fid += 1
-        if self.mode == 'move up' and self.fid > 20:
+        if self.mode == 'move up' and self.fid > 25:
             self.mode = 'open box'
-        elif self.mode == 'open box' and self.fid > 40:
+        elif self.mode == 'open box' and self.fid > 50:
             self.mode = 'pop out'
 
-def draw_train(bg,shift=False):
+    def set_zoom(self):
+        self.mode = 'Zoom In'
+        self.recreate_image()
+        self.gift_img_top = self.top + self.gift_top
+        self.gift_img_left = self.left
+        self.fid = 1
+
+    def zoom_img(self):
+        if self.fid < 20:
+            self.gift_img_top -= self.zoom_factor
+            self.gift_img_left -= self.zoom_factor
+            self.gift_width += self.zoom_factor
+            self.gift_img = Image.new('RGBA',(self.gift_width,self.gift_width))
+            gift_img = ImageOps.pad(self.gift, (self.gift_width, self.gift_width))
+            self.gift_img.paste(gift_img, (0,0), gift_img)
+        self.fid += 1
+
+
+def draw_train(bg, shift=False):
     if shift == True:
         engine.shift()
-    bg.paste(engine.img, (engine.left, engine.top), engine.img)
+    if -800 <= engine.left <= 2200:
+        bg.paste(engine.img, (engine.left, engine.top), engine.img)
     for t in t_ar:
         if shift == True:
             t.shift()
-        bg.paste(t.img, (t.left, t.top), t.img)
+        if -800 <= t.left <= 2200:
+            bg.paste(t.img, (t.left, t.top), t.img)
 
+
+base_img = Image.open('base_img.jpg')
 t_ar = []
 gift_ar = []
 clr_ar = [(255, 140, 0), (102, 205, 170), (123, 104, 238), (255, 105, 180), (176, 196, 222)]
 animal_ar = ('elephant', 'duck', 'giraffe', 'penguin', 'panda')
-gft_lst = ('teddy_bear','barbie','chocolate','cake','ball')
+gft_lst = ('teddy_bear', 'barbie', 'chocolate', 'cake', 'ball')
 engine = Engine(-470, 250)
 left = -470 - 800
 for i in range(5):
     t_ar.append(Trolley(left, 250, clr_ar[i], animal_ar[i]))
-    gift_ar.append(Gift(clr_ar[i],gft_lst[i],725,195))
+    gift_ar.append(Gift(clr_ar[i], gft_lst[i], 725, 195))
     left -= 800
 
 i = 0
 cur_idx = 0
-for j in range(600):
+for j in range(200):
     print('processing frame ', i)
-    if t_ar[cur_idx].left > 325:
+    if cur_idx < len(t_ar) and t_ar[cur_idx].left > 325:
         g = gift_ar[cur_idx]
-        for k in range(40):
+        for k in range(95):
             print('processing frame ', i)
             g.shift()
-            bg = Image.open('base_img.jpg')
-            bg.paste(g.img, (g.left,g.top),g.img)
-            draw_train(bg,False)
+            bg = base_img.copy()
+            bg.paste(g.img, (g.left, g.top), g.img)
+            draw_train(bg, False)
+            bg.save('out_frames/img_%03d.png' % i)
+            i += 1
+        g.set_zoom()
+        for k in range(25):
+            print('processing frame ', i)
+            g.zoom_img()
+            bg = base_img.copy()
+            bg.paste(g.img, (g.left, g.top), g.img)
+            draw_train(bg, False)
+            bg.paste(g.gift_img, (g.gift_img_left, g.gift_img_top), g.gift_img)
             bg.save('out_frames/img_%03d.png' % i)
             i += 1
         cur_idx += 1
-    bg = Image.open('base_img.jpg')
-    draw_train(bg,True)
+    bg = base_img.copy()
+    draw_train(bg, True)
     bg.save('out_frames/img_%03d.png' % i)
     i += 1
 
