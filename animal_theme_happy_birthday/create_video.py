@@ -1,8 +1,10 @@
-from PIL import Image, ImageDraw, ImageOps
+from PIL import Image, ImageDraw, ImageOps, ImageFont
 import glob
 import random
 from moviepy.editor import *
 import math
+
+person_name = 'Abcdef'
 
 
 def rotate_point(x, y, degrees, shftx, shfty):
@@ -133,6 +135,7 @@ class Gift:
         self.speed = 7
         self.zoom_factor = 10
         self.mode = 'move up'
+        self.font = ImageFont.truetype(r'C:\Windows\Fonts\verdana.ttf', size=36)
         self.gift_top = None
         self.gift_img = None
         self.gift_img_top = None
@@ -143,9 +146,10 @@ class Gift:
         self.img = Image.new('RGBA', (self.width, self.height))
         if self.mode == 'pop out':
             gift_img = ImageOps.pad(self.gift, (150, 150))
-            self.img.paste(gift_img, (0, self.gift_top), gift_img)
+            self.img.paste(gift_img, (25, self.gift_top), gift_img)
         draw = ImageDraw.Draw(self.img)
         draw.rectangle((0, self.box_top, self.box_width, self.box_top + self.box_height), fill=self.color)
+        draw.text((100, self.box_top + 75), person_name, font=self.font, anchor="mm", fill=(0, 0, 0))
         x1, y1 = rotate_point(-200, 0, self.angle, 200, self.box_top)
         x2, y2 = (200, self.box_top)
         draw.line((x1, y1, x2, y2), fill=self.color, width=30)
@@ -169,7 +173,7 @@ class Gift:
         self.mode = 'Zoom In'
         self.recreate_image()
         self.gift_img_top = self.top + self.gift_top
-        self.gift_img_left = self.left
+        self.gift_img_left = self.left + 25
         self.fid = 1
 
     def zoom_img(self):
@@ -177,9 +181,9 @@ class Gift:
             self.gift_img_top -= self.zoom_factor
             self.gift_img_left -= self.zoom_factor
             self.gift_width += self.zoom_factor
-            self.gift_img = Image.new('RGBA',(self.gift_width,self.gift_width))
+            self.gift_img = Image.new('RGBA', (self.gift_width, self.gift_width))
             gift_img = ImageOps.pad(self.gift, (self.gift_width, self.gift_width))
-            self.gift_img.paste(gift_img, (0,0), gift_img)
+            self.gift_img.paste(gift_img, (0, 0), gift_img)
         self.fid += 1
 
 
@@ -210,7 +214,7 @@ for i in range(5):
 
 i = 0
 cur_idx = 0
-for j in range(200):
+for j in range(600):
     print('processing frame ', i)
     if cur_idx < len(t_ar) and t_ar[cur_idx].left > 325:
         g = gift_ar[cur_idx]
