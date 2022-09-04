@@ -224,22 +224,22 @@ for j in range(600):
             bg = base_img.copy()
             bg.paste(g.img, (g.left, g.top), g.img)
             draw_train(bg, False)
-            bg.save('out_frames/img_%03d.png' % i)
+            bg.save('out_frames/img_%04d.png' % i)
             i += 1
         g.set_zoom()
-        for k in range(25):
+        for k in range(30):
             print('processing frame ', i)
             g.zoom_img()
             bg = base_img.copy()
             bg.paste(g.img, (g.left, g.top), g.img)
             draw_train(bg, False)
             bg.paste(g.gift_img, (g.gift_img_left, g.gift_img_top), g.gift_img)
-            bg.save('out_frames/img_%03d.png' % i)
+            bg.save('out_frames/img_%04d.png' % i)
             i += 1
         cur_idx += 1
     bg = base_img.copy()
     draw_train(bg, True)
-    bg.save('out_frames/img_%03d.png' % i)
+    bg.save('out_frames/img_%04d.png' % i)
     i += 1
 
 clip = ImageSequenceClip(sorted(glob.glob('out_frames/*.*')), fps=20)
