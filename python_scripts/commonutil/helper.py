@@ -1,7 +1,7 @@
 from __future__ import annotations
 from pathlib import Path
 import json
-
+from typing import List
 
 class File:
     def __init__(self, fl: str):
@@ -34,3 +34,11 @@ class Folder:
 
 def dummy(*args, **kwargs):
     pass
+
+
+def get_choice_from_user(title:str, options: List[str]) -> str:
+    print( f'{"="*5} {title} {"="*5}' )
+    for i,v in enumerate(options,1):
+        print( f'{i} {v}')
+    ch = input('Enter choice : ')
+    return options[int(ch)-1]
