@@ -1,0 +1,1 @@
+/home/dvs/tmp/brython/brython_stdlib.js
