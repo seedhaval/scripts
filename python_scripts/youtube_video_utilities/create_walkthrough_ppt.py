@@ -5,12 +5,13 @@ from pygments.formatters import ImageFormatter
 from pygments import lexers
 
 height = 31
-max_scroll = 10
-buffer = 2
+max_scroll = 20
+buffer = 5
 width = 81
 
 fl = File(r"D:\scripts\scripts\python_scripts\commonutil\tkhelper.py")
 data = fl.readlines()
+data.extend([' ']*10)
 data_fmt = [x+' '*(width-len(x))+'.' for x in data]
 cnt = len(data)
 img_fldr = r"D:\tmp"
