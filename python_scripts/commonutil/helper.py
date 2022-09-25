@@ -15,6 +15,9 @@ class File:
         with open(self.fl, 'r') as f:
             return f.read()
 
+    def readlines(self) -> List[str]:
+        return self.read().splitlines()
+
     def append(self, txt: str) -> None:
         with open(self.fl, 'a') as f:
             f.write(txt)

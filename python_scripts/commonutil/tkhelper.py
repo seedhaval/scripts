@@ -5,15 +5,18 @@ from typing import List, Callable
 
 def pos(elm, pos_ar: List[int]):
     row, col, rowspan, colspan = pos_ar
-    elm.grid(row=row, column=col, rowspan=rowspan, columnspan=colspan, padx=5, pady=5)
+    elm.grid(row=row, column=col, rowspan=rowspan, columnspan=colspan, padx=5,
+             pady=5)
 
 
 class MyListbox:
-    def __init__(self, prnt, ar: List[str], width: int, height: int, pos_ar: List[int]):
+    def __init__(self, prnt, ar: List[str], width: int, height: int,
+                 pos_ar: List[int]):
         self.prnt = prnt
         self.ar = ar
         self.var: StringVar = StringVar()
-        self.elm = Listbox(self.prnt, listvariable=self.var, width=width, height=height)
+        self.elm = Listbox(self.prnt, listvariable=self.var, width=width,
+                           height=height)
         pos(self.elm, pos_ar)
         self.load_list()
 
@@ -46,7 +49,8 @@ class MyListbox:
 
 
 class MyLabel:
-    def __init__(self, prnt, text: str, width: int, height: int, pos_ar: List[int]):
+    def __init__(self, prnt, text: str, width: int, height: int,
+                 pos_ar: List[int]):
         self.prnt = prnt
         self.var: StringVar = StringVar()
         self.elm = Label(self.prnt, textvariable=self.var)
@@ -58,8 +62,8 @@ class MyLabel:
     def set(self, text):
         self.var.set(text)
 
-    def set_font_size(self,sz: int):
-        self.elm.config(font=("verdana",sz))
+    def set_font_size(self, sz: int):
+        self.elm.config(font=("verdana", sz))
 
 
 class MyButton:
@@ -70,7 +74,8 @@ class MyButton:
 
 
 class MyText():
-    def __init__(self, prnt, text: str, width: int, height: int, pos_ar: List[int]):
+    def __init__(self, prnt, text: str, width: int, height: int,
+                 pos_ar: List[int]):
         self.prnt = prnt
         self.elm = Text(self.prnt, width=width, height=height)
         self.set(text)
@@ -88,7 +93,8 @@ class MyText():
 
 
 class MyFrame:
-    def __init__(self, prnt, title: str, width: int, height: int, pos_ar: List[int]):
+    def __init__(self, prnt, title: str, width: int, height: int,
+                 pos_ar: List[int]):
         self.elm: LabelFrame = LabelFrame(prnt, text=title)
         self.elm.config(width=width)
         self.elm.config(height=height)
@@ -96,23 +102,30 @@ class MyFrame:
         pos(self.elm, pos_ar)
         self.children = {}
 
-    def add_label(self, nm: str, text: str, width: int, height: int, pos_ar: List[int]) -> MyLabel:
-        self.children[nm]: MyLabel = MyLabel(self.elm, text, width, height, pos_ar)
+    def add_label(self, nm: str, text: str, width: int, height: int,
+                  pos_ar: List[int]) -> MyLabel:
+        self.children[nm]: MyLabel = MyLabel(self.elm, text, width, height,
+                                             pos_ar)
         return self.children[nm]
 
     def add_button(self, nm: str, text: str, cb, pos_ar: List[int]) -> MyButton:
         self.children[nm]: MyButton = MyButton(self.elm, text, cb, pos_ar)
         return self.children[nm]
 
-    def add_text(self, nm: str, text: str, width: int, height: int, pos_ar: List[int]) -> MyText:
-        self.children[nm]: MyText = MyText(self.elm, text, width, height, pos_ar)
+    def add_text(self, nm: str, text: str, width: int, height: int,
+                 pos_ar: List[int]) -> MyText:
+        self.children[nm]: MyText = MyText(self.elm, text, width, height,
+                                           pos_ar)
         return self.children[nm]
 
-    def add_listbox(self, nm: str, ar: List[str], width: int, height: int, pos_ar: List[int]) -> MyListbox:
-        self.children[nm]: MyListbox = MyListbox(self.elm, ar, width, height, pos_ar)
+    def add_listbox(self, nm: str, ar: List[str], width: int, height: int,
+                    pos_ar: List[int]) -> MyListbox:
+        self.children[nm]: MyListbox = MyListbox(self.elm, ar, width, height,
+                                                 pos_ar)
         return self.children[nm]
 
-    def add_frame(self, title: str, width: int, height: int, pos_ar: List[int]) -> MyFrame:
+    def add_frame(self, title: str, width: int, height: int,
+                  pos_ar: List[int]) -> MyFrame:
         self.children['title'] = MyFrame(self.elm, title, width, height, pos_ar)
         return self.children['title']
 
@@ -126,7 +139,8 @@ class MyApp:
         self.top.geometry(f'{width}x{height}+10+10')
         self.children = {}
 
-    def add_frame(self, title: str, width: int, height: int, pos_ar: list[int]) -> MyFrame:
+    def add_frame(self, title: str, width: int, height: int,
+                  pos_ar: list[int]) -> MyFrame:
         self.children['title'] = MyFrame(self.top, title, width, height, pos_ar)
         return self.children['title']
 
