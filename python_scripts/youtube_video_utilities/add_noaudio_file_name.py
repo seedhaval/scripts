@@ -8,3 +8,5 @@ def main():
         if '_noaudio' not in fl:
             shutil.move(fl,fl.replace(".mp4","_noaudio.mp4"))
 
+if __name__ == "__main__":
+    main()

@@ -53,3 +53,6 @@ def main():
                                      height=Inches(7.5))
 
     prs.save(ppt_fl)
+
+if __name__ == "__main__":
+    main()

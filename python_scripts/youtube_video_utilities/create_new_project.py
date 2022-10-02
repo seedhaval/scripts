@@ -19,5 +19,6 @@ def main():
         File( proj_dir + r"\info.txt").write(info_txt)
         shutil.copy(tmplt_dir+r"\images.pptx",proj_dir)
 
-
+if __name__ == "__main__":
+    main()
 

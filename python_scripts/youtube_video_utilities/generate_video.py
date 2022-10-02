@@ -17,6 +17,7 @@ def generate(fl):
     shutil.move(fl + "_noaudio.mp4", cmplt_fldr + "/" + fl + "_noaudio.mp4")
     shutil.copy(fl + ".mp4", cmplt_fldr + "/" + fl + ".mp4")
     os.remove(fl + ".aup3")
+    return 0
 
 def main():
     os.chdir(r'D:\Documents\notes_doodle')

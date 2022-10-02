@@ -57,3 +57,6 @@ def main():
     os.chdir(inp_fldr)
     for fl in Path(inp_fldr).glob("*.txt"):
         generate(fl.stem)
+
+if __name__ == "__main__":
+    main()
