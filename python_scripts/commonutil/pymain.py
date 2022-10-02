@@ -15,6 +15,7 @@ ch_ar = ["Create new Youtube project",
          "Add _noaudio to file name"]
 
 while True:
+    print('')
     ch = get_choice_from_user("Select action", ch_ar)
     if ch == "Create new Youtube project":
         create_new_project.main()
