@@ -1,14 +1,14 @@
 import os
 import shutil
 from zipfile import ZipFile
+from pathlib import Path
 
 tmplt_fldr = r"D:\Documents\notes_doodle\benime_template"
 inp_fldr = r"D:\Documents\notes_doodle"
 
-def main():
+def generate(inp_fl):
     os.chdir(inp_fldr)
 
-    inp_fl = input("Enter file name : ")
     out_fldr = r"D:\Documents\notes_doodle" + "\\" + inp_fl
 
     with open(tmplt_fldr + "//benime_document_parent.json") as f:
@@ -18,6 +18,7 @@ def main():
         data = [x.strip() for x in f.readlines() if x.strip()]
 
     for i, ln in enumerate(data):
+        ln = ln.replace("\\","\\\\").replace('"','\\"')
         if i % 6 == 0:
             t = i // 6
             fmt = "xt%s" % (t + 1)
@@ -41,3 +42,7 @@ def main():
                 zip.write(file_name,arcname=file)
 
     shutil.copy(zipfl,r"G:\My Drive\Home\notes")
+
+def main():
+    for fl in Path(inp_fldr).glob("*.txt"):
+        generate(fl.stem)
