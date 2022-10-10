@@ -19,7 +19,13 @@ def generate(inp_fl):
     if data[-1].startswith("~"):
         return
 
-    for i, ln in enumerate(data):
+    title = data[0]
+    part = re.findall(r'\d+', inp_fl)[0]
+
+    out = out.replace("=xtTitle=", title)
+    out = out.replace("=xtPart=", part)
+
+    for i, ln in enumerate(data[1:]):
         ln = ln.replace("\\", "\\\\").replace('"', '\\"')
         if i % 6 == 0:
             t = i // 6
@@ -48,7 +54,7 @@ def generate(inp_fl):
     shutil.rmtree(out_fldr)
     base_nm = re.sub(r'_\d+$', '', inp_fl)
     cmplt_fldr = "completed/" + base_nm
-    os.makedirs(cmplt_fldr)
+    os.makedirs(cmplt_fldr, exist_ok=True)
     shutil.move(zipfl, cmplt_fldr + "/" + inp_fl + ".zip")
     shutil.move(inp_fl + ".txt", cmplt_fldr + "/" + inp_fl + ".txt")
 
@@ -57,6 +63,7 @@ def main():
     os.chdir(inp_fldr)
     for fl in Path(inp_fldr).glob("*.txt"):
         generate(fl.stem)
+
 
 if __name__ == "__main__":
     main()
