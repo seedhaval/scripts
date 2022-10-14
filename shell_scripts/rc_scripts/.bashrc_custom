@@ -8,3 +8,4 @@ export PATH=$PATH:~/scripts/bin/
 set -o vi
 
 alias py3=python3
+alias run_interface="python3 ~/scripts/shell_scripts/userland/interface.py"
