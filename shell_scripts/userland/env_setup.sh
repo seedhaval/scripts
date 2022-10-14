@@ -24,5 +24,5 @@ echo "Cloning repository"
 cd
 git clone git@github.com:seedhaval/scripts.git
 
-echo "Transfering control to env_setup.py to carry out chechpointed setup"
-python3 ~/scripts/userland/env_setup.py
+echo "Transfering control to env_setup.py to carry out checkpointed setup"
+python3 ~/scripts/shell_scripts/userland/env_setup.py
