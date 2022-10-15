@@ -21,7 +21,8 @@ def generate(fl):
     shutil.move(fl + "_noaudio.mp4", cmplt_fldr + "/" + fl + "_noaudio.mp4")
     shutil.copy(fl + ".mp4", cmplt_fldr + "/" + fl + ".mp4")
     os.remove(fl + ".aup3")
-    shutil.move(fl + ".mp4", "Revision of " + title + " - " + part + ".mp4")
+    shutil.move(fl + ".mp4", "Revision of " + title + " - Part " + part +
+                ".mp4")
     return 0
 
 
