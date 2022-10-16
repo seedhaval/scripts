@@ -3,11 +3,11 @@ import sys
 sys.path.append(r"D:\scripts\scripts")
 
 from python_scripts.commonutil.helper import get_choice_from_user
-from python_scripts.youtube_video_utilities import create_new_project, \
+from python_scripts.youtube_video_utilities import create_new_worksheet_project, \
     create_walkthrough_ppt, generate_video, generate_benime_file, \
     create_audacity_files, add_noaudio_file_name
 
-ch_ar = ["Create new Youtube project",
+ch_ar = ["Create new worksheet project",
          "Create walkthrough PPT",
          "Generate Benime file",
          "Generate video",
@@ -17,8 +17,8 @@ ch_ar = ["Create new Youtube project",
 while True:
     print('')
     ch = get_choice_from_user("Select action", ch_ar)
-    if ch == "Create new Youtube project":
-        create_new_project.main()
+    if ch == "Create new worksheet project":
+        create_new_worksheet_project.main()
     elif ch == "Create walkthrough PPT":
         create_walkthrough_ppt.main()
     elif ch == "Generate video":
