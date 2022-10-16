@@ -31,7 +31,6 @@ def get_section(strt, end):
 
 
 def write_problem(left: int, top: int, data, ws):
-    print(data)
     for i in range(len(data['left'])):
         ws.cell(top + i, left).value = data['left'][i]
         ws.cell(top + i, left).font = Font(size=14)
