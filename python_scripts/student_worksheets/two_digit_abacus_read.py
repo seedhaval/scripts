@@ -24,9 +24,13 @@ bean_radius = 7
 def draw_circles(xcenter, bottom, count, radius, draw):
     btm = bottom
     for i in range(count):
+        if i > 4:
+            fill=(255, 255, 255, 255)
+        else:
+            fill=(0, 0, 0, 255)
         top = btm - (2 * radius)
         draw.ellipse((xcenter - radius, top, xcenter + radius, btm),
-                     fill=(255, 255, 255, 255), outline=(0, 0, 0, 255))
+                     fill=fill, outline=(0, 0, 0, 255))
         btm = top
 
 
