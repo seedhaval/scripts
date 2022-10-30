@@ -41,7 +41,7 @@ def write_problem(left: int, top: int, data, ws):
         ws.cell(top + i, left + 2).alignment = Alignment(wrap_text=True,
                                                          vertical='center')
         ws.row_dimensions[top + i].height = 30
-    for i in range(-1, 4):
+    for i in range(3):
         ws.cell(top + len(data['left']) + 1, left + i).border = Border(
             bottom=regular)
 

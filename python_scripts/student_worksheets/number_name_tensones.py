@@ -6,7 +6,7 @@ import os
 import random
 from num2words import num2words
 
-num_problems = 50
+num_problems = 20
 problem_page_break_at = 20
 regular = Side(border_style='medium', color='000000')
 wb = Workbook()

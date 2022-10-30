@@ -7,7 +7,7 @@ from openpyxl.worksheet.pagebreak import Break
 import os
 import random
 
-num_problems = 10
+num_problems = 8
 cols_per_page = 2
 rows_per_page = 4
 font = ImageFont.truetype("arial.ttf", 14)
