@@ -3,6 +3,7 @@ from tkinter import filedialog
 from typing import List
 from PIL import Image, ImageTk, ImageEnhance
 from math import sqrt
+from math import atan2, degrees
 
 w = 500
 h = 700
@@ -21,6 +22,14 @@ base_fldr = [
 img = {}
 pt_ar = []
 
+
+def angle_between(p1, p2, p3):
+    x1, y1 = p1
+    x2, y2 = p2
+    x3, y3 = p3
+    deg1 = (360 + degrees(atan2(x1 - x2, y1 - y2))) % 360
+    deg2 = (360 + degrees(atan2(x3 - x2, y3 - y2))) % 360
+    return deg2 - deg1 if deg1 <= deg2 else 360 - (deg1 - deg2)
 
 def get_distance(p1: List[int], p2: List[int]):
     x1, y1 = p1
@@ -41,6 +50,7 @@ def refresh_canvas():
             imgnew = imgnew.transpose(Image.FLIP_TOP_BOTTOM)
         imgnew = ImageEnhance.Brightness(imgnew).enhance(img[k]['brightness'])
         imgnew = ImageEnhance.Contrast(imgnew).enhance(img[k]['contrast'])
+        imgnew = imgnew.rotate(img[k]['rotate'],expand=True)
         base_img.paste(imgnew, (img[k]['left'], img[k]['top']), imgnew)
     base_img.save(r"C:\Users\Dell\OneDrive\Desktop\a.png")
     imgtk = ImageTk.PhotoImage(base_img.convert("RGB"))
@@ -208,6 +218,11 @@ def handle_click(event):
         refresh_canvas()
     if action.get() == 'flip V':
         img[key]['flipv'] = not img[key]['flipv']
+        pt_ar.clear()
+        refresh_canvas()
+    if action.get() == "rotate" and len(pt_ar) == 3:
+        s = angle_between(*pt_ar)
+        img[key]['rotate'] = (img[key]['rotate'] + s)
         pt_ar.clear()
         refresh_canvas()
 
