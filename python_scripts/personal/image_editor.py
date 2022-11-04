@@ -2,6 +2,7 @@ from tkinter import *
 from tkinter import filedialog
 from typing import List
 from PIL import Image, ImageDraw, ImageTk
+from math import sqrt
 
 w = 500
 h = 700
@@ -17,6 +18,13 @@ base_fldr = [
 ]
 
 img = {}
+pt_ar = []
+
+
+def get_distance(p1: List[int], p2: List[int]):
+    x1, y1 = p1
+    x2, y2 = p2
+    return sqrt(((x2 - x1) ** 2) + ((y2 - y1) ** 2))
 
 
 def refresh_canvas():
@@ -99,6 +107,11 @@ class MyCanvas:
         self.elm: Canvas = Canvas(prnt, height=height, width=width)
         self.imgtk = None
         pos(self.elm, pos_ar)
+        self.cb = None
+
+    def set_callback(self, cb):
+        self.cb = cb
+        self.elm.bind('<Button-1>', self.cb)
 
     def set_image(self, imgtk):
         self.imgtk = imgtk
@@ -159,10 +172,22 @@ class MyApp:
         self.top.mainloop()
 
 
+def handle_click(event):
+    pt_ar.append([event.x, event.y])
+    key = int(layer.get()) - 1
+    if action.get() == "move" and len( pt_ar ) == 2:
+        img[key]['left'] += pt_ar[1][0] - pt_ar[0][0]
+        img[key]['top'] += pt_ar[1][1] - pt_ar[0][1]
+        pt_ar.clear()
+        refresh_canvas()
+
+
+
 app = MyApp("Image Editor", w, h)
 frm: MyFrame = app.add_frame("Image Editor", w - 10, h - 10, [1, 1, 1, 1])
 layer: MyDropDown = frm.add_dropdown("layer", '1 2 3 4'.split(), [1, 1, 1, 1])
 selfile: MyButton = frm.add_button("selfile", "...", selectFile, [1, 2, 1, 1])
 action: MyDropDown = frm.add_dropdown("action", actions, [1, 3, 1, 1])
 cnv: MyCanvas = frm.add_canvas("cnv", cnvw, cnvh, [2, 1, 1, 3])
+cnv.set_callback(handle_click)
 app.show()
