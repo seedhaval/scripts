@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import filedialog
 from typing import List
-from PIL import Image, ImageTk
+from PIL import Image, ImageTk, ImageEnhance
 from math import sqrt
 
 w = 500
@@ -39,6 +39,8 @@ def refresh_canvas():
             imgnew = imgnew.transpose(Image.FLIP_LEFT_RIGHT)
         if img[k]['flipv'] == True:
             imgnew = imgnew.transpose(Image.FLIP_TOP_BOTTOM)
+        imgnew = ImageEnhance.Brightness(imgnew).enhance(img[k]['brightness'])
+        imgnew = ImageEnhance.Contrast(imgnew).enhance(img[k]['contrast'])
         base_img.paste(imgnew, (img[k]['left'], img[k]['top']), imgnew)
     base_img.save(r"C:\Users\Dell\OneDrive\Desktop\a.png")
     imgtk = ImageTk.PhotoImage(base_img.convert("RGB"))
@@ -47,8 +49,8 @@ def refresh_canvas():
 
 def load_img(imgfl):
     key = int(layer.get()) - 1
-    img[key] = {'refobj': Image.open(imgfl), 'contrast': 100, 'brightness':
-        100, 'rotate': 0, 'top': 1, 'left': 1, 'fliph': False, 'flipv': False}
+    img[key] = {'refobj': Image.open(imgfl), 'contrast': 1.0, 'brightness':
+        1.0, 'rotate': 0, 'top': 1, 'left': 1, 'fliph': False, 'flipv': False}
     img[key]['width'], img[key]['height'] = img[key]['refobj'].size
     rx = cnvw * 1.00 / img[key]['width']
     ry = cnvh * 1.00 / img[key]['height']
@@ -188,6 +190,16 @@ def handle_click(event):
     if action.get() == "scale" and len(pt_ar) == 3:
         s = get_distance(pt_ar[0], pt_ar[2]) / get_distance(pt_ar[0], pt_ar[1])
         img[key]['scale'] *= s
+        pt_ar.clear()
+        refresh_canvas()
+    if action.get() == "brightness" and len(pt_ar) == 3:
+        s = get_distance(pt_ar[0], pt_ar[2]) / get_distance(pt_ar[0], pt_ar[1])
+        img[key]['brightness'] *= s
+        pt_ar.clear()
+        refresh_canvas()
+    if action.get() == "contrast" and len(pt_ar) == 3:
+        s = get_distance(pt_ar[0], pt_ar[2]) / get_distance(pt_ar[0], pt_ar[1])
+        img[key]['contrast'] *= s
         pt_ar.clear()
         refresh_canvas()
     if action.get() == 'flip H':
