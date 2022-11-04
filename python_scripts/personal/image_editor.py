@@ -1,7 +1,7 @@
 from tkinter import *
 from tkinter import filedialog
 from typing import List
-from PIL import Image, ImageDraw, ImageTk
+from PIL import Image, ImageTk
 from math import sqrt
 
 w = 500
@@ -9,7 +9,8 @@ h = 700
 cnvw = w - 20
 cnvh = h - 100
 
-actions = ["move", "rotate", "scale", "contrast", "brightness"]
+actions = ["move", "rotate", "scale", "contrast", "brightness", "flip H",
+           "flip V"]
 
 base_fldr = [
     r"D:\Documents\Python create puzzles\2_digit_addition\images",
@@ -34,6 +35,10 @@ def refresh_canvas():
         imgw = int(img[k]['width'] * img[k]['scale'])
         imgh = int(img[k]['height'] * img[k]['scale'])
         imgnew = imgnew.resize((imgw, imgh))
+        if img[k]['fliph'] == True:
+            imgnew = imgnew.transpose(Image.FLIP_LEFT_RIGHT)
+        if img[k]['flipv'] == True:
+            imgnew = imgnew.transpose(Image.FLIP_TOP_BOTTOM)
         base_img.paste(imgnew, (img[k]['left'], img[k]['top']), imgnew)
     base_img.save(r"C:\Users\Dell\OneDrive\Desktop\a.png")
     imgtk = ImageTk.PhotoImage(base_img.convert("RGB"))
@@ -43,7 +48,7 @@ def refresh_canvas():
 def load_img(imgfl):
     key = int(layer.get()) - 1
     img[key] = {'refobj': Image.open(imgfl), 'contrast': 100, 'brightness':
-        100, 'rotate': 0, 'top': 1, 'left': 1}
+        100, 'rotate': 0, 'top': 1, 'left': 1, 'fliph': False, 'flipv': False}
     img[key]['width'], img[key]['height'] = img[key]['refobj'].size
     rx = cnvw * 1.00 / img[key]['width']
     ry = cnvh * 1.00 / img[key]['height']
@@ -175,12 +180,24 @@ class MyApp:
 def handle_click(event):
     pt_ar.append([event.x, event.y])
     key = int(layer.get()) - 1
-    if action.get() == "move" and len( pt_ar ) == 2:
+    if action.get() == "move" and len(pt_ar) == 2:
         img[key]['left'] += pt_ar[1][0] - pt_ar[0][0]
         img[key]['top'] += pt_ar[1][1] - pt_ar[0][1]
         pt_ar.clear()
         refresh_canvas()
-
+    if action.get() == "scale" and len(pt_ar) == 3:
+        s = get_distance(pt_ar[0], pt_ar[2]) / get_distance(pt_ar[0], pt_ar[1])
+        img[key]['scale'] *= s
+        pt_ar.clear()
+        refresh_canvas()
+    if action.get() == 'flip H':
+        img[key]['fliph'] = not img[key]['fliph']
+        pt_ar.clear()
+        refresh_canvas()
+    if action.get() == 'flip V':
+        img[key]['flipv'] = not img[key]['flipv']
+        pt_ar.clear()
+        refresh_canvas()
 
 
 app = MyApp("Image Editor", w, h)
