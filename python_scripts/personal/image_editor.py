@@ -14,16 +14,19 @@ if os.name == 'nt':
         r"D:\Documents\Python create "
         r"puzzles\draw_beads_on_abacus_for_2_digit_number\worksheet_images"
     ]
+    cnvw = w - 20
+    cnvh = h - 100
 else:
-    w = 500
-    h = 700
+    w = 1050
+    h = 1950
     base_fldr = [
         "../tmp/img1",
         "../tmp/img2",
     ]
+    cnvw = w - 40
+    cnvh = h - 100
 
-cnvw = w - 20
-cnvh = h - 100
+
 
 actions = ["move", "rotate", "scale", "contrast", "brightness", "flip H",
            "flip V"]
