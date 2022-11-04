@@ -4,20 +4,29 @@ from typing import List
 from PIL import Image, ImageTk, ImageEnhance
 from math import sqrt
 from math import atan2, degrees
+import os
 
-w = 500
-h = 700
+if os.name == 'nt':
+    w = 500
+    h = 700
+    base_fldr = [
+        r"D:\Documents\Python create puzzles\2_digit_addition\images",
+        r"D:\Documents\Python create "
+        r"puzzles\draw_beads_on_abacus_for_2_digit_number\worksheet_images"
+    ]
+else:
+    w = 500
+    h = 700
+    base_fldr = [
+        "../tmp/img1",
+        "../tmp/img2",
+    ]
+
 cnvw = w - 20
 cnvh = h - 100
 
 actions = ["move", "rotate", "scale", "contrast", "brightness", "flip H",
            "flip V"]
-
-base_fldr = [
-    r"D:\Documents\Python create puzzles\2_digit_addition\images",
-    r"D:\Documents\Python create "
-    r"puzzles\draw_beads_on_abacus_for_2_digit_number\worksheet_images"
-]
 
 img = {}
 pt_ar = []
@@ -30,6 +39,7 @@ def angle_between(p1, p2, p3):
     deg1 = (360 + degrees(atan2(x1 - x2, y1 - y2))) % 360
     deg2 = (360 + degrees(atan2(x3 - x2, y3 - y2))) % 360
     return deg2 - deg1 if deg1 <= deg2 else 360 - (deg1 - deg2)
+
 
 def get_distance(p1: List[int], p2: List[int]):
     x1, y1 = p1
@@ -50,7 +60,7 @@ def refresh_canvas():
             imgnew = imgnew.transpose(Image.FLIP_TOP_BOTTOM)
         imgnew = ImageEnhance.Brightness(imgnew).enhance(img[k]['brightness'])
         imgnew = ImageEnhance.Contrast(imgnew).enhance(img[k]['contrast'])
-        imgnew = imgnew.rotate(img[k]['rotate'],expand=True)
+        imgnew = imgnew.rotate(img[k]['rotate'], expand=True)
         base_img.paste(imgnew, (img[k]['left'], img[k]['top']), imgnew)
     base_img.save(r"C:\Users\Dell\OneDrive\Desktop\a.png")
     imgtk = ImageTk.PhotoImage(base_img.convert("RGB"))
