@@ -1,9 +1,11 @@
+import random
 from tkinter import *
 from tkinter import filedialog
 from typing import List
 from PIL import Image, ImageTk, ImageEnhance
 from math import sqrt
 from math import atan2, degrees
+from pathlib import Path
 import os
 
 if os.name == 'nt':
@@ -26,10 +28,8 @@ else:
     cnvw = w - 40
     cnvh = h - 100
 
-
-
 actions = ["move", "rotate", "scale", "contrast", "brightness", "flip H",
-           "flip V"]
+           "flip V", "random", "crop"]
 
 img = {}
 pt_ar = []
@@ -54,6 +54,8 @@ def refresh_canvas():
     base_img = Image.new('RGBA', (cnvw, cnvh), (255, 255, 255, 255))
     for k in sorted(img.keys()):
         imgnew = img[k]['refobj'].copy().convert('RGBA')
+        if len(img[k]['crop']) > 0:
+            imgnew = imgnew.crop(tuple(img[k]['crop']))
         imgw = int(img[k]['width'] * img[k]['scale'])
         imgh = int(img[k]['height'] * img[k]['scale'])
         imgnew = imgnew.resize((imgw, imgh))
@@ -65,7 +67,6 @@ def refresh_canvas():
         imgnew = ImageEnhance.Contrast(imgnew).enhance(img[k]['contrast'])
         imgnew = imgnew.rotate(img[k]['rotate'], expand=True)
         base_img.paste(imgnew, (img[k]['left'], img[k]['top']), imgnew)
-    base_img.save(r"C:\Users\Dell\OneDrive\Desktop\a.png")
     imgtk = ImageTk.PhotoImage(base_img.convert("RGB"))
     cnv.set_image(imgtk)
 
@@ -73,7 +74,8 @@ def refresh_canvas():
 def load_img(imgfl):
     key = int(layer.get()) - 1
     img[key] = {'refobj': Image.open(imgfl), 'contrast': 1.0, 'brightness':
-        1.0, 'rotate': 0, 'top': 1, 'left': 1, 'fliph': False, 'flipv': False}
+        1.0, 'rotate': 0, 'top': 1, 'left': 1, 'fliph': False, 'flipv':
+                    False, "crop": []}
     img[key]['width'], img[key]['height'] = img[key]['refobj'].size
     rx = cnvw * 1.00 / img[key]['width']
     ry = cnvh * 1.00 / img[key]['height']
@@ -127,6 +129,9 @@ class MyDropDown:
 
     def get(self):
         return self.var.get()
+
+    def set(self, val: str):
+        self.var.set(val)
 
 
 class MyCanvas:
@@ -238,12 +243,31 @@ def handle_click(event):
         img[key]['rotate'] = (img[key]['rotate'] + s)
         pt_ar.clear()
         refresh_canvas()
+    if action.get() == "random" and len(pt_ar) == 1:
+        layer.set('1')
+        load_img(random.choice(list(Path(base_fldr[0]).glob('*.*'))))
+        layer.set('2')
+        load_img(random.choice(list(Path(base_fldr[1]).glob('*.*'))))
+        pt_ar.clear()
+    if action.get() == "crop" and len(pt_ar) == 2:
+        x1, y1 = pt_ar[0]
+        x2, y2 = pt_ar[1]
+        x1, x2 = [x - img[key]['left'] for x in (x1, x2)]
+        y1, y2 = [y - img[key]['top'] for y in (y1, y2)]
+        x1, y1, x2, y2 = [int(x * 1.0 / img[key]['scale']) for x in (x1, y1,
+                                                                     x2, y2)]
+        img[key]['crop'] = [x1,y1,x2,y2]
+        refresh_canvas()
+        pt_ar.clear()
 
 
 app = MyApp("Image Editor", w, h)
-frm: MyFrame = app.add_frame("Image Editor", w - 10, h - 10, [1, 1, 1, 1])
-layer: MyDropDown = frm.add_dropdown("layer", '1 2 3 4'.split(), [1, 1, 1, 1])
-selfile: MyButton = frm.add_button("selfile", "...", selectFile, [1, 2, 1, 1])
+frm: MyFrame = app.add_frame("Image Editor", w - 10, h - 10,
+                             [1, 1, 1, 1])
+layer: MyDropDown = frm.add_dropdown("layer", '1 2 3 4'.split(),
+                                     [1, 1, 1, 1])
+selfile: MyButton = frm.add_button("selfile", "...", selectFile,
+                                   [1, 2, 1, 1])
 action: MyDropDown = frm.add_dropdown("action", actions, [1, 3, 1, 1])
 cnv: MyCanvas = frm.add_canvas("cnv", cnvw, cnvh, [2, 1, 1, 3])
 cnv.set_callback(handle_click)
