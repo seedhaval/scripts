@@ -29,10 +29,15 @@ else:
     cnvh = h - 100
 
 actions = ["move", "rotate", "scale", "contrast", "brightness", "flip H",
-           "flip V", "random", "crop", "swap"]
+           "flip V", "random", "crop", "swap", "add frame", "animate",
+           "reset animation"]
 
 img = {}
 pt_ar = []
+img_ar = []
+curi = 0
+delay = 500
+cnv_img = None
 
 
 def angle_between(p1, p2, p3):
@@ -51,13 +56,14 @@ def get_distance(p1: List[int], p2: List[int]):
 
 
 def refresh_canvas():
+    global cnv_img
     base_img = Image.new('RGBA', (cnvw, cnvh), (255, 255, 255, 255))
     for k in sorted(img.keys()):
         imgnew = img[k]['refobj'].copy().convert('RGBA')
         if len(img[k]['crop']) > 0:
             imgnew = imgnew.crop(tuple(img[k]['crop']))
-        imgw = int(img[k]['width'] * img[k]['scale'])
-        imgh = int(img[k]['height'] * img[k]['scale'])
+        imgw = int(imgnew.size[0] * img[k]['scale'])
+        imgh = int(imgnew.size[1] * img[k]['scale'])
         imgnew = imgnew.resize((imgw, imgh))
         if img[k]['fliph'] == True:
             imgnew = imgnew.transpose(Image.FLIP_LEFT_RIGHT)
@@ -67,8 +73,8 @@ def refresh_canvas():
         imgnew = ImageEnhance.Contrast(imgnew).enhance(img[k]['contrast'])
         imgnew = imgnew.rotate(img[k]['rotate'], expand=True)
         base_img.paste(imgnew, (img[k]['left'], img[k]['top']), imgnew)
-    imgtk = ImageTk.PhotoImage(base_img.convert("RGB"))
-    cnv.set_image(imgtk)
+    cnv_img = ImageTk.PhotoImage(base_img.convert("RGB"))
+    cnv.set_image(cnv_img)
 
 
 def load_img(imgfl):
@@ -210,58 +216,77 @@ class MyApp:
 
 
 def handle_click(event):
+    global pt_ar
     pt_ar.append([event.x, event.y])
     key = int(layer.get()) - 1
     if action.get() == "move" and len(pt_ar) == 2:
         img[key]['left'] += pt_ar[1][0] - pt_ar[0][0]
         img[key]['top'] += pt_ar[1][1] - pt_ar[0][1]
-        pt_ar.clear()
+        pt_ar = []
         refresh_canvas()
-    if action.get() == "scale" and len(pt_ar) == 3:
+    elif action.get() == "scale" and len(pt_ar) == 3:
         s = get_distance(pt_ar[0], pt_ar[2]) / get_distance(pt_ar[0], pt_ar[1])
         img[key]['scale'] *= s
-        pt_ar.clear()
+        pt_ar = []
         refresh_canvas()
-    if action.get() == "brightness" and len(pt_ar) == 3:
+    elif action.get() == "brightness" and len(pt_ar) == 3:
         s = get_distance(pt_ar[0], pt_ar[2]) / get_distance(pt_ar[0], pt_ar[1])
         img[key]['brightness'] *= s
-        pt_ar.clear()
+        pt_ar = []
         refresh_canvas()
-    if action.get() == "contrast" and len(pt_ar) == 3:
+    elif action.get() == "contrast" and len(pt_ar) == 3:
         s = get_distance(pt_ar[0], pt_ar[2]) / get_distance(pt_ar[0], pt_ar[1])
         img[key]['contrast'] *= s
-        pt_ar.clear()
+        pt_ar = []
         refresh_canvas()
-    if action.get() == 'flip H':
+    elif action.get() == 'flip H':
         img[key]['fliph'] = not img[key]['fliph']
-        pt_ar.clear()
+        pt_ar = []
         refresh_canvas()
-    if action.get() == 'flip V':
+    elif action.get() == 'flip V':
         img[key]['flipv'] = not img[key]['flipv']
-        pt_ar.clear()
+        pt_ar = []
         refresh_canvas()
-    if action.get() == "rotate" and len(pt_ar) == 3:
+    elif action.get() == "rotate" and len(pt_ar) == 3:
         s = angle_between(*pt_ar)
         img[key]['rotate'] = (img[key]['rotate'] + s)
-        pt_ar.clear()
+        pt_ar = []
         refresh_canvas()
-    if action.get() == "random" and len(pt_ar) == 1:
+    elif action.get() == "random":
         load_img(random.choice(list(Path(base_fldr[1]).glob('*.*'))))
-        pt_ar.clear()
-    if action.get() == "swap" and len(pt_ar) == 1:
+        pt_ar = []
+    elif action.get() == "swap":
         img[0], img[1] = img[1], img[0]
         refresh_canvas()
-        pt_ar.clear()
-    if action.get() == "crop" and len(pt_ar) == 2:
+        pt_ar = []
+    elif action.get() == "crop" and len(pt_ar) == 2:
         x1, y1 = pt_ar[0]
         x2, y2 = pt_ar[1]
         x1, x2 = [x - img[key]['left'] for x in (x1, x2)]
         y1, y2 = [y - img[key]['top'] for y in (y1, y2)]
         x1, y1, x2, y2 = [int(x * 1.0 / img[key]['scale']) for x in (x1, y1,
                                                                      x2, y2)]
-        img[key]['crop'] = [x1,y1,x2,y2]
+        img[key]['crop'] = [x1, y1, x2, y2]
         refresh_canvas()
-        pt_ar.clear()
+        pt_ar = []
+    elif action.get() == "add frame":
+        img_ar.append(cnv_img)
+        pt_ar = []
+    elif action.get() == "animate":
+        pt_ar = []
+        curi = -1
+        animate()
+    elif action.get() == "reset animation":
+        pt_ar = []
+        img_ar.clear()
+
+
+def animate():
+    global curi
+    if len(img_ar) > 0:
+        curi = (curi + 1) % (len(img_ar))
+        cnv.set_image(img_ar[curi])
+        app.top.after(delay, animate)
 
 
 app = MyApp("Image Editor", w, h)
