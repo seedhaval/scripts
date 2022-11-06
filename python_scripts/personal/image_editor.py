@@ -29,7 +29,7 @@ else:
     cnvh = h - 100
 
 actions = ["move", "rotate", "scale", "contrast", "brightness", "flip H",
-           "flip V", "random", "crop"]
+           "flip V", "random", "crop", "swap"]
 
 img = {}
 pt_ar = []
@@ -85,7 +85,9 @@ def load_img(imgfl):
 
 def selectFile(*args, **kwargs):
     fldr = base_fldr[int(layer.get()) - 1]
-    load_img(filedialog.askopenfilename(initialdir=fldr))
+    fl = filedialog.askopenfilename(initialdir=fldr)
+    if fl:
+        load_img(fl)
 
 
 def pos(elm, pos_ar: List[int]):
@@ -244,10 +246,11 @@ def handle_click(event):
         pt_ar.clear()
         refresh_canvas()
     if action.get() == "random" and len(pt_ar) == 1:
-        layer.set('1')
-        load_img(random.choice(list(Path(base_fldr[0]).glob('*.*'))))
-        layer.set('2')
         load_img(random.choice(list(Path(base_fldr[1]).glob('*.*'))))
+        pt_ar.clear()
+    if action.get() == "swap" and len(pt_ar) == 1:
+        img[0], img[1] = img[1], img[0]
+        refresh_canvas()
         pt_ar.clear()
     if action.get() == "crop" and len(pt_ar) == 2:
         x1, y1 = pt_ar[0]
