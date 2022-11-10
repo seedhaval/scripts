@@ -79,11 +79,10 @@ class MyFrame:
         self.children[nm]: MyCanvas = MyCanvas(self.elm, width, height, pos_ar)
         return self.children[nm]
 
-
-def add_frame(self, title: str, width: int, height: int,
-              pos_ar: List[int]):
-    self.children['title'] = MyFrame(self.elm, title, width, height, pos_ar)
-    return self.children['title']
+    def add_frame(self, title: str, width: int, height: int,
+                  pos_ar: List[int]):
+        self.children['title'] = MyFrame(self.elm, title, width, height, pos_ar)
+        return self.children['title']
 
 
 class MyApp:
