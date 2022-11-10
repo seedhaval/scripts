@@ -14,7 +14,7 @@ if os.name == 'nt':
 else:
     w = 1050
     h = 1950
-    base_fldr = "../tmp/img1",
+    base_fldr = "../DCIM/Restored/",
     cnvw = w - 40
     cnvh = int(h * 0.6)
 
@@ -24,6 +24,8 @@ def selectFile(*args, **kwargs):
     if fl:
         gd.set_img_file(pathlib.Path(fl).name)
         photo.load_file(fl)
+        photo.update_sections(gd.section_data.get_sections_for_file(gd.file))
+        
 
 
 def handle_click(x: int, y: int):
