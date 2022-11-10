@@ -1,6 +1,7 @@
 from tkinter import *
 from typing import List, Callable
 from datetime import datetime, date
+from PIL import Image, ImageTk, ImageDraw
 import csv
 
 
@@ -8,6 +9,25 @@ def pos(elm, pos_ar: List[int]):
     row, col, rowspan, colspan = pos_ar
     elm.grid(row=row, column=col, rowspan=rowspan, columnspan=colspan, padx=5,
              pady=5)
+
+
+class MyText():
+    def __init__(self, prnt, text: str, width: int, height: int,
+                 pos_ar: List[int]):
+        self.prnt = prnt
+        self.elm = Text(self.prnt, width=width, height=height)
+        self.set(text)
+        pos(self.elm, pos_ar)
+
+    def clear(self):
+        self.elm.delete('1.0', END)
+
+    def set(self, text):
+        self.clear()
+        self.elm.insert(END, text)
+
+    def get(self):
+        return self.elm.get('1.0', 'end -1c')
 
 
 class MyLabel:
@@ -84,6 +104,12 @@ class MyFrame:
         self.children['title'] = MyFrame(self.elm, title, width, height, pos_ar)
         return self.children['title']
 
+    def add_text(self, nm: str, text: str, width: int, height: int,
+                 pos_ar: List[int]) -> MyText:
+        self.children[nm]: MyText = MyText(self.elm, text, width, height,
+                                           pos_ar)
+        return self.children[nm]
+
 
 class MyApp:
     def __init__(self, title: str, width: int, height: int):
@@ -140,6 +166,9 @@ class Section:
         self.x2: int = int(ar[5])
         self.y2: int = int(ar[6])
 
+    def get_bbox(self):
+        return [(self.x1, self.y1), (self.x2, self.y2)]
+
 
 class SectionData:
     def __init__(self):
@@ -153,39 +182,97 @@ class SectionData:
             for row in csv_reader:
                 self.sections.append(Section(row))
 
+    def get_sections_for_file(self, file: str):
+        return ([x for x in self.sections if x.file == file])
+
 
 class GameData:
     def __init__(self):
         self.action_data: ActionData = ActionData()
         self.section_data: SectionData = SectionData()
+        self.file = None
+        self.cur_ar = []
+
+    def set_img_file(self, file: str):
+        self.file = file
 
 
 class Photo:
-    def __init__(self, cnv: MyCanvas, file: str, cb: Callable):
+    def __init__(self, cnv: MyCanvas, cb: Callable, cnvw: int, cnvh: int):
         self.cnv = cnv
-        self.file = file
         self.cb = cb
+        self.section_ar = []
+        self.file = None
+        self.file_img = None
+        self.pil_img = None
+        self.tk_img = None
+        self.cnvw, self.cnvh = (cnvw, cnvh)
+        self.scale = 1.0
+        self.cnv.set_callback(self.handle_click)
 
-    def show_all_sections(self):
-        pass
+    def load_file(self, file: str):
+        self.file = file
+        img = Image.open(file)
+        imgw, imgh = img.size
+        rx = self.cnvw * 1.00 / imgw
+        ry = self.cnvh * 1.00 / imgh
+        self.scale = min(rx, ry)
+        n_imgw = int(imgw * self.scale)
+        n_imgh = int(imgh * self.scale)
+        self.file_img = img.resize((n_imgw, n_imgh))
+        self.load_image()
 
-    def show_overdue_sections(self):
-        pass
+    def load_image(self):
+        self.pil_img = Image.new('RGBA', (self.cnvw, self.cnvh), (0, 0, 0, 255))
+        self.pil_img.paste(self.file_img, (1, 1),
+                           self.file_img.copy().convert('RGBA'))
+        draw = ImageDraw.Draw(self.pil_img)
+        for s in self.section_ar:
+            x1, y1 = [x * self.scale for x in s.get_bbox()[0]]
+            x2, y2 = [x * self.scale for x in s.get_bbox()[1]]
+            draw.rectangle(((x1, y1), (x2, y2)), fill=(150, 0, 0))
+        self.tk_img = ImageTk.PhotoImage(self.pil_img.convert("RGB"))
+        self.cnv.set_image(self.tk_img)
+
+    def update_sections(self, section_ar):
+        self.section_ar = section_ar
+        self.load_image()
 
     def handle_click(self, event):
-        pass
-        person: str = ""
-        section: str = ""
-        self.cb(person, section)
+        x, y = [event.x, event.y]
+        self.cb(int(x / self.scale), int(y / self.scale))
 
 
 class EditSection:
     def __init__(self, frame: MyFrame, gd: GameData):
         self.frame = frame
         self.gd = gd
+        self.lbl_person: MyLabel = self.frame.add_label("person", "Person",
+                                                        20, 1, [1, 1, 1, 1])
+        self.txt_person: MyText = self.frame.add_text("personnm", "", 20, 1,
+                                                      [1, 2, 1, 1])
+        self.lbl_section: MyLabel = self.frame.add_label("section", "Section",
+                                                         20, 1, [2, 1, 1, 1])
+        self.txt_section: MyText = self.frame.add_text("sectionnm", "", 20, 1,
+                                                       [2, 2, 1, 1])
+        self.btn_add: MyButton = self.frame.add_button("add", "Add",
+                                                       self.add_section,
+                                                       [3, 1, 1, 1])
+        self.btn_del: MyButton = self.frame.add_button("del", "Delete",
+                                                       self.delete_section,
+                                                       [3, 2, 1, 1])
 
     def delete_section(self):
         pass
+
+    def add_section(self):
+        file = self.gd.file
+        person = self.txt_person.get()
+        section = self.txt_section.get()
+        x1, y1 = [str(x) for x in self.gd.cur_ar[0]]
+        x2, y2 = [str(x) for x in self.gd.cur_ar[1]]
+        self.gd.section_data.sections.append(Section([file, person, section, x1,
+                                                      y1, x2, y2]))
 
     def load_section(self, person: str, section: str):
         pass
