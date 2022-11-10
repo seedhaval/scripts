@@ -1,8 +1,9 @@
 from tkinter import *
 from typing import List, Callable
-from datetime import datetime, date
+from datetime import datetime, date, timedelta
 from PIL import Image, ImageTk, ImageDraw
 import csv
+import random
 
 
 def pos(elm, pos_ar: List[int]):
@@ -130,14 +131,18 @@ class MyApp:
 
 class Action:
     def __init__(self, ar: List[str]):
-        self.person: str = ar[0]
-        self.section: str = ar[1]
+        self.person: str = ar[0].strip()
+        self.section: str = ar[1].strip()
         self.event: str = ar[2]
         self.duetime: date = datetime.strptime(ar[3], "%Y-%m-%d %H:%M:%S")
         self.cooling_days: float = float(ar[4])
         self.verb: str = ar[5]
         self.action_minutes: int = int(ar[6])
         self.wait_text: str = ar[7]
+        if self.duetime > datetime.now():
+            self.is_due = False
+        else:
+            self.is_due = True
 
     def get_busy_text(self):
         return self.wait_text.replace("$x", self.person)
@@ -154,13 +159,24 @@ class ActionData:
             next(csv_reader, None)
             for row in csv_reader:
                 self.actions.append(Action(row))
-
+        random.shuffle(self.actions)    
+    def get_one_due(self, s_dict):
+        for i,act in enumerate(self.actions):
+            if act.is_due and (act.person,act.section) in s_dict:
+                return (i,s_dict[(act.person,act.section)])
+                
+    def save(self):        
+        with open("Action - Action.csv","w") as f:
+            f.write('person,section,event,due,cool,verb,waittm,waiittxt\n')
+            for s in self.actions:
+                f.write(','.join([s.person,s.section,s.event,s.duetime.strftime('%Y-%m-%d %H:%M:%S'),str(s.cooling_days),s.verb,str(s.action_minutes),s.wait_text]))
+                f.write('\n')                
 
 class Section:
     def __init__(self, ar: List[str]):
         self.file: str = ar[0]
-        self.person: str = ar[1]
-        self.section: str = ar[2]
+        self.person: str = ar[1].strip()
+        self.section: str = ar[2].strip()
         self.x1: int = int(ar[3])
         self.y1: int = int(ar[4])
         self.x2: int = int(ar[5])
@@ -184,6 +200,17 @@ class SectionData:
 
     def get_sections_for_file(self, file: str):
         return ([x for x in self.sections if x.file == file])
+        
+    def save(self):        
+        with open("Action - Section.csv","w") as f:
+            f.write('file,person,section,x1,y1,x2,y2\n')
+            for s in self.sections:
+                f.write(','.join([s.file,s.person,s.section,str(s.x1),str(s.y1),str(s.x2),str(s.y2)]))
+                f.write('\n')
+                
+    def get_s_dict(self, file):
+        return {(x.person,x.section):x for x in self.sections if x.file == file}     
+                    
 
 
 class GameData:
@@ -192,6 +219,8 @@ class GameData:
         self.section_data: SectionData = SectionData()
         self.file = None
         self.cur_ar = []
+        self.cur_act_idx = None
+        self.cur_sec = None
 
     def set_img_file(self, file: str):
         self.file = file
@@ -230,7 +259,7 @@ class Photo:
         for s in self.section_ar:
             x1, y1 = [x * self.scale for x in s.get_bbox()[0]]
             x2, y2 = [x * self.scale for x in s.get_bbox()[1]]
-            draw.rectangle(((x1, y1), (x2, y2)), fill=(150, 0, 0))
+            draw.rectangle(((x1, y1), (x2, y2)), outline=(150, 0, 0),width=5)
         self.tk_img = ImageTk.PhotoImage(self.pil_img.convert("RGB"))
         self.cnv.set_image(self.tk_img)
 
@@ -273,15 +302,19 @@ class EditSection:
         x2, y2 = [str(x) for x in self.gd.cur_ar[1]]
         self.gd.section_data.sections.append(Section([file, person, section, x1,
                                                       y1, x2, y2]))
+        self.gd.section_data.save()
 
     def load_section(self, person: str, section: str):
         pass
 
 
 class DoAction:
-    def __init__(self, gd: GameData):
+    def __init__(self, gd: GameData, frame,cb):
         self.gd = gd
+        self.cb = cb        
         self.action = None
+        self.lblltxt = frame.add_label("txt","",40,3,[1,1,1,1])
+        self.lblverb = frame.add_button("btn","",self.perform_action,[2,1,1,1])
 
     def show(self, action: Action):
         pass
@@ -290,4 +323,11 @@ class DoAction:
         pass
 
     def perform_action(self):
-        pass
+        a = self.gd.action_data.actions[self.gd.cur_act_idx]
+        a.duetime += timedelta(days=a.cooling_days)
+        a.is_due = False
+        self.lblltxt.set("")
+        self.lblverb.elm['text'] = ''
+        self.gd.action_data.save()
+        self.cb()
+        
