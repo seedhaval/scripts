@@ -8,20 +8,23 @@ import random
 if os.name == 'nt':
     w = 500
     h = 700
-    base_fldr = [r"D:\Documents\Python create puzzles\2_digit_addition\images"]
+    base_fldr = r"D:\Documents\Python create puzzles\2_digit_addition\images"
     cnvw = w - 40
     cnvh = int(h * 0.6)
 else:
     w = 1050
     h = 1950
-    base_fldr = random.choice(["../DCIM/Restored/","../tmp/img/"])
+    base_fldr = "../tmp/img/"
     cnvw = w - 40
     cnvh = int(h * 0.6)
 
 def handle_click(x: int, y: int):
-    if not gd.cur_sec.x1 < x < gd.cur_sec.x2:
+    s = gd.cur_sec
+    x1,x2 = sorted([s.x1,s.x2])
+    y1,y2 = sorted([s.y1,s.y2])
+    if not x1 < x < x2:
         return
-    if not gd.cur_sec.y1 < y < gd.cur_sec.y2:
+    if not y1 < y < y2:
         return
     a = gd.action_data.actions[gd.cur_act_idx]
     act.lblltxt.set(a.event)
@@ -29,18 +32,19 @@ def handle_click(x: int, y: int):
     
     
 def refresh_file():    
-    gd.cur_act_idx, gd.cur_sec = gd.action_data.get_one_due(gd.section_data.get_s_dict(gd.file))
-    photo.update_sections([gd.cur_sec])
+    fl = random.choice(list(pathlib.Path(base_fldr).glob('*.*')))
+    if fl:
+        gd.set_img_file(pathlib.Path(fl).name)
+        photo.load_file(fl)        
+        gd.cur_act_idx, gd.cur_sec = gd.action_data.get_one_due(gd.section_data.get_s_dict(gd.file))
+        photo.update_sections([gd.cur_sec])
     
     
     
 def selectFile(*args, **kwargs):
     #fl = filedialog.askopenfilename(initialdir=base_fldr)
-    fl = random.choice(list(pathlib.Path(base_fldr).glob('*.*')))
-    if fl:
-        gd.set_img_file(pathlib.Path(fl).name)
-        photo.load_file(fl)
-        refresh_file()
+    refresh_file()
+    
         
         
 gd = core.GameData()
