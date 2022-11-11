@@ -14,7 +14,7 @@ if os.name == 'nt':
 else:
     w = 1050
     h = 1950
-    base_fldr = "../DCIM/Restored/",
+    base_fldr = "../tmp/img/",
     cnvw = w - 40
     cnvh = int(h * 0.6)
 
