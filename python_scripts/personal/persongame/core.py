@@ -160,6 +160,7 @@ class ActionData:
             for row in csv_reader:
                 self.actions.append(Action(row))
         random.shuffle(self.actions)    
+        
     def get_one_due(self, s_dict):
         for i,act in enumerate(self.actions):
             if act.is_due and (act.person,act.section) in s_dict:
@@ -168,7 +169,7 @@ class ActionData:
     def save(self):        
         with open("Action - Action.csv","w") as f:
             f.write('person,section,event,due,cool,verb,waittm,waiittxt\n')
-            for s in self.actions:
+            for s in sorted(self.actions, key=lambda x:(x.person,x.section,x.event)):
                 f.write(','.join([s.person,s.section,s.event,s.duetime.strftime('%Y-%m-%d %H:%M:%S'),str(s.cooling_days),s.verb,str(s.action_minutes),s.wait_text]))
                 f.write('\n')                
 
@@ -197,6 +198,7 @@ class SectionData:
             next(csv_reader, None)
             for row in csv_reader:
                 self.sections.append(Section(row))
+        random.shuffle(self.sections)
 
     def get_sections_for_file(self, file: str):
         return ([x for x in self.sections if x.file == file])
@@ -324,7 +326,7 @@ class DoAction:
 
     def perform_action(self):
         a = self.gd.action_data.actions[self.gd.cur_act_idx]
-        a.duetime += timedelta(days=a.cooling_days)
+        a.duetime = datetime.now()+timedelta(days=a.cooling_days)
         a.is_due = False
         self.lblltxt.set("")
         self.lblverb.elm['text'] = ''
