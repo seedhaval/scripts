@@ -137,15 +137,13 @@ class Action:
         self.duetime: date = datetime.strptime(ar[3], "%Y-%m-%d %H:%M:%S")
         self.cooling_days: float = float(ar[4])
         self.verb: str = ar[5]
-        self.action_minutes: int = int(ar[6])
-        self.wait_text: str = ar[7]
+
         if self.duetime > datetime.now():
             self.is_due = False
         else:
             self.is_due = True
 
-    def get_busy_text(self):
-        return self.wait_text.replace("$x", self.person)
+
 
 
 class ActionData:
@@ -168,9 +166,9 @@ class ActionData:
                 
     def save(self):        
         with open("Action - Action.csv","w") as f:
-            f.write('person,section,event,due,cool,verb,waittm,waiittxt\n')
-            for s in sorted(self.actions, key=lambda x:(x.person,x.section,x.event)):
-                f.write(','.join([s.person,s.section,s.event,s.duetime.strftime('%Y-%m-%d %H:%M:%S'),str(s.cooling_days),s.verb,str(s.action_minutes),s.wait_text]))
+            f.write('person,section,event,due,cool,verb\n')
+            for s in sorted(self.actions, key=lambda x:(x.verb,x.event,x.person,x.section)):
+                f.write(','.join([s.person,s.section,s.event,s.duetime.strftime('%Y-%m-%d %H:%M:%S'),str(s.cooling_days),s.verb]))
                 f.write('\n')                
 
 class Section:
