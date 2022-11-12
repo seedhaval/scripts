@@ -22,10 +22,9 @@ else:
 def selectFile(*args, **kwargs):
     fl = filedialog.askopenfilename(initialdir=base_fldr)
     if fl:
-        gd.set_img_file(pathlib.Path(fl).name)
+        gd.file = pathlib.Path(fl).name
         photo.load_file(fl)
         photo.update_sections(gd.section_data.get_sections_for_file(gd.file))
-        
 
 
 def handle_click(x: int, y: int):
@@ -35,9 +34,9 @@ def handle_click(x: int, y: int):
         photo.update_sections(gd.section_data.get_sections_for_file(gd.file))
     elif len(pt_ar) == 2:
         section_ar = [x for x in photo.section_ar]
-        x1,y1 = [str(x) for x in pt_ar[0]]
+        x1, y1 = [str(x) for x in pt_ar[0]]
         x2, y2 = [str(x) for x in pt_ar[1]]
-        section_ar.append(core.Section(['','','',x1,y1,x2,y2]))
+        section_ar.append(core.Section(['', '', '', x1, y1, x2, y2], -1))
         gd.cur_ar = [x for x in pt_ar]
         pt_ar = []
         photo.update_sections(section_ar)

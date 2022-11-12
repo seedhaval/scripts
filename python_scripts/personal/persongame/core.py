@@ -1,5 +1,5 @@
 from tkinter import *
-from typing import List, Callable
+from typing import List, Callable, Dict
 from datetime import datetime, date, timedelta
 from PIL import Image, ImageTk, ImageDraw
 import csv
@@ -129,50 +129,80 @@ class MyApp:
         self.top.mainloop()
 
 
+class CSV:
+    def __init__(self, fl: str, header: bool, headertxt: str):
+        self.fl = fl
+        self.header = header
+        self.headertxt = headertxt
+
+    def get_shuffled_records(self):
+        out = []
+        with open(self.fl) as f:
+            csv_reader = csv.reader(f)
+            if self.header == True:
+                next(csv_reader, None)
+            for row in csv_reader:
+                out.append(row)
+        random.shuffle(out)
+        return out
+
+    def write(self, data: List):
+        with open(self.fl, "w") as f:
+            f.write(self.headertxt + '\n')
+            for row in data:
+                f.write(','.join([str(x) for x in row]) + '\n')
+
+
 class Action:
-    def __init__(self, ar: List[str]):
+    def __init__(self, ar: List[str], idx: int):
         self.person: str = ar[0].strip()
         self.section: str = ar[1].strip()
         self.event: str = ar[2]
+        self.duetimetxt = ar[3]
         self.duetime: date = datetime.strptime(ar[3], "%Y-%m-%d %H:%M:%S")
         self.cooling_days: float = float(ar[4])
         self.verb: str = ar[5]
-
+        self.idx: int = idx
         if self.duetime > datetime.now():
             self.is_due = False
         else:
             self.is_due = True
 
+    def get_row_ar(self):
+        return [self.person, self.section, self.event, self.duetimetxt,
+                self.cooling_days, self.verb]
 
+    def do(self):
+        self.duetime = datetime.now() + timedelta(days=self.cooling_days)
+        self.duetimetxt = self.duetime.strftime("%Y-%m-%d %H:%M:%S")
+        self.is_due = False
 
 
 class ActionData:
     def __init__(self):
-        self.actions: List[Action] = []
+        self.actions: Dict[int, Action] = {}
+        self.fl = "Action - Action.csv"
+        self.header = "person,section,event,due,cool,verb"
+        self.csv = CSV(self.fl, True, self.header)
         self.load()
 
-    def load(self):
-        with open("Action - Action.csv") as f:
-            csv_reader = csv.reader(f)
-            next(csv_reader, None)
-            for row in csv_reader:
-                self.actions.append(Action(row))
-        random.shuffle(self.actions)    
-        
-    def get_one_due(self, s_dict):
-        for i,act in enumerate(self.actions):
-            if act.is_due and (act.person,act.section) in s_dict:
-                return (i,s_dict[(act.person,act.section)])
-                
-    def save(self):        
-        with open("Action - Action.csv","w") as f:
-            f.write('person,section,event,due,cool,verb\n')
-            for s in sorted(self.actions, key=lambda x:(x.verb,x.event,x.person,x.section)):
-                f.write(','.join([s.person,s.section,s.event,s.duetime.strftime('%Y-%m-%d %H:%M:%S'),str(s.cooling_days),s.verb]))
-                f.write('\n')                
+    def get_sorted_data(self):
+        return sorted(self.actions.values(), key=lambda x: (
+            x.verb, x.event, x.person, x.section))
+
+    def load(self) -> None:
+        self.actions = {i: Action(x, i) for i, x in
+                        enumerate(self.csv.get_shuffled_records())}
+
+    def get_due(self) -> List[Action]:
+        return [x for x in self.actions.values() if x.is_due]
+
+    def save(self) -> None:
+        self.csv.write([x.get_row_ar() for x in self.get_sorted_data()])
+
 
 class Section:
-    def __init__(self, ar: List[str]):
+    def __init__(self, ar: List[str], idx: int):
         self.file: str = ar[0]
         self.person: str = ar[1].strip()
         self.section: str = ar[2].strip()
@@ -180,37 +210,42 @@ class Section:
         self.y1: int = int(ar[4])
         self.x2: int = int(ar[5])
         self.y2: int = int(ar[6])
+        self.minx, self.maxx = sorted((self.x1, self.x2))
+        self.miny, self.maxy = sorted((self.y1, self.y2))
+        self.idx = idx
 
     def get_bbox(self):
         return [(self.x1, self.y1), (self.x2, self.y2)]
 
+    def point_exists(self, x: int, y: int):
+        if not self.minx <= x <= self.maxx:
+            return False
+        if not self.miny <= y <= self.maxy:
+            return False
+        return True
+
+    def get_row_ar(self):
+        return [self.file, self.person, self.section, self.x1, self.y1,
+                self.x2, self.y2]
+
 
 class SectionData:
     def __init__(self):
-        self.sections: List[Section] = []
+        self.sections: Dict[int, Section] = {}
+        self.fl = "Action - Section.csv"
+        self.header = "file,person,section,x1,y1,x2,y2"
+        self.csv = CSV(self.fl, True, self.header)
         self.load()
 
-    def load(self):
-        with open("Action - Section.csv") as f:
-            csv_reader = csv.reader(f)
-            next(csv_reader, None)
-            for row in csv_reader:
-                self.sections.append(Section(row))
-        random.shuffle(self.sections)
+    def load(self) -> None:
+        self.sections = {i: Section(x, i) for i, x in
+                         enumerate(self.csv.get_shuffled_records())}
 
-    def get_sections_for_file(self, file: str):
-        return ([x for x in self.sections if x.file == file])
-        
-    def save(self):        
-        with open("Action - Section.csv","w") as f:
-            f.write('file,person,section,x1,y1,x2,y2\n')
-            for s in self.sections:
-                f.write(','.join([s.file,s.person,s.section,str(s.x1),str(s.y1),str(s.x2),str(s.y2)]))
-                f.write('\n')
-                
-    def get_s_dict(self, file):
-        return {(x.person,x.section):x for x in self.sections if x.file == file}     
-                    
+    def get_sections_for_file(self, file: str) -> List[Section]:
+        return ([x for x in self.sections.values() if x.file == file])
+
+    def save(self):
+        self.csv.write([x.get_row_ar() for x in self.sections.values()])
 
 
 class GameData:
@@ -219,11 +254,15 @@ class GameData:
         self.section_data: SectionData = SectionData()
         self.file = None
         self.cur_ar = []
-        self.cur_act_idx = None
-        self.cur_sec = None
+        self.cur_act: Action = None
+        self.cur_sec: Section = None
 
-    def set_img_file(self, file: str):
-        self.file = file
+    def get_one_due_action(self):
+        ref_set = {(x.person, x.section): x for x in
+                   self.section_data.get_sections_for_file(self.file)}
+        self.cur_act = [x for x in self.action_data.get_due() if
+                        (x.person, x.section) in ref_set][0]
+        self.cur_sec = ref_set[(self.cur_act.person, self.cur_act.section)]
 
 
 class Photo:
@@ -259,7 +298,7 @@ class Photo:
         for s in self.section_ar:
             x1, y1 = [x * self.scale for x in s.get_bbox()[0]]
             x2, y2 = [x * self.scale for x in s.get_bbox()[1]]
-            draw.rectangle(((x1, y1), (x2, y2)), outline=(150, 0, 0),width=5)
+            draw.rectangle(((x1, y1), (x2, y2)), outline=(150, 0, 0), width=5)
         self.tk_img = ImageTk.PhotoImage(self.pil_img.convert("RGB"))
         self.cnv.set_image(self.tk_img)
 
@@ -287,12 +326,6 @@ class EditSection:
         self.btn_add: MyButton = self.frame.add_button("add", "Add",
                                                        self.add_section,
                                                        [3, 1, 1, 1])
-        self.btn_del: MyButton = self.frame.add_button("del", "Delete",
-                                                       self.delete_section,
-                                                       [3, 2, 1, 1])
-
-    def delete_section(self):
-        pass
 
     def add_section(self):
         file = self.gd.file
@@ -300,34 +333,24 @@ class EditSection:
         section = self.txt_section.get()
         x1, y1 = [str(x) for x in self.gd.cur_ar[0]]
         x2, y2 = [str(x) for x in self.gd.cur_ar[1]]
-        self.gd.section_data.sections.append(Section([file, person, section, x1,
-                                                      y1, x2, y2]))
+        sid = max(self.gd.section_data.sections.keys()) + 1
+        self.gd.section_data.sections[sid] = Section([file, person, section,
+                                                      x1, y1, x2, y2], sid)
         self.gd.section_data.save()
-
-    def load_section(self, person: str, section: str):
-        pass
 
 
 class DoAction:
-    def __init__(self, gd: GameData, frame,cb):
+    def __init__(self, gd: GameData, frame, cb):
         self.gd = gd
-        self.cb = cb        
+        self.cb = cb
         self.action = None
-        self.lblltxt = frame.add_label("txt","",40,3,[1,1,1,1])
-        self.lblverb = frame.add_button("btn","",self.perform_action,[2,1,1,1])
-
-    def show(self, action: Action):
-        pass
-
-    def show_busy(self):
-        pass
+        self.lblltxt = frame.add_label("txt", "", 40, 3, [1, 1, 1, 1])
+        self.lblverb = frame.add_button("btn", "", self.perform_action,
+                                        [2, 1, 1, 1])
 
     def perform_action(self):
-        a = self.gd.action_data.actions[self.gd.cur_act_idx]
-        a.duetime = datetime.now()+timedelta(days=a.cooling_days)
-        a.is_due = False
+        self.gd.cur_act.do()
         self.lblltxt.set("")
         self.lblverb.elm['text'] = ''
         self.gd.action_data.save()
         self.cb()
-        

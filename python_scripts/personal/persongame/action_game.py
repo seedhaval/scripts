@@ -1,7 +1,6 @@
 import tkinter as tk
 import core
 import os
-from tkinter import filedialog
 import pathlib
 import random
 
@@ -18,46 +17,33 @@ else:
     cnvw = w - 40
     cnvh = int(h * 0.6)
 
+
 def handle_click(x: int, y: int):
-    s = gd.cur_sec
-    x1,x2 = sorted([s.x1,s.x2])
-    y1,y2 = sorted([s.y1,s.y2])
-    if not x1 < x < x2:
+    if not gd.cur_sec.point_exists(x,y):
         return
-    if not y1 < y < y2:
-        return
-    a = gd.action_data.actions[gd.cur_act_idx]
-    act.lblltxt.set(a.event)
-    act.lblverb.elm['text'] = a.verb
-    
-    
-def refresh_file():    
+    act.lblltxt.set(gd.cur_act.event)
+    act.lblverb.elm['text'] = gd.cur_act.verb
+
+
+def refresh_file(*args, **kwargs):
     fl = random.choice(list(pathlib.Path(base_fldr).glob('*.*')))
-    if fl:
-        gd.set_img_file(pathlib.Path(fl).name)
-        photo.load_file(fl)        
-        gd.cur_act_idx, gd.cur_sec = gd.action_data.get_one_due(gd.section_data.get_s_dict(gd.file))
-        photo.update_sections([gd.cur_sec])
-    
-    
-    
-def selectFile(*args, **kwargs):
-    #fl = filedialog.askopenfilename(initialdir=base_fldr)
-    refresh_file()
-    
-        
-        
+    gd.file = pathlib.Path(fl).name
+    photo.load_file(str(fl))
+    gd.get_one_due_action()
+    photo.update_sections([gd.cur_sec])
+
+
 gd = core.GameData()
 app = core.MyApp("Action Game", w, h)
 frmFileSel: core.MyFrame = app.add_frame("Photo", w - 10, int(h * 0.1),
-                             [1, 1, 1, 1])
-selfile: core.MyButton = frmFileSel.add_button("selfile", "...", selectFile,
-                                   [1, 1, 1, 1])
+                                         [1, 1, 1, 1])
+selfile: core.MyButton = frmFileSel.add_button("selfile", "...", refresh_file,
+                                               [1, 1, 1, 1])
 frmAction: core.MyFrame = app.add_frame("Action", w - 10, int(h * 0.2),
-                             [2, 1, 1, 1])
+                                        [2, 1, 1, 1])
 frmCnv: core.MyFrame = app.add_frame("Image", w - 10, int(h * 0.65),
-                             [3, 1, 1, 1])
+                                     [3, 1, 1, 1])
 cnv: core.MyCanvas = frmCnv.add_canvas("cnv", cnvw, cnvh, [1, 1, 1, 1])
 photo = core.Photo(cnv, handle_click, cnvw, cnvh)
-act = core.DoAction(gd,frmAction,refresh_file)
+act = core.DoAction(gd, frmAction, refresh_file)
 app.show()
