@@ -135,7 +135,7 @@ class MyApp:
         self.top = Tk()
         self.top.title(title)
         self.top.grid_propagate(False)
-        self.top.option_add("*font", "verdana 12")
+        #self.top.option_add("*font", "verdana 12")
         self.top.geometry(f'{width}x{height}+10+10')
         self.children = {}
 
