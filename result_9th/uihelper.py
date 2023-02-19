@@ -135,14 +135,23 @@ class MyApp:
         self.top = Tk()
         self.top.title(title)
         self.top.grid_propagate(False)
-        #self.top.option_add("*font", "verdana 12")
+        # self.top.option_add("*font", "verdana 12")
         self.top.geometry(f'{width}x{height}+10+10')
         self.children = {}
+        self.main_frame: MyFrame = self.add_main_frame()
 
     def add_frame(self, title: str, width: int, height: int,
                   pos_ar: list[int]) -> MyFrame:
-        self.children['title'] = MyFrame(self.top, title, width, height, pos_ar)
-        return self.children['title']
+        self.children[title] = MyFrame(self.top, title, width, height, pos_ar)
+        return self.children[title]
+
+    def clear_screen(self):
+        if '--' in self.children:
+            self.children['--'].elm.destroy()
+        self.main_frame = self.add_main_frame()
+
+    def add_main_frame(self):
+        return self.add_frame("--", 790, 590, [1, 1, 1, 1])
 
     def show(self):
         self.top.mainloop()
