@@ -9,6 +9,13 @@ def pos(elm, pos_ar):
     elm.grid(row=row, column=col, rowspan=rowspan, columnspan=colspan, padx=5,
              pady=5)
 
+def get_desktop_path():
+    userprofile = Path(os.environ['USERPROFILE'])
+    onedrivepth = list(userprofile.glob("OneDrive*/Desktop"))
+    if onedrivepth:
+        return onedrivepth[0]
+    else:
+        return str(userprofile / "Desktop")
 
 
 def generate_excel(*args, **kwargs):
