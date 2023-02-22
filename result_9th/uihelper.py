@@ -156,13 +156,12 @@ class MyFrame:
 
     def add_frame(self, title: str, width: int, height: int,
                   pos_ar: List[int]) -> MyFrame:
-        self.children['title'] = MyFrame(self.elm, title, width, height, pos_ar)
-        return self.children['title']
+        self.children[title] = MyFrame(self.elm, title, width, height, pos_ar)
+        return self.children[title]
 
     def remove_border(self):
         self.elm.config(borderwidth=0)
         self.elm.config(highlightthickness=0)
-
 
 class MyApp:
     def __init__(self, title: str, width: int, height: int):

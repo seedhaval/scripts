@@ -3,7 +3,7 @@ from datetime import date
 import json
 
 dates = {
-    'latest': date(2023, 2, 17)
+    'latest': date(2023, 2, 20)
     , 'prv_mo_1': date(2023, 1, 11)
     , 'prv_mo_2': date(2023, 1, 25)
     , 'six_mo_1': date(2022, 8, 10)
@@ -55,7 +55,7 @@ def get_net_data():
         f.write(json.dumps(d, indent=2))
 
 
-#get_net_data()
+get_net_data()
 scrip_ar = []
 
 with open('out.json', 'r') as f:
