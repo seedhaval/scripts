@@ -1,5 +1,5 @@
-from uihelper import MyApp, MyDropdown
-from codehelper import fetch_sqlite_rows
+from lib.uihelper import MyApp, MyDropdown
+from lib.codehelper import fetch_sqlite_rows
 from math import ceil
 
 d = {}

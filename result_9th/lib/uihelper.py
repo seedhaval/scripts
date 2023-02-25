@@ -3,6 +3,7 @@ from tkinter import *
 from tkinter import ttk
 import tkinter.font as tkFont
 from typing import List, Callable
+from collections import OrderedDict
 
 
 def pos(elm, pos_ar: List[int]):
@@ -31,45 +32,6 @@ class MyDropdown:
 
     def get(self):
         return self.var.get()
-
-
-class MyListbox:
-    def __init__(self, prnt, ar: List[str], width: int, height: int,
-                 pos_ar: List[int]):
-        self.prnt = prnt
-        self.ar = ar
-        self.var: StringVar = StringVar()
-        self.elm = Listbox(self.prnt, listvariable=self.var, width=width,
-                           height=height)
-        pos(self.elm, pos_ar)
-        self.load_list()
-
-    def clear(self):
-        self.elm.delete(0, END)
-
-    def load_list(self):
-        self.clear()
-        for i, v in enumerate(self.ar):
-            self.elm.insert(i + 1, v)
-
-    def add_item(self, v: str):
-        self.ar.extend([v])
-        self.load_list()
-
-    def set(self, text):
-        self.var.set(text)
-
-    def get(self):
-        ar = [self.elm.get(i) for i in self.elm.curselection()]
-        if len(ar) > 0:
-            return ar[0]
-        return None
-
-    def get_active_index(self):
-        ar = self.elm.curselection()
-        if len(ar) > 0:
-            return ar[0]
-        return None
 
 
 class MyLabel:
@@ -142,12 +104,6 @@ class MyFrame:
                                            pos_ar)
         return self.children[nm]
 
-    def add_listbox(self, nm: str, ar: List[str], width: int, height: int,
-                    pos_ar: List[int]) -> MyListbox:
-        self.children[nm]: MyListbox = MyListbox(self.elm, ar, width, height,
-                                                 pos_ar)
-        return self.children[nm]
-
     def add_dropdown(self, nm: str, ar: List[str], width: int, height: int,
                      pos_ar: List[int], cb) -> MyDropdown:
         self.children[nm]: MyDropdown = MyDropdown(self.elm, ar, width, height,
@@ -163,16 +119,20 @@ class MyFrame:
         self.elm.config(borderwidth=0)
         self.elm.config(highlightthickness=0)
 
+
 class MyApp:
     def __init__(self, title: str, width: int, height: int):
         self.top = Tk()
         self.top.title(title)
         self.top.grid_propagate(False)
         tkFont.nametofont("TkDefaultFont").config(size=12)
-        self.top.option_add("*font", "verdana 12")
+        self.top.option_add("*font", ("", 12))
         self.top.geometry(f'{width}x{height}+10+10')
         self.children = {}
         self.main_frame: MyFrame = self.add_main_frame()
+        self.menu = OrderedDict()
+        self.xobj = []
+        self.menubar: Menu
 
     def add_frame(self, title: str, width: int, height: int,
                   pos_ar: list[int]) -> MyFrame:
@@ -180,13 +140,29 @@ class MyApp:
         return self.children[title]
 
     def clear_screen(self):
-        if '--' in self.children:
-            self.children['--'].elm.destroy()
+        if '  ' in self.children:
+            self.children['  '].elm.destroy()
         self.main_frame = self.add_main_frame()
         self.main_frame.remove_border()
 
     def add_main_frame(self):
-        return self.add_frame("--", 790, 590, [1, 1, 1, 1])
+        return self.add_frame("  ", 790, 590, [1, 1, 1, 1])
+
+    def add_menu(self, menu_ar):
+        self.menubar = Menu(self.top)
+        self.top.config(menu=self.menubar)
+
+        for menu, submenu, cmd in menu_ar:
+            if menu not in self.menu:
+                mobj = Menu(self.menubar, tearoff=False)
+                self.menu[menu] = mobj
+            else:
+                mobj = self.menu[menu]
+            mobj.add_command(label=submenu, command=cmd)
+            self.xobj.append(mobj)
+
+        for k,v in self.menu.items():
+            self.menubar.add_cascade(label=k, menu=v)
 
     def show(self):
         self.top.mainloop()

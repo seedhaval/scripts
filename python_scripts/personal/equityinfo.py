@@ -3,7 +3,7 @@ from datetime import date
 import json
 
 dates = {
-    'latest': date(2023, 2, 20)
+    'latest': date(2023, 2, 22)
     , 'prv_mo_1': date(2023, 1, 11)
     , 'prv_mo_2': date(2023, 1, 25)
     , 'six_mo_1': date(2022, 8, 10)
