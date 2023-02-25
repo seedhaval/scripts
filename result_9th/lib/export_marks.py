@@ -72,7 +72,7 @@ def add_excel_base_columns(wb):
     sht.column_dimensions["A"].width = 8
     sht.column_dimensions["B"].width = 8
     sht.column_dimensions["C"].width = 30
-    sht.row_dimensions[7].height = 80
+    sht.row_dimensions[7].height = 120
     for row in range(7, 10):
         for col in range(1, 4):
             Cell(row, col, sht).border()

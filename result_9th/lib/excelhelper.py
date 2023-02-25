@@ -22,6 +22,10 @@ class Cell:
         self.cell.alignment = Alignment(wrap_text=True, textRotation=90)
         return self
 
+    def center(self):
+        self.cell.alignment = Alignment(horizontal='center')
+        return self
+
     def color(self, clr):
         self.cell.font = Font(color = clr)
         return self
