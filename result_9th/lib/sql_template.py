@@ -4,19 +4,19 @@ select
   a.student_id
   ,a.student_name
   ,b.exam_id
-  ,coalesce(b.marks,-999)
+  ,coalesce(c.marks,-999)
 from student_info a 
 
-left outer join student_marks b 
-on a.student_id = b.student_id 
+left outer join exam_details b
+on b.subject = ?
+and b.exam_category = ?
+and b.exam_sub_category = ?
 
-left outer join exam_details c 
-on b.exam_id = c.exam_id
+left outer join student_marks c
+on a.student_id = c.student_id
+and b.exam_id = c.exam_id
 
-where c.subject = ? 
-and c.exam_category = ?
-and c.exam_sub_category = ?
-and a.division = ?
+where a.division = ?
 """
 
 get_subject_list = """
@@ -90,4 +90,12 @@ from student_marks a
 inner join student_info b
 on a.student_id = b.student_id
 and b.division = ?
+"""
+
+exam_details_delete = """
+delete from exam_details
+"""
+
+student_info_delete = """
+delete from student_info
 """

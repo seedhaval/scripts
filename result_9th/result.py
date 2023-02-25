@@ -1,4 +1,5 @@
-from lib import enter_marks, export_marks, individual_result
+from lib import enter_marks, export_marks, individual_result, \
+    refresh_exam_info, refresh_student_info
 from lib.codehelper import backup_database
 from lib.uihelper import MyApp
 
@@ -9,9 +10,11 @@ menu_ar = [
     ["Marks", "Export", lambda: export_marks.show_ui(app)],
     ["Result", "Individual Result", lambda: individual_result.show_ui(app)],
     ["Result", "Combined Result", lambda: 1],
-    ["Reference Data", "Refresh exam info", lambda: 1],
-    ["Reference Data", "Refresh student info", lambda: 1],
-    ["Database", "Backup", backup_database],
+    ["Reference Data", "Refresh exam info", refresh_exam_info.do],
+    ["Reference Data", "Refresh student info - Change",
+     refresh_student_info.update],
+    ["Reference Data", "Refresh student info - New year", lambda: 1],
+    ["Database", "Backup", lambda: backup_database(True)],
     ["Database", "Restore", lambda: 1]
 ]
 

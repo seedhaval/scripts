@@ -1,3 +1,4 @@
+import openpyxl
 from openpyxl.styles import Alignment
 from openpyxl.styles import Font
 from openpyxl.styles.borders import Border, Side
@@ -39,4 +40,14 @@ class Cell:
         return self
 
 
-
+def read_all_rows(fl, shtnm):
+    out = []
+    wb = openpyxl.load_workbook(fl)
+    sht = wb[shtnm]
+    for r in range(sht.max_row):
+        row = []
+        for c in range(sht.max_column):
+            row.append( sht.cell(r+1,c+1).value)
+        out.append(row)
+    wb.close()
+    return out

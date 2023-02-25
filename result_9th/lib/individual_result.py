@@ -137,6 +137,7 @@ def generate_result():
     wb = openpyxl.Workbook()
     populate_excel(wb, cfg)
     wb.save(filepath)
+    wb.close()
     os.startfile(filepath)
 
 
