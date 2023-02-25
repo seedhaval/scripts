@@ -13,7 +13,8 @@ menu_ar = [
     ["Reference Data", "Refresh exam info", refresh_exam_info.do],
     ["Reference Data", "Refresh student info - Change",
      refresh_student_info.update],
-    ["Reference Data", "Refresh student info - New year", lambda: 1],
+    ["Reference Data", "Refresh student info - New year",
+     lambda: refresh_student_info.new_year(app)],
     ["Database", "Backup", lambda: backup_database(True)],
     ["Database", "Restore", lambda: 1]
 ]

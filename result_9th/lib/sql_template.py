@@ -99,3 +99,7 @@ delete from exam_details
 student_info_delete = """
 delete from student_info
 """
+
+student_marks_delete = """
+delete from student_marks
+"""
