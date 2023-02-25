@@ -67,3 +67,15 @@ select
 from exam_details
 where subject = ?
 """
+
+get_marks_for_subject = """
+select
+  a.exam_id
+  ,a.student_id
+  ,a.marks
+from student_marks a
+
+inner join exam_details b
+on a.exam_id = b.exam_id
+and b.subject = ?
+"""

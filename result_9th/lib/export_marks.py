@@ -5,13 +5,21 @@ import string
 
 import openpyxl
 from openpyxl.utils import get_column_letter
+from collections import defaultdict
 
 from lib import sql_template
 from lib.codehelper import fetch_sqlite_rows, tm_sfx, output_path, data_path
 from lib.excelhelper import Cell
 from lib.uihelper import MyApp
+from lib.calculatedmarks import calculate
 
 d = {}
+
+
+def calculate_marks():
+    cols = [x['id'] for x in d['colInfo'] if x['type'] == 'calculated']
+    for k, v in d['marksMap'].items():
+        calculate(v, 'subset', cols)
 
 
 def load_data():
@@ -22,8 +30,15 @@ def load_data():
     args = [d['ddSubject'].get()]
     data = [tuple(x) for x in fetch_sqlite_rows(qry, args)]
     d['examMap'] = {x[0]: (x[1], x[2]) for x in data}
+    qry = sql_template.get_marks_for_subject
+    args = [d['ddSubject'].get()]
+    data = [tuple(x) for x in fetch_sqlite_rows(qry, args)]
+    md = defaultdict(dict)
+    for examid, sid, marks in data:
+        md[sid][str(examid)] = marks
+    d['marksMap'] = md
     get_column_info()
-    print(d['examMap'])
+    calculate_marks()
 
 
 def get_subject_list():
@@ -80,11 +95,13 @@ def add_excel_student_info(wb):
         Cell(10 + i, 2, sht).set(roll).border()
         Cell(10 + i, 3, sht).set(nm).wrap().border()
 
+
 def excel_format_mark_cells(wb):
     sht = wb.active
     for r in range(len(d['studentMap'])):
         for c in range(len(d['colInfo'])):
-            Cell(10+r,4+c, sht).border().color(d['colInfo'][c]['color'])
+            Cell(10 + r, 4 + c, sht).border().color(d['colInfo'][c]['color'])
+
 
 def add_excel_exam_info(wb):
     sht = wb.active
@@ -100,7 +117,7 @@ def add_excel_exam_info(wb):
         Cell(7, 4 + i, sht).set(nm).border().verticalwrap().color(clr)
         Cell(8, 4 + i, sht).set(alias).border().color(clr)
         Cell(9, 4 + i, sht).set(total).border().color(clr)
-        sht.column_dimensions[get_column_letter(4+i)].width = 6
+        sht.column_dimensions[get_column_letter(4 + i)].width = 6
 
 
 def get_column_info():
@@ -132,6 +149,15 @@ def get_column_info():
     d['colInfo'] = col_info
 
 
+def add_excel_marks(wb):
+    sht = wb.active
+    for ir, student in enumerate(d['studentMap']):
+        for ic, exam in enumerate(d['colInfo']):
+            if student[0] in d['marksMap'] \
+                    and exam['id'] in d['marksMap'][student[0]]:
+                Cell(10+ir,4+ic,sht).set(d['marksMap'][student[0]][exam['id']])
+
+
 def populate_excel(wb, cfg):
     add_excel_header(wb, cfg)
     add_excel_base_columns(wb)
@@ -139,6 +165,7 @@ def populate_excel(wb, cfg):
     add_excel_student_info(wb)
     add_excel_exam_info(wb)
     excel_format_mark_cells(wb)
+    add_excel_marks(wb)
 
 
 def export_data():
