@@ -1,6 +1,6 @@
 from lib import enter_marks, export_marks, individual_result, \
     refresh_exam_info, refresh_student_info
-from lib.codehelper import backup_database
+from lib.codehelper import backup_database, restore_database
 from lib.uihelper import MyApp
 
 app = MyApp("Result", 800, 600)
@@ -16,7 +16,7 @@ menu_ar = [
     ["Reference Data", "Refresh student info - New year",
      lambda: refresh_student_info.new_year(app)],
     ["Database", "Backup", lambda: backup_database(True)],
-    ["Database", "Restore", lambda: 1]
+    ["Database", "Restore", restore_database]
 ]
 
 app.add_menu(menu_ar)

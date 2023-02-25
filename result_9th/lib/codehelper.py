@@ -4,6 +4,7 @@ import sqlite3
 import subprocess
 from datetime import datetime
 from pathlib import Path
+from tkinter import filedialog
 
 
 def sqlite_exec_query(qry, args):
@@ -32,6 +33,13 @@ def backup_database(show):
     shutil.copy(db_path, output_file)
     if show:
         subprocess.Popen(r'explorer /select,"' + output_file + '"')
+
+
+def restore_database():
+    file = filedialog.askopenfilename(initialdir=output_path)
+    backup_database(False)
+    if file:
+        shutil.copy(file, db_path)
 
 
 app_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
