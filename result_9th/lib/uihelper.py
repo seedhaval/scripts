@@ -1,9 +1,10 @@
 from __future__ import annotations
+
+import tkinter.font as tkFont
+from collections import OrderedDict
 from tkinter import *
 from tkinter import ttk
-import tkinter.font as tkFont
-from typing import List, Callable
-from collections import OrderedDict
+from typing import List
 
 
 def pos(elm, pos_ar: List[int]):

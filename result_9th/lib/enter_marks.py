@@ -1,6 +1,8 @@
-from lib.uihelper import MyApp, MyDropdown
-from lib.codehelper import fetch_sqlite_rows
 from math import ceil
+
+from lib.codehelper import fetch_sqlite_rows
+from lib.uihelper import MyApp
+from lib import sql_template
 
 d = {}
 d['page_length'] = 8
@@ -48,24 +50,16 @@ def show_student_marks(*args, **kwargs):
 
 
 def get_student_marks():
-    qry = f"select a.student_id, a.student_name, b.exam_id, " \
-          f"coalesce(b.marks,-999) " \
-          f"from student_info a " \
-          f"left outer join student_marks b " \
-          f"on a.student_id = b.student_id " \
-          f"left outer join exam_details c " \
-          f"on b.exam_id = c.exam_id " \
-          f"where c.subject = '{d['ddSubject'].get()}' " \
-          f"and c.exam_category = '{d['ddExamCtgy'].get()}' " \
-          f"and c.exam_sub_category = '{d['ddExamSubCtgy'].get()}' " \
-          f"and a.division = '{d['ddDivision'].get()}'"
-    d['marks_list'] = [tuple(x) for x in fetch_sqlite_rows(qry)]
+    qry = sql_template.get_student_marks_for_exam
+    args = [d['ddSubject'].get(), d['ddExamCtgy'].get(),
+            d['ddExamSubCtgy'].get(), d['ddDivision'].get()]
+    d['marks_list'] = [tuple(x) for x in fetch_sqlite_rows(qry, args)]
     return d['marks_list']
 
 
 def get_subject_list():
-    return sorted([x[0] for x in fetch_sqlite_rows(
-        "select subject from exam_details group by 1 ;")])
+    qry = sql_template.get_subject_list
+    return sorted([x[0] for x in fetch_sqlite_rows(qry, ())])
 
 
 def handle_subject_change(subject):
@@ -76,9 +70,9 @@ def handle_subject_change(subject):
 
 
 def get_exam_category_list():
-    return [x[0] for x in fetch_sqlite_rows(
-        f"select exam_category from exam_details where subject = '"
-        f"{d['ddSubject'].get()}' group by 1 order by exam_id;")]
+    qry = sql_template.get_exam_category_list
+    args = [d['ddSubject'].get()]
+    return [x[0] for x in fetch_sqlite_rows(qry, args)]
 
 
 def handle_exam_category_change(exam_category):
@@ -88,16 +82,14 @@ def handle_exam_category_change(exam_category):
 
 
 def get_exam_sub_category_list():
-    return [x[0] for x in fetch_sqlite_rows(
-        f"select exam_sub_category from exam_details where subject = '"
-        f"{d['ddSubject'].get()}' and exam_category = '"
-        f"{d['ddExamCtgy'].get()}' "
-        f"group by 1 order by exam_id;")]
+    qry = sql_template.get_exam_sub_category_list
+    args = [d['ddSubject'].get(), d['ddExamCtgy'].get()]
+    return [x[0] for x in fetch_sqlite_rows(qry, args)]
 
 
 def get_division_list():
-    return sorted([x[0] for x in fetch_sqlite_rows(
-        "select division from student_info group by 1 order by student_id;")])
+    qry = sql_template.get_division_list
+    return sorted([x[0] for x in fetch_sqlite_rows(qry, ())])
 
 
 def show_ui(app: MyApp):
