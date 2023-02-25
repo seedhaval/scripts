@@ -15,10 +15,11 @@ def fetch_sqlite_rows(qry, args):
     conn.close()
     return out
 
+def tm_sfx():
+    return datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
 
 def backup_database():
-    sfx = datetime.now().strftime("%Y_%m_%d_%H_%M_%S")
-    output_file = str(Path(output_path) / f"result_{sfx}.db")
+    output_file = str(Path(output_path) / f"result_{tm_sfx()}.db")
     shutil.copy(db_path, output_file)
     subprocess.Popen(r'explorer /select,"' + output_file + '"')
 
