@@ -26,6 +26,7 @@ class MyTreeView:
             self.elm.column(str(i + 1), width=width, anchor=anchor)
             self.elm.heading(str(i + 1), text=colnm)
         self.elm.bind('<ButtonRelease-1>', cb)
+        self.elm.bind('<KeyRelease>', cb)
         pos(self.elm, pos_ar)
 
     def clear(self):

@@ -1,11 +1,6 @@
-from math import ceil
-
-from lib.codehelper import fetch_sqlite_rows
-from lib.uihelper import MyApp, pos
 from lib import sql_template
-
-from tkinter import ttk
-import tkinter as tk
+from lib.codehelper import fetch_sqlite_rows
+from lib.uihelper import MyApp
 
 d = {}
 d['page_length'] = 8
@@ -77,13 +72,12 @@ def get_division_list():
     qry = sql_template.get_division_list
     return sorted([x[0] for x in fetch_sqlite_rows(qry, ())])
 
+
 def refresh_text_marks():
     row = d['treeview'].get_sel_row_values()
     if row:
         d['txtNewMarks'].set(row[2])
     d['txtNewMarks'].select_all()
-    d['txtNewMarks'].focus()
-
 
 
 def handle_student_select(*args, **kwargs):
@@ -140,4 +134,4 @@ def show_ui(app: MyApp):
                                                [2, 3, 1, 1])
     d['txtNewMarks'].bind_return(handle_marks_enter_key_press)
     d['frm_marks'].add_button("btnSaveStudents", "Save", lambda: None,
-                           [3, 2, 1, 1])
+                              [3, 2, 1, 1])
