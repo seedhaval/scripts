@@ -136,4 +136,3 @@ def calculate(md, type, cols):
         md["sci.9"] = md["sci.4"] + md["sci.8"]
     if (type == 'all' or 'sci.10' in cols) and isvalid("sci.9", md):
         md["sci.10"] = md["sci.9"] / 2
-
