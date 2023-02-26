@@ -13,6 +13,61 @@ def pos(elm, pos_ar: List[int]):
              pady=5)
 
 
+class MyTreeView:
+    def __init__(self, prnt, height: int, cols, pos_ar: List[int], cb):
+        self.prnt = prnt
+        self.elm = ttk.Treeview(self.prnt, selectmode='browse',
+                                show=["headings"], height=height)
+        self.cols = cols
+        self.data = []
+        self.elm["columns"] = [str(x + 1) for x in range(len(cols))]
+        for i, cinfo in enumerate(cols):
+            colnm, width, anchor = cinfo
+            self.elm.column(str(i + 1), width=width, anchor=anchor)
+            self.elm.heading(str(i + 1), text=colnm)
+        self.elm.bind('<ButtonRelease-1>', cb)
+        pos(self.elm, pos_ar)
+
+    def clear(self):
+        for item in self.elm.get_children():
+            self.elm.delete(item)
+
+    def load_data(self, ar):
+        self.data = ar
+        self.clear()
+        for i, values in enumerate(ar):
+            self.elm.insert("", 'end', values=values, text=f"{i}",
+                            iid=f'Row{i}')
+
+    def update_current_row(self, colid, colval):
+        if self.cur_ir is not None:
+            self.data[self.cur_ir][colid] = colval
+            self.elm.item(self.cur_iid, values=self.data[self.cur_ir])
+
+    def select_row(self, ir):
+        self.elm.selection_set(f'Row{ir}')
+        self.cur_ir = ir
+        self.cur_iid = f"Row{self.cur_ir}"
+
+    def select_focussed(self):
+        self.focus = self.elm.focus()
+        sel = self.elm.item(self.focus)
+        if sel['text']:
+            self.select_row(int(sel['text']))
+        else:
+            self.cur_ir = None
+            self.cur_iid = None
+
+    def get_sel_row_values(self):
+        if self.cur_ir is not None:
+            return self.data[self.cur_ir]
+        return None
+
+    def select_next_row(self):
+        if self.cur_ir is not None and len(self.data) > self.cur_ir + 1:
+            self.select_row(self.cur_ir + 1)
+
+
 class MyDropdown:
     def __init__(self, prnt, ar, width: int, height: int, pos_ar: List[int],
                  cb):
@@ -78,6 +133,17 @@ class MyText():
     def get(self):
         return self.elm.get('1.0', 'end -1c')
 
+    def bind_return(self, cb):
+        self.return_cb = cb
+        self.elm.bind('<Return>', cb)
+
+    def select_all(self):
+        self.elm.tag_add(SEL, "1.0", END)
+        self.elm.mark_set(INSERT, "1.0")
+        self.elm.see(INSERT)
+
+    def focus(self):
+        self.elm.focus_set()
 
 class MyFrame:
     def __init__(self, prnt, title: str, width: int, height: int,
@@ -108,6 +174,12 @@ class MyFrame:
     def add_dropdown(self, nm: str, ar: List[str], width: int, height: int,
                      pos_ar: List[int], cb) -> MyDropdown:
         self.children[nm]: MyDropdown = MyDropdown(self.elm, ar, width, height,
+                                                   pos_ar, cb)
+        return self.children[nm]
+
+    def add_treeview(self, nm: str, height: int, cols,
+                     pos_ar: List[int], cb) -> MyTreeView:
+        self.children[nm]: MyTreeView = MyTreeView(self.elm, height, cols,
                                                    pos_ar, cb)
         return self.children[nm]
 
@@ -162,7 +234,7 @@ class MyApp:
             mobj.add_command(label=submenu, command=cmd)
             self.xobj.append(mobj)
 
-        for k,v in self.menu.items():
+        for k, v in self.menu.items():
             self.menubar.add_cascade(label=k, menu=v)
 
     def show(self):

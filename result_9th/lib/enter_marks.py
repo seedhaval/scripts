@@ -1,52 +1,38 @@
 from math import ceil
 
 from lib.codehelper import fetch_sqlite_rows
-from lib.uihelper import MyApp
+from lib.uihelper import MyApp, pos
 from lib import sql_template
+
+from tkinter import ttk
+import tkinter as tk
 
 d = {}
 d['page_length'] = 8
 
 
 def clear_marks_info(*args, **kwargs):
-    clear_marks_frame()
-    d['marks_textbox_ar'] = []
+    d['treeview'].clear()
     d['marks_list'] = []
-    d['ddPageNo'].load_list(['1'])
+    d['lblTotal'].set("Total marks = N/A")
+    d['txtNewMarks'].clear()
 
 
-def load_page(pageno):
-    clear_marks_frame()
-    start = (int(pageno) - 1) * d['page_length']
-    end = start + d['page_length']
-    d['marks_textbox_ar'] = []
-    for i, row in enumerate(d['marks_list'][start:end]):
-        d['frm_marks'].add_label(f"lblnm{i}", row[1], 25, 1, [i + 1, 1, 1, 1])
-        if row[3] == -999:
-            txtMarks = ""
+def refresh_table():
+    out = []
+    for i, minfo in enumerate(d['marks_list']):
+        if minfo[4] != -999:
+            marks = str(int(minfo[4]))
         else:
-            txtMarks = str(int(row[3]))
-        txtbox = d['frm_marks'].add_text(f"txtbox{i}", txtMarks, 5, 1,
-                                         [i + 1, 2, 1, 1])
-
-
-def clear_marks_frame():
-    if 'frm_marks' in d:
-        d['frm_marks'].elm.destroy()
-    d['frm_marks'] = d['app'].main_frame.add_frame("Marks", 780, 300,
-                                                   [3, 1, 1, 1])
-
-
-def refresh_page_count():
-    page_ar = [x + 1 for x in
-               range(ceil(len(d['marks_list']) / d['page_length']))]
-    d['ddPageNo'].load_list(page_ar)
+            marks = ""
+        out.append([minfo[1], minfo[2], marks])
+    d['treeview'].load_data(out)
 
 
 def show_student_marks(*args, **kwargs):
     get_student_marks()
-    refresh_page_count()
-    load_page(1)
+    refresh_table()
+    d['lblTotal'].set(f"Total marks = {d['marks_list'][0][5]}")
 
 
 def get_student_marks():
@@ -91,6 +77,26 @@ def get_division_list():
     qry = sql_template.get_division_list
     return sorted([x[0] for x in fetch_sqlite_rows(qry, ())])
 
+def refresh_text_marks():
+    row = d['treeview'].get_sel_row_values()
+    if row:
+        d['txtNewMarks'].set(row[2])
+    d['txtNewMarks'].select_all()
+    d['txtNewMarks'].focus()
+
+
+
+def handle_student_select(*args, **kwargs):
+    d['treeview'].select_focussed()
+    refresh_text_marks()
+
+
+def handle_marks_enter_key_press(*args, **kwargs):
+    d['treeview'].update_current_row(2, d['txtNewMarks'].get())
+    d['treeview'].select_next_row()
+    refresh_text_marks()
+    return "break"
+
 
 def show_ui(app: MyApp):
     d['app'] = app
@@ -120,10 +126,18 @@ def show_ui(app: MyApp):
                                                clear_marks_info)
     frm_details.add_button("btnShowStudents", "Show", show_student_marks,
                            [2, 3, 1, 2])
-    frm_navigate = app.main_frame.add_frame("Navigate", 780, 70, [2, 1, 1, 2])
-    frm_navigate.add_label("Page", "Page", 6, 1, [1, 1, 1, 1])
-    d['ddPageNo'] = frm_navigate.add_dropdown("ddPageNo", ["1"], 3, 1,
-                                              [1, 2, 1, 1], load_page)
-    frm_navigate.add_button("btnSaveStudents", "Save", lambda: None,
-                            [1, 3, 1, 2])
-    clear_marks_frame()
+    d['frm_marks'] = d['app'].main_frame.add_frame("Marks", 780, 380,
+                                                   [2, 1, 1, 1])
+
+    cols = (("Roll No", 60, "c"), ("Name", 250, "sw"), ("Marks", 60, "se"))
+    d['treeview'] = d['frm_marks'].add_treeview("tview", 16, cols, [1, 1, 3, 1],
+                                                handle_student_select)
+    d['lblTotal'] = d['frm_marks'].add_label("lblTotal", "Total marks = N/A",
+                                             18, 1, [1, 2, 1, 1])
+    lblMarksNew = d['frm_marks'].add_label("lblMarksNew", "Enter new marks",
+                                           18, 1, [2, 2, 1, 1])
+    d['txtNewMarks'] = d['frm_marks'].add_text("txtNewMarks", "", 5, 1,
+                                               [2, 3, 1, 1])
+    d['txtNewMarks'].bind_return(handle_marks_enter_key_press)
+    d['frm_marks'].add_button("btnSaveStudents", "Save", lambda: None,
+                           [3, 2, 1, 1])

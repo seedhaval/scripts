@@ -2,9 +2,11 @@
 get_student_marks_for_exam = """
 select
   a.student_id
+  ,a.roll_no
   ,a.student_name
   ,b.exam_id
   ,coalesce(c.marks,-999)
+  ,b.total_marks
 from student_info a 
 
 left outer join exam_details b
