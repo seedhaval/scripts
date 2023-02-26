@@ -1,4 +1,14 @@
 
+delete_marks_for_div_exam = """
+delete from student_marks
+where exam_id = ?
+and student_id in (
+  select student_id
+  from student_info
+  where division = ?
+)
+"""
+
 get_student_marks_for_exam = """
 select
   a.student_id

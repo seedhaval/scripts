@@ -1,10 +1,24 @@
+from tkinter import messagebox
+
 from lib import sql_template
-from lib.codehelper import fetch_sqlite_rows
+from lib.codehelper import fetch_sqlite_rows, sqlite_exec_query
 from lib.uihelper import MyApp
 
 d = {}
 d['page_length'] = 8
 
+
+def save_data(*args, **kwargs):
+    ar = []
+    for i,row in enumerate(d['treeview'].data):
+        if row[2] != "":
+            ar.append(f"({d['marks_list'][i][0]},{d['marks_list'][i][3]},{row[2]})")
+    qry = sql_template.delete_marks_for_div_exam
+    args = [d['marks_list'][0][3], d['ddDivision'].get()]
+    sqlite_exec_query(qry, args)
+    qry = "insert into student_marks values " + ",\n".join(ar)
+    sqlite_exec_query(qry, ())
+    messagebox.showinfo("Done !!", "Done !!")
 
 def clear_marks_info(*args, **kwargs):
     d['treeview'].clear()
@@ -133,5 +147,5 @@ def show_ui(app: MyApp):
     d['txtNewMarks'] = d['frm_marks'].add_text("txtNewMarks", "", 5, 1,
                                                [2, 3, 1, 1])
     d['txtNewMarks'].bind_return(handle_marks_enter_key_press)
-    d['frm_marks'].add_button("btnSaveStudents", "Save", lambda: None,
+    d['frm_marks'].add_button("btnSaveStudents", "Save", save_data,
                               [3, 2, 1, 1])
