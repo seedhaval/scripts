@@ -136,3 +136,42 @@ def calculate(md, type, cols):
         md["sci.9"] = md["sci.4"] + md["sci.8"]
     if (type == 'all' or 'sci.10' in cols) and isvalid("sci.9", md):
         md["sci.10"] = md["sci.9"] / 2
+
+    if (type == 'all' or 'smj.1' in cols) and isvalid('101 102', md):
+        md['smj.1'] = md['101'] + md['102']
+    if (type == 'all' or 'smj.2' in cols) and isvalid('103 104', md):
+        md['smj.2'] = md['103'] + md['104']
+    if (type == 'all' or 'smj.3' in cols) and isvalid('105', md):
+        md['smj.3'] = md['105'] / 2
+    if (type == 'all' or 'smj.4' in cols) and isvalid('106', md):
+        md['smj.4'] = md['106'] / 2
+    if (type == 'all' or 'smj.5' in cols) and isvalid('107', md):
+        md['smj.5'] = md['107'] / 2
+    if (type == 'all' or 'smj.6' in cols) and isvalid('108', md):
+        md['smj.6'] = md['108'] / 2
+    if (type == 'all' or 'smj.7' in cols) and isvalid('smj.3 smj.4 smj.5 smj.6',
+                                                      md):
+        md['smj.7'] = md['smj.3'] + md['smj.4'] + md['smj.5'] + md['smj.6']
+    if (type == 'all' or 'smj.8' in cols) and isvalid('smj.2 smj.7', md):
+        md['smj.8'] = md['smj.2'] + md['smj.7']
+    if (type == 'all' or 'smj.9' in cols) and isvalid('109 110', md):
+        md['smj.9'] = md['109'] + md['110']
+    if (type == 'all' or 'smj.10' in cols) and isvalid('111 112', md):
+        md['smj.10'] = md['111'] + md['112']
+    if (type == 'all' or 'smj.11' in cols) and isvalid('113', md):
+        md['smj.11'] = md['113'] / 2
+    if (type == 'all' or 'smj.12' in cols) and isvalid('114', md):
+        md['smj.12'] = md['114'] / 2
+    if (type == 'all' or 'smj.13' in cols) and isvalid('115', md):
+        md['smj.13'] = md['115'] / 2
+    if (type == 'all' or 'smj.14' in cols) and isvalid('116', md):
+        md['smj.14'] = md['116'] / 2
+    if (type == 'all' or 'amj.15' in cols) and isvalid(
+            'smj.11 smj.12 smj.13 smj.14', md):
+        md['amj.15'] = md['smj.11'] + md['smj.12'] + md['smj.13'] + md['smj.14']
+    if (type == 'all' or 'smj.16' in cols) and isvalid('smj.10 amj.15', md):
+        md['smj.16'] = md['smj.10'] + md['amj.15']
+    if (type == 'all' or 'smj.17' in cols) and isvalid('smj.8 smj.16', md):
+        md['smj.17'] = md['smj.8'] + md['smj.16']
+    if (type == 'all' or 'smj.18' in cols) and isvalid('smj.17', md):
+        md['smj.18'] = md['smj.17'] / 2
