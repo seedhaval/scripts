@@ -1,5 +1,5 @@
 from lib import enter_marks, export_marks, individual_result, \
-    refresh_exam_info, refresh_student_info
+    refresh_exam_info, refresh_student_info, bulk_import
 from lib.codehelper import backup_database, restore_database
 from lib.uihelper import MyApp
 
@@ -8,6 +8,7 @@ app = MyApp("Result", 800, 600)
 menu_ar = [
     ["Marks", "Enter Marks", lambda: enter_marks.show_ui(app)],
     ["Marks", "Export", lambda: export_marks.show_ui(app)],
+    ['Marks', 'Bulk import', lambda: bulk_import.show_ui(app)],
     ["Result", "Individual Result", lambda: individual_result.show_ui(app)],
     ["Result", "Combined Result", lambda: 1],
     ["Reference Data", "Refresh exam info", refresh_exam_info.do],

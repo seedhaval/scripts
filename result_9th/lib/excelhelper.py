@@ -1,5 +1,5 @@
 import openpyxl
-from openpyxl.styles import Alignment
+from openpyxl.styles import Alignment, Protection
 from openpyxl.styles import Font
 from openpyxl.styles.borders import Border, Side
 
@@ -38,6 +38,9 @@ class Cell:
     def border(self):
         self.cell.border = thin_border
         return self
+
+    def unprotect(self):
+        self.cell.protection = Protection(locked=False)
 
 
 def read_all_rows(fl, shtnm):
