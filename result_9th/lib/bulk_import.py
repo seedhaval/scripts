@@ -1,15 +1,19 @@
 import json
 import os
+import random
 import re
 import string
-import random
+from collections import defaultdict
+from tkinter import filedialog
+from tkinter import messagebox
 
 import openpyxl
 from openpyxl.utils import get_column_letter
-from collections import defaultdict
 
+from lib import excelhelper
 from lib import sql_template
-from lib.codehelper import fetch_sqlite_rows, tm_sfx, output_path, data_path
+from lib.codehelper import fetch_sqlite_rows, output_path, data_path, \
+    sqlite_exec_query
 from lib.excelhelper import Cell
 from lib.uihelper import MyApp
 
@@ -128,7 +132,8 @@ def populate_excel(wb, cfg):
 
 def protect_sheet(wb):
     sht = wb.active
-    sht.protection.password = str(random.randint(10000,99999))
+    sht.protection.password = str(random.randint(10000, 99999))
+
 
 def export_data():
     filepath = get_output_file_path()
@@ -139,6 +144,31 @@ def export_data():
     wb.save(filepath)
     wb.close()
     os.startfile(filepath)
+
+
+def import_data():
+    file = filedialog.askopenfilename(initialdir=output_path)
+    if not file:
+        return
+    data = excelhelper.read_all_rows(file, False)
+    subject = data[3][2]
+    division = data[4][2]
+    examids = data[7][3:]
+    studentids = [x[0] for x in data[9:]]
+    if subject != d['ddSubject'].get() or division != d['ddDivision'].get():
+        messagebox.showerror("Invalid file", "Invalid file")
+        return
+    out = []
+    for ir, row in enumerate(data[9:]):
+        for ic, col in enumerate(row[3:]):
+            if str(col).strip() not in ('None', ''):
+                out.append(f"({studentids[ir]}, {examids[ic]}, {col})")
+    qry = sql_template.delete_marks_for_div_subject
+    args = [d['ddSubject'].get(), d['ddDivision'].get()]
+    sqlite_exec_query(qry, args)
+    qry = "insert into student_marks values " + ",\n".join(out)
+    sqlite_exec_query(qry, ())
+    messagebox.showinfo("Done !!", "Done !!")
 
 
 def show_ui(app: MyApp):
@@ -152,4 +182,6 @@ def show_ui(app: MyApp):
     d['ddDivision'] = frm_select.add_dropdown("ddDivision", get_division_list(),
                                               25, 1, [2, 2, 1, 1], lambda x: 1)
     frm_select.add_button("btnGenTemplate", "Generate Template", export_data,
-                          [3, 2, 1, 2])
+                          [3, 1, 1, 1])
+    frm_select.add_button("btnImport", "Import", import_data,
+                          [3, 2, 1, 1])

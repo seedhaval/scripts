@@ -8,6 +8,7 @@ thin_border = Border(left=Side(style='thin'),
                      top=Side(style='thin'),
                      bottom=Side(style='thin'))
 
+
 class Cell:
     def __init__(self, row, col, sht):
         self.cell = sht.cell(row, col)
@@ -28,7 +29,7 @@ class Cell:
         return self
 
     def color(self, clr):
-        self.cell.font = Font(color = clr)
+        self.cell.font = Font(color=clr)
         return self
 
     def set(self, v):
@@ -46,11 +47,14 @@ class Cell:
 def read_all_rows(fl, shtnm):
     out = []
     wb = openpyxl.load_workbook(fl)
-    sht = wb[shtnm]
+    if shtnm:
+        sht = wb[shtnm]
+    else:
+        sht = wb.worksheets[0]
     for r in range(sht.max_row):
         row = []
         for c in range(sht.max_column):
-            row.append( sht.cell(r+1,c+1).value)
+            row.append(sht.cell(r + 1, c + 1).value)
         out.append(row)
     wb.close()
     return out

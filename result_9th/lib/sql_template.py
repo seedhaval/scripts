@@ -1,3 +1,17 @@
+delete_marks_for_div_subject = """
+delete from student_marks
+where exam_id in (
+  select exam_id
+  from exam_details
+  where subject = ?
+)
+and student_id in (
+  select student_id
+  from student_info
+  where division = ?
+)
+"""
+
 
 delete_marks_for_div_exam = """
 delete from student_marks
