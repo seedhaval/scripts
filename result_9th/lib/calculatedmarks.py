@@ -5,6 +5,18 @@ def isvalid(txt, md):
     return True
 
 
+def get_grade(marks):
+    if marks >= 60:
+        return 'अ'
+    elif marks >= 45:
+        return 'ब'
+    elif marks >= 35:
+        return 'क'
+    elif marks >= 0:
+        return 'ड'
+    return ''
+
+
 def calculate(md, type, cols):
     if (type == 'all' or 'mar.1' in cols) and isvalid("3 4 5 6", md):
         md["mar.1"] = md["3"] + md["4"] + md["5"] + md["6"]
@@ -179,12 +191,29 @@ def calculate(md, type, cols):
     if (type == 'all' or 'tec.1' in cols) and isvalid('117 118 119', md):
         md['tec.1'] = md['117'] + md['118'] + md['119']
     if (type == 'all' or 'tec.2' in cols) and isvalid('tec.1', md):
-        md['tec.2'] = md['tec.1'] * (100.00/140.00)
+        md['tec.2'] = md['tec.1'] * (100.00 / 140.00)
     if (type == 'all' or 'tec.3' in cols) and isvalid('120 121 122', md):
         md['tec.3'] = md['120'] + md['121'] + md['122']
     if (type == 'all' or 'tec.4' in cols) and isvalid('tec.3', md):
-        md['tec.4'] = md['tec.3'] * (100.00/140.00)
+        md['tec.4'] = md['tec.3'] * (100.00 / 140.00)
     if (type == 'all' or 'tec.5' in cols) and isvalid('tec.2 tec.4', md):
         md['tec.5'] = md['tec.2'] + md['tec.4']
     if (type == 'all' or 'tec.6' in cols) and isvalid('tec.5', md):
         md['tec.6'] = md['tec.5'] / 2
+
+    if (type == 'all' or 'aro.1' in cols) and isvalid('123 124 125 126 127',
+                                                      md):
+        md['aro.1'] = md['123'] + md['124'] + md['125'] + md['126'] + md['127']
+    if (type == 'all' or 'aro.2' in cols) and isvalid('aro.1', md):
+        md['aro.2'] = get_grade(md['aro.1'])
+    if (type == 'all' or 'aro.3' in cols) and isvalid('128 129 130 131 132',
+                                                      md):
+        md['aro.3'] = md['128'] + md['129'] + md['130'] + md['131'] + md['132']
+    if (type == 'all' or 'aro.4' in cols) and isvalid('aro.3', md):
+        md['aro.4'] = get_grade(md['aro.3'])
+    if (type == 'all' or 'aro.5' in cols) and isvalid('aro.1 aro.3', md):
+        md['aro.5'] = md['aro.1'] + md['aro.3']
+    if (type == 'all' or 'aro.6' in cols) and isvalid('aro.5', md):
+        md['aro.6'] = md['aro.5'] / 2
+    if (type == 'all' or 'aro.7' in cols) and isvalid('aro.6', md):
+        md['aro.7'] = get_grade(md['aro.6'])

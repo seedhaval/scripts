@@ -135,7 +135,7 @@ def get_column_info():
         else:
             curd['type'] = 'calculated'
             curd['id'] = ar[0]
-            curd['total'] = int(ar[1])
+            curd['total'] = int(ar[1]) if ar[1].strip() != '' else ''
             curd['nm'] = ar[2]
             curd['color'] = '0000FF'
 
