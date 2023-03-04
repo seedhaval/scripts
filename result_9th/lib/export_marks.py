@@ -31,7 +31,7 @@ def load_data():
     data = [tuple(x) for x in fetch_sqlite_rows(qry, args)]
     d['examMap'] = {x[0]: (x[1], x[2]) for x in data}
     qry = sql_template.get_marks_for_subject
-    args = [d['ddSubject'].get()]
+    args = [d['ddSubject'].get(), d['ddDivision'].get()]
     data = [tuple(x) for x in fetch_sqlite_rows(qry, args)]
     md = defaultdict(dict)
     for examid, sid, marks in data:
@@ -155,7 +155,8 @@ def add_excel_marks(wb):
         for ic, exam in enumerate(d['colInfo']):
             if student[0] in d['marksMap'] \
                     and exam['id'] in d['marksMap'][student[0]]:
-                Cell(10+ir,4+ic,sht).set(d['marksMap'][student[0]][exam['id']])
+                Cell(10 + ir, 4 + ic, sht).set(
+                    d['marksMap'][student[0]][exam['id']])
 
 
 def populate_excel(wb, cfg):

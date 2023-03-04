@@ -17,13 +17,14 @@ for row in data:
             val += ":" + row[3]
         cfg.append(val)
 
-        val = " + ".join( f"md['{x}']" for x in row[4].split())
-        assign = f"md['{row[0]}'] = {val}"
+        if len(row) > 4:
+            val = " + ".join( f"md['{x}']" for x in row[4].split())
+            assign = f"md['{row[0]}'] = {val}"
 
-        code = f"if (type == 'all' or '{row[0]}' in cols) and isvalid('" \
-               f"{row[4]}',md):\n\t"
-        code += assign
-        calc.append(code)
+            code = f"if (type == 'all' or '{row[0]}' in cols) and isvalid('" \
+                   f"{row[4]}',md):\n\t"
+            code += assign
+            calc.append(code)
 
 
 print(",".join(cfg))

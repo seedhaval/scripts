@@ -104,6 +104,10 @@ from student_marks a
 inner join exam_details b
 on a.exam_id = b.exam_id
 and b.subject = ?
+
+inner join student_info c
+on a.student_id = c.student_id
+and c.division = ?
 """
 
 get_marks_for_all_subjects = """
