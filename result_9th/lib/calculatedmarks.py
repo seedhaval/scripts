@@ -217,3 +217,22 @@ def calculate(md, type, cols):
         md['aro.6'] = md['aro.5'] / 2
     if (type == 'all' or 'aro.7' in cols) and isvalid('aro.6', md):
         md['aro.7'] = get_grade(md['aro.6'])
+
+    if (type == 'all' or 'ncc.1' in cols) and isvalid(
+            '133 134 135 136 137 138 139 140 141', md):
+        md['ncc.1'] = md['133'] + md['134'] + md['135'] + md['136'] + md[
+            '137'] + md['138'] + md['139'] + md['140'] + md['141']
+    if (type == 'all' or 'ncc.2' in cols) and isvalid('ncc.1 142', md):
+        md['ncc.2'] = md['ncc.1'] + md['142']
+    if (type == 'all' or 'ncc.3' in cols) and isvalid(
+            '143 144 145 146 147 148 149 150 151', md):
+        md['ncc.3'] = md['143'] + md['144'] + md['145'] + md['146'] + md[
+            '147'] + md['148'] + md['149'] + md['150'] + md['151']
+    if (type == 'all' or 'ncc.4' in cols) and isvalid('ncc.3 152', md):
+        md['ncc.4'] = md['ncc.3'] + md['152']
+    if (type == 'all' or 'ncc.5' in cols) and isvalid('ncc.2 ncc.4', md):
+        md['ncc.5'] = md['ncc.2'] + md['ncc.4']
+    if (type == 'all' or 'ncc.6' in cols) and isvalid('ncc.5', md):
+        md['ncc.6'] = md['ncc.5'] / 2
+    if (type == 'all' or 'ncc.7' in cols) and isvalid('ncc.6', md):
+        md['ncc.7'] = get_grade(md['ncc.6'])
