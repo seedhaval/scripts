@@ -14,6 +14,8 @@ menu_ar = [
      lambda: result_tabular.show_ui(app, "घटक चाचणी १")],
     ["Result", "घटक चाचणी २",
      lambda: result_tabular.show_ui(app, "घटक चाचणी २")],
+    ["Result", "प्रथम सत्र",
+     lambda: result_tabular.show_ui(app, "प्रथम सत्र")],
     ["Reference Data", "Refresh exam info", refresh_exam_info.do],
     ["Reference Data", "Refresh student info - Change",
      refresh_student_info.update],

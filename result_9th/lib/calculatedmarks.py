@@ -291,3 +291,29 @@ def calculate(md, type, cols):
             md['gc2.5'] = 'Pass'
         else:
             md['gc2.5'] = f'F{val}'
+
+    if (type == 'all' or 'ps.1' in cols):
+        md['ps.1'] = oneof('hin.2 snsk.2 ssh.4', md)
+    if (type == 'all' or 'ps.2' in cols) and isvalid('eng.2 ps.1 mar.2', md):
+        md['ps.2'] = md['eng.2'] + md['ps.1'] + md['mar.2']
+    if (type == 'all' or 'ps.3' in cols) and isvalid('sci.4 mat.7', md):
+        md['ps.3'] = md['sci.4'] + md['mat.7']
+    if (type == 'all' or 'ps.4' in cols):
+        md['ps.4'] = oneof('smj.8 tec.1', md)
+    if (type == 'all' or 'ps.5' in cols) and isvalid('ps.2 ps.3 ps.4', md):
+        md['ps.5'] = md['ps.2'] + md['ps.3'] + md['ps.4']
+    if (type == 'all' or 'ps.6' in cols) and isvalid('ps.5', md):
+        md['ps.6'] = md['ps.5'] / 6
+    if (type == 'all' or 'ps.7' in cols) and isvalid(
+            'mar.2 ps.1 eng.2 mat.7 sci.4 ps.4', md):
+        val = 0
+        val += 1 if md['mar.2'] < 35 else 0
+        val += 1 if md['ps.1'] < 35 else 0
+        val += 1 if md['eng.2'] < 35 else 0
+        val += 1 if md['mat.7'] < 35 else 0
+        val += 1 if md['sci.4'] < 35 else 0
+        val += 1 if md['ps.4'] < 35 else 0
+        if val == 0:
+            md['ps.7'] = 'Pass'
+        else:
+            md['ps.7'] = f'F{val}'
