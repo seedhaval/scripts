@@ -299,7 +299,7 @@ def calculate(md, type, cols):
     if (type == 'all' or 'ps.3' in cols) and isvalid('sci.4 mat.7', md):
         md['ps.3'] = md['sci.4'] + md['mat.7']
     if (type == 'all' or 'ps.4' in cols):
-        md['ps.4'] = oneof('smj.8 tec.1', md)
+        md['ps.4'] = oneof('smj.8 tec.2', md)
     if (type == 'all' or 'ps.5' in cols) and isvalid('ps.2 ps.3 ps.4', md):
         md['ps.5'] = md['ps.2'] + md['ps.3'] + md['ps.4']
     if (type == 'all' or 'ps.6' in cols) and isvalid('ps.5', md):
@@ -317,3 +317,29 @@ def calculate(md, type, cols):
             md['ps.7'] = 'Pass'
         else:
             md['ps.7'] = f'F{val}'
+
+    if (type == 'all' or 'ds.1' in cols):
+        md['ds.1'] = oneof('hin.4 snsk.4 ssh.8', md)
+    if (type == 'all' or 'ds.2' in cols) and isvalid('eng.4 ds.1 mar.4', md):
+        md['ds.2'] = md['eng.4'] + md['ds.1'] + md['mar.4']
+    if (type == 'all' or 'ds.3' in cols) and isvalid('sci.8 mat.14', md):
+        md['ds.3'] = md['sci.8'] + md['mat.14']
+    if (type == 'all' or 'ds.4' in cols):
+        md['ds.4'] = oneof('smj.16 tec.4', md)
+    if (type == 'all' or 'ds.5' in cols) and isvalid('ds.2 ds.3 ds.4', md):
+        md['ds.5'] = md['ds.2'] + md['ds.3'] + md['ds.4']
+    if (type == 'all' or 'ds.6' in cols) and isvalid('ds.5', md):
+        md['ds.6'] = md['ds.5'] / 6
+    if (type == 'all' or 'ds.7' in cols) and isvalid(
+            'mar.4 ds.1 eng.4 mat.14 sci.8 ds.4', md):
+        val = 0
+        val += 1 if md['mar.4'] < 35 else 0
+        val += 1 if md['ds.1'] < 35 else 0
+        val += 1 if md['eng.4'] < 35 else 0
+        val += 1 if md['mat.14'] < 35 else 0
+        val += 1 if md['sci.8'] < 35 else 0
+        val += 1 if md['ds.4'] < 35 else 0
+        if val == 0:
+            md['ds.7'] = 'Pass'
+        else:
+            md['ds.7'] = f'F{val}'
