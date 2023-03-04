@@ -175,3 +175,16 @@ def calculate(md, type, cols):
         md['smj.17'] = md['smj.8'] + md['smj.16']
     if (type == 'all' or 'smj.18' in cols) and isvalid('smj.17', md):
         md['smj.18'] = md['smj.17'] / 2
+
+    if (type == 'all' or 'tec.1' in cols) and isvalid('117 118 119', md):
+        md['tec.1'] = md['117'] + md['118'] + md['119']
+    if (type == 'all' or 'tec.2' in cols) and isvalid('tec.1', md):
+        md['tec.2'] = md['tec.1'] * (100.00/140.00)
+    if (type == 'all' or 'tec.3' in cols) and isvalid('120 121 122', md):
+        md['tec.3'] = md['120'] + md['121'] + md['122']
+    if (type == 'all' or 'tec.4' in cols) and isvalid('tec.3', md):
+        md['tec.4'] = md['tec.3'] * (100.00/140.00)
+    if (type == 'all' or 'tec.5' in cols) and isvalid('tec.2 tec.4', md):
+        md['tec.5'] = md['tec.2'] + md['tec.4']
+    if (type == 'all' or 'tec.6' in cols) and isvalid('tec.5', md):
+        md['tec.6'] = md['tec.5'] / 2
