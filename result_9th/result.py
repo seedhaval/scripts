@@ -1,5 +1,5 @@
 from lib import enter_marks, export_marks, individual_result, \
-    refresh_exam_info, refresh_student_info, bulk_import
+    refresh_exam_info, refresh_student_info, bulk_import, result_tabular
 from lib.codehelper import backup_database, restore_database
 from lib.uihelper import MyApp
 
@@ -10,7 +10,10 @@ menu_ar = [
     ["Marks", "Export", lambda: export_marks.show_ui(app)],
     ['Marks', 'Bulk import', lambda: bulk_import.show_ui(app)],
     ["Result", "Individual Result", lambda: individual_result.show_ui(app)],
-    ["Result", "Combined Result", lambda: 1],
+    ["Result", "घटक चाचणी १",
+     lambda: result_tabular.show_ui(app, "घटक चाचणी १")],
+    ["Result", "घटक चाचणी २",
+     lambda: result_tabular.show_ui(app, "घटक चाचणी २")],
     ["Reference Data", "Refresh exam info", refresh_exam_info.do],
     ["Reference Data", "Refresh student info - Change",
      refresh_student_info.update],

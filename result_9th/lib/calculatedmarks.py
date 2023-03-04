@@ -5,6 +5,13 @@ def isvalid(txt, md):
     return True
 
 
+def oneof(txt, md):
+    for idx in txt.strip().split():
+        if idx in md and str(md[idx]).strip() != '':
+            return md[idx]
+    return ''
+
+
 def get_grade(marks):
     if marks >= 60:
         return 'अ'
@@ -236,3 +243,51 @@ def calculate(md, type, cols):
         md['ncc.6'] = md['ncc.5'] / 2
     if (type == 'all' or 'ncc.7' in cols) and isvalid('ncc.6', md):
         md['ncc.7'] = get_grade(md['ncc.6'])
+
+    if (type == 'all' or 'gc1.1' in cols):
+        md['gc1.1'] = oneof('13 25 ssh.1', md)
+    if (type == 'all' or 'gc1.2' in cols):
+        md['gc1.2'] = oneof('smj.1 117', md)
+    if (type == 'all' or 'gc1.3' in cols) and isvalid(
+            '1 gc1.1 53 mat.1 sci.1 gc1.2', md):
+        md['gc1.3'] = md['1'] + md['gc1.1'] + md['53'] + md['mat.1'] + md[
+            'sci.1'] + md['gc1.2']
+    if (type == 'all' or 'gc1.4' in cols) and isvalid('gc1.3', md):
+        md['gc1.4'] = md['gc1.3'] * (100.00 / 140.00)
+    if (type == 'all' or 'gc1.5' in cols) and isvalid(
+            '1 gc1.1 53 mat.1 sci.1 gc1.2', md):
+        val = 0
+        val += 1 if md['1'] < 7 else 0
+        val += 1 if md['gc1.1'] < 7 else 0
+        val += 1 if md['53'] < 7 else 0
+        val += 1 if md['mat.1'] < 14 else 0
+        val += 1 if md['sci.1'] < 7 else 0
+        val += 1 if md['gc1.2'] < 7 else 0
+        if val == 0:
+            md['gc1.5'] = 'Pass'
+        else:
+            md['gc1.5'] = f'F{val}'
+
+    if (type == 'all' or 'gc2.1' in cols):
+        md['gc2.1'] = oneof('19 31 ssh.5', md)
+    if (type == 'all' or 'gc2.2' in cols):
+        md['gc2.2'] = oneof('smj.9 120', md)
+    if (type == 'all' or 'gc2.3' in cols) and isvalid(
+            '7 gc2.1 59 mat.8 sci.5 gc2.2', md):
+        md['gc2.3'] = md['7'] + md['gc2.1'] + md['59'] + md['mat.8'] + md[
+            'sci.5'] + md['gc2.2']
+    if (type == 'all' or 'gc2.4' in cols) and isvalid('gc2.3', md):
+        md['gc2.4'] = md['gc2.3'] * (100.00 / 140.00)
+    if (type == 'all' or 'gc2.5' in cols) and isvalid(
+            '7 gc2.1 59 mat.8 sci.5 gc2.2', md):
+        val = 0
+        val += 1 if md['7'] < 7 else 0
+        val += 1 if md['gc2.1'] < 7 else 0
+        val += 1 if md['59'] < 7 else 0
+        val += 1 if md['mat.8'] < 14 else 0
+        val += 1 if md['sci.5'] < 7 else 0
+        val += 1 if md['gc2.2'] < 7 else 0
+        if val == 0:
+            md['gc2.5'] = 'Pass'
+        else:
+            md['gc2.5'] = f'F{val}'
