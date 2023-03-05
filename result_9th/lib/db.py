@@ -48,6 +48,15 @@ def get_marks_map(subject, division):
     return md
 
 
+def get_marks_map_for_all_subjects(div):
+    qry = sql_template.get_marks_for_all_subjects
+    data = [tuple(x) for x in fetch_sqlite_rows(qry, [div])]
+    md = defaultdict(dict)
+    for examid, sid, marks in data:
+        md[sid][str(examid)] = marks
+    return md
+
+
 def delete_marks_for_div_exam(examid, div):
     qry = sql_template.delete_marks_for_div_exam
     args = [examid, div]
@@ -86,9 +95,11 @@ def student_info_delete():
     qry = sql_template.student_info_delete
     sqlite_exec_query(qry, ())
 
+
 def bulk_insert_student_info(ar):
     qry = "insert into student_info values " + ",\n".join(ar)
     sqlite_exec_query(qry, ())
+
 
 def student_marks_delete():
     qry = sql_template.student_marks_delete
