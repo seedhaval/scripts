@@ -1,24 +1,21 @@
 from tkinter import messagebox
 
-from lib import sql_template
-from lib.codehelper import fetch_sqlite_rows, sqlite_exec_query
+from lib import db
 from lib.uihelper import MyApp
 
 d = {}
-d['page_length'] = 8
 
 
 def save_data(*args, **kwargs):
     ar = []
-    for i,row in enumerate(d['treeview'].data):
+    for i, row in enumerate(d['treeview'].data):
         if row[2] != "":
-            ar.append(f"({d['marks_list'][i][0]},{d['marks_list'][i][3]},{row[2]})")
-    qry = sql_template.delete_marks_for_div_exam
-    args = [d['marks_list'][0][3], d['ddDivision'].get()]
-    sqlite_exec_query(qry, args)
-    qry = "insert into student_marks values " + ",\n".join(ar)
-    sqlite_exec_query(qry, ())
+            ar.append(
+                f"({d['marks_list'][i][0]},{d['marks_list'][i][3]},{row[2]})")
+    db.delete_marks_for_div_exam(d['marks_list'][0][3], d['ddDivision'].get())
+    db.bulk_insert_marks(ar)
     messagebox.showinfo("Done !!", "Done !!")
+
 
 def clear_marks_info(*args, **kwargs):
     d['treeview'].clear()
@@ -30,10 +27,7 @@ def clear_marks_info(*args, **kwargs):
 def refresh_table():
     out = []
     for i, minfo in enumerate(d['marks_list']):
-        if minfo[4] != -999:
-            marks = str(int(minfo[4]))
-        else:
-            marks = ""
+        marks = "" if minfo[4] == -999 else str(int(minfo[4]))
         out.append([minfo[1], minfo[2], marks])
     d['treeview'].load_data(out)
 
@@ -45,46 +39,24 @@ def show_student_marks(*args, **kwargs):
 
 
 def get_student_marks():
-    qry = sql_template.get_student_marks_for_exam
-    args = [d['ddSubject'].get(), d['ddExamCtgy'].get(),
-            d['ddExamSubCtgy'].get(), d['ddDivision'].get()]
-    d['marks_list'] = [tuple(x) for x in fetch_sqlite_rows(qry, args)]
+    d['marks_list'] = db.get_student_marks_for_exam(
+        d['ddSubject'].get(), d['ddExamCtgy'].get(),
+        d['ddExamSubCtgy'].get(), d['ddDivision'].get())
     return d['marks_list']
 
 
-def get_subject_list():
-    qry = sql_template.get_subject_list
-    return sorted([x[0] for x in fetch_sqlite_rows(qry, ())])
-
-
 def handle_subject_change(subject):
-    exam_ctgy_list = get_exam_category_list()
+    exam_ctgy_list = db.get_exam_categories(d['ddSubject'].get())
     d['ddExamCtgy'].load_list(exam_ctgy_list)
     handle_exam_category_change(d['ddExamCtgy'].get())
     clear_marks_info()
 
 
-def get_exam_category_list():
-    qry = sql_template.get_exam_category_list
-    args = [d['ddSubject'].get()]
-    return [x[0] for x in fetch_sqlite_rows(qry, args)]
-
-
 def handle_exam_category_change(exam_category):
-    exam_sub_ctgy_list = get_exam_sub_category_list()
+    exam_sub_ctgy_list = db.get_exam_sub_categories(d['ddSubject'].get(),
+                                                    d['ddExamCtgy'].get())
     d['ddExamSubCtgy'].load_list(exam_sub_ctgy_list)
     clear_marks_info()
-
-
-def get_exam_sub_category_list():
-    qry = sql_template.get_exam_sub_category_list
-    args = [d['ddSubject'].get(), d['ddExamCtgy'].get()]
-    return [x[0] for x in fetch_sqlite_rows(qry, args)]
-
-
-def get_division_list():
-    qry = sql_template.get_division_list
-    return sorted([x[0] for x in fetch_sqlite_rows(qry, ())])
 
 
 def refresh_text_marks():
@@ -113,23 +85,27 @@ def show_ui(app: MyApp):
 
     frm_details.add_label("Subject", "Subject", 18, 1, [1, 1, 1, 1])
 
-    d['ddSubject'] = frm_details.add_dropdown("ddSubject", get_subject_list(),
+    d['ddSubject'] = frm_details.add_dropdown("ddSubject",
+                                              db.get_subject_list(),
                                               25, 1, [1, 2, 1, 1],
                                               handle_subject_change)
     frm_details.add_label("Exam Category", "Exam Category", 18, 1, [2, 1, 1, 1])
     d['ddExamCtgy'] = frm_details.add_dropdown("ddExamCtgy",
-                                               get_exam_category_list(),
+                                               db.get_exam_categories(
+                                                   d['ddSubject'].get()),
                                                25, 1, [2, 2, 1, 1],
                                                handle_exam_category_change)
     frm_details.add_label("Exam Sub Category", "Exam Sub Category", 18, 1,
                           [3, 1, 1, 1])
     d['ddExamSubCtgy'] = frm_details.add_dropdown("ddExamSubCtgy",
-                                                  get_exam_sub_category_list(),
+                                                  db.get_exam_sub_categories(
+                                                      d['ddSubject'].get(),
+                                                      d['ddExamCtgy'].get()),
                                                   25, 1, [3, 2, 1, 1],
                                                   clear_marks_info)
     frm_details.add_label("Division", "Division", 15, 1, [1, 3, 1, 1])
     d['ddDivision'] = frm_details.add_dropdown("ddDivision",
-                                               get_division_list(),
+                                               db.get_division_list(),
                                                2, 1, [1, 4, 1, 1],
                                                clear_marks_info)
     frm_details.add_button("btnShowStudents", "Show", show_student_marks,

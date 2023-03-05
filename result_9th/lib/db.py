@@ -46,3 +46,24 @@ def get_marks_map(subject, division):
     for examid, sid, marks in data:
         md[sid][str(examid)] = marks
     return md
+
+
+def delete_marks_for_div_exam(examid, div):
+    qry = sql_template.delete_marks_for_div_exam
+    args = [examid, div]
+    sqlite_exec_query(qry, args)
+
+def get_student_marks_for_exam(subject, ctgy, subctgy, div):
+    qry = sql_template.get_student_marks_for_exam
+    args = [subject, ctgy, subctgy, div]
+    return [tuple(x) for x in fetch_sqlite_rows(qry, args)]
+
+def get_exam_categories(subject):
+    qry = sql_template.get_exam_category_list
+    args = [subject]
+    return [x[0] for x in fetch_sqlite_rows(qry, args)]
+
+def get_exam_sub_categories(subject, ctgy):
+    qry = sql_template.get_exam_sub_category_list
+    args = [subject, ctgy]
+    return [x[0] for x in fetch_sqlite_rows(qry, args)]
