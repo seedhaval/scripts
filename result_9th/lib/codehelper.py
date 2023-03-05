@@ -1,11 +1,13 @@
+import json
 import os
+import re
 import shutil
 import sqlite3
 import subprocess
 from datetime import datetime
 from pathlib import Path
 from tkinter import filedialog
-
+import string
 
 def sqlite_exec_query(qry, args):
     conn = sqlite3.connect(db_path)
@@ -42,7 +44,19 @@ def restore_database():
         shutil.copy(file, db_path)
 
 
+def load_config():
+    with open(f"{data_path}\config.json", encoding='utf8') as f:
+        return json.load(f)
+
+def get_safe_output_xls_path(nm, tm_sfx):
+    filenm = f"{nm}"
+    p = re.compile("[" + re.escape(string.punctuation) + " ]+")
+    filenm = p.sub("_", filenm) + ".xlsx"
+    return f"{output_path}\\{filenm}"
+
+
 app_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 db_path = str(Path(app_path) / "data/results.db")
 data_path = str(Path(app_path) / "data")
 output_path = str(Path(app_path) / "output")
+cfg = load_config()

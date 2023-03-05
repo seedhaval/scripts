@@ -1,3 +1,6 @@
+import os
+import random
+
 import openpyxl
 from openpyxl.styles import Alignment, Protection
 from openpyxl.styles import Font
@@ -58,3 +61,23 @@ def read_all_rows(fl, shtnm):
         out.append(row)
     wb.close()
     return out
+
+def protect_sheet(wb):
+    sht = wb.active
+    sht.protection.password = str(random.randint(10000, 99999))
+
+
+def save_close_and_start(wb, filepath):
+    wb.save(filepath)
+    wb.close()
+    os.startfile(filepath)
+
+def add_table(sht, left, top, ar):
+    for ir, row in enumerate(ar):
+        for ic, col in enumerate(row):
+            sht.cell(top+ir, left+ic).value = col
+
+def all_borders(sht, left, top, right, bottom):
+    for ir in range(top, bottom+1):
+        for ic in range(left, right + 1):
+            sht.cell(ir, ic).border = thin_border
