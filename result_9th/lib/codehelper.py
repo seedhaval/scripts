@@ -50,11 +50,45 @@ def load_config():
         return json.load(f)
 
 
-def get_safe_output_xls_path(nm, tm_sfx):
+def get_safe_output_xls_path(nm, add_tm):
     filenm = f"{nm}"
+    if add_tm == True:
+        filenm += f"_{tm_sfx()}"
     p = re.compile("[" + re.escape(string.punctuation) + " ]+")
     filenm = p.sub("_", filenm) + ".xlsx"
     return f"{output_path}\\{filenm}"
+
+
+def get_column_config_for_subject(subject):
+    with open(data_path + "\\export_columns.csv", encoding='utf8') as f:
+        data = [x.strip().split(",") for x in f.readlines() if x.strip()]
+    col_data = [x for x in data if x[0] == subject][0]
+    col_info = []
+    for col in col_data[1:]:
+        curd = {}
+        ar = col.split(":")
+        if col[0] in '123456789':
+            curd['type'] = 'exam id'
+            curd['id'] = ar[0]
+            if len(ar) > 2:
+                curd['nm'] = ar[2]
+            if len(ar) > 3:
+                curd['total'] = int(ar[3])
+            curd['color'] = '000000'
+        else:
+            curd['type'] = 'calculated'
+            curd['id'] = ar[0]
+            curd['total'] = int(ar[1]) if ar[1].strip() != '' else ''
+            curd['nm'] = ar[2]
+            curd['color'] = '0000FF'
+
+        if curd['type'] == 'exam id' and len(ar) > 1:
+            curd['alias'] = ar[1]
+        if curd['type'] == 'calculated' and len(ar) > 3:
+            curd['alias'] = ar[3]
+
+        col_info.append(curd)
+    return col_info
 
 
 app_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
