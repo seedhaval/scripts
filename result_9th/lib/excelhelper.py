@@ -3,10 +3,10 @@ import random
 from copy import copy
 
 import openpyxl
-from openpyxl.styles import Alignment, Protection
-from openpyxl.styles import Font
+from openpyxl.styles import Alignment, Protection, Font
 from openpyxl.styles.borders import Border, Side
 from openpyxl.utils.cell import get_column_letter as cl
+from openpyxl.worksheet.pagebreak import Break
 
 thin_border = Border(left=Side(style='thin'),
                      right=Side(style='thin'),
@@ -143,3 +143,8 @@ def apply_template(sht, tmplt, left, top):
         l, t, r, b = minfo
         range = f"{cl(l + left)}{t + top}:{cl(r + left)}{b + top}"
         sht.merge_cells(range)
+
+
+def add_page_break(sht, rowid):
+    page_break = Break(id=rowid)
+    sht.row_breaks.append(page_break)

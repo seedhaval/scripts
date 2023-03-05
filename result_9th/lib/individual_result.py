@@ -4,7 +4,7 @@ from lib import db
 from lib.calculatedmarks import calculate
 from lib.codehelper import data_path, get_safe_output_xls_path
 from lib.excelhelper import Cell, load_template, save_close_and_start, \
-    apply_template, apply_column_widths
+    apply_template, apply_column_widths, add_page_break
 from lib.uihelper import MyApp
 
 d = {}
@@ -46,6 +46,7 @@ def add_excel_result(wb):
         ir = (i * 37) + 1
         apply_template(sht, d['tmplt'], 2, ir)
         # draw_excel_populate_marks(wb, ir, student)
+        add_page_break(sht, ir + 35)
 
 
 def populate_excel(wb):
