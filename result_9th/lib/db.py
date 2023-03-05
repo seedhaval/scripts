@@ -53,17 +53,43 @@ def delete_marks_for_div_exam(examid, div):
     args = [examid, div]
     sqlite_exec_query(qry, args)
 
+
 def get_student_marks_for_exam(subject, ctgy, subctgy, div):
     qry = sql_template.get_student_marks_for_exam
     args = [subject, ctgy, subctgy, div]
     return [tuple(x) for x in fetch_sqlite_rows(qry, args)]
+
 
 def get_exam_categories(subject):
     qry = sql_template.get_exam_category_list
     args = [subject]
     return [x[0] for x in fetch_sqlite_rows(qry, args)]
 
+
 def get_exam_sub_categories(subject, ctgy):
     qry = sql_template.get_exam_sub_category_list
     args = [subject, ctgy]
     return [x[0] for x in fetch_sqlite_rows(qry, args)]
+
+
+def exam_details_delete():
+    qry = sql_template.exam_details_delete
+    sqlite_exec_query(qry, ())
+
+
+def bulk_insert_exam_details(ar):
+    qry = "insert into exam_details values " + ",\n".join(ar)
+    sqlite_exec_query(qry, ())
+
+
+def student_info_delete():
+    qry = sql_template.student_info_delete
+    sqlite_exec_query(qry, ())
+
+def bulk_insert_student_info(ar):
+    qry = "insert into student_info values " + ",\n".join(ar)
+    sqlite_exec_query(qry, ())
+
+def student_marks_delete():
+    qry = sql_template.student_marks_delete
+    sqlite_exec_query(qry, ())

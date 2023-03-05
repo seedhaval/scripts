@@ -1,5 +1,5 @@
 from lib.codehelper import backup_database, data_path, sqlite_exec_query
-from lib import excelhelper, sql_template
+from lib import excelhelper, sql_template, db
 from tkinter import messagebox
 from lib.uihelper import MyApp
 import random
@@ -11,13 +11,11 @@ def do_update():
     backup_database(False)
     data = excelhelper.read_all_rows(
         f"{data_path}\\result_reference_data.xlsx", "student_info")
-    qry = sql_template.student_info_delete
-    sqlite_exec_query(qry, ())
+    db.student_info_delete()
     ar = []
     for row in data[1:]:
         ar.append(f"({row[0]},'{row[1]}',{row[2]},'{row[3]}')")
-    qry = "insert into student_info values " + ",\n".join(ar)
-    sqlite_exec_query(qry, ())
+    db.bulk_insert_student_info(ar)
 
 
 def update():
@@ -30,8 +28,7 @@ def do_new_year():
         return
     d['txtCode'].set("")
     do_update()
-    qry = sql_template.student_marks_delete
-    sqlite_exec_query(qry, ())
+    db.student_marks_delete()
     messagebox.showinfo("Done !!", "Done !!")
 
 
