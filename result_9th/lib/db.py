@@ -1,6 +1,7 @@
+from collections import defaultdict
+
 from lib import sql_template
 from lib.codehelper import sqlite_exec_query, fetch_sqlite_rows
-from collections import defaultdict
 
 
 def delete_marks_for_div_subject(subject, div):
