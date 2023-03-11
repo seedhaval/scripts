@@ -37,6 +37,11 @@ def get_exam_map(subject):
     data = [tuple(x) for x in fetch_sqlite_rows(qry, args)]
     return {x[0]: (x[1], x[2]) for x in data}
 
+def get_exam_map_for_all_subjects():
+    qry = sql_template.get_exam_info_for_all_subjects
+    data = [tuple(x) for x in fetch_sqlite_rows(qry, [])]
+    return {x[0]: (x[1], x[2]) for x in data}
+
 
 def get_marks_map(subject, division):
     qry = sql_template.get_marks_for_subject

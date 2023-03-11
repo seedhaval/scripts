@@ -133,3 +133,12 @@ delete from student_info
 student_marks_delete = """
 delete from student_marks
 """
+
+get_exam_info_for_all_subjects = """
+select
+  exam_id
+  ,case when exam_category = exam_sub_category then exam_category
+      else exam_category || ' - ' || exam_sub_category end as exam_name
+  ,total_marks
+from exam_details
+"""

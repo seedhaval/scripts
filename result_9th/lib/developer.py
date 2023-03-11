@@ -1,7 +1,29 @@
-from lib.codehelper import data_path
+import openpyxl
+
+from lib.codehelper import get_safe_output_xls_path, data_path, \
+    get_column_config_for_subject
+from lib.db import get_exam_map_for_all_subjects
+from lib.excelhelper import save_close_and_start, add_table
 
 
-def main():
+def get_column_ids(*args, **kwargs):
+    filepath = get_safe_output_xls_path("column_id", False)
+    wb = openpyxl.Workbook()
+    sht = wb.active
+    with open(data_path + "\\export_columns.csv", encoding='utf8') as f:
+        subs = [x.strip().split(",")[0] for x in f.readlines() if x.strip()]
+    exam_map = get_exam_map_for_all_subjects()
+    out = [["Subject", "Exam", "Column ID"]]
+    for sub in subs:
+        colinfo = get_column_config_for_subject(sub)
+        for col in colinfo:
+            colnm = col['nm'] if 'nm' in col else exam_map[int(col['id'])][0]
+            out.append([sub, colnm, str(col['id'])])
+    add_table(sht, 1, 1, out)
+    save_close_and_start(wb, filepath)
+
+
+def create_calculation_formula():
     with open(data_path + "\\colnm_input", encoding='utf8') as f:
         data = [x.strip().split("\t") for x in f.readlines() if x.strip()]
 
