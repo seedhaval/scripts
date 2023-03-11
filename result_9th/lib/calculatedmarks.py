@@ -12,8 +12,8 @@ def oneof(txt, md):
     return ''
 
 
-def auto_condo( mrk ):
-    if mrk in (33,34):
+def auto_condo(mrk):
+    if mrk in (33, 34):
         return 35
     return mrk
 
@@ -29,6 +29,7 @@ def get_grade(marks):
         return 'ड'
     return ''
 
+
 def calc_marathi(md, type, cols):
     if (type == 'all' or 'mar.1' in cols) and isvalid("3 4 5 6", md):
         md["mar.1"] = md["3"] + md["4"] + md["5"] + md["6"]
@@ -42,6 +43,7 @@ def calc_marathi(md, type, cols):
         md["mar.5"] = md["mar.2"] + md["mar.4"]
     if (type == 'all' or 'mar.6' in cols) and isvalid("mar.5", md):
         md["mar.6"] = md["mar.5"] / 2
+
 
 def calc_maths(md, type, cols):
     if (type == 'all' or 'mat.1' in cols) and isvalid("65 66", md):
@@ -79,6 +81,7 @@ def calc_maths(md, type, cols):
     if (type == 'all' or 'mat.16' in cols) and isvalid("mat.15", md):
         md["mat.16"] = md["mat.15"] / 2
 
+
 def calc_sanskrit(md, type, cols):
     if (type == 'all' or 'snsk.1' in cols) and isvalid("15 16 17 18", md):
         md["snsk.1"] = md["15"] + md["16"] + md["17"] + md["18"]
@@ -92,6 +95,7 @@ def calc_sanskrit(md, type, cols):
         md["snsk.5"] = md["snsk.2"] + md["snsk.4"]
     if (type == 'all' or 'snsk.6' in cols) and isvalid("snsk.5", md):
         md["snsk.6"] = md["snsk.5"] / 2
+
 
 def calc_hindi(md, type, cols):
     if (type == 'all' or 'hin.1' in cols) and isvalid("27 28 29 30", md):
@@ -107,6 +111,7 @@ def calc_hindi(md, type, cols):
     if (type == 'all' or 'hin.6' in cols) and isvalid("hin.5", md):
         md["hin.6"] = md["hin.5"] / 2
 
+
 def calc_english(md, type, cols):
     if (type == 'all' or 'eng.1' in cols) and isvalid("55 56 57 58", md):
         md["eng.1"] = md["55"] + md["56"] + md["57"] + md["58"]
@@ -120,6 +125,7 @@ def calc_english(md, type, cols):
         md["eng.5"] = md["eng.2"] + md["eng.4"]
     if (type == 'all' or 'eng.6' in cols) and isvalid("eng.5", md):
         md["eng.6"] = md["eng.5"] / 2
+
 
 def calc_hindi_sanskrit_combo(md, type, cols):
     if (type == 'all' or 'ssh.1' in cols) and isvalid("37 38", md):
@@ -142,6 +148,7 @@ def calc_hindi_sanskrit_combo(md, type, cols):
         md["ssh.9"] = md["ssh.4"] + md["ssh.8"]
     if (type == 'all' or 'ssh.10' in cols) and isvalid("ssh.9", md):
         md["ssh.10"] = md["ssh.9"] / 2
+
 
 def calc_science(md, type, cols):
     if (type == 'all' or 'sci.1' in cols) and isvalid("81 82", md):
@@ -166,6 +173,7 @@ def calc_science(md, type, cols):
         md["sci.9"] = md["sci.4"] + md["sci.8"]
     if (type == 'all' or 'sci.10' in cols) and isvalid("sci.9", md):
         md["sci.10"] = md["sci.9"] / 2
+
 
 def calc_social_science(md, type, cols):
     if (type == 'all' or 'smj.1' in cols) and isvalid('101 102', md):
@@ -207,6 +215,7 @@ def calc_social_science(md, type, cols):
     if (type == 'all' or 'smj.18' in cols) and isvalid('smj.17', md):
         md['smj.18'] = md['smj.17'] / 2
 
+
 def calc_technical(md, type, cols):
     if (type == 'all' or 'tec.1' in cols) and isvalid('117 118 119', md):
         md['tec.1'] = md['117'] + md['118'] + md['119']
@@ -220,6 +229,7 @@ def calc_technical(md, type, cols):
         md['tec.5'] = md['tec.2'] + md['tec.4']
     if (type == 'all' or 'tec.6' in cols) and isvalid('tec.5', md):
         md['tec.6'] = md['tec.5'] / 2
+
 
 def calc_arogya(md, type, cols):
     if (type == 'all' or 'aro.1' in cols) and isvalid('123 124 125 126 127',
@@ -260,20 +270,8 @@ def calc_ncc(md, type, cols):
     if (type == 'all' or 'ncc.7' in cols) and isvalid('ncc.6', md):
         md['ncc.7'] = get_grade(md['ncc.6'])
 
-def calculate(md, type, cols):
-    calc_marathi(md, type, cols)
-    calc_maths(md, type, cols)
-    calc_sanskrit(md, type, cols)
-    calc_hindi(md, type, cols)
-    calc_english(md, type, cols)
-    calc_hindi_sanskrit_combo(md, type, cols)
-    calc_science(md, type, cols)
-    calc_social_science(md, type, cols)
-    calc_technical(md, type, cols)
-    calc_arogya(md, type, cols)
-    calc_ncc(md, type, cols)
 
-
+def calc_unit_1(md, type, cols):
     if (type == 'all' or 'gc1.1' in cols):
         md['gc1.1'] = oneof('13 25 ssh.1', md)
     if (type == 'all' or 'gc1.2' in cols):
@@ -298,6 +296,8 @@ def calculate(md, type, cols):
         else:
             md['gc1.5'] = f'F{val}'
 
+
+def calc_unit_2(md, type, cols):
     if (type == 'all' or 'gc2.1' in cols):
         md['gc2.1'] = oneof('19 31 ssh.5', md)
     if (type == 'all' or 'gc2.2' in cols):
@@ -322,6 +322,8 @@ def calculate(md, type, cols):
         else:
             md['gc2.5'] = f'F{val}'
 
+
+def calc_term_1(md, type, cols):
     if (type == 'all' or 'ps.1' in cols):
         md['ps.1'] = oneof('hin.2 snsk.2 ssh.4', md)
     if (type == 'all' or 'ps.2' in cols) and isvalid('eng.2 ps.1 mar.2', md):
@@ -348,6 +350,8 @@ def calculate(md, type, cols):
         else:
             md['ps.7'] = f'F{val}'
 
+
+def calc_term_2(md, type, cols):
     if (type == 'all' or 'ds.1' in cols):
         md['ds.1'] = oneof('hin.4 snsk.4 ssh.8', md)
     if (type == 'all' or 'ds.2' in cols) and isvalid('eng.4 ds.1 mar.4', md):
@@ -373,6 +377,25 @@ def calculate(md, type, cols):
             md['ds.7'] = 'Pass'
         else:
             md['ds.7'] = f'F{val}'
+
+
+def calculate(md, type, cols):
+    calc_marathi(md, type, cols)
+    calc_maths(md, type, cols)
+    calc_sanskrit(md, type, cols)
+    calc_hindi(md, type, cols)
+    calc_english(md, type, cols)
+    calc_hindi_sanskrit_combo(md, type, cols)
+    calc_science(md, type, cols)
+    calc_social_science(md, type, cols)
+    calc_technical(md, type, cols)
+    calc_arogya(md, type, cols)
+    calc_ncc(md, type, cols)
+
+    calc_unit_1(md, type, cols)
+    calc_unit_2(md, type, cols)
+    calc_term_1(md, type, cols)
+    calc_term_2(md, type, cols)
 
     if (type == 'all' or 'fin.mar.t1' in cols) and isvalid('mar.6', md):
         md['fin.mar.1'] = md['mar.6']
@@ -453,4 +476,3 @@ def calculate(md, type, cols):
             md['fin.soc.1'] = auto_condo(md['fin.soc.1'])
 
             md['fin.rem.t1'] = f'F{val} '
-
