@@ -343,3 +343,44 @@ def calculate(md, type, cols):
             md['ds.7'] = 'Pass'
         else:
             md['ds.7'] = f'F{val}'
+
+    if (type == 'all' or 'fin.mar.t1' in cols) and isvalid('mar.6', md):
+        md['fin.mar.1'] = md['mar.6']
+        md['fin.mar.t1'] = md['mar.6']
+    if (type == 'all' or 'fin.hin.t1' in cols) and isvalid(
+            'snsk.6 hin.6 ssh.10', md):
+        md['fin.hin.1'] = oneof('snsk.6 hin.6 ssh.10', md)
+        md['fin.hin.t1'] = oneof('snsk.6 hin.6 ssh.10', md)
+    if (type == 'all' or 'fin.eng.t1' in cols) and isvalid('eng.6', md):
+        md['fin.eng.1'] = md['eng.6']
+        md['fin.eng.t1'] = md['eng.6']
+    if (type == 'all' or 'fin.grp.t1' in cols) and isvalid(
+            'fin.mar.1 fin.hin.1 fin.eng.1', md):
+        md['fin.grp.1'] = md['fin.mar.1'] + md['fin.hin.1'] + md['fin.eng.1']
+        md['fin.grp.t1'] = md['fin.mar.1'] + md['fin.hin.1'] + md['fin.eng.1']
+    if (type == 'all' or 'fin.mat.t1' in cols) and isvalid('mat.16', md):
+        md['fin.mat.1'] = md['mat.16']
+        md['fin.mat.t1'] = md['mat.16']
+    if (type == 'all' or 'fin.sci.t1' in cols) and isvalid('sci.10', md):
+        md['fin.sci.1'] = md['sci.10']
+        md['fin.sci.t1'] = md['sci.10']
+    if (type == 'all' or 'fin.grp.t2' in cols) and isvalid(
+            'fin.mat.1 fin.sci.1', md):
+        md['fin.grp.2'] = md['fin.mat.1'] + md['fin.sci.1']
+        md['fin.grp.t2'] = md['fin.mat.1'] + md['fin.sci.1']
+    if (type == 'all' or 'fin.soc.t1' in cols) and isvalid('smj.18 tec.6', md):
+        md['fin.soc.1'] = oneof('smj.18 tec.6', md)
+        md['fin.soc.t1'] = oneof('smj.18 tec.6', md)
+    if (type == 'all' or 'fin.aro.t1' in cols) and isvalid('aro.7', md):
+        md['fin.aro.1'] = md['aro.7']
+        md['fin.aro.t1'] = md['aro.7']
+    if (type == 'all' or 'fin.scout.t1' in cols) and isvalid('ncc.7', md):
+        md['fin.scout.1'] = md['ncc.7']
+        md['fin.scout.t1'] = md['ncc.7']
+    if (type == 'all' or 'fin.total.t1' in cols) and isvalid(
+            'fin.grp.1 fin.grp.2 fin.soc.1', md):
+        md['fin.total.1'] = md['fin.grp.1'] + md['fin.grp.2'] + md['fin.soc.1']
+        md['fin.total.t1'] = md['fin.grp.1'] + md['fin.grp.2'] + md['fin.soc.1']
+    if (type == 'all' or 'fin.100.t1' in cols) and isvalid('fin.total.1', md):
+        md['fin.100.1'] = md['fin.total.1'] / 6
+        md['fin.100.t1'] = md['fin.total.1'] / 6

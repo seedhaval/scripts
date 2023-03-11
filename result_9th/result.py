@@ -18,6 +18,8 @@ menu_ar = [
      lambda: result_tabular.show_ui(app, "प्रथम सत्र")],
     ["Result", "द्वितीय सत्र",
      lambda: result_tabular.show_ui(app, "द्वितीय सत्र")],
+    ["Result", "Final",
+     lambda: result_tabular.show_ui(app, "final")],
     ["Result", "Report card", lambda: individual_result.show_ui(app)],
     ["Reference Data", "Refresh exam info", refresh_exam_info.do],
     ["Reference Data", "Refresh student info - Change",

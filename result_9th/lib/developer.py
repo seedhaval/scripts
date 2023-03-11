@@ -25,7 +25,7 @@ def get_column_ids(*args, **kwargs):
 
 def create_calculation_formula():
     with open(data_path + "\\colnm_input", encoding='utf8') as f:
-        data = [x.strip().split("\t") for x in f.readlines() if x.strip()]
+        data = [x.strip("\n").split("\t") for x in f.readlines() if x.strip()]
 
     cfg = [data[0][1]]
     calc = []
@@ -37,8 +37,8 @@ def create_calculation_formula():
             else:
                 cfg.append(row[0])
         else:
-            pfx = row[0].split('.')[0]
-            val = f"{row[0]}:{row[2]}:{row[1]}"
+            total = row[2] if len(row) > 2 else ''
+            val = f"{row[0]}:{total}:{row[1]}"
             if len(row) > 3 and len(row[3]) > 0:
                 val += ":" + row[3]
             cfg.append(val)
