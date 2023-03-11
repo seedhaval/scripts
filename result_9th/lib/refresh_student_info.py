@@ -14,7 +14,7 @@ def do_update():
     db.student_info_delete()
     ar = []
     for row in data[1:]:
-        ar.append(f"({row[0]},'{row[1]}',{row[2]},'{row[3]}')")
+        ar.append(f"({row[0]},'{row[1]}',{row[2]},'{row[3]}','{row[4]}')")
     db.bulk_insert_student_info(ar)
 
 

@@ -438,39 +438,47 @@ def calc_final_fail_count(md, type, cols):
 
 
 def calc_final_combined_passing(md, type, cols):
-    if md['fcount'] == 0:
-        md['lang_pass'], md['msci_pass'], md['msoc_pass'] = (True, True, True)
-        return
-    if md['mar.6'] < 25 or md['fin.hin.1'] < 25 or md['eng.6'] < 25:
-        lang_pass = False
-    elif md['mar.6'] + md['fin.hin.1'] + md['eng.6'] < 105:
-        lang_pass = False
-    else:
-        lang_pass = True
+    if (type == 'all' or 'fin.rem.t1' in cols) and isvalid('mar.6 fin.hin.1 '
+                                                           'eng.6 mat.16 '
+                                                           'sci.10 fin.soc.1',
+                                                           md):
+        if md['fcount'] == 0:
+            md['lang_pass'], md['msci_pass'], md['msoc_pass'] = (True, True, True)
+            return
+        if md['mar.6'] < 25 or md['fin.hin.1'] < 25 or md['eng.6'] < 25:
+            lang_pass = False
+        elif md['mar.6'] + md['fin.hin.1'] + md['eng.6'] < 105:
+            lang_pass = False
+        else:
+            lang_pass = True
 
-    if md['mat.16'] < 25 or md['sci.10'] < 25:
-        msci_pass = False
-    elif md['mat.16'] + md['sci.10'] < 70:
-        msci_pass = False
-    else:
-        msci_pass = True
+        if md['mat.16'] < 25 or md['sci.10'] < 25:
+            msci_pass = False
+        elif md['mat.16'] + md['sci.10'] < 70:
+            msci_pass = False
+        else:
+            msci_pass = True
 
-    if md['fin.soc.1'] < 35:
-        msoc_pass = False
-    else:
-        msoc_pass = True
+        if md['fin.soc.1'] < 35:
+            msoc_pass = False
+        else:
+            msoc_pass = True
 
-    md['lang_pass'], md['msci_pass'], md['msoc_pass'] = (
-        lang_pass, msci_pass, msoc_pass)
+        md['lang_pass'], md['msci_pass'], md['msoc_pass'] = (
+            lang_pass, msci_pass, msoc_pass)
 
 
 def calc_final_auto_condo(md, type, cols):
-    md['mar.6'] = auto_condo(md['mar.6'])
-    md['fin.hin.1'] = auto_condo(md['fin.hin.1'])
-    md['eng.6'] = auto_condo(md['eng.6'])
-    md['mat.16'] = auto_condo(md['mat.16'])
-    md['sci.10'] = auto_condo(md['sci.10'])
-    md['fin.soc.1'] = auto_condo(md['fin.soc.1'])
+    if (type == 'all' or 'fin.rem.t1' in cols) and isvalid('mar.6 fin.hin.1 '
+                                                           'eng.6 mat.16 '
+                                                           'sci.10 fin.soc.1',
+                                                           md):
+        md['mar.6'] = auto_condo(md['mar.6'])
+        md['fin.hin.1'] = auto_condo(md['fin.hin.1'])
+        md['eng.6'] = auto_condo(md['eng.6'])
+        md['mat.16'] = auto_condo(md['mat.16'])
+        md['sci.10'] = auto_condo(md['sci.10'])
+        md['fin.soc.1'] = auto_condo(md['fin.soc.1'])
 
 
 def calculate(md, type, cols):
