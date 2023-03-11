@@ -13,7 +13,7 @@ def oneof(txt, md):
 
 
 def auto_condo(mrk):
-    if mrk in (33, 34):
+    if 33 <= mrk <= 35:
         return 35
     return mrk
 
@@ -379,24 +379,7 @@ def calc_term_2(md, type, cols):
             md['ds.7'] = f'F{val}'
 
 
-def calculate(md, type, cols):
-    calc_marathi(md, type, cols)
-    calc_maths(md, type, cols)
-    calc_sanskrit(md, type, cols)
-    calc_hindi(md, type, cols)
-    calc_english(md, type, cols)
-    calc_hindi_sanskrit_combo(md, type, cols)
-    calc_science(md, type, cols)
-    calc_social_science(md, type, cols)
-    calc_technical(md, type, cols)
-    calc_arogya(md, type, cols)
-    calc_ncc(md, type, cols)
-
-    calc_unit_1(md, type, cols)
-    calc_unit_2(md, type, cols)
-    calc_term_1(md, type, cols)
-    calc_term_2(md, type, cols)
-
+def calc_final_step_1(md, type, cols):
     if (type == 'all' or 'fin.mar.t1' in cols) and isvalid('mar.6', md):
         md['fin.mar.1'] = md['mar.6']
         md['fin.mar.t1'] = md['mar.6']
@@ -437,7 +420,13 @@ def calculate(md, type, cols):
     if (type == 'all' or 'fin.100.t1' in cols) and isvalid('fin.total.1', md):
         md['fin.100.1'] = md['fin.total.1'] / 6
         md['fin.100.t1'] = md['fin.total.1'] / 6
-    if (type == 'all' or 'fin.rem.t1' in cols) and isvalid('mar.6 ', md):
+
+
+def calc_final_fail_count(md, type, cols):
+    if (type == 'all' or 'fin.rem.t1' in cols) and isvalid('mar.6 fin.hin.1 '
+                                                           'eng.6 mat.16 '
+                                                           'sci.10 fin.soc.1',
+                                                           md):
         val = 0
         val += 1 if md['mar.6'] < 35 else 0
         val += 1 if md['fin.hin.1'] < 35 else 0
@@ -445,34 +434,64 @@ def calculate(md, type, cols):
         val += 1 if md['mat.16'] < 35 else 0
         val += 1 if md['sci.10'] < 35 else 0
         val += 1 if md['fin.soc.1'] < 35 else 0
-        fcount = f'F{val}'
-        if val == 0:
-            md['fin.rem.t1'] = 'ऊत्तीर्ण'
-        else:
-            if md['mar.6'] < 25 or md['fin.hin.1'] < 25 or md['eng.6'] < 25:
-                lang_pass = False
-            elif md['mar.6'] + md['fin.hin.1'] + md['eng.6'] < 105:
-                lang_pass = False
-            else:
-                lang_pass = True
+        md['fcount'] = val
 
-            if md['mat.16'] < 25 or md['sci.10'] < 25:
-                msci_pass = False
-            elif md['mat.16'] + md['sci.10'] < 70:
-                msci_pass = False
-            else:
-                msci_pass = True
 
-            if md['fin.soc.1'] < 35:
-                msoc_pass = False
-            else:
-                msoc_pass = True
+def calc_final_combined_passing(md, type, cols):
+    if md['fcount'] == 0:
+        md['lang_pass'], md['msci_pass'], md['msoc_pass'] = (True, True, True)
+        return
+    if md['mar.6'] < 25 or md['fin.hin.1'] < 25 or md['eng.6'] < 25:
+        lang_pass = False
+    elif md['mar.6'] + md['fin.hin.1'] + md['eng.6'] < 105:
+        lang_pass = False
+    else:
+        lang_pass = True
 
-            md['mar.6'] = auto_condo(md['mar.6'])
-            md['fin.hin.1'] = auto_condo(md['fin.hin.1'])
-            md['eng.6'] = auto_condo(md['eng.6'])
-            md['mat.16'] = auto_condo(md['mat.16'])
-            md['sci.10'] = auto_condo(md['sci.10'])
-            md['fin.soc.1'] = auto_condo(md['fin.soc.1'])
+    if md['mat.16'] < 25 or md['sci.10'] < 25:
+        msci_pass = False
+    elif md['mat.16'] + md['sci.10'] < 70:
+        msci_pass = False
+    else:
+        msci_pass = True
 
-            md['fin.rem.t1'] = f'F{val} '
+    if md['fin.soc.1'] < 35:
+        msoc_pass = False
+    else:
+        msoc_pass = True
+
+    md['lang_pass'], md['msci_pass'], md['msoc_pass'] = (
+        lang_pass, msci_pass, msoc_pass)
+
+
+def calc_final_auto_condo(md, type, cols):
+    md['mar.6'] = auto_condo(md['mar.6'])
+    md['fin.hin.1'] = auto_condo(md['fin.hin.1'])
+    md['eng.6'] = auto_condo(md['eng.6'])
+    md['mat.16'] = auto_condo(md['mat.16'])
+    md['sci.10'] = auto_condo(md['sci.10'])
+    md['fin.soc.1'] = auto_condo(md['fin.soc.1'])
+
+
+def calculate(md, type, cols):
+    calc_marathi(md, type, cols)
+    calc_maths(md, type, cols)
+    calc_sanskrit(md, type, cols)
+    calc_hindi(md, type, cols)
+    calc_english(md, type, cols)
+    calc_hindi_sanskrit_combo(md, type, cols)
+    calc_science(md, type, cols)
+    calc_social_science(md, type, cols)
+    calc_technical(md, type, cols)
+    calc_arogya(md, type, cols)
+    calc_ncc(md, type, cols)
+
+    calc_unit_1(md, type, cols)
+    calc_unit_2(md, type, cols)
+    calc_term_1(md, type, cols)
+    calc_term_2(md, type, cols)
+
+    calc_final_step_1(md, type, cols)
+    calc_final_fail_count(md, type, cols)
+    calc_final_combined_passing(md, type, cols)
+    calc_final_auto_condo(md, type, cols)
