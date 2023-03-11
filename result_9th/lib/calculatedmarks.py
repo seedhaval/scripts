@@ -12,6 +12,12 @@ def oneof(txt, md):
     return ''
 
 
+def auto_condo( mrk ):
+    if mrk in (33,34):
+        return 35
+    return mrk
+
+
 def get_grade(marks):
     if marks >= 60:
         return 'अ'
@@ -23,8 +29,7 @@ def get_grade(marks):
         return 'ड'
     return ''
 
-
-def calculate(md, type, cols):
+def calc_marathi(md, type, cols):
     if (type == 'all' or 'mar.1' in cols) and isvalid("3 4 5 6", md):
         md["mar.1"] = md["3"] + md["4"] + md["5"] + md["6"]
     if (type == 'all' or 'mar.2' in cols) and isvalid("2 mar.1", md):
@@ -38,6 +43,7 @@ def calculate(md, type, cols):
     if (type == 'all' or 'mar.6' in cols) and isvalid("mar.5", md):
         md["mar.6"] = md["mar.5"] / 2
 
+def calc_maths(md, type, cols):
     if (type == 'all' or 'mat.1' in cols) and isvalid("65 66", md):
         md["mat.1"] = md["65"] + md["66"]
     if (type == 'all' or 'mat.2' in cols) and isvalid("67 68", md):
@@ -73,6 +79,7 @@ def calculate(md, type, cols):
     if (type == 'all' or 'mat.16' in cols) and isvalid("mat.15", md):
         md["mat.16"] = md["mat.15"] / 2
 
+def calc_sanskrit(md, type, cols):
     if (type == 'all' or 'snsk.1' in cols) and isvalid("15 16 17 18", md):
         md["snsk.1"] = md["15"] + md["16"] + md["17"] + md["18"]
     if (type == 'all' or 'snsk.2' in cols) and isvalid("14 snsk.1", md):
@@ -86,6 +93,7 @@ def calculate(md, type, cols):
     if (type == 'all' or 'snsk.6' in cols) and isvalid("snsk.5", md):
         md["snsk.6"] = md["snsk.5"] / 2
 
+def calc_hindi(md, type, cols):
     if (type == 'all' or 'hin.1' in cols) and isvalid("27 28 29 30", md):
         md["hin.1"] = md["27"] + md["28"] + md["29"] + md["30"]
     if (type == 'all' or 'hin.2' in cols) and isvalid("26 hin.1", md):
@@ -99,6 +107,7 @@ def calculate(md, type, cols):
     if (type == 'all' or 'hin.6' in cols) and isvalid("hin.5", md):
         md["hin.6"] = md["hin.5"] / 2
 
+def calc_english(md, type, cols):
     if (type == 'all' or 'eng.1' in cols) and isvalid("55 56 57 58", md):
         md["eng.1"] = md["55"] + md["56"] + md["57"] + md["58"]
     if (type == 'all' or 'eng.2' in cols) and isvalid("54 eng.1", md):
@@ -112,6 +121,7 @@ def calculate(md, type, cols):
     if (type == 'all' or 'eng.6' in cols) and isvalid("eng.5", md):
         md["eng.6"] = md["eng.5"] / 2
 
+def calc_hindi_sanskrit_combo(md, type, cols):
     if (type == 'all' or 'ssh.1' in cols) and isvalid("37 38", md):
         md["ssh.1"] = md["37"] + md["38"]
     if (type == 'all' or 'ssh.2' in cols) and isvalid("39 40", md):
@@ -133,6 +143,7 @@ def calculate(md, type, cols):
     if (type == 'all' or 'ssh.10' in cols) and isvalid("ssh.9", md):
         md["ssh.10"] = md["ssh.9"] / 2
 
+def calc_science(md, type, cols):
     if (type == 'all' or 'sci.1' in cols) and isvalid("81 82", md):
         md["sci.1"] = md["81"] + md["82"]
     if (type == 'all' or 'sci.2' in cols) and isvalid("83 84", md):
@@ -156,6 +167,7 @@ def calculate(md, type, cols):
     if (type == 'all' or 'sci.10' in cols) and isvalid("sci.9", md):
         md["sci.10"] = md["sci.9"] / 2
 
+def calc_social_science(md, type, cols):
     if (type == 'all' or 'smj.1' in cols) and isvalid('101 102', md):
         md['smj.1'] = md['101'] + md['102']
     if (type == 'all' or 'smj.2' in cols) and isvalid('103 104', md):
@@ -195,6 +207,7 @@ def calculate(md, type, cols):
     if (type == 'all' or 'smj.18' in cols) and isvalid('smj.17', md):
         md['smj.18'] = md['smj.17'] / 2
 
+def calc_technical(md, type, cols):
     if (type == 'all' or 'tec.1' in cols) and isvalid('117 118 119', md):
         md['tec.1'] = md['117'] + md['118'] + md['119']
     if (type == 'all' or 'tec.2' in cols) and isvalid('tec.1', md):
@@ -208,6 +221,7 @@ def calculate(md, type, cols):
     if (type == 'all' or 'tec.6' in cols) and isvalid('tec.5', md):
         md['tec.6'] = md['tec.5'] / 2
 
+def calc_arogya(md, type, cols):
     if (type == 'all' or 'aro.1' in cols) and isvalid('123 124 125 126 127',
                                                       md):
         md['aro.1'] = md['123'] + md['124'] + md['125'] + md['126'] + md['127']
@@ -225,6 +239,8 @@ def calculate(md, type, cols):
     if (type == 'all' or 'aro.7' in cols) and isvalid('aro.6', md):
         md['aro.7'] = get_grade(md['aro.6'])
 
+
+def calc_ncc(md, type, cols):
     if (type == 'all' or 'ncc.1' in cols) and isvalid(
             '133 134 135 136 137 138 139 140 141', md):
         md['ncc.1'] = md['133'] + md['134'] + md['135'] + md['136'] + md[
@@ -243,6 +259,20 @@ def calculate(md, type, cols):
         md['ncc.6'] = md['ncc.5'] / 2
     if (type == 'all' or 'ncc.7' in cols) and isvalid('ncc.6', md):
         md['ncc.7'] = get_grade(md['ncc.6'])
+
+def calculate(md, type, cols):
+    calc_marathi(md, type, cols)
+    calc_maths(md, type, cols)
+    calc_sanskrit(md, type, cols)
+    calc_hindi(md, type, cols)
+    calc_english(md, type, cols)
+    calc_hindi_sanskrit_combo(md, type, cols)
+    calc_science(md, type, cols)
+    calc_social_science(md, type, cols)
+    calc_technical(md, type, cols)
+    calc_arogya(md, type, cols)
+    calc_ncc(md, type, cols)
+
 
     if (type == 'all' or 'gc1.1' in cols):
         md['gc1.1'] = oneof('13 25 ssh.1', md)
@@ -384,3 +414,43 @@ def calculate(md, type, cols):
     if (type == 'all' or 'fin.100.t1' in cols) and isvalid('fin.total.1', md):
         md['fin.100.1'] = md['fin.total.1'] / 6
         md['fin.100.t1'] = md['fin.total.1'] / 6
+    if (type == 'all' or 'fin.rem.t1' in cols) and isvalid('mar.6 ', md):
+        val = 0
+        val += 1 if md['mar.6'] < 35 else 0
+        val += 1 if md['fin.hin.1'] < 35 else 0
+        val += 1 if md['eng.6'] < 35 else 0
+        val += 1 if md['mat.16'] < 35 else 0
+        val += 1 if md['sci.10'] < 35 else 0
+        val += 1 if md['fin.soc.1'] < 35 else 0
+        fcount = f'F{val}'
+        if val == 0:
+            md['fin.rem.t1'] = 'ऊत्तीर्ण'
+        else:
+            if md['mar.6'] < 25 or md['fin.hin.1'] < 25 or md['eng.6'] < 25:
+                lang_pass = False
+            elif md['mar.6'] + md['fin.hin.1'] + md['eng.6'] < 105:
+                lang_pass = False
+            else:
+                lang_pass = True
+
+            if md['mat.16'] < 25 or md['sci.10'] < 25:
+                msci_pass = False
+            elif md['mat.16'] + md['sci.10'] < 70:
+                msci_pass = False
+            else:
+                msci_pass = True
+
+            if md['fin.soc.1'] < 35:
+                msoc_pass = False
+            else:
+                msoc_pass = True
+
+            md['mar.6'] = auto_condo(md['mar.6'])
+            md['fin.hin.1'] = auto_condo(md['fin.hin.1'])
+            md['eng.6'] = auto_condo(md['eng.6'])
+            md['mat.16'] = auto_condo(md['mat.16'])
+            md['sci.10'] = auto_condo(md['sci.10'])
+            md['fin.soc.1'] = auto_condo(md['fin.soc.1'])
+
+            md['fin.rem.t1'] = f'F{val} '
+
