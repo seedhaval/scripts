@@ -1,8 +1,13 @@
-def oneof(txt, md):
-    for idx in txt.strip().split():
+def oneof(md, type, cols, nm, txt_ar):
+    if type != 'all' and nm not in cols:
+        return
+    ar = txt_ar.strip().split()
+    if not any([x in md for x in ar]):
+        return
+    for idx in ar:
         if idx in md and str(md[idx]).strip() != '':
-            return md[idx]
-    return ''
+            md[nm] = md[idx]
+            return
 
 
 def auto_condo(mrk):
@@ -38,6 +43,18 @@ def multiply(md, type, cols, nm, base, mltpl):
     if base not in md:
         return
     md[nm] = md[base] * mltpl
+
+
+def get_fail_count(md, type, cols, nm, txt):
+    if type != 'all' and nm not in cols:
+        return
+    ar = [x.split(':') for x in txt.strip().split()]
+    if not all([x[0] in md for x in ar]):
+        return
+    val = 0
+    for row in ar:
+        val += 1 if md[row[0]] < float(row[1]) else 0
+    md[nm] = val
 
 
 def calc_marathi(md, type, cols):
@@ -139,95 +156,58 @@ def calc_technical(md, type, cols):
 
 
 def calc_arogya(md, type, cols):
-    if (type == 'all' or 'aro.1' in cols) and isvalid('123 124 125 126 127',
-                                                      md):
-        md['aro.1'] = md['123'] + md['124'] + md['125'] + md['126'] + md['127']
-    if (type == 'all' or 'aro.2' in cols) and isvalid('aro.1', md):
-        md['aro.2'] = get_grade(md['aro.1'])
-    if (type == 'all' or 'aro.3' in cols) and isvalid('128 129 130 131 132',
-                                                      md):
-        md['aro.3'] = md['128'] + md['129'] + md['130'] + md['131'] + md['132']
-    if (type == 'all' or 'aro.4' in cols) and isvalid('aro.3', md):
-        md['aro.4'] = get_grade(md['aro.3'])
-    if (type == 'all' or 'aro.5' in cols) and isvalid('aro.1 aro.3', md):
-        md['aro.5'] = md['aro.1'] + md['aro.3']
-    if (type == 'all' or 'aro.6' in cols) and isvalid('aro.5', md):
-        md['aro.6'] = md['aro.5'] / 2
-    if (type == 'all' or 'aro.7' in cols) and isvalid('aro.6', md):
-        md['aro.7'] = get_grade(md['aro.6'])
+    add(md, type, cols, "aro.1", "128 129")
+    add(md, type, cols, "aro.2", "130 131")
+    add(md, type, cols, "aro.3", "aro.1 aro.2")
+    multiply(md, type, cols, "aro.4", "aro.3", 0.5)
+
+
+def calc_jals(md, type, cols):
+    add(md, type, cols, "jals.1", "132 133")
+    add(md, type, cols, "jals.2", "134 135")
+    add(md, type, cols, "jals.3", "jals.1 jals.2")
+    multiply(md, type, cols, "jals.4", "jals.3", 0.5)
 
 
 def calc_ncc(md, type, cols):
-    if (type == 'all' or 'ncc.1' in cols) and isvalid(
-            '133 134 135 136 137 138 139 140 141', md):
-        md['ncc.1'] = md['133'] + md['134'] + md['135'] + md['136'] + md[
-            '137'] + md['138'] + md['139'] + md['140'] + md['141']
-    if (type == 'all' or 'ncc.2' in cols) and isvalid('ncc.1 142', md):
-        md['ncc.2'] = md['ncc.1'] + md['142']
-    if (type == 'all' or 'ncc.3' in cols) and isvalid(
-            '143 144 145 146 147 148 149 150 151', md):
-        md['ncc.3'] = md['143'] + md['144'] + md['145'] + md['146'] + md[
-            '147'] + md['148'] + md['149'] + md['150'] + md['151']
-    if (type == 'all' or 'ncc.4' in cols) and isvalid('ncc.3 152', md):
-        md['ncc.4'] = md['ncc.3'] + md['152']
-    if (type == 'all' or 'ncc.5' in cols) and isvalid('ncc.2 ncc.4', md):
-        md['ncc.5'] = md['ncc.2'] + md['ncc.4']
-    if (type == 'all' or 'ncc.6' in cols) and isvalid('ncc.5', md):
-        md['ncc.6'] = md['ncc.5'] / 2
-    if (type == 'all' or 'ncc.7' in cols) and isvalid('ncc.6', md):
-        md['ncc.7'] = get_grade(md['ncc.6'])
+    add(md, type, cols, "ncc.1", "136 137")
+    add(md, type, cols, "ncc.2", "138 139")
+    add(md, type, cols, "ncc.3", "ncc.1 ncc.2")
+    multiply(md, type, cols, "ncc.4", "ncc.3", 0.5)
 
 
 def calc_unit_1(md, type, cols):
-    if (type == 'all' or 'gc1.1' in cols):
-        md['gc1.1'] = oneof('13 25 ssh.1', md)
-    if (type == 'all' or 'gc1.2' in cols):
-        md['gc1.2'] = oneof('smj.1 117', md)
-    if (type == 'all' or 'gc1.3' in cols) and isvalid(
-            '1 gc1.1 53 mat.1 sci.1 gc1.2', md):
-        md['gc1.3'] = md['1'] + md['gc1.1'] + md['53'] + md['mat.1'] + md[
-            'sci.1'] + md['gc1.2']
-    if (type == 'all' or 'gc1.4' in cols) and isvalid('gc1.3', md):
-        md['gc1.4'] = md['gc1.3'] * (100.00 / 140.00)
-    if (type == 'all' or 'gc1.5' in cols) and isvalid(
-            '1 gc1.1 53 mat.1 sci.1 gc1.2', md):
-        val = 0
-        val += 1 if md['1'] < 7 else 0
-        val += 1 if md['gc1.1'] < 7 else 0
-        val += 1 if md['53'] < 7 else 0
-        val += 1 if md['mat.1'] < 14 else 0
-        val += 1 if md['sci.1'] < 7 else 0
-        val += 1 if md['gc1.2'] < 7 else 0
-        if val == 0:
-            md['gc1.5'] = 'Pass'
-        else:
-            md['gc1.5'] = f'F{val}'
+    add(md, type, cols, 'tmp.1', '37 38')
+    add(md, type, cols, 'tmp.2', '106 107')
+    add(md, type, cols, 'gc1.6', '70 71')
+    add(md, type, cols, 'gc1.7', '86 87')
+    oneof(md, type, cols, 'gc1.1', '13 25 tmp.1')
+    oneof(md, type, cols, 'gc1.2', 'tmp.2 122')
+    add(md, type, cols, 'gc1.3', '1 gc1.1 58 gc1.6 gc1.7 gc1.2')
+    multiply(md, type, cols, 'gc1.4', 'gc1.3', 0.71428)
+    get_fail_count(md, type, cols, 'gc1.fcount',
+                   '1:7 gc1.1:7 58:7 gc1.6:14 gc1.7:7 gc1.2:7')
+    if md['gc1.fcount'] == 0:
+        md['gc1.5'] = 'Pass'
+    else:
+        md['gc1.5'] = f"F{md['gc1.fcount']}"
 
 
 def calc_unit_2(md, type, cols):
-    if (type == 'all' or 'gc2.1' in cols):
-        md['gc2.1'] = oneof('19 31 ssh.5', md)
-    if (type == 'all' or 'gc2.2' in cols):
-        md['gc2.2'] = oneof('smj.9 120', md)
-    if (type == 'all' or 'gc2.3' in cols) and isvalid(
-            '7 gc2.1 59 mat.8 sci.5 gc2.2', md):
-        md['gc2.3'] = md['7'] + md['gc2.1'] + md['59'] + md['mat.8'] + md[
-            'sci.5'] + md['gc2.2']
-    if (type == 'all' or 'gc2.4' in cols) and isvalid('gc2.3', md):
-        md['gc2.4'] = md['gc2.3'] * (100.00 / 140.00)
-    if (type == 'all' or 'gc2.5' in cols) and isvalid(
-            '7 gc2.1 59 mat.8 sci.5 gc2.2', md):
-        val = 0
-        val += 1 if md['7'] < 7 else 0
-        val += 1 if md['gc2.1'] < 7 else 0
-        val += 1 if md['59'] < 7 else 0
-        val += 1 if md['mat.8'] < 14 else 0
-        val += 1 if md['sci.5'] < 7 else 0
-        val += 1 if md['gc2.2'] < 7 else 0
-        if val == 0:
-            md['gc2.5'] = 'Pass'
-        else:
-            md['gc2.5'] = f'F{val}'
+    add(md, type, cols, 'tmp.1', '47 48')
+    add(md, type, cols, 'tmp.2', '114 115')
+    add(md, type, cols, 'gc2.6', '78 79')
+    add(md, type, cols, 'gc2.7', '96 97')
+    oneof(md, type, cols, 'gc2.1', '19 31 tmp.1')
+    oneof(md, type, cols, 'gc2.2', 'tmp.2 125')
+    add(md, type, cols, 'gc2.3', '7 gc2.1 64 gc2.6 gc2.7 gc2.2')
+    multiply(md, type, cols, 'gc2.4', 'gc2.3', 0.71428)
+    get_fail_count(md, type, cols, 'gc2.fcount',
+                   '7:7 gc2.1:7 64:7 gc2.6:14 gc2.7:7 gc2.2:7')
+    if md['gc2.fcount'] == 0:
+        md['gc2.5'] = 'Pass'
+    else:
+        md['gc2.5'] = f"F{md['gc2.fcount']}"
 
 
 def calc_term_1(md, type, cols):
@@ -400,14 +380,15 @@ def calculate(md, type, cols):
     calc_social_science(md, type, cols)
     calc_technical(md, type, cols)
     calc_arogya(md, type, cols)
+    calc_jals(md, type, cols)
     calc_ncc(md, type, cols)
 
     calc_unit_1(md, type, cols)
     calc_unit_2(md, type, cols)
-    calc_term_1(md, type, cols)
-    calc_term_2(md, type, cols)
+    #calc_term_1(md, type, cols)
+    #calc_term_2(md, type, cols)
 
-    calc_final_step_1(md, type, cols)
-    calc_final_fail_count(md, type, cols)
-    calc_final_combined_passing(md, type, cols)
-    calc_final_auto_condo(md, type, cols)
+    #calc_final_step_1(md, type, cols)
+    #calc_final_fail_count(md, type, cols)
+    #calc_final_combined_passing(md, type, cols)
+    #calc_final_auto_condo(md, type, cols)

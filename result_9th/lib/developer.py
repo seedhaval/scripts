@@ -6,7 +6,7 @@ from lib.db import get_exam_map_for_all_subjects
 from lib.excelhelper import save_close_and_start, add_table
 
 
-def get_column_ids(*args, **kwargs):
+def get_column_ids():
     filepath = get_safe_output_xls_path("column_id", False)
     wb = openpyxl.Workbook()
     sht = wb.active
