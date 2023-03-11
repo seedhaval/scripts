@@ -30,19 +30,30 @@ def get_grade(marks):
     return ''
 
 
+def add(md, type, cols, nm, txt_ar):
+    if type != 'all' and nm not in cols:
+        return
+    ar = txt_ar.strip().split()
+    if not all([x in md for x in ar]):
+        return
+    md[nm] = sum([md[x] for x in ar])
+
+
+def multiply(md, type, cols, nm, base, mltpl):
+    if type != 'all' and nm not in cols:
+        return
+    if base not in md:
+        return
+    md[nm] = md[base] * mltpl
+
+
 def calc_marathi(md, type, cols):
-    if (type == 'all' or 'mar.1' in cols) and isvalid("3 4 5 6", md):
-        md["mar.1"] = md["3"] + md["4"] + md["5"] + md["6"]
-    if (type == 'all' or 'mar.2' in cols) and isvalid("2 mar.1", md):
-        md["mar.2"] = md["2"] + md["mar.1"]
-    if (type == 'all' or 'mar.3' in cols) and isvalid("9 10 11 12", md):
-        md["mar.3"] = md["9"] + md["10"] + md["11"] + md["12"]
-    if (type == 'all' or 'mar.4' in cols) and isvalid("8 mar.3", md):
-        md["mar.4"] = md["8"] + md["mar.3"]
-    if (type == 'all' or 'mar.5' in cols) and isvalid("mar.2 mar.4", md):
-        md["mar.5"] = md["mar.2"] + md["mar.4"]
-    if (type == 'all' or 'mar.6' in cols) and isvalid("mar.5", md):
-        md["mar.6"] = md["mar.5"] / 2
+    add(md, type, cols, "mar.1", "3 4 5 6")
+    add(md, type, cols, "mar.2", "2 mar.1")
+    add(md, type, cols, "mar.3", "9 10 11 12")
+    add(md, type, cols, "mar.4", "8 mar.3")
+    add(md, type, cols, "mar.5", "mar.2 mar.4")
+    multiply(md, type, cols, "mar.6", "mar.5", 0.5)
 
 
 def calc_maths(md, type, cols):
@@ -83,48 +94,30 @@ def calc_maths(md, type, cols):
 
 
 def calc_sanskrit(md, type, cols):
-    if (type == 'all' or 'snsk.1' in cols) and isvalid("15 16 17 18", md):
-        md["snsk.1"] = md["15"] + md["16"] + md["17"] + md["18"]
-    if (type == 'all' or 'snsk.2' in cols) and isvalid("14 snsk.1", md):
-        md["snsk.2"] = md["14"] + md["snsk.1"]
-    if (type == 'all' or 'snsk.3' in cols) and isvalid("21 22 23 24", md):
-        md["snsk.3"] = md["21"] + md["22"] + md["23"] + md["24"]
-    if (type == 'all' or 'snsk.4' in cols) and isvalid("20 snsk.3", md):
-        md["snsk.4"] = md["20"] + md["snsk.3"]
-    if (type == 'all' or 'snsk.5' in cols) and isvalid("snsk.2 snsk.4", md):
-        md["snsk.5"] = md["snsk.2"] + md["snsk.4"]
-    if (type == 'all' or 'snsk.6' in cols) and isvalid("snsk.5", md):
-        md["snsk.6"] = md["snsk.5"] / 2
+    add(md, type, cols, "snsk.1", "15 16 17 18")
+    add(md, type, cols, "snsk.2", "14 snsk.1")
+    add(md, type, cols, "snsk.3", "21 22 23 24")
+    add(md, type, cols, "snsk.4", "20 snsk.3")
+    add(md, type, cols, "snsk.5", "snsk.2 snsk.4")
+    multiply(md, type, cols, "snsk.6", "snsk.5", 0.5)
 
 
 def calc_hindi(md, type, cols):
-    if (type == 'all' or 'hin.1' in cols) and isvalid("27 28 29 30", md):
-        md["hin.1"] = md["27"] + md["28"] + md["29"] + md["30"]
-    if (type == 'all' or 'hin.2' in cols) and isvalid("26 hin.1", md):
-        md["hin.2"] = md["26"] + md["hin.1"]
-    if (type == 'all' or 'hin.3' in cols) and isvalid("33 34 35 36", md):
-        md["hin.3"] = md["33"] + md["34"] + md["35"] + md["36"]
-    if (type == 'all' or 'hin.4' in cols) and isvalid("32 hin.3", md):
-        md["hin.4"] = md["32"] + md["hin.3"]
-    if (type == 'all' or 'hin.5' in cols) and isvalid("hin.2 hin.4", md):
-        md["hin.5"] = md["hin.2"] + md["hin.4"]
-    if (type == 'all' or 'hin.6' in cols) and isvalid("hin.5", md):
-        md["hin.6"] = md["hin.5"] / 2
+    add(md, type, cols, "hin.1", "27 28 29 30")
+    add(md, type, cols, "hin.2", "26 hin.1")
+    add(md, type, cols, "hin.3", "33 34 35 36")
+    add(md, type, cols, "hin.4", "32 hin.3")
+    add(md, type, cols, "hin.5", "hin.2 hin.4")
+    multiply(md, type, cols, "hin.6", "hin.5", 0.5)
 
 
 def calc_english(md, type, cols):
-    if (type == 'all' or 'eng.1' in cols) and isvalid("60 61 62 63", md):
-        md["eng.1"] = md["60"] + md["61"] + md["62"] + md["63"]
-    if (type == 'all' or 'eng.2' in cols) and isvalid("59 eng.1", md):
-        md["eng.2"] = md["59"] + md["eng.1"]
-    if (type == 'all' or 'eng.3' in cols) and isvalid("66 67 68 69", md):
-        md["eng.3"] = md["66"] + md["67"] + md["68"] + md["69"]
-    if (type == 'all' or 'eng.4' in cols) and isvalid("65 eng.3", md):
-        md["eng.4"] = md["65"] + md["eng.3"]
-    if (type == 'all' or 'eng.5' in cols) and isvalid("eng.2 eng.4", md):
-        md["eng.5"] = md["eng.2"] + md["eng.4"]
-    if (type == 'all' or 'eng.6' in cols) and isvalid("eng.5", md):
-        md["eng.6"] = md["eng.5"] / 2
+    add(md, type, cols, "eng.1", "60 61 62 63")
+    add(md, type, cols, "eng.2", "59 eng.1")
+    add(md, type, cols, "eng.3", "66 67 68 69")
+    add(md, type, cols, "eng.4", "65 eng.3")
+    add(md, type, cols, "eng.5", "eng.2 eng.4")
+    multiply(md, type, cols, "eng.6", "eng.5", 0.5)
 
 
 def calc_hindi_sanskrit_combo(md, type, cols):
@@ -443,7 +436,8 @@ def calc_final_combined_passing(md, type, cols):
                                                            'sci.10 fin.soc.1',
                                                            md):
         if md['fcount'] == 0:
-            md['lang_pass'], md['msci_pass'], md['msoc_pass'] = (True, True, True)
+            md['lang_pass'], md['msci_pass'], md['msoc_pass'] = (
+                True, True, True)
             return
         if md['mar.6'] < 25 or md['fin.hin.1'] < 25 or md['eng.6'] < 25:
             lang_pass = False
