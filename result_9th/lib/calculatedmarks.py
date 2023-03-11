@@ -102,28 +102,14 @@ def calc_hindi_sanskrit_combo(md, type, cols):
 
 
 def calc_science(md, type, cols):
-    if (type == 'all' or 'sci.1' in cols) and isvalid("81 82", md):
-        md["sci.1"] = md["81"] + md["82"]
-    if (type == 'all' or 'sci.2' in cols) and isvalid("83 84", md):
-        md["sci.2"] = md["83"] + md["84"]
-    if (type == 'all' or 'sci.3' in cols) and isvalid("85 86 87 88 89 90", md):
-        md["sci.3"] = md["85"] + md["86"] + md["87"] + md["88"] + md["89"] + md[
-            "90"]
-    if (type == 'all' or 'sci.4' in cols) and isvalid("sci.2 sci.3", md):
-        md["sci.4"] = md["sci.2"] + md["sci.3"]
-    if (type == 'all' or 'sci.5' in cols) and isvalid("91 92", md):
-        md["sci.5"] = md["91"] + md["92"]
-    if (type == 'all' or 'sci.6' in cols) and isvalid("93 94", md):
-        md["sci.6"] = md["93"] + md["94"]
-    if (type == 'all' or 'sci.7' in cols) and isvalid("95 96 97 98 99 100", md):
-        md["sci.7"] = md["95"] + md["96"] + md["97"] + md["98"] + md["99"] + md[
-            "100"]
-    if (type == 'all' or 'sci.8' in cols) and isvalid("sci.6 sci.7", md):
-        md["sci.8"] = md["sci.6"] + md["sci.7"]
-    if (type == 'all' or 'sci.9' in cols) and isvalid("sci.4 sci.8", md):
-        md["sci.9"] = md["sci.4"] + md["sci.8"]
-    if (type == 'all' or 'sci.10' in cols) and isvalid("sci.9", md):
-        md["sci.10"] = md["sci.9"] / 2
+    add(md, type, cols, "sci.1", "88 90 91 92")
+    add(md, type, cols, "sci.2", "89 93 94 95")
+    add(md, type, cols, "sci.3", "sci.1 sci.2")
+    add(md, type, cols, "sci.4", "98 100 101 102")
+    add(md, type, cols, "sci.5", "99 103 104 105")
+    add(md, type, cols, "sci.6", "sci.4 sci.5")
+    add(md, type, cols, "sci.7", "sci.3 sci.6")
+    multiply(md, type, cols, "sci.8", "sci.7", 0.5)
 
 
 def calc_social_science(md, type, cols):
