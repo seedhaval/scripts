@@ -121,26 +121,17 @@ def calc_english(md, type, cols):
 
 
 def calc_hindi_sanskrit_combo(md, type, cols):
-    if (type == 'all' or 'ssh.1' in cols) and isvalid("37 38", md):
-        md["ssh.1"] = md["37"] + md["38"]
-    if (type == 'all' or 'ssh.2' in cols) and isvalid("39 40", md):
-        md["ssh.2"] = md["39"] + md["40"]
-    if (type == 'all' or 'ssh.3' in cols) and isvalid("41 42 43 44", md):
-        md["ssh.3"] = md["41"] + md["42"] + md["43"] + md["44"]
-    if (type == 'all' or 'ssh.4' in cols) and isvalid("ssh.2 ssh.3", md):
-        md["ssh.4"] = md["ssh.2"] + md["ssh.3"]
-    if (type == 'all' or 'ssh.5' in cols) and isvalid("45 46", md):
-        md["ssh.5"] = md["45"] + md["46"]
-    if (type == 'all' or 'ssh.6' in cols) and isvalid("47 48", md):
-        md["ssh.6"] = md["47"] + md["48"]
-    if (type == 'all' or 'ssh.7' in cols) and isvalid("49 50 51 52", md):
-        md["ssh.7"] = md["49"] + md["50"] + md["51"] + md["52"]
-    if (type == 'all' or 'ssh.8' in cols) and isvalid("ssh.6 ssh.7", md):
-        md["ssh.8"] = md["ssh.6"] + md["ssh.7"]
-    if (type == 'all' or 'ssh.9' in cols) and isvalid("ssh.4 ssh.8", md):
-        md["ssh.9"] = md["ssh.4"] + md["ssh.8"]
-    if (type == 'all' or 'ssh.10' in cols) and isvalid("ssh.9", md):
-        md["ssh.10"] = md["ssh.9"] / 2
+    add(md, type, cols, "ssh.1", "39 41 43 45")
+    add(md, type, cols, "ssh.2", "40 42 44 46")
+    add(md, type, cols, "ssh.3", "ssh.1 ssh.2")
+    add(md, type, cols, "ssh.4", "49 51 53 55")
+    add(md, type, cols, "ssh.5", "50 52 54 56")
+    add(md, type, cols, "ssh.6", "ssh.4 ssh.5")
+    add(md, type, cols, "ssh.7", "ssh.1 ssh.4")
+    multiply(md, type, cols, "ssh.7", "ssh.7", 0.5)
+    add(md, type, cols, "ssh.8", "ssh.2 ssh.5")
+    multiply(md, type, cols, "ssh.8", "ssh.8", 0.5)
+    add(md, type, cols, "ssh.9", "ssh.7 ssh.8")
 
 
 def calc_science(md, type, cols):

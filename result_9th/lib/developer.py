@@ -44,13 +44,7 @@ def create_calculation_formula():
             cfg.append(val)
 
             if len(row) > 4:
-                val = " + ".join(f"md['{x}']" for x in row[4].split())
-                assign = f"md['{row[0]}'] = {val}"
-
-                code = f"if (type == 'all' or '{row[0]}' in cols) and " \
-                       f"isvalid('" \
-                       f"{row[4]}',md):\n\t"
-                code += assign
+                code = f'add(md, type, cols, "{row[0]}", "{row[4]}")'
                 calc.append(code)
 
     print(",".join(cfg))
