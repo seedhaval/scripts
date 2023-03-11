@@ -113,14 +113,14 @@ def calc_hindi(md, type, cols):
 
 
 def calc_english(md, type, cols):
-    if (type == 'all' or 'eng.1' in cols) and isvalid("55 56 57 58", md):
-        md["eng.1"] = md["55"] + md["56"] + md["57"] + md["58"]
-    if (type == 'all' or 'eng.2' in cols) and isvalid("54 eng.1", md):
-        md["eng.2"] = md["54"] + md["eng.1"]
-    if (type == 'all' or 'eng.3' in cols) and isvalid("61 62 63 64", md):
-        md["eng.3"] = md["61"] + md["62"] + md["63"] + md["64"]
-    if (type == 'all' or 'eng.4' in cols) and isvalid("60 eng.3", md):
-        md["eng.4"] = md["60"] + md["eng.3"]
+    if (type == 'all' or 'eng.1' in cols) and isvalid("60 61 62 63", md):
+        md["eng.1"] = md["60"] + md["61"] + md["62"] + md["63"]
+    if (type == 'all' or 'eng.2' in cols) and isvalid("59 eng.1", md):
+        md["eng.2"] = md["59"] + md["eng.1"]
+    if (type == 'all' or 'eng.3' in cols) and isvalid("66 67 68 69", md):
+        md["eng.3"] = md["66"] + md["67"] + md["68"] + md["69"]
+    if (type == 'all' or 'eng.4' in cols) and isvalid("65 eng.3", md):
+        md["eng.4"] = md["65"] + md["eng.3"]
     if (type == 'all' or 'eng.5' in cols) and isvalid("eng.2 eng.4", md):
         md["eng.5"] = md["eng.2"] + md["eng.4"]
     if (type == 'all' or 'eng.6' in cols) and isvalid("eng.5", md):
