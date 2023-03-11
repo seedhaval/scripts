@@ -1,10 +1,3 @@
-def isvalid(txt, md):
-    for idx in txt.strip().split():
-        if idx not in md:
-            return False
-    return True
-
-
 def oneof(txt, md):
     for idx in txt.strip().split():
         if idx in md and str(md[idx]).strip() != '':
@@ -57,40 +50,14 @@ def calc_marathi(md, type, cols):
 
 
 def calc_maths(md, type, cols):
-    if (type == 'all' or 'mat.1' in cols) and isvalid("65 66", md):
-        md["mat.1"] = md["65"] + md["66"]
-    if (type == 'all' or 'mat.2' in cols) and isvalid("67 68", md):
-        md["mat.2"] = md["67"] + md["68"]
-    if (type == 'all' or 'mat.3' in cols) and isvalid("69 70", md):
-        md["mat.3"] = md["69"] + md["70"]
-    if (type == 'all' or 'mat.4' in cols) and isvalid("71 72", md):
-        md["mat.4"] = md["71"] + md["72"]
-    if (type == 'all' or 'mat.5' in cols) and isvalid("mat.4", md):
-        md["mat.5"] = md["mat.4"] / 2
-    if (type == 'all' or 'mat.6' in cols) and isvalid("mat.3 mat.5", md):
-        md["mat.6"] = md["mat.3"] + md["mat.5"]
-    if (type == 'all' or 'mat.7' in cols) and isvalid("mat.2 mat.6", md):
-        md["mat.7"] = md["mat.2"] + md["mat.6"]
-
-    if (type == 'all' or 'mat.8' in cols) and isvalid("73 74", md):
-        md["mat.8"] = md["73"] + md["74"]
-    if (type == 'all' or 'mat.9' in cols) and isvalid("75 76", md):
-        md["mat.9"] = md["75"] + md["76"]
-    if (type == 'all' or 'mat.10' in cols) and isvalid("77 78", md):
-        md["mat.10"] = md["77"] + md["78"]
-    if (type == 'all' or 'mat.11' in cols) and isvalid("79 80", md):
-        md["mat.11"] = md["79"] + md["80"]
-    if (type == 'all' or 'mat.12' in cols) and isvalid("mat.11", md):
-        md["mat.12"] = md["mat.11"] / 2
-    if (type == 'all' or 'mat.13' in cols) and isvalid("mat.10 mat.12", md):
-        md["mat.13"] = md["mat.10"] + md["mat.12"]
-    if (type == 'all' or 'mat.14' in cols) and isvalid("mat.9 mat.13", md):
-        md["mat.14"] = md["mat.9"] + md["mat.13"]
-
-    if (type == 'all' or 'mat.15' in cols) and isvalid("mat.7 mat.14", md):
-        md["mat.15"] = md["mat.7"] + md["mat.14"]
-    if (type == 'all' or 'mat.16' in cols) and isvalid("mat.15", md):
-        md["mat.16"] = md["mat.15"] / 2
+    add(md, type, cols, "mat.1", "72 74 76")
+    add(md, type, cols, "mat.2", "73 75 77")
+    add(md, type, cols, "mat.3", "mat.1 mat.2")
+    add(md, type, cols, "mat.4", "80 82 84")
+    add(md, type, cols, "mat.5", "81 83 85")
+    add(md, type, cols, "mat.6", "mat.4 mat.5")
+    add(md, type, cols, "mat.7", "mat.3 mat.6")
+    multiply(md, type, cols, "mat.8", "mat.7", 0.5)
 
 
 def calc_sanskrit(md, type, cols):
