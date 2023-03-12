@@ -16,16 +16,23 @@ def auto_condo(mrk):
     return mrk
 
 
-def get_grade(marks):
+def get_grade(md, type, cols, nm, base):
+    if type != 'all' and nm not in cols:
+        return
+    if base not in md:
+        return
+    marks = md[base]
     if marks >= 60:
-        return 'अ'
+        val = 'अ'
     elif marks >= 45:
-        return 'ब'
+        val = 'ब'
     elif marks >= 35:
-        return 'क'
+        val = 'क'
     elif marks >= 0:
-        return 'ड'
-    return ''
+        val = 'ड'
+    else:
+        val = ''
+    md[nm] = val
 
 
 def add(md, type, cols, nm, txt_ar):
@@ -187,10 +194,11 @@ def calc_unit_1(md, type, cols):
     multiply(md, type, cols, 'gc1.4', 'gc1.3', 0.71428)
     get_fail_count(md, type, cols, 'gc1.fcount',
                    '1:7 gc1.1:7 58:7 gc1.6:14 gc1.7:7 gc1.2:7')
-    if md['gc1.fcount'] == 0:
-        md['gc1.5'] = 'Pass'
-    else:
-        md['gc1.5'] = f"F{md['gc1.fcount']}"
+    if 'gc1.fcount' in md:
+        if md['gc1.fcount'] == 0:
+            md['gc1.5'] = 'Pass'
+        else:
+            md['gc1.5'] = f"F{md['gc1.fcount']}"
 
 
 def calc_unit_2(md, type, cols):
@@ -204,38 +212,30 @@ def calc_unit_2(md, type, cols):
     multiply(md, type, cols, 'gc2.4', 'gc2.3', 0.71428)
     get_fail_count(md, type, cols, 'gc2.fcount',
                    '7:7 gc2.1:7 64:7 gc2.6:14 gc2.7:7 gc2.2:7')
-    if md['gc2.fcount'] == 0:
-        md['gc2.5'] = 'Pass'
-    else:
-        md['gc2.5'] = f"F{md['gc2.fcount']}"
+    if 'gc2.fcount' in md:
+        if md['gc2.fcount'] == 0:
+            md['gc2.5'] = 'Pass'
+        else:
+            md['gc2.5'] = f"F{md['gc2.fcount']}"
 
 
 def calc_term_1(md, type, cols):
-    if (type == 'all' or 'ps.1' in cols):
-        md['ps.1'] = oneof('hin.2 snsk.2 ssh.4', md)
-    if (type == 'all' or 'ps.2' in cols) and isvalid('eng.2 ps.1 mar.2', md):
-        md['ps.2'] = md['eng.2'] + md['ps.1'] + md['mar.2']
-    if (type == 'all' or 'ps.3' in cols) and isvalid('sci.4 mat.7', md):
-        md['ps.3'] = md['sci.4'] + md['mat.7']
-    if (type == 'all' or 'ps.4' in cols):
-        md['ps.4'] = oneof('smj.8 tec.2', md)
-    if (type == 'all' or 'ps.5' in cols) and isvalid('ps.2 ps.3 ps.4', md):
-        md['ps.5'] = md['ps.2'] + md['ps.3'] + md['ps.4']
-    if (type == 'all' or 'ps.6' in cols) and isvalid('ps.5', md):
-        md['ps.6'] = md['ps.5'] / 6
-    if (type == 'all' or 'ps.7' in cols) and isvalid(
-            'mar.2 ps.1 eng.2 mat.7 sci.4 ps.4', md):
-        val = 0
-        val += 1 if md['mar.2'] < 35 else 0
-        val += 1 if md['ps.1'] < 35 else 0
-        val += 1 if md['eng.2'] < 35 else 0
-        val += 1 if md['mat.7'] < 35 else 0
-        val += 1 if md['sci.4'] < 35 else 0
-        val += 1 if md['ps.4'] < 35 else 0
-        if val == 0:
+    oneof(md, type, cols, 'ps.1', 'hin.2 snsk.2 ssh.3')
+    add(md, type, cols, 'ps.2', 'eng.2 ps.1 mar.2')
+    add(md, type, cols, 'ps.3', 'sci.3 mat.3')
+    oneof(md, type, cols, 'ps.4', 'soc.6 tec.2')
+    add(md, type, cols, 'ps.5', 'ps.2 ps.3 ps.4')
+    multiply(md, type, cols, 'ps.6', 'ps.5', 0.1666)
+    get_grade(md, type, cols, 'ps.8', 'aro.1')
+    get_grade(md, type, cols, 'ps.9', 'jals.1')
+    get_grade(md, type, cols, 'ps.10', 'ncc.1')
+    get_fail_count(md, type, cols, 'ps.fcount',
+                   'mar.2:35 ps.1:35 eng.2:35 mat.3:35 sci.3:35 ps.4:35')
+    if 'ps.fcount' in md:
+        if md['ps.fcount'] == 0:
             md['ps.7'] = 'Pass'
         else:
-            md['ps.7'] = f'F{val}'
+            md['ps.7'] = f"F{md['ps.fcount']}"
 
 
 def calc_term_2(md, type, cols):
@@ -385,10 +385,10 @@ def calculate(md, type, cols):
 
     calc_unit_1(md, type, cols)
     calc_unit_2(md, type, cols)
-    #calc_term_1(md, type, cols)
-    #calc_term_2(md, type, cols)
+    calc_term_1(md, type, cols)
+    # calc_term_2(md, type, cols)
 
-    #calc_final_step_1(md, type, cols)
-    #calc_final_fail_count(md, type, cols)
-    #calc_final_combined_passing(md, type, cols)
-    #calc_final_auto_condo(md, type, cols)
+    # calc_final_step_1(md, type, cols)
+    # calc_final_fail_count(md, type, cols)
+    # calc_final_combined_passing(md, type, cols)
+    # calc_final_auto_condo(md, type, cols)
