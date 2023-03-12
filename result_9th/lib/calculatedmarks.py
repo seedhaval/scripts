@@ -334,6 +334,8 @@ def calc_final_combined_maths(md, type, cols):
 
 
 def calc_final_combined_passing(md, type, cols):
+    if 'fin.mar.1' not in md:
+        return
     calc_final_combined_lang(md, type, cols)
     calc_final_combined_maths(md, type, cols)
 
@@ -351,10 +353,45 @@ def calc_final_auto_condo(md, type, cols):
                'स्काऊट गाईड/NCC/RSP/स्व विकास कलारसास्वाद')
 
 
+def calc_grace(md, type, cols):
+    if 'tmp.lang.combined.pass' not in md:
+        return
+    add(md, type, cols, 'tmp.6.total',
+        'fin.mar.1 fin.hin.1 fin.eng.1 fin.mat.1 fin.sci.1 fin.smj.1')
+    get_fail_count(md, type, cols, 'tmp.total.fail.cnt',
+                   'fin.mar.1:35 fin.hin.1:35 fin.eng.1:35 fin.mat.1:35 '
+                   'fin.sci.1:35 fin.smj.1:35')
+    if md['tmp.6.total'] < 210:
+        return
+    if md['tmp.total.fail.cnt'] == 0:
+        return
+    grace_req = []
+    if md['tmp.lang.combined.pass'] != True:
+        for sub in 'fin.mar.1 fin.hin.1 fin.eng.1'.split():
+            if 25 <= md[sub] < 35:
+                grace_req.append([sub, 35 - md[sub]])
+    if md['tmp.maths.combined.pass'] != True:
+        for sub in 'fin.mat.1 fin.sci.1'.split():
+            if 25 <= md[sub] < 35:
+                grace_req.append([sub, 35 - md[sub]])
+    if 25 <= md['fin.smj.1'] < 35:
+        grace_req.append(['fin.smj.1', 35 - md['fin.smj.1']])
+    avlbl_grace = 20
+    grace_applied = []
+    for row in sorted(grace_req, key=lambda x: x[1]):
+        if row[1] < avlbl_grace:
+            avlbl_grace -= row[1]
+            grace_applied.append(row)
+            print(row)
+        else:
+            break
+
+
 def calc_final(md, type, cols):
     calc_final_step_1(md, type, cols)
     calc_final_auto_condo(md, type, cols)
     calc_final_combined_passing(md, type, cols)
+    calc_grace(md, type, cols)
     # calc_final_fail_count(md, type, cols)
     md['fin.cmnt'] = md['fin.cmnt'].strip().strip(',')
 
