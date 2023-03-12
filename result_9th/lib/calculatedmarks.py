@@ -10,10 +10,12 @@ def oneof(md, type, cols, nm, txt_ar):
             return
 
 
-def auto_condo(mrk):
-    if 33 <= mrk <= 35:
-        return 35
-    return mrk
+def auto_condo(md, type, cols, nm, sub):
+    if nm not in md:
+        return
+    if 33 <= md[nm] <= 35:
+        md['fin.cmnt'] += f"Automatic Condonation - {sub}, "
+        md[nm] = 35
 
 
 def get_grade(md, type, cols, nm, base):
@@ -258,46 +260,16 @@ def calc_term_2(md, type, cols):
 
 
 def calc_final_step_1(md, type, cols):
-    if (type == 'all' or 'fin.mar.t1' in cols) and isvalid('mar.6', md):
-        md['fin.mar.1'] = md['mar.6']
-        md['fin.mar.t1'] = md['mar.6']
-    if (type == 'all' or 'fin.hin.t1' in cols) and isvalid(
-            'snsk.6 hin.6 ssh.10', md):
-        md['fin.hin.1'] = oneof('snsk.6 hin.6 ssh.10', md)
-        md['fin.hin.t1'] = oneof('snsk.6 hin.6 ssh.10', md)
-    if (type == 'all' or 'fin.eng.t1' in cols) and isvalid('eng.6', md):
-        md['fin.eng.1'] = md['eng.6']
-        md['fin.eng.t1'] = md['eng.6']
-    if (type == 'all' or 'fin.grp.t1' in cols) and isvalid(
-            'fin.mar.1 fin.hin.1 fin.eng.1', md):
-        md['fin.grp.1'] = md['fin.mar.1'] + md['fin.hin.1'] + md['fin.eng.1']
-        md['fin.grp.t1'] = md['fin.mar.1'] + md['fin.hin.1'] + md['fin.eng.1']
-    if (type == 'all' or 'fin.mat.t1' in cols) and isvalid('mat.16', md):
-        md['fin.mat.1'] = md['mat.16']
-        md['fin.mat.t1'] = md['mat.16']
-    if (type == 'all' or 'fin.sci.t1' in cols) and isvalid('sci.10', md):
-        md['fin.sci.1'] = md['sci.10']
-        md['fin.sci.t1'] = md['sci.10']
-    if (type == 'all' or 'fin.grp.t2' in cols) and isvalid(
-            'fin.mat.1 fin.sci.1', md):
-        md['fin.grp.2'] = md['fin.mat.1'] + md['fin.sci.1']
-        md['fin.grp.t2'] = md['fin.mat.1'] + md['fin.sci.1']
-    if (type == 'all' or 'fin.soc.t1' in cols) and isvalid('smj.18 tec.6', md):
-        md['fin.soc.1'] = oneof('smj.18 tec.6', md)
-        md['fin.soc.t1'] = oneof('smj.18 tec.6', md)
-    if (type == 'all' or 'fin.aro.t1' in cols) and isvalid('aro.7', md):
-        md['fin.aro.1'] = md['aro.7']
-        md['fin.aro.t1'] = md['aro.7']
-    if (type == 'all' or 'fin.scout.t1' in cols) and isvalid('ncc.7', md):
-        md['fin.scout.1'] = md['ncc.7']
-        md['fin.scout.t1'] = md['ncc.7']
-    if (type == 'all' or 'fin.total.t1' in cols) and isvalid(
-            'fin.grp.1 fin.grp.2 fin.soc.1', md):
-        md['fin.total.1'] = md['fin.grp.1'] + md['fin.grp.2'] + md['fin.soc.1']
-        md['fin.total.t1'] = md['fin.grp.1'] + md['fin.grp.2'] + md['fin.soc.1']
-    if (type == 'all' or 'fin.100.t1' in cols) and isvalid('fin.total.1', md):
-        md['fin.100.1'] = md['fin.total.1'] / 6
-        md['fin.100.t1'] = md['fin.total.1'] / 6
+    add(md, type, cols, 'fin.mar.1', 'mar.6')
+    oneof(md, type, cols, 'fin.hin.1', 'hin.6 snsk.6 ssh.9')
+    add(md, type, cols, 'fin.eng.1', 'eng.6')
+    add(md, type, cols, 'fin.mat.1', 'mat.8')
+    add(md, type, cols, 'fin.sci.1', 'sci.8')
+    oneof(md, type, cols, 'fin.smj.1', 'soc.15 tec.6')
+    add(md, type, cols, 'fin.aro.1', 'aro.4')
+    add(md, type, cols, 'fin.jals.1', 'jals.4')
+    add(md, type, cols, 'fin.ncc.1', 'ncc.4')
+    md['fin.cmnt'] = ''
 
 
 def calc_final_fail_count(md, type, cols):
@@ -315,49 +287,76 @@ def calc_final_fail_count(md, type, cols):
         md['fcount'] = val
 
 
+def calc_final_combined_lang(md, type, cols):
+    get_fail_count(md, type, cols, 'tmp.lang.fail.cnt',
+                   'fin.mar.1:35 fin.hin.1:35 fin.eng.1:35')
+    get_fail_count(md, type, cols, 'tmp.lang.lessthan.25.cnt',
+                   'fin.mar.1:25 fin.hin.1:25 fin.eng.1:25')
+    if 'ssh.7' in md and 'ssh.8' in md:
+        get_fail_count(md, type, cols, 'tmp.lang.lessthan.25.cnt2',
+                       'ssh.7:13 ssh.8:13')
+        md['tmp.lang.lessthan.25.cnt'] += md['tmp.lang.lessthan.25.cnt2']
+    add(md, type, cols, 'tmp.lang.total',
+        'fin.mar.1 fin.hin.1 fin.eng.1')
+
+    if md['tmp.lang.fail.cnt'] == 0:
+        md['tmp.lang.combined.pass'] = True
+        return
+    if md['tmp.lang.lessthan.25.cnt'] > 0:
+        md['tmp.lang.combined.pass'] = False
+        return
+    if md['tmp.lang.total'] < 105:
+        md['tmp.lang.combined.pass'] = False
+        return
+    md['tmp.lang.combined.pass'] = True
+    md['fin.cmnt'] += "Combined passing भाषा गट, "
+
+
+def calc_final_combined_maths(md, type, cols):
+    get_fail_count(md, type, cols, 'tmp.maths.fail.cnt',
+                   'fin.mat.1:35 fin.sci.1:35')
+    get_fail_count(md, type, cols, 'tmp.maths.lessthan.25.cnt',
+                   'fin.mat.1:25 fin.sci.1:25')
+    add(md, type, cols, 'tmp.maths.total',
+        'fin.mat.1 fin.sci.1')
+
+    if md['tmp.maths.fail.cnt'] == 0:
+        md['tmp.maths.combined.pass'] = True
+        return
+    if md['tmp.maths.lessthan.25.cnt'] > 0:
+        md['tmp.maths.combined.pass'] = False
+        return
+    if md['tmp.maths.total'] < 70:
+        md['tmp.maths.combined.pass'] = False
+        return
+    md['tmp.maths.combined.pass'] = True
+    md['fin.cmnt'] += "Combined passing गणित गट, "
+
+
 def calc_final_combined_passing(md, type, cols):
-    if (type == 'all' or 'fin.rem.t1' in cols) and isvalid('mar.6 fin.hin.1 '
-                                                           'eng.6 mat.16 '
-                                                           'sci.10 fin.soc.1',
-                                                           md):
-        if md['fcount'] == 0:
-            md['lang_pass'], md['msci_pass'], md['msoc_pass'] = (
-                True, True, True)
-            return
-        if md['mar.6'] < 25 or md['fin.hin.1'] < 25 or md['eng.6'] < 25:
-            lang_pass = False
-        elif md['mar.6'] + md['fin.hin.1'] + md['eng.6'] < 105:
-            lang_pass = False
-        else:
-            lang_pass = True
-
-        if md['mat.16'] < 25 or md['sci.10'] < 25:
-            msci_pass = False
-        elif md['mat.16'] + md['sci.10'] < 70:
-            msci_pass = False
-        else:
-            msci_pass = True
-
-        if md['fin.soc.1'] < 35:
-            msoc_pass = False
-        else:
-            msoc_pass = True
-
-        md['lang_pass'], md['msci_pass'], md['msoc_pass'] = (
-            lang_pass, msci_pass, msoc_pass)
+    calc_final_combined_lang(md, type, cols)
+    calc_final_combined_maths(md, type, cols)
 
 
 def calc_final_auto_condo(md, type, cols):
-    if (type == 'all' or 'fin.rem.t1' in cols) and isvalid('mar.6 fin.hin.1 '
-                                                           'eng.6 mat.16 '
-                                                           'sci.10 fin.soc.1',
-                                                           md):
-        md['mar.6'] = auto_condo(md['mar.6'])
-        md['fin.hin.1'] = auto_condo(md['fin.hin.1'])
-        md['eng.6'] = auto_condo(md['eng.6'])
-        md['mat.16'] = auto_condo(md['mat.16'])
-        md['sci.10'] = auto_condo(md['sci.10'])
-        md['fin.soc.1'] = auto_condo(md['fin.soc.1'])
+    auto_condo(md, type, cols, 'fin.mar.1', 'मराठी')
+    auto_condo(md, type, cols, 'fin.hin.1', 'हिंदी / संस्कृत')
+    auto_condo(md, type, cols, 'fin.eng.1', 'इंग्लिश')
+    auto_condo(md, type, cols, 'fin.mat.1', 'गणित')
+    auto_condo(md, type, cols, 'fin.sci.1', 'विज्ञान')
+    auto_condo(md, type, cols, 'fin.smj.1', 'समाजशास्त्र / टेकनिकल')
+    auto_condo(md, type, cols, 'fin.aro.1', 'आरोग्य व शा.शिक्षण')
+    auto_condo(md, type, cols, 'fin.jals.1', 'जलसंरक्षण')
+    auto_condo(md, type, cols, 'fin.ncc.1',
+               'स्काऊट गाईड/NCC/RSP/स्व विकास कलारसास्वाद')
+
+
+def calc_final(md, type, cols):
+    calc_final_step_1(md, type, cols)
+    calc_final_auto_condo(md, type, cols)
+    calc_final_combined_passing(md, type, cols)
+    # calc_final_fail_count(md, type, cols)
+    md['fin.cmnt'] = md['fin.cmnt'].strip().strip(',')
 
 
 def calculate(md, type, cols):
@@ -379,7 +378,4 @@ def calculate(md, type, cols):
     calc_term_1(md, type, cols)
     calc_term_2(md, type, cols)
 
-    # calc_final_step_1(md, type, cols)
-    # calc_final_fail_count(md, type, cols)
-    # calc_final_combined_passing(md, type, cols)
-    # calc_final_auto_condo(md, type, cols)
+    calc_final(md, type, cols)

@@ -65,7 +65,6 @@ def get_column_config_for_subject(subject):
     col_data = [x for x in data if x[0] == subject][0]
     col_info = []
     for col in col_data[1:]:
-        print(col)
         curd = {}
         ar = col.split(":")
         if col[0] in '123456789':
