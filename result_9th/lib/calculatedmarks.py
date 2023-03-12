@@ -239,31 +239,22 @@ def calc_term_1(md, type, cols):
 
 
 def calc_term_2(md, type, cols):
-    if (type == 'all' or 'ds.1' in cols):
-        md['ds.1'] = oneof('hin.4 snsk.4 ssh.8', md)
-    if (type == 'all' or 'ds.2' in cols) and isvalid('eng.4 ds.1 mar.4', md):
-        md['ds.2'] = md['eng.4'] + md['ds.1'] + md['mar.4']
-    if (type == 'all' or 'ds.3' in cols) and isvalid('sci.8 mat.14', md):
-        md['ds.3'] = md['sci.8'] + md['mat.14']
-    if (type == 'all' or 'ds.4' in cols):
-        md['ds.4'] = oneof('smj.16 tec.4', md)
-    if (type == 'all' or 'ds.5' in cols) and isvalid('ds.2 ds.3 ds.4', md):
-        md['ds.5'] = md['ds.2'] + md['ds.3'] + md['ds.4']
-    if (type == 'all' or 'ds.6' in cols) and isvalid('ds.5', md):
-        md['ds.6'] = md['ds.5'] / 6
-    if (type == 'all' or 'ds.7' in cols) and isvalid(
-            'mar.4 ds.1 eng.4 mat.14 sci.8 ds.4', md):
-        val = 0
-        val += 1 if md['mar.4'] < 35 else 0
-        val += 1 if md['ds.1'] < 35 else 0
-        val += 1 if md['eng.4'] < 35 else 0
-        val += 1 if md['mat.14'] < 35 else 0
-        val += 1 if md['sci.8'] < 35 else 0
-        val += 1 if md['ds.4'] < 35 else 0
-        if val == 0:
+    oneof(md, type, cols, 'ds.1', 'hin.4 snsk.4 ssh.6')
+    add(md, type, cols, 'ds.2', 'eng.4 ds.1 mar.4')
+    add(md, type, cols, 'ds.3', 'sci.6 mat.6')
+    oneof(md, type, cols, 'ds.4', 'soc.13 tec.4')
+    add(md, type, cols, 'ds.5', 'ds.2 ds.3 ds.4')
+    multiply(md, type, cols, 'ds.6', 'ds.5', 0.1666)
+    get_grade(md, type, cols, 'ds.8', 'aro.2')
+    get_grade(md, type, cols, 'ds.9', 'jals.2')
+    get_grade(md, type, cols, 'ds.10', 'ncc.2')
+    get_fail_count(md, type, cols, 'ds.fcount',
+                   'mar.4:35 ds.1:35 eng.4:35 mat.6:35 sci.6:35 ds.4:35')
+    if 'ds.fcount' in md:
+        if md['ds.fcount'] == 0:
             md['ds.7'] = 'Pass'
         else:
-            md['ds.7'] = f'F{val}'
+            md['ds.7'] = f"F{md['ds.fcount']}"
 
 
 def calc_final_step_1(md, type, cols):
@@ -386,7 +377,7 @@ def calculate(md, type, cols):
     calc_unit_1(md, type, cols)
     calc_unit_2(md, type, cols)
     calc_term_1(md, type, cols)
-    # calc_term_2(md, type, cols)
+    calc_term_2(md, type, cols)
 
     # calc_final_step_1(md, type, cols)
     # calc_final_fail_count(md, type, cols)
