@@ -48,8 +48,9 @@ def get_marks_map(subject, division):
     args = [subject, division]
     data = [tuple(x) for x in fetch_sqlite_rows(qry, args)]
     md = defaultdict(dict)
-    for examid, sid, marks in data:
+    for examid, sid, marks, addl_grace in data:
         md[sid][str(examid)] = marks
+        md[sid]['additional_grace'] = addl_grace
     return md
 
 
@@ -57,8 +58,9 @@ def get_marks_map_for_all_subjects(div):
     qry = sql_template.get_marks_for_all_subjects
     data = [tuple(x) for x in fetch_sqlite_rows(qry, [div])]
     md = defaultdict(dict)
-    for examid, sid, marks in data:
+    for examid, sid, marks, addl_grace in data:
         md[sid][str(examid)] = marks
+        md[sid]['additional_grace'] = addl_grace
     return md
 
 

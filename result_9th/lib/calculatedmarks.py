@@ -273,18 +273,9 @@ def calc_final_step_1(md, type, cols):
 
 
 def calc_final_fail_count(md, type, cols):
-    if (type == 'all' or 'fin.rem.t1' in cols) and isvalid('mar.6 fin.hin.1 '
-                                                           'eng.6 mat.16 '
-                                                           'sci.10 fin.soc.1',
-                                                           md):
-        val = 0
-        val += 1 if md['mar.6'] < 35 else 0
-        val += 1 if md['fin.hin.1'] < 35 else 0
-        val += 1 if md['eng.6'] < 35 else 0
-        val += 1 if md['mat.16'] < 35 else 0
-        val += 1 if md['sci.10'] < 35 else 0
-        val += 1 if md['fin.soc.1'] < 35 else 0
-        md['fcount'] = val
+    get_fail_count(md, type, cols, 'tmp.final.fail.cnt',
+                   'fin.mar.1:35 fin.hin.1:35 fin.eng.1:35 fin.mat.1:35 '
+                   'fin.sci.1:35 fin.smj.1:35')
 
 
 def calc_final_combined_lang(md, type, cols):
@@ -365,16 +356,20 @@ def calc_grace(md, type, cols):
         return
     if md['tmp.total.fail.cnt'] == 0:
         return
+    if md['additional_grace'].lower().strip() == 'yes':
+        start = 15
+    else:
+        start = 25
     grace_req = []
     if md['tmp.lang.combined.pass'] != True:
         for sub in 'fin.mar.1 fin.hin.1 fin.eng.1'.split():
-            if 25 <= md[sub] < 35:
+            if start <= md[sub] < 35:
                 grace_req.append([sub, 35 - md[sub]])
     if md['tmp.maths.combined.pass'] != True:
         for sub in 'fin.mat.1 fin.sci.1'.split():
-            if 25 <= md[sub] < 35:
+            if start <= md[sub] < 35:
                 grace_req.append([sub, 35 - md[sub]])
-    if 25 <= md['fin.smj.1'] < 35:
+    if start <= md['fin.smj.1'] < 35:
         grace_req.append(['fin.smj.1', 35 - md['fin.smj.1']])
     avlbl_grace = 20
     grace_applied = []
@@ -382,7 +377,6 @@ def calc_grace(md, type, cols):
         if row[1] < avlbl_grace:
             avlbl_grace -= row[1]
             grace_applied.append(row)
-            print(row)
         else:
             break
 
@@ -392,7 +386,7 @@ def calc_final(md, type, cols):
     calc_final_auto_condo(md, type, cols)
     calc_final_combined_passing(md, type, cols)
     calc_grace(md, type, cols)
-    # calc_final_fail_count(md, type, cols)
+    calc_final_fail_count(md, type, cols)
     md['fin.cmnt'] = md['fin.cmnt'].strip().strip(',')
 
 

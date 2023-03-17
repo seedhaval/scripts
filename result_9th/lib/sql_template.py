@@ -31,6 +31,7 @@ select
   ,b.exam_id
   ,coalesce(c.marks,-999)
   ,b.total_marks
+  ,a.additional_grace
 from student_info a 
 
 left outer join exam_details b
@@ -99,6 +100,7 @@ select
   a.exam_id
   ,a.student_id
   ,a.marks
+  ,c.additional_grace
 from student_marks a
 
 inner join exam_details b
@@ -115,6 +117,7 @@ select
   a.exam_id
   ,a.student_id
   ,a.marks
+  ,b.additional_grace
 from student_marks a
 
 inner join student_info b
