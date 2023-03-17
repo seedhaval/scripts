@@ -51,7 +51,7 @@ def multiply(md, type, cols, nm, base, mltpl):
         return
     if base not in md:
         return
-    md[nm] = md[base] * mltpl
+    md[nm] = round(md[base] * mltpl, 2)
 
 
 def get_fail_count(md, type, cols, nm, txt):
@@ -347,6 +347,7 @@ def calc_final_auto_condo(md, type, cols):
 def calc_grace(md, type, cols):
     if 'tmp.lang.combined.pass' not in md:
         return
+    md['grace_applied'] = {}
     add(md, type, cols, 'tmp.6.total',
         'fin.mar.1 fin.hin.1 fin.eng.1 fin.mat.1 fin.sci.1 fin.smj.1')
     get_fail_count(md, type, cols, 'tmp.total.fail.cnt',
@@ -372,13 +373,43 @@ def calc_grace(md, type, cols):
     if start <= md['fin.smj.1'] < 35:
         grace_req.append(['fin.smj.1', 35 - md['fin.smj.1']])
     avlbl_grace = 20
-    grace_applied = []
+    grace_applied = {}
     for row in sorted(grace_req, key=lambda x: x[1]):
+        req = round(row[1], 2)
         if row[1] < avlbl_grace:
-            avlbl_grace -= row[1]
-            grace_applied.append(row)
+            avlbl_grace -= req
+            md[row[0]] += req
+            grace_applied[row[0]] = req
         else:
             break
+    md['grace_applied'] = grace_applied
+
+
+def get_final_ledger_text(md, type, cols):
+    if 'tmp.lang.combined.pass' not in md:
+        return
+    for sub in 'fin.mar.1 fin.hin.1 fin.eng.1 fin.mat.1 fin.sci.1 ' \
+               'fin.smj.1'.split():
+        if sub in md['grace_applied']:
+            md[sub.replace('.1', '.l1')] = \
+                f"{md[sub] - md['grace_applied'][sub]} + " \
+                f"{md['grace_applied'][sub]}"
+        else:
+            md[sub.replace('.1', '.l1')] = md[sub]
+
+    for sub in "fin.aro.1 fin.jals.1 fin.ncc.1".split():
+        get_grade(md, type, cols, sub.replace('.1', '.l1'), sub)
+
+    add(md, type, cols, 'fin.grp.l1', 'fin.mar.1 fin.hin.1 fin.eng.1')
+    add(md, type, cols, 'fin.grp.l2', 'fin.mat.1 fin.sci.1')
+    add(md, type, cols, 'fin.total.l1', 'fin.grp.l1 fin.grp.l2 fin.smj.1')
+
+    if len(md['grace_applied']) == 0:
+        return
+    if max(md['grace_applied'].values()) <= 10:
+        md['fin.cmnt'] += f"grace applied, "
+    else:
+        md['fin.cmnt'] += f"additional grace applied, "
 
 
 def calc_final(md, type, cols):
@@ -387,6 +418,7 @@ def calc_final(md, type, cols):
     calc_final_combined_passing(md, type, cols)
     calc_grace(md, type, cols)
     calc_final_fail_count(md, type, cols)
+    get_final_ledger_text(md, type, cols)
     md['fin.cmnt'] = md['fin.cmnt'].strip().strip(',')
 
 
