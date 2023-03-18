@@ -79,6 +79,9 @@ def is_red_high_req(md, colinfo):
             and colinfo["red_color_col"] in md \
             and md[colinfo["red_color_col"]] < colinfo["red_color_val"]:
         return True
+    if "red_color_self_val" in colinfo \
+        and md[colinfo["id"]] < colinfo["red_color_self_val"]:
+        return True
     return False
 
 

@@ -1095,38 +1095,44 @@
       "id": "1",
       "nm": "मराठी",
       "total": 20,
-      "alias": ""
+      "alias": "",
+      "red_color_self_val": 7
     },
     {
       "type": "calculated",
       "id": "gc1.1",
       "total": 20,
-      "nm": "हिंदी/ संस्कृत"
+      "nm": "हिंदी/ संस्कृत",
+      "red_color_self_val": 7
     },
     {
       "type": "exam id",
       "id": "58",
       "nm": "इंग्रजी",
       "total": 20,
-      "alias": ""
+      "alias": "",
+      "red_color_self_val": 7
     },
     {
       "type": "calculated",
       "id": "gc1.6",
       "total": 40,
-      "nm": "गणित"
+      "nm": "गणित",
+      "red_color_self_val": 14
     },
     {
       "type": "calculated",
       "id": "gc1.7",
       "total": 20,
-      "nm": "विज्ञान आणि तंत्रज्ञान"
+      "nm": "विज्ञान आणि तंत्रज्ञान",
+      "red_color_self_val": 7
     },
     {
       "type": "calculated",
       "id": "gc1.2",
       "total": 20,
-      "nm": "समाजशास्त्र / टेकनिकल"
+      "nm": "समाजशास्त्र / टेकनिकल",
+      "red_color_self_val": 7
     },
     {
       "type": "calculated",
@@ -1153,38 +1159,44 @@
       "id": "7",
       "nm": "मराठी",
       "total": 20,
-      "alias": ""
+      "alias": "",
+      "red_color_self_val": 7
     },
     {
       "type": "calculated",
       "id": "gc2.1",
       "total": 20,
-      "nm": "हिंदी/ संस्कृत"
+      "nm": "हिंदी/ संस्कृत",
+      "red_color_self_val": 7
     },
     {
       "type": "exam id",
       "id": "64",
       "nm": "इंग्रजी",
       "total": 20,
-      "alias": ""
+      "alias": "",
+      "red_color_self_val": 7
     },
     {
       "type": "calculated",
       "id": "gc2.6",
       "total": 40,
-      "nm": "गणित"
+      "nm": "गणित",
+      "red_color_self_val": 14
     },
     {
       "type": "calculated",
       "id": "gc2.7",
       "total": 20,
-      "nm": "विज्ञान आणि तंत्रज्ञान"
+      "nm": "विज्ञान आणि तंत्रज्ञान",
+      "red_color_self_val": 7
     },
     {
       "type": "calculated",
       "id": "gc2.2",
       "total": 20,
-      "nm": "समाजशास्त्र / टेकनिकल"
+      "nm": "समाजशास्त्र / टेकनिकल",
+      "red_color_self_val": 7
     },
     {
       "type": "calculated",
@@ -1210,19 +1222,22 @@
       "type": "calculated",
       "id": "mar.2",
       "total": 100,
-      "nm": "मराठी"
+      "nm": "मराठी",
+      "red_color_self_val": 35
     },
     {
       "type": "calculated",
       "id": "ps.1",
       "total": 100,
-      "nm": "हिंदी / संस्कृत "
+      "nm": "हिंदी / संस्कृत",
+      "red_color_self_val": 35
     },
     {
       "type": "calculated",
       "id": "eng.2",
       "total": 100,
-      "nm": "इंग्रजी"
+      "nm": "इंग्रजी",
+      "red_color_self_val": 35
     },
     {
       "type": "calculated",
@@ -1234,13 +1249,15 @@
       "type": "calculated",
       "id": "mat.3",
       "total": 100,
-      "nm": "गणित "
+      "nm": "गणित",
+      "red_color_self_val": 35
     },
     {
       "type": "calculated",
       "id": "sci.3",
       "total": 100,
-      "nm": "विज्ञान आणि तंत्रज्ञान"
+      "nm": "विज्ञान आणि तंत्रज्ञान",
+      "red_color_self_val": 35
     },
     {
       "type": "calculated",
@@ -1252,13 +1269,14 @@
       "type": "calculated",
       "id": "ps.4",
       "total": 100,
-      "nm": "समाजशास्त्र / टेकनिकल "
+      "nm": "समाजशास्त्र / टेकनिकल",
+      "red_color_self_val": 35
     },
     {
       "type": "calculated",
       "id": "ps.8",
       "total": 100,
-      "nm": "आरोग्यव शा. शिक्षण "
+      "nm": "आरोग्यव शा. शिक्षण"
     },
     {
       "type": "calculated",
@@ -1296,19 +1314,22 @@
       "type": "calculated",
       "id": "mar.4",
       "total": 100,
-      "nm": "मराठी"
+      "nm": "मराठी",
+      "red_color_self_val": 35
     },
     {
       "type": "calculated",
       "id": "ds.1",
       "total": 100,
-      "nm": "हिंदी / संस्कृत "
+      "nm": "हिंदी / संस्कृत",
+      "red_color_self_val": 35
     },
     {
       "type": "calculated",
       "id": "eng.4",
       "total": 100,
-      "nm": "इंग्रजी"
+      "nm": "इंग्रजी",
+      "red_color_self_val": 35
     },
     {
       "type": "calculated",
@@ -1320,13 +1341,15 @@
       "type": "calculated",
       "id": "mat.6",
       "total": 100,
-      "nm": "गणित "
+      "nm": "गणित",
+      "red_color_self_val": 35
     },
     {
       "type": "calculated",
       "id": "sci.6",
       "total": 100,
-      "nm": "विज्ञान आणि तंत्रज्ञान"
+      "nm": "विज्ञान आणि तंत्रज्ञान",
+      "red_color_self_val": 35
     },
     {
       "type": "calculated",
@@ -1338,7 +1361,8 @@
       "type": "calculated",
       "id": "ds.4",
       "total": 100,
-      "nm": "समाजशास्त्र / टेकनिकल "
+      "nm": "समाजशास्त्र / टेकनिकल",
+      "red_color_self_val": 35
     },
     {
       "type": "calculated",
