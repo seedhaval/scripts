@@ -52,7 +52,7 @@ def add_excel_result(wb):
 def populate_excel(wb):
     sht = wb.active
     load_data()
-    apply_column_widths(sht, 2, d['tmplt']['widths'])
+    apply_column_widths(sht, 1, [5, 10, 20, 12, 11, 12, 12])
     add_excel_result(wb)
 
 
