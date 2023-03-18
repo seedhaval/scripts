@@ -12,14 +12,26 @@ d = {}
 
 def draw_excel_populate_marks(wb, ir, student):
     sid, roll, nm = student
+    md = d['marksMap'][sid]
     sht = wb.active
-    Cell(ir + 5, 3, sht).set(roll)
-    Cell(ir + 5, 6, sht).set("तुकडी - " + d['ddDivision'].get())
-    Cell(ir + 6, 4, sht).set(nm)
-    if sid in d['marksMap'] and 'mar.6' in d['marksMap'][sid]:
-        Cell(ir + 8, 6, sht).set(d['marksMap'][sid]['mar.6'])
-    if sid in d['marksMap'] and 'mat.16' in d['marksMap'][sid]:
-        Cell(ir + 12, 6, sht).set(d['marksMap'][sid]['mat.16'])
+    Cell(ir + 6, 3, sht).set(roll)
+    Cell(ir + 6, 6, sht).set("तुकडी - " + d['ddDivision'].get())
+    Cell(ir + 7, 4, sht).set(nm)
+    Cell(ir + 9, 6, sht).set(md['fin.mar.r1'])
+    Cell(ir + 10, 6, sht).set(md['fin.hin.r1'])
+    Cell(ir + 11, 6, sht).set(md['fin.eng.r1'])
+    Cell(ir + 12, 6, sht).set(md['fin.grp.l1'])
+    Cell(ir + 13, 6, sht).set(md['fin.mat.r1'])
+    Cell(ir + 14, 6, sht).set(md['fin.sci.r1'])
+    Cell(ir + 15, 6, sht).set(md['fin.grp.l2'])
+    Cell(ir + 16, 6, sht).set(md['fin.smj.r1'])
+    Cell(ir + 17, 6, sht).set(md['fin.aro.l1'])
+    Cell(ir + 18, 6, sht).set(md['fin.jals.l1'])
+    Cell(ir + 19, 6, sht).set(md['fin.ncc.l1'])
+    Cell(ir + 20, 6, sht).set(md['fin.total.l1'])
+    Cell(ir + 21, 6, sht).set(md['fin.100.l1'])
+    Cell(ir + 22, 4, sht).set(md['final.pass.status'])
+
 
 
 def calculate_marks():
@@ -45,7 +57,7 @@ def add_excel_result(wb):
     for i, student in enumerate(d['studentMap']):
         ir = (i * 37) + 1
         apply_template(sht, d['tmplt'], 2, ir)
-        # draw_excel_populate_marks(wb, ir, student)
+        draw_excel_populate_marks(wb, ir, student)
         add_page_break(sht, ir + 35)
 
 

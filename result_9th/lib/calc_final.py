@@ -131,6 +131,15 @@ def get_ledger_remark(md):
     md['fin.rem.l1'] = val
 
 
+def get_final_report_text(md):
+    for sub in six_sub_nm.split():
+        r_sub = sub.replace('.1', '.r1')
+        if sub in md['grace_applied']:
+            md[r_sub] = f"{md[sub]}#"
+        else:
+            md[r_sub] = md[sub]
+
+
 def get_final_ledger_text(md):
     for sub in six_sub_nm.split():
         l_sub = sub.replace('.1', '.l1')
@@ -164,4 +173,5 @@ def calc_final(md):
     calc_grace(md)
     get_fail_count_lt(md, 'tmp.final.fail.cnt', '', six_sub_nm, 35)
     get_final_ledger_text(md)
+    get_final_report_text(md)
     md['fin.cmnt'] = md['fin.cmnt'].strip().strip(',')
