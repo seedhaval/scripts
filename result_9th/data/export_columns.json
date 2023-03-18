@@ -1,0 +1,1472 @@
+{
+  "मराठी": [
+    {
+      "type": "exam id",
+      "id": "1"
+    },
+    {
+      "type": "exam id",
+      "id": "2",
+      "alias": "A"
+    },
+    {
+      "type": "exam id",
+      "id": "3"
+    },
+    {
+      "type": "exam id",
+      "id": "4"
+    },
+    {
+      "type": "exam id",
+      "id": "5"
+    },
+    {
+      "type": "exam id",
+      "id": "6"
+    },
+    {
+      "type": "calculated",
+      "id": "mar.1",
+      "total": 20,
+      "nm": "प्रथम सत्र अंतर्गत मूल्यमापन एकूण",
+      "alias": "B"
+    },
+    {
+      "type": "calculated",
+      "id": "mar.2",
+      "total": 100,
+      "nm": "प्रथम सत्र एकूण (A+B)",
+      "alias": "C"
+    },
+    {
+      "type": "exam id",
+      "id": "7"
+    },
+    {
+      "type": "exam id",
+      "id": "8",
+      "alias": "D"
+    },
+    {
+      "type": "exam id",
+      "id": "9"
+    },
+    {
+      "type": "exam id",
+      "id": "10"
+    },
+    {
+      "type": "exam id",
+      "id": "11"
+    },
+    {
+      "type": "exam id",
+      "id": "12"
+    },
+    {
+      "type": "calculated",
+      "id": "mar.3",
+      "total": 20,
+      "nm": "द्वितीय सत्र अंतर्गत मूल्यमापन एकूण",
+      "alias": "E"
+    },
+    {
+      "type": "calculated",
+      "id": "mar.4",
+      "total": 100,
+      "nm": "द्वितीय सत्र एकूण (D+E)",
+      "alias": "F"
+    },
+    {
+      "type": "calculated",
+      "id": "mar.5",
+      "total": 200,
+      "nm": "एकूण",
+      "alias": "C+F"
+    },
+    {
+      "type": "calculated",
+      "id": "mar.6",
+      "total": 100,
+      "nm": "100 गुणांत रुपांतर"
+    }
+  ],
+  "इंग्रजी": [
+    {
+      "type": "exam id",
+      "id": "58"
+    },
+    {
+      "type": "exam id",
+      "id": "59",
+      "alias": "A"
+    },
+    {
+      "type": "exam id",
+      "id": "60"
+    },
+    {
+      "type": "exam id",
+      "id": "61"
+    },
+    {
+      "type": "exam id",
+      "id": "62"
+    },
+    {
+      "type": "exam id",
+      "id": "63"
+    },
+    {
+      "type": "calculated",
+      "id": "eng.1",
+      "total": 20,
+      "nm": "प्रथम सत्र अंतर्गत मूल्यमापन एकूण",
+      "alias": "B"
+    },
+    {
+      "type": "calculated",
+      "id": "eng.2",
+      "total": 100,
+      "nm": "प्रथम सत्र एकूण (A+B)",
+      "alias": "C"
+    },
+    {
+      "type": "exam id",
+      "id": "64"
+    },
+    {
+      "type": "exam id",
+      "id": "65",
+      "alias": "D"
+    },
+    {
+      "type": "exam id",
+      "id": "66"
+    },
+    {
+      "type": "exam id",
+      "id": "67"
+    },
+    {
+      "type": "exam id",
+      "id": "68"
+    },
+    {
+      "type": "exam id",
+      "id": "69"
+    },
+    {
+      "type": "calculated",
+      "id": "eng.3",
+      "total": 20,
+      "nm": "द्वितीय सत्र अंतर्गत मूल्यमापन एकूण",
+      "alias": "E"
+    },
+    {
+      "type": "calculated",
+      "id": "eng.4",
+      "total": 100,
+      "nm": "द्वितीय सत्र एकूण (D+E)",
+      "alias": "F"
+    },
+    {
+      "type": "calculated",
+      "id": "eng.5",
+      "total": 200,
+      "nm": "एकूण",
+      "alias": "C+F"
+    },
+    {
+      "type": "calculated",
+      "id": "eng.6",
+      "total": 100,
+      "nm": "100 गुणांत रुपांतर"
+    }
+  ],
+  "संपूर्ण संस्कृत": [
+    {
+      "type": "exam id",
+      "id": "13"
+    },
+    {
+      "type": "exam id",
+      "id": "14",
+      "alias": "A"
+    },
+    {
+      "type": "exam id",
+      "id": "15"
+    },
+    {
+      "type": "exam id",
+      "id": "16"
+    },
+    {
+      "type": "exam id",
+      "id": "17"
+    },
+    {
+      "type": "exam id",
+      "id": "18"
+    },
+    {
+      "type": "calculated",
+      "id": "snsk.1",
+      "total": 20,
+      "nm": "प्रथम सत्र अंतर्गत मूल्यमापन एकूण",
+      "alias": "B"
+    },
+    {
+      "type": "calculated",
+      "id": "snsk.2",
+      "total": 100,
+      "nm": "प्रथम सत्र एकूण (A+B)",
+      "alias": "C"
+    },
+    {
+      "type": "exam id",
+      "id": "19"
+    },
+    {
+      "type": "exam id",
+      "id": "20",
+      "alias": "D"
+    },
+    {
+      "type": "exam id",
+      "id": "21"
+    },
+    {
+      "type": "exam id",
+      "id": "22"
+    },
+    {
+      "type": "exam id",
+      "id": "23"
+    },
+    {
+      "type": "exam id",
+      "id": "24"
+    },
+    {
+      "type": "calculated",
+      "id": "snsk.3",
+      "total": 20,
+      "nm": "द्वितीय सत्र अंतर्गत मूल्यमापन एकूण",
+      "alias": "E"
+    },
+    {
+      "type": "calculated",
+      "id": "snsk.4",
+      "total": 100,
+      "nm": "द्वितीय सत्र एकूण (D+E)",
+      "alias": "F"
+    },
+    {
+      "type": "calculated",
+      "id": "snsk.5",
+      "total": 200,
+      "nm": "एकूण",
+      "alias": "C+F"
+    },
+    {
+      "type": "calculated",
+      "id": "snsk.6",
+      "total": 100,
+      "nm": "100 गुणांत रुपांतर"
+    }
+  ],
+  "संपूर्ण हिंदी": [
+    {
+      "type": "exam id",
+      "id": "25"
+    },
+    {
+      "type": "exam id",
+      "id": "26",
+      "alias": "A"
+    },
+    {
+      "type": "exam id",
+      "id": "27"
+    },
+    {
+      "type": "exam id",
+      "id": "28"
+    },
+    {
+      "type": "exam id",
+      "id": "29"
+    },
+    {
+      "type": "exam id",
+      "id": "30"
+    },
+    {
+      "type": "calculated",
+      "id": "hin.1",
+      "total": 20,
+      "nm": "प्रथम सत्र अंतर्गत मूल्यमापन एकूण",
+      "alias": "B"
+    },
+    {
+      "type": "calculated",
+      "id": "hin.2",
+      "total": 100,
+      "nm": "प्रथम सत्र एकूण (A+B)",
+      "alias": "C"
+    },
+    {
+      "type": "exam id",
+      "id": "31"
+    },
+    {
+      "type": "exam id",
+      "id": "32",
+      "alias": "D"
+    },
+    {
+      "type": "exam id",
+      "id": "33"
+    },
+    {
+      "type": "exam id",
+      "id": "34"
+    },
+    {
+      "type": "exam id",
+      "id": "35"
+    },
+    {
+      "type": "exam id",
+      "id": "36"
+    },
+    {
+      "type": "calculated",
+      "id": "hin.3",
+      "total": 20,
+      "nm": "द्वितीय सत्र अंतर्गत मूल्यमापन एकूण",
+      "alias": "E"
+    },
+    {
+      "type": "calculated",
+      "id": "hin.4",
+      "total": 100,
+      "nm": "द्वितीय सत्र एकूण (D+E)",
+      "alias": "F"
+    },
+    {
+      "type": "calculated",
+      "id": "hin.5",
+      "total": 200,
+      "nm": "एकूण",
+      "alias": "C+F"
+    },
+    {
+      "type": "calculated",
+      "id": "hin.6",
+      "total": 100,
+      "nm": "100 गुणांत रुपांतर"
+    }
+  ],
+  "संयुक्त हिंदी संस्कृत": [
+    {
+      "type": "exam id",
+      "id": "37"
+    },
+    {
+      "type": "exam id",
+      "id": "39"
+    },
+    {
+      "type": "exam id",
+      "id": "41"
+    },
+    {
+      "type": "exam id",
+      "id": "43"
+    },
+    {
+      "type": "exam id",
+      "id": "45"
+    },
+    {
+      "type": "calculated",
+      "id": "ssh.1",
+      "total": 50,
+      "nm": "हिंदी संयुक्त एकूण"
+    },
+    {
+      "type": "exam id",
+      "id": "38"
+    },
+    {
+      "type": "exam id",
+      "id": "40"
+    },
+    {
+      "type": "exam id",
+      "id": "42"
+    },
+    {
+      "type": "exam id",
+      "id": "44"
+    },
+    {
+      "type": "exam id",
+      "id": "46"
+    },
+    {
+      "type": "calculated",
+      "id": "ssh.2",
+      "total": 50,
+      "nm": "संस्कृत संयुक्त एकूण"
+    },
+    {
+      "type": "calculated",
+      "id": "ssh.3",
+      "total": 100,
+      "nm": "प्रथम सत्र एकूण"
+    },
+    {
+      "type": "exam id",
+      "id": "47"
+    },
+    {
+      "type": "exam id",
+      "id": "49"
+    },
+    {
+      "type": "exam id",
+      "id": "51"
+    },
+    {
+      "type": "exam id",
+      "id": "53"
+    },
+    {
+      "type": "exam id",
+      "id": "55"
+    },
+    {
+      "type": "calculated",
+      "id": "ssh.4",
+      "total": 50,
+      "nm": "हिंदी संयुक्त एकूण"
+    },
+    {
+      "type": "exam id",
+      "id": "48"
+    },
+    {
+      "type": "exam id",
+      "id": "50"
+    },
+    {
+      "type": "exam id",
+      "id": "52"
+    },
+    {
+      "type": "exam id",
+      "id": "54"
+    },
+    {
+      "type": "exam id",
+      "id": "56"
+    },
+    {
+      "type": "calculated",
+      "id": "ssh.5",
+      "total": 50,
+      "nm": "संस्कृत संयुक्त एकूण"
+    },
+    {
+      "type": "calculated",
+      "id": "ssh.6",
+      "total": 100,
+      "nm": "द्वितीय सत्र एकूण"
+    },
+    {
+      "type": "calculated",
+      "id": "ssh.7",
+      "total": 50,
+      "nm": "हिंदी सरासरी"
+    },
+    {
+      "type": "calculated",
+      "id": "ssh.8",
+      "total": 50,
+      "nm": "संस्कृत सरासरी"
+    },
+    {
+      "type": "calculated",
+      "id": "ssh.9",
+      "total": 100,
+      "nm": "एकूण"
+    }
+  ],
+  "गणित": [
+    {
+      "type": "exam id",
+      "id": "70"
+    },
+    {
+      "type": "exam id",
+      "id": "72"
+    },
+    {
+      "type": "exam id",
+      "id": "74"
+    },
+    {
+      "type": "exam id",
+      "id": "76"
+    },
+    {
+      "type": "calculated",
+      "id": "mat.1",
+      "total": 50,
+      "nm": "गणित भाग १ एकूण"
+    },
+    {
+      "type": "exam id",
+      "id": "71"
+    },
+    {
+      "type": "exam id",
+      "id": "73"
+    },
+    {
+      "type": "exam id",
+      "id": "75"
+    },
+    {
+      "type": "exam id",
+      "id": "77"
+    },
+    {
+      "type": "calculated",
+      "id": "mat.2",
+      "total": 50,
+      "nm": "गणित भाग २ एकूण"
+    },
+    {
+      "type": "calculated",
+      "id": "mat.3",
+      "total": 100,
+      "nm": "प्रथम सत्र एकूण"
+    },
+    {
+      "type": "exam id",
+      "id": "78"
+    },
+    {
+      "type": "exam id",
+      "id": "80"
+    },
+    {
+      "type": "exam id",
+      "id": "82"
+    },
+    {
+      "type": "exam id",
+      "id": "84"
+    },
+    {
+      "type": "calculated",
+      "id": "mat.4",
+      "total": 50,
+      "nm": "गणित भाग १ एकूण"
+    },
+    {
+      "type": "exam id",
+      "id": "79"
+    },
+    {
+      "type": "exam id",
+      "id": "81"
+    },
+    {
+      "type": "exam id",
+      "id": "83"
+    },
+    {
+      "type": "exam id",
+      "id": "85"
+    },
+    {
+      "type": "calculated",
+      "id": "mat.5",
+      "total": 50,
+      "nm": "गणित भाग २ एकूण"
+    },
+    {
+      "type": "calculated",
+      "id": "mat.6",
+      "total": 100,
+      "nm": "द्वितीय सत्र एकूण"
+    },
+    {
+      "type": "calculated",
+      "id": "mat.7",
+      "total": 200,
+      "nm": "एकूण"
+    },
+    {
+      "type": "calculated",
+      "id": "mat.8",
+      "total": 100,
+      "nm": "100 गुणांत रुपांतर"
+    }
+  ],
+  "विज्ञान आणि तंत्रज्ञान": [
+    {
+      "type": "exam id",
+      "id": "86"
+    },
+    {
+      "type": "exam id",
+      "id": "88"
+    },
+    {
+      "type": "exam id",
+      "id": "90"
+    },
+    {
+      "type": "exam id",
+      "id": "91"
+    },
+    {
+      "type": "exam id",
+      "id": "92"
+    },
+    {
+      "type": "calculated",
+      "id": "sci.1",
+      "total": 50,
+      "nm": "भाग १ एकूण"
+    },
+    {
+      "type": "exam id",
+      "id": "87"
+    },
+    {
+      "type": "exam id",
+      "id": "89"
+    },
+    {
+      "type": "exam id",
+      "id": "93"
+    },
+    {
+      "type": "exam id",
+      "id": "94"
+    },
+    {
+      "type": "exam id",
+      "id": "95"
+    },
+    {
+      "type": "calculated",
+      "id": "sci.2",
+      "total": 50,
+      "nm": "भाग २ एकूण"
+    },
+    {
+      "type": "calculated",
+      "id": "sci.3",
+      "total": 100,
+      "nm": "प्रथम सत्र एकूण"
+    },
+    {
+      "type": "exam id",
+      "id": "96"
+    },
+    {
+      "type": "exam id",
+      "id": "98"
+    },
+    {
+      "type": "exam id",
+      "id": "100"
+    },
+    {
+      "type": "exam id",
+      "id": "101"
+    },
+    {
+      "type": "exam id",
+      "id": "102"
+    },
+    {
+      "type": "calculated",
+      "id": "sci.4",
+      "total": 50,
+      "nm": "भाग १ एकूण"
+    },
+    {
+      "type": "exam id",
+      "id": "97"
+    },
+    {
+      "type": "exam id",
+      "id": "99"
+    },
+    {
+      "type": "exam id",
+      "id": "103"
+    },
+    {
+      "type": "exam id",
+      "id": "104"
+    },
+    {
+      "type": "exam id",
+      "id": "105"
+    },
+    {
+      "type": "calculated",
+      "id": "sci.5",
+      "total": 50,
+      "nm": "भाग २ एकूण"
+    },
+    {
+      "type": "calculated",
+      "id": "sci.6",
+      "total": 100,
+      "nm": "द्वितीय सत्र एकूण"
+    },
+    {
+      "type": "calculated",
+      "id": "sci.7",
+      "total": 200,
+      "nm": "एकूण"
+    },
+    {
+      "type": "calculated",
+      "id": "sci.8",
+      "total": 100,
+      "nm": "100 गुणांत रुपांतर"
+    }
+  ],
+  "समाजशास्त्र": [
+    {
+      "type": "exam id",
+      "id": "106"
+    },
+    {
+      "type": "exam id",
+      "id": "107"
+    },
+    {
+      "type": "exam id",
+      "id": "108"
+    },
+    {
+      "type": "exam id",
+      "id": "109"
+    },
+    {
+      "type": "calculated",
+      "id": "soc.1",
+      "total": 80,
+      "nm": "एकूण"
+    },
+    {
+      "type": "exam id",
+      "id": "110"
+    },
+    {
+      "type": "exam id",
+      "id": "111"
+    },
+    {
+      "type": "calculated",
+      "id": "soc.2",
+      "total": 20,
+      "nm": "एकूण"
+    },
+    {
+      "type": "calculated",
+      "id": "soc.3",
+      "total": 10,
+      "nm": "सरासरी"
+    },
+    {
+      "type": "exam id",
+      "id": "112"
+    },
+    {
+      "type": "exam id",
+      "id": "113"
+    },
+    {
+      "type": "calculated",
+      "id": "soc.4",
+      "total": 20,
+      "nm": "एकूण"
+    },
+    {
+      "type": "calculated",
+      "id": "soc.5",
+      "total": 10,
+      "nm": "सरासरी"
+    },
+    {
+      "type": "calculated",
+      "id": "soc.6",
+      "total": 100,
+      "nm": "प्रथम सत्र एकूण"
+    },
+    {
+      "type": "exam id",
+      "id": "114"
+    },
+    {
+      "type": "exam id",
+      "id": "115"
+    },
+    {
+      "type": "exam id",
+      "id": "116"
+    },
+    {
+      "type": "exam id",
+      "id": "117"
+    },
+    {
+      "type": "calculated",
+      "id": "soc.7",
+      "total": 80,
+      "nm": "एकूण"
+    },
+    {
+      "type": "exam id",
+      "id": "118"
+    },
+    {
+      "type": "exam id",
+      "id": "119"
+    },
+    {
+      "type": "calculated",
+      "id": "soc.8",
+      "total": 20,
+      "nm": "एकूण"
+    },
+    {
+      "type": "calculated",
+      "id": "soc.9",
+      "total": 10,
+      "nm": "सरासरी"
+    },
+    {
+      "type": "exam id",
+      "id": "120"
+    },
+    {
+      "type": "exam id",
+      "id": "121"
+    },
+    {
+      "type": "calculated",
+      "id": "soc.11",
+      "total": 20,
+      "nm": "एकूण"
+    },
+    {
+      "type": "calculated",
+      "id": "soc.12",
+      "total": 10,
+      "nm": "सरासरी"
+    },
+    {
+      "type": "calculated",
+      "id": "soc.13",
+      "total": 100,
+      "nm": "द्वितीय सत्र एकूण"
+    },
+    {
+      "type": "calculated",
+      "id": "soc.14",
+      "total": 200,
+      "nm": "एकूण"
+    },
+    {
+      "type": "calculated",
+      "id": "soc.15",
+      "total": 100,
+      "nm": "सरासरी"
+    }
+  ],
+  "टेकनिकल": [
+    {
+      "type": "exam id",
+      "id": "122"
+    },
+    {
+      "type": "exam id",
+      "id": "123"
+    },
+    {
+      "type": "exam id",
+      "id": "124"
+    },
+    {
+      "type": "calculated",
+      "id": "tec.1",
+      "total": 140,
+      "nm": "प्रथम सत्र एकूण"
+    },
+    {
+      "type": "calculated",
+      "id": "tec.2",
+      "total": 100,
+      "nm": "100 गुणांत रुपांतर"
+    },
+    {
+      "type": "exam id",
+      "id": "125"
+    },
+    {
+      "type": "exam id",
+      "id": "126"
+    },
+    {
+      "type": "exam id",
+      "id": "127"
+    },
+    {
+      "type": "calculated",
+      "id": "tec.3",
+      "total": 140,
+      "nm": "द्वितीय सत्र एकूण"
+    },
+    {
+      "type": "calculated",
+      "id": "tec.4",
+      "total": 100,
+      "nm": "100 गुणांत रुपांतर"
+    },
+    {
+      "type": "calculated",
+      "id": "tec.5",
+      "total": 200,
+      "nm": "एकूण"
+    },
+    {
+      "type": "calculated",
+      "id": "tec.6",
+      "total": 100,
+      "nm": "100 गुणांत रुपांतर"
+    }
+  ],
+  "आरोग्य शिक्षण आणि शारीरिक शिक्षण": [
+    {
+      "type": "exam id",
+      "id": "128"
+    },
+    {
+      "type": "exam id",
+      "id": "129"
+    },
+    {
+      "type": "calculated",
+      "id": "aro.1",
+      "total": 100,
+      "nm": "प्रथम सत्र एकूण"
+    },
+    {
+      "type": "exam id",
+      "id": "130"
+    },
+    {
+      "type": "exam id",
+      "id": "131"
+    },
+    {
+      "type": "calculated",
+      "id": "aro.2",
+      "total": 100,
+      "nm": "द्वितीय सत्र एकूण"
+    },
+    {
+      "type": "calculated",
+      "id": "aro.3",
+      "total": 200,
+      "nm": "एकूण"
+    },
+    {
+      "type": "calculated",
+      "id": "aro.4",
+      "total": 100,
+      "nm": "सरासरी"
+    }
+  ],
+  "जलसंरक्षण": [
+    {
+      "type": "exam id",
+      "id": "132"
+    },
+    {
+      "type": "exam id",
+      "id": "133"
+    },
+    {
+      "type": "calculated",
+      "id": "jals.1",
+      "total": 100,
+      "nm": "प्रथम सत्र एकूण"
+    },
+    {
+      "type": "exam id",
+      "id": "134"
+    },
+    {
+      "type": "exam id",
+      "id": "135"
+    },
+    {
+      "type": "calculated",
+      "id": "jals.2",
+      "total": 100,
+      "nm": "द्वितीय सत्र एकूण"
+    },
+    {
+      "type": "calculated",
+      "id": "jals.3",
+      "total": 200,
+      "nm": "एकूण"
+    },
+    {
+      "type": "calculated",
+      "id": "jals.4",
+      "total": 100,
+      "nm": "सरासरी"
+    }
+  ],
+  "स्काउट गाईड-NCC-RSP-कला रसास्वाद ": [
+    {
+      "type": "exam id",
+      "id": "136"
+    },
+    {
+      "type": "exam id",
+      "id": "137"
+    },
+    {
+      "type": "calculated",
+      "id": "ncc.1",
+      "total": 100,
+      "nm": "प्रथम सत्र एकूण"
+    },
+    {
+      "type": "exam id",
+      "id": "138"
+    },
+    {
+      "type": "exam id",
+      "id": "139"
+    },
+    {
+      "type": "calculated",
+      "id": "ncc.2",
+      "total": 100,
+      "nm": "द्वितीय सत्र एकूण"
+    },
+    {
+      "type": "calculated",
+      "id": "ncc.3",
+      "total": 200,
+      "nm": "एकूण"
+    },
+    {
+      "type": "calculated",
+      "id": "ncc.4",
+      "total": 100,
+      "nm": "सरासरी"
+    }
+  ],
+  "घटक चाचणी १": [
+    {
+      "type": "exam id",
+      "id": "1",
+      "nm": "मराठी",
+      "total": 20,
+      "alias": ""
+    },
+    {
+      "type": "calculated",
+      "id": "gc1.1",
+      "total": 20,
+      "nm": "हिंदी/ संस्कृत"
+    },
+    {
+      "type": "exam id",
+      "id": "58",
+      "nm": "इंग्रजी",
+      "total": 20,
+      "alias": ""
+    },
+    {
+      "type": "calculated",
+      "id": "gc1.6",
+      "total": 40,
+      "nm": "गणित"
+    },
+    {
+      "type": "calculated",
+      "id": "gc1.7",
+      "total": 20,
+      "nm": "विज्ञान आणि तंत्रज्ञान"
+    },
+    {
+      "type": "calculated",
+      "id": "gc1.2",
+      "total": 20,
+      "nm": "समाजशास्त्र / टेकनिकल"
+    },
+    {
+      "type": "calculated",
+      "id": "gc1.3",
+      "total": 140,
+      "nm": "एकुण"
+    },
+    {
+      "type": "calculated",
+      "id": "gc1.4",
+      "total": 100,
+      "nm": "शे.गुण"
+    },
+    {
+      "type": "calculated",
+      "id": "gc1.5",
+      "total": "",
+      "nm": "शेरा"
+    }
+  ],
+  "घटक चाचणी २": [
+    {
+      "type": "exam id",
+      "id": "7",
+      "nm": "मराठी",
+      "total": 20,
+      "alias": ""
+    },
+    {
+      "type": "calculated",
+      "id": "gc2.1",
+      "total": 20,
+      "nm": "हिंदी/ संस्कृत"
+    },
+    {
+      "type": "exam id",
+      "id": "64",
+      "nm": "इंग्रजी",
+      "total": 20,
+      "alias": ""
+    },
+    {
+      "type": "calculated",
+      "id": "gc2.6",
+      "total": 40,
+      "nm": "गणित"
+    },
+    {
+      "type": "calculated",
+      "id": "gc2.7",
+      "total": 20,
+      "nm": "विज्ञान आणि तंत्रज्ञान"
+    },
+    {
+      "type": "calculated",
+      "id": "gc2.2",
+      "total": 20,
+      "nm": "समाजशास्त्र / टेकनिकल"
+    },
+    {
+      "type": "calculated",
+      "id": "gc2.3",
+      "total": 140,
+      "nm": "एकुण"
+    },
+    {
+      "type": "calculated",
+      "id": "gc2.4",
+      "total": 100,
+      "nm": "शे.गुण"
+    },
+    {
+      "type": "calculated",
+      "id": "gc2.5",
+      "total": "",
+      "nm": "शेरा"
+    }
+  ],
+  "प्रथम सत्र": [
+    {
+      "type": "calculated",
+      "id": "mar.2",
+      "total": 100,
+      "nm": "मराठी"
+    },
+    {
+      "type": "calculated",
+      "id": "ps.1",
+      "total": 100,
+      "nm": "हिंदी / संस्कृत "
+    },
+    {
+      "type": "calculated",
+      "id": "eng.2",
+      "total": 100,
+      "nm": "इंग्रजी"
+    },
+    {
+      "type": "calculated",
+      "id": "ps.2",
+      "total": 300,
+      "nm": "एकुण"
+    },
+    {
+      "type": "calculated",
+      "id": "mat.3",
+      "total": 100,
+      "nm": "गणित "
+    },
+    {
+      "type": "calculated",
+      "id": "sci.3",
+      "total": 100,
+      "nm": "विज्ञान आणि तंत्रज्ञान"
+    },
+    {
+      "type": "calculated",
+      "id": "ps.3",
+      "total": 200,
+      "nm": "एकुण"
+    },
+    {
+      "type": "calculated",
+      "id": "ps.4",
+      "total": 100,
+      "nm": "समाजशास्त्र / टेकनिकल "
+    },
+    {
+      "type": "calculated",
+      "id": "ps.8",
+      "total": 100,
+      "nm": "आरोग्यव शा. शिक्षण "
+    },
+    {
+      "type": "calculated",
+      "id": "ps.9",
+      "total": 100,
+      "nm": "जलसंरक्षण"
+    },
+    {
+      "type": "calculated",
+      "id": "ps.10",
+      "total": 100,
+      "nm": "स्काऊट गाइड/RSP/NCC/स्व विकास कलारस्वाद"
+    },
+    {
+      "type": "calculated",
+      "id": "ps.5",
+      "total": 600,
+      "nm": "एकुण"
+    },
+    {
+      "type": "calculated",
+      "id": "ps.6",
+      "total": 100,
+      "nm": "शे.गुण "
+    },
+    {
+      "type": "calculated",
+      "id": "ps.7",
+      "total": "",
+      "nm": "शेरा"
+    }
+  ],
+  "द्वितीय सत्र": [
+    {
+      "type": "calculated",
+      "id": "mar.4",
+      "total": 100,
+      "nm": "मराठी"
+    },
+    {
+      "type": "calculated",
+      "id": "ds.1",
+      "total": 100,
+      "nm": "हिंदी / संस्कृत "
+    },
+    {
+      "type": "calculated",
+      "id": "eng.4",
+      "total": 100,
+      "nm": "इंग्रजी"
+    },
+    {
+      "type": "calculated",
+      "id": "ds.2",
+      "total": 300,
+      "nm": "एकुण"
+    },
+    {
+      "type": "calculated",
+      "id": "mat.6",
+      "total": 100,
+      "nm": "गणित "
+    },
+    {
+      "type": "calculated",
+      "id": "sci.6",
+      "total": 100,
+      "nm": "विज्ञान आणि तंत्रज्ञान"
+    },
+    {
+      "type": "calculated",
+      "id": "ds.3",
+      "total": 200,
+      "nm": "एकुण"
+    },
+    {
+      "type": "calculated",
+      "id": "ds.4",
+      "total": 100,
+      "nm": "समाजशास्त्र / टेकनिकल "
+    },
+    {
+      "type": "calculated",
+      "id": "ds.8",
+      "total": 100,
+      "nm": "आरोग्यव शा. शिक्षण "
+    },
+    {
+      "type": "calculated",
+      "id": "ds.9",
+      "total": 100,
+      "nm": "जलसंरक्षण"
+    },
+    {
+      "type": "calculated",
+      "id": "ds.10",
+      "total": 100,
+      "nm": "स्काऊट गाइड/RSP/NCC/स्व विकास कलारस्वाद"
+    },
+    {
+      "type": "calculated",
+      "id": "ds.5",
+      "total": 600,
+      "nm": "एकुण"
+    },
+    {
+      "type": "calculated",
+      "id": "ds.6",
+      "total": 100,
+      "nm": "शे.गुण "
+    },
+    {
+      "type": "calculated",
+      "id": "ds.7",
+      "total": "",
+      "nm": "शेरा"
+    }
+  ],
+  "final": [
+    {
+      "type": "calculated",
+      "id": "fin.mar.l1",
+      "total": 100,
+      "nm": "मराठी"
+    },
+    {
+      "type": "calculated",
+      "id": "fin.hin.l1",
+      "total": 100,
+      "nm": "हिंदी / संस्कृत"
+    },
+    {
+      "type": "calculated",
+      "id": "fin.eng.l1",
+      "total": 100,
+      "nm": "इंग्लिश"
+    },
+    {
+      "type": "calculated",
+      "id": "fin.grp.l1",
+      "total": 300,
+      "nm": "ग्रुप १"
+    },
+    {
+      "type": "calculated",
+      "id": "fin.mat.l1",
+      "total": 100,
+      "nm": "गणित"
+    },
+    {
+      "type": "calculated",
+      "id": "fin.sci.l1",
+      "total": 100,
+      "nm": "विज्ञान"
+    },
+    {
+      "type": "calculated",
+      "id": "fin.grp.l2",
+      "total": 200,
+      "nm": "ग्रुप २"
+    },
+    {
+      "type": "calculated",
+      "id": "fin.smj.l1",
+      "total": 100,
+      "nm": "समाजशास्त्र / टेकनिकल"
+    },
+    {
+      "type": "calculated",
+      "id": "fin.aro.l1",
+      "total": "",
+      "nm": "आरोग्य व शा.शिक्षण"
+    },
+    {
+      "type": "calculated",
+      "id": "fin.jals.l1",
+      "total": "",
+      "nm": "जलसंरक्षण"
+    },
+    {
+      "type": "calculated",
+      "id": "fin.ncc.l1",
+      "total": "",
+      "nm": "स्काऊट गाईड/NCC/RSP/स्व विकास कलारसास्वाद"
+    },
+    {
+      "type": "calculated",
+      "id": "fin.total.l1",
+      "total": 600,
+      "nm": "एकूण"
+    },
+    {
+      "type": "calculated",
+      "id": "fin.100.l1",
+      "total": 100,
+      "nm": "शेकडा गुण"
+    },
+    {
+      "type": "calculated",
+      "id": "fin.rem.l1",
+      "total": "",
+      "nm": "शेरा"
+    },
+    {
+      "type": "calculated",
+      "id": "fin.cmnt",
+      "total": "",
+      "nm": "Comments"
+    }
+  ]
+}

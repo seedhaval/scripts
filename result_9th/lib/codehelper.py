@@ -60,33 +60,16 @@ def get_safe_output_xls_path(nm, add_tm):
 
 
 def get_column_config_for_subject(subject):
-    with open(data_path + "\\export_columns.csv", encoding='utf8') as f:
-        data = [x.strip().split(",") for x in f.readlines() if x.strip()]
-    col_data = [x for x in data if x[0] == subject][0]
+    with open(data_path + "\\export_columns.json", encoding='utf8') as f:
+        data = json.load(f)
+    col_data = data[subject]
     col_info = []
-    for col in col_data[1:]:
-        curd = {}
-        ar = col.split(":")
-        if col[0] in '123456789':
-            curd['type'] = 'exam id'
-            curd['id'] = ar[0]
-            if len(ar) > 2:
-                curd['nm'] = ar[2]
-            if len(ar) > 3:
-                curd['total'] = int(ar[3])
+    for col in col_data:
+        curd = col
+        if curd['type'] == 'exam id':
             curd['color'] = '000000'
         else:
-            curd['type'] = 'calculated'
-            curd['id'] = ar[0]
-            curd['total'] = int(ar[1]) if ar[1].strip() != '' else ''
-            curd['nm'] = ar[2]
             curd['color'] = '0000FF'
-
-        if curd['type'] == 'exam id' and len(ar) > 1:
-            curd['alias'] = ar[1]
-        if curd['type'] == 'calculated' and len(ar) > 3:
-            curd['alias'] = ar[3]
-
         col_info.append(curd)
     return col_info
 

@@ -4,14 +4,15 @@ from lib.codehelper import get_safe_output_xls_path, data_path, \
     get_column_config_for_subject
 from lib.db import get_exam_map_for_all_subjects
 from lib.excelhelper import save_close_and_start, add_table
+import json
 
 
 def get_column_ids():
     filepath = get_safe_output_xls_path("column_id", False)
     wb = openpyxl.Workbook()
     sht = wb.active
-    with open(data_path + "\\export_columns.csv", encoding='utf8') as f:
-        subs = [x.strip().split(",")[0] for x in f.readlines() if x.strip()]
+    with open(data_path + "\\export_columns.json", encoding='utf8') as f:
+        subs = json.load(f).keys()
     exam_map = get_exam_map_for_all_subjects()
     out = [["Subject", "Exam", "Column ID"]]
     for sub in subs:
@@ -23,29 +24,14 @@ def get_column_ids():
     save_close_and_start(wb, filepath)
 
 
-def create_calculation_formula():
-    with open(data_path + "\\colnm_input", encoding='utf8') as f:
-        data = [x.strip("\n").split("\t") for x in f.readlines() if x.strip()]
-
-    cfg = [data[0][1]]
-    calc = []
-
-    for row in data:
-        if row[0][0] in '123456789':
-            if len(row) > 5:
-                cfg.append(f"{row[0]}:{row[5]}")
-            else:
-                cfg.append(row[0])
-        else:
-            total = row[2] if len(row) > 2 else ''
-            val = f"{row[0]}:{total}:{row[1]}"
-            if len(row) > 3 and len(row[3]) > 0:
-                val += ":" + row[3]
-            cfg.append(val)
-
-            if len(row) > 4:
-                code = f'add(md, type, cols, "{row[0]}", "{row[4]}")'
-                calc.append(code)
-
-    print(",".join(cfg))
-    print("\n".join(calc))
+#def csv_to_json_col_export():
+#    d = {}
+#    with open(data_path + "\\export_columns", encoding='utf8') as f:
+#        sub_ar = [x.strip().split(",")[0] for x in f.readlines() if x.strip()]
+#    for sub in sub_ar:
+#        curd = get_column_config_for_subject(sub)
+#        for row in curd:
+#            del row["color"]
+#        d[sub] = curd
+#
+#    print(json.dumps(d, indent=2, ensure_ascii=False))

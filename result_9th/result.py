@@ -1,7 +1,7 @@
 from lib import enter_marks, export_marks, individual_result, \
     refresh_exam_info, refresh_student_info, bulk_import, result_tabular
 from lib.codehelper import backup_database, restore_database
-from lib.developer import get_column_ids, create_calculation_formula
+from lib.developer import get_column_ids
 from lib.uihelper import MyApp
 
 app = MyApp("Result", 800, 600)
@@ -28,7 +28,6 @@ menu_ar = [
      lambda: refresh_student_info.new_year(app)],
     ["Database", "Backup", lambda: backup_database(True)],
     ["Database", "Restore", restore_database],
-    ['Developer', 'Create Calc Formula', create_calculation_formula],
     ["Developer", "Get Column IDs", get_column_ids]
 ]
 
