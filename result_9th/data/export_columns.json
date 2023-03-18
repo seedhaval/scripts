@@ -1382,19 +1382,25 @@
       "type": "calculated",
       "id": "fin.mar.l1",
       "total": 100,
-      "nm": "मराठी"
+      "nm": "मराठी",
+      "red_color_col": "fin.mar.1",
+      "red_color_val": 35
     },
     {
       "type": "calculated",
       "id": "fin.hin.l1",
       "total": 100,
-      "nm": "हिंदी / संस्कृत"
+      "nm": "हिंदी / संस्कृत",
+      "red_color_col": "fin.hin.1",
+      "red_color_val": 35
     },
     {
       "type": "calculated",
       "id": "fin.eng.l1",
       "total": 100,
-      "nm": "इंग्लिश"
+      "nm": "इंग्लिश",
+      "red_color_col": "fin.eng.1",
+      "red_color_val": 35
     },
     {
       "type": "calculated",
@@ -1406,13 +1412,17 @@
       "type": "calculated",
       "id": "fin.mat.l1",
       "total": 100,
-      "nm": "गणित"
+      "nm": "गणित",
+      "red_color_col": "fin.mat.1",
+      "red_color_val": 35
     },
     {
       "type": "calculated",
       "id": "fin.sci.l1",
       "total": 100,
-      "nm": "विज्ञान"
+      "nm": "विज्ञान",
+      "red_color_col": "fin.sci.1",
+      "red_color_val": 35
     },
     {
       "type": "calculated",
@@ -1424,7 +1434,9 @@
       "type": "calculated",
       "id": "fin.smj.l1",
       "total": 100,
-      "nm": "समाजशास्त्र / टेकनिकल"
+      "nm": "समाजशास्त्र / टेकनिकल",
+      "red_color_col": "fin.smj.1",
+      "red_color_val": 35
     },
     {
       "type": "calculated",
@@ -1466,7 +1478,8 @@
       "type": "calculated",
       "id": "fin.cmnt",
       "total": "",
-      "nm": "Comments"
+      "nm": "Comments",
+      "width": 20
     }
   ]
 }

@@ -74,6 +74,14 @@ def get_column_config_for_subject(subject):
     return col_info
 
 
+def is_red_high_req(md, colinfo):
+    if "red_color_col" in colinfo \
+            and colinfo["red_color_col"] in md \
+            and md[colinfo["red_color_col"]] < colinfo["red_color_val"]:
+        return True
+    return False
+
+
 app_path = os.path.dirname(os.path.dirname(os.path.realpath(__file__)))
 db_path = str(Path(app_path) / "data/results.db")
 data_path = str(Path(app_path) / "data")

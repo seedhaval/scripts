@@ -1,11 +1,11 @@
 import openpyxl
-from openpyxl.utils import get_column_letter
 
 from lib import db
 from lib.calculatedmarks import calculate
 from lib.codehelper import get_column_config_for_subject, \
-    get_safe_output_xls_path, cfg
-from lib.excelhelper import Cell, all_borders, add_table, save_close_and_start
+    get_safe_output_xls_path, cfg, is_red_high_req
+from lib.excelhelper import Cell, all_borders, add_table, \
+    save_close_and_start, apply_column_widths
 from lib.uihelper import MyApp
 
 d = {}
@@ -75,7 +75,8 @@ def add_excel_exam_info(wb):
         Cell(7, 4 + i, sht).set(nm).border().verticalwrap()
         Cell(8, 4 + i, sht).set(alias).border()
         Cell(9, 4 + i, sht).set(total).border()
-        sht.column_dimensions[get_column_letter(4 + i)].width = 6
+        width = 6 if "width" not in examcol else examcol["width"]
+        apply_column_widths(sht, 4 + i, [width])
 
 
 def add_excel_marks(wb):
@@ -84,8 +85,10 @@ def add_excel_marks(wb):
         for ic, exam in enumerate(d['colInfo']):
             if student[0] in d['marksMap'] \
                     and exam['id'] in d['marksMap'][student[0]]:
-                Cell(10 + ir, 4 + ic, sht).set(
-                    d['marksMap'][student[0]][exam['id']])
+                c = Cell(10 + ir, 4 + ic, sht)
+                c.set(d['marksMap'][student[0]][exam['id']]).wrap()
+                if is_red_high_req(d['marksMap'][student[0]], exam):
+                    c.red_color()
 
 
 def populate_excel(wb):

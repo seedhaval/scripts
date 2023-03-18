@@ -37,6 +37,10 @@ class Cell:
         self.cell.font = Font(color=clr)
         return self
 
+    def red_color(self):
+        self.cell.font = Font(color='FF0000')
+        return self
+
     def set(self, v):
         self.cell.value = v
         return self

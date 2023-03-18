@@ -81,9 +81,9 @@ def apply_grace(md, grace_req):
     grace_applied = {}
     for sub, req in sorted(grace_req, key=lambda x: x[1]):
         if req < avlbl_grace:
+            grace_applied[sub] = [md[sub], req]
             avlbl_grace -= req
             md[sub] += req
-            grace_applied[sub] = [md[sub], req]
         else:
             break
     md['grace_applied'] = grace_applied

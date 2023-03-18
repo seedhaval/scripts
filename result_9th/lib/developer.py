@@ -22,16 +22,3 @@ def get_column_ids():
             out.append([sub, colnm, str(col['id'])])
     add_table(sht, 1, 1, out)
     save_close_and_start(wb, filepath)
-
-
-#def csv_to_json_col_export():
-#    d = {}
-#    with open(data_path + "\\export_columns", encoding='utf8') as f:
-#        sub_ar = [x.strip().split(",")[0] for x in f.readlines() if x.strip()]
-#    for sub in sub_ar:
-#        curd = get_column_config_for_subject(sub)
-#        for row in curd:
-#            del row["color"]
-#        d[sub] = curd
-#
-#    print(json.dumps(d, indent=2, ensure_ascii=False))
