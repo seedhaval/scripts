@@ -1,5 +1,5 @@
 from lib.calchelper import add, oneof, get_fail_count_lt, add_comment, \
-    auto_condo, get_grade
+    auto_condo, get_grade, multiply
 
 snsk_hin_cmb_nm = 'ssh.7 ssh.8'
 lang_grp_nm = 'fin.mar.1 fin.hin.1 fin.eng.1'
@@ -99,6 +99,38 @@ def calc_grace(md):
     apply_grace(md, grace_req)
 
 
+def add_grace_comment(md):
+    for i, sub in enumerate(all_sub_nm.split()):
+        if sub in md['grace_applied']:
+            grace = md['grace_applied'][sub][1]
+            if grace <= 10:
+                add_comment(md, f"Grace - {all_sub_title[i]}")
+            else:
+                add_comment(md, f"Extra Grace - {all_sub_title[i]}")
+
+
+def get_ledger_remark(md):
+    passed = True
+    get_fail_count_lt(md, 'tmp.lang.fail.cnt', '', lang_grp_nm, 35)
+    get_fail_count_lt(md, 'tmp.mat.fail.cnt', '', mat_grp_nm, 35)
+    if md['tmp.lang.fail.cnt'] > 0 and md['tmp.lang.combined.pass'] == False:
+        passed = False
+    if md['tmp.mat.fail.cnt'] > 0 and md['tmp.maths.combined.pass'] == False:
+        passed = False
+    if md[smj_nm] < 35:
+        passed = False
+    if md['tmp.final.fail.cnt'] == 0:
+        val = 'उत्तीर्ण'
+        md['final.pass.status'] = 'उत्तीर्ण'
+    elif passed == True:
+        val = f"F{md['tmp.final.fail.cnt']} उत्तीर्ण"
+        md['final.pass.status'] = 'उत्तीर्ण'
+    else:
+        val = f"F{md['tmp.final.fail.cnt']} जून पुनर्परीक्षेस पात्र"
+        md['final.pass.status'] = 'जून पुनर्परीक्षेस पात्र'
+    md['fin.rem.l1'] = val
+
+
 def get_final_ledger_text(md):
     for sub in six_sub_nm.split():
         l_sub = sub.replace('.1', '.l1')
@@ -115,12 +147,9 @@ def get_final_ledger_text(md):
     add(md, 'fin.grp.l1', lang_grp_nm)
     add(md, 'fin.grp.l2', mat_grp_nm)
     add(md, 'fin.total.l1', f'fin.grp.l1 fin.grp.l2 {smj_nm}')
-
-    if len(md['grace_applied']) == 0:
-        return
-    max_grace = max([x[1] for x in md['grace_applied'].values()])
-    cmnt = "grace applied" if max_grace <= 10 else "additional grace applied"
-    add_comment(md, cmnt)
+    multiply(md, 'fin.100.l1', 'fin.total.l1', 1.0 / 6.0)
+    add_grace_comment(md)
+    get_ledger_remark(md)
 
 
 def calc_final(md):

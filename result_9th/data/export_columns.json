@@ -1496,7 +1496,8 @@
       "type": "calculated",
       "id": "fin.rem.l1",
       "total": "",
-      "nm": "शेरा"
+      "nm": "शेरा",
+      "width": 20
     },
     {
       "type": "calculated",
