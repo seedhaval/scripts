@@ -33,7 +33,6 @@ def draw_excel_populate_marks(wb, ir, student, left):
     Cell(ir + 20, left + 2, sht).set(md['final.pass.status'])
 
 
-
 def calculate_marks():
     for k, v in d['marksMap'].items():
         calculate(v, 'all', ())
@@ -55,12 +54,12 @@ def get_output_file_path():
 def add_excel_result(wb):
     sht = wb.active
     for i, student in enumerate(d['studentMap']):
-        ir = ((i//2) * 29) + 1
+        ir = ((i // 2) * 29) + 1
         print(ir)
-        left = 2 if i%2 == 0 else 9
+        left = 2 if i % 2 == 0 else 9
         apply_template(sht, d['tmplt'], left, ir)
         draw_excel_populate_marks(wb, ir, student, left)
-        if i%2 == 1:
+        if i % 2 == 1:
             add_page_break(sht, ir + 28)
 
 
