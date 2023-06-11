@@ -41,7 +41,6 @@ def calc_term_1(md):
     oneof(md, 'ps.4', 'soc.6 tec.2')
     add(md, 'ps.5', 'ps.2 ps.3 ps.4')
     multiply(md, 'ps.6', 'ps.5', 0.1666)
-    get_grade(md, 'ps.8', 'aro.1')
     get_grade(md, 'ps.10', 'ncc.1')
     get_fail_count_lt(md, 'ps.fcount', 'ps.7',
                       'mar.2 ps.1 eng.2 mat.3 sci.3 ps.4', 35)
@@ -54,7 +53,6 @@ def calc_term_2(md):
     oneof(md, 'ds.4', 'soc.13 tec.4')
     add(md, 'ds.5', 'ds.2 ds.3 ds.4')
     multiply(md, 'ds.6', 'ds.5', 0.1666)
-    get_grade(md, 'ds.8', 'aro.2')
     get_grade(md, 'ds.10', 'ncc.2')
     get_fail_count_lt(md, 'ds.fcount', 'ds.7',
                       'mar.4 ds.1 eng.4 mat.6 sci.6 ds.4', 35)

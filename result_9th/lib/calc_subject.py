@@ -100,10 +100,12 @@ def calc_technical(md):
 
 
 def calc_arogya(md):
-    add(md, "aro.1", "128 129")
-    add(md, "aro.2", "130 131")
-    add(md, "aro.3", "aro.1 aro.2")
-    multiply(md, "aro.4", "aro.3", 0.5)
+    add(md, "aro.1", "170 171 172 173 174")
+    get_grade(md, "aro.2", "aro.1")
+    add(md, "aro.3", "175 176 177 178 179")
+    add(md, "aro.4", "aro.1 aro.3")
+    multiply(md, "aro.5", "aro.4", 0.5)
+    get_grade(md, "aro.6", "aro.5")
 
 
 def calc_jals(md):
@@ -112,7 +114,6 @@ def calc_jals(md):
     add(md, "jals.3", "159 160 161 162 163")
     add(md, "jals.4", "jals.1 jals.3")
     get_grade(md, "jals.5", "jals.4")
-
 
 
 def calc_ncc(md):

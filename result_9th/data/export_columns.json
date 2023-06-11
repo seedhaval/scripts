@@ -966,11 +966,23 @@
   "आरोग्य शिक्षण आणि शारीरिक शिक्षण": [
     {
       "type": "exam id",
-      "id": "128"
+      "id": "170"
     },
     {
       "type": "exam id",
-      "id": "129"
+      "id": "171"
+    },
+    {
+      "type": "exam id",
+      "id": "172"
+    },
+    {
+      "type": "exam id",
+      "id": "173"
+    },
+    {
+      "type": "exam id",
+      "id": "174"
     },
     {
       "type": "calculated",
@@ -979,30 +991,54 @@
       "nm": "प्रथम सत्र एकूण"
     },
     {
-      "type": "exam id",
-      "id": "130"
+      "type": "calculated",
+      "id": "aro.2",
+      "total": "",
+      "nm": "श्रेणी"
     },
     {
       "type": "exam id",
-      "id": "131"
+      "id": "175"
+    },
+    {
+      "type": "exam id",
+      "id": "176"
+    },
+    {
+      "type": "exam id",
+      "id": "177"
+    },
+    {
+      "type": "exam id",
+      "id": "178"
+    },
+    {
+      "type": "exam id",
+      "id": "179"
     },
     {
       "type": "calculated",
-      "id": "aro.2",
+      "id": "aro.3",
       "total": 100,
       "nm": "द्वितीय सत्र एकूण"
     },
     {
       "type": "calculated",
-      "id": "aro.3",
+      "id": "aro.4",
       "total": 200,
       "nm": "एकूण"
     },
     {
       "type": "calculated",
-      "id": "aro.4",
+      "id": "aro.5",
       "total": 100,
       "nm": "सरासरी"
+    },
+    {
+      "type": "calculated",
+      "id": "aro.6",
+      "total": "",
+      "nm": "श्रेणी"
     }
   ],
   "जलसंरक्षण": [
@@ -1304,7 +1340,7 @@
     },
     {
       "type": "calculated",
-      "id": "ps.8",
+      "id": "aro.2",
       "total": "",
       "nm": "आरोग्यव शा. शिक्षण"
     },
@@ -1396,7 +1432,7 @@
     },
     {
       "type": "calculated",
-      "id": "ds.8",
+      "id": "aro.6",
       "total": "",
       "nm": "आरोग्यव शा. शिक्षण "
     },
@@ -1494,7 +1530,7 @@
     },
     {
       "type": "calculated",
-      "id": "fin.aro.l1",
+      "id": "aro.6",
       "total": "",
       "nm": "आरोग्य व शा.शिक्षण"
     },

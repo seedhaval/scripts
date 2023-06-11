@@ -25,7 +25,7 @@ def draw_excel_populate_marks(wb, ir, student, left):
     Cell(ir + 12, left + 4, sht).set(md['fin.sci.r1'])
     Cell(ir + 13, left + 4, sht).set(md['fin.grp.l2'])
     Cell(ir + 14, left + 4, sht).set(md['fin.smj.r1'])
-    Cell(ir + 15, left + 4, sht).set(md['fin.aro.l1'])
+    Cell(ir + 15, left + 4, sht).set(md['aro.6'])
     Cell(ir + 16, left + 4, sht).set(md['jals.5'])
     Cell(ir + 17, left + 4, sht).set(md['fin.ncc.l1'])
     Cell(ir + 18, left + 4, sht).set(md['fin.total.l1'])
