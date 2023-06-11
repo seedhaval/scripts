@@ -66,7 +66,8 @@ def excel_format_mark_cells(wb):
     sht = wb.active
     for r in range(len(d['studentMap'])):
         for c in range(len(d['colInfo'])):
-            Cell(10 + r, 4 + c, sht).border().color(d['colInfo'][c]['color'])
+            Cell(10 + r, 4 + c, sht).border().color(d['colInfo'][c][
+                                                        'color']).zerodecimal()
 
 
 def add_excel_exam_info(wb):

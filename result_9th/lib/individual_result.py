@@ -55,7 +55,6 @@ def add_excel_result(wb):
     sht = wb.active
     for i, student in enumerate(d['studentMap']):
         ir = ((i // 2) * 29) + 1
-        print(ir)
         left = 2 if i % 2 == 0 else 9
         apply_template(sht, d['tmplt'], left, ir)
         draw_excel_populate_marks(wb, ir, student, left)

@@ -91,7 +91,6 @@ def add_excel_marks(wb):
                 c.set(d['marksMap'][student[0]][exam['id']]).wrap()
                 if is_red_high_req(d['marksMap'][student[0]], exam):
                     c.red_color()
-    print(json.dumps(d['marksMap'][22], indent=2))
 
 def populate_excel(wb):
     add_excel_header(wb)

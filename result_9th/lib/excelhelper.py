@@ -52,6 +52,9 @@ class Cell:
     def unprotect(self):
         self.cell.protection = Protection(locked=False)
 
+    def zerodecimal(self):
+        self.cell.number_format = "0"
+
 
 def read_all_rows(fl, shtnm):
     out = []
