@@ -1,4 +1,4 @@
-from lib.calchelper import add, multiply
+from lib.calchelper import add, multiply, get_grade
 
 
 def calc_marathi(md):
@@ -107,10 +107,12 @@ def calc_arogya(md):
 
 
 def calc_jals(md):
-    add(md, "jals.1", "132 133")
-    add(md, "jals.2", "134 135")
-    add(md, "jals.3", "jals.1 jals.2")
-    multiply(md, "jals.4", "jals.3", 0.5)
+    add(md, "jals.1", "154 155 156 157 158")
+    get_grade(md, "jals.2", "jals.1", 50)
+    add(md, "jals.3", "159 160 161 162 163")
+    add(md, "jals.4", "jals.1 jals.3")
+    get_grade(md, "jals.5", "jals.4")
+
 
 
 def calc_ncc(md):

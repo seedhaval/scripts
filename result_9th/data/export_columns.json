@@ -1008,43 +1008,73 @@
   "जलसंरक्षण": [
     {
       "type": "exam id",
-      "id": "132"
+      "id": "154"
     },
     {
       "type": "exam id",
-      "id": "133"
+      "id": "155"
+    },
+    {
+      "type": "exam id",
+      "id": "156"
+    },
+    {
+      "type": "exam id",
+      "id": "157"
+    },
+    {
+      "type": "exam id",
+      "id": "158"
     },
     {
       "type": "calculated",
       "id": "jals.1",
-      "total": 100,
+      "total": 50,
       "nm": "प्रथम सत्र एकूण"
-    },
-    {
-      "type": "exam id",
-      "id": "134"
-    },
-    {
-      "type": "exam id",
-      "id": "135"
     },
     {
       "type": "calculated",
       "id": "jals.2",
-      "total": 100,
-      "nm": "द्वितीय सत्र एकूण"
+      "total": "",
+      "nm": "प्रथम सत्र श्रेणी"
+    },
+    {
+      "type": "exam id",
+      "id": "159"
+    },
+    {
+      "type": "exam id",
+      "id": "160"
+    },
+    {
+      "type": "exam id",
+      "id": "161"
+    },
+    {
+      "type": "exam id",
+      "id": "162"
+    },
+    {
+      "type": "exam id",
+      "id": "163"
     },
     {
       "type": "calculated",
       "id": "jals.3",
-      "total": 200,
-      "nm": "एकूण"
+      "total": 50,
+      "nm": "द्वितीय सत्र एकूण"
     },
     {
       "type": "calculated",
       "id": "jals.4",
       "total": 100,
-      "nm": "सरासरी"
+      "nm": "एकूण"
+    },
+    {
+      "type": "calculated",
+      "id": "jals.5",
+      "total": "",
+      "nm": "श्रेणी"
     }
   ],
   "स्काउट गाईड-NCC-RSP-कला रसास्वाद ": [
@@ -1275,19 +1305,19 @@
     {
       "type": "calculated",
       "id": "ps.8",
-      "total": 100,
+      "total": "",
       "nm": "आरोग्यव शा. शिक्षण"
     },
     {
       "type": "calculated",
-      "id": "ps.9",
-      "total": 100,
+      "id": "jals.2",
+      "total": "",
       "nm": "जलसंरक्षण"
     },
     {
       "type": "calculated",
       "id": "ps.10",
-      "total": 100,
+      "total": "",
       "nm": "स्काऊट गाइड/RSP/NCC/स्व विकास कलारस्वाद"
     },
     {
@@ -1367,19 +1397,19 @@
     {
       "type": "calculated",
       "id": "ds.8",
-      "total": 100,
+      "total": "",
       "nm": "आरोग्यव शा. शिक्षण "
     },
     {
       "type": "calculated",
-      "id": "ds.9",
-      "total": 100,
+      "id": "jals.5",
+      "total": "",
       "nm": "जलसंरक्षण"
     },
     {
       "type": "calculated",
       "id": "ds.10",
-      "total": 100,
+      "total": "",
       "nm": "स्काऊट गाइड/RSP/NCC/स्व विकास कलारस्वाद"
     },
     {
@@ -1470,7 +1500,7 @@
     },
     {
       "type": "calculated",
-      "id": "fin.jals.l1",
+      "id": "jals.5",
       "total": "",
       "nm": "जलसंरक्षण"
     },

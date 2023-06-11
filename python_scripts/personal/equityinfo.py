@@ -3,11 +3,11 @@ from datetime import date
 import json
 
 dates = {
-    'latest': date(2023, 4, 6)
+    'latest': date(2023, 5, 12)
     , 'prv_mo_1': date(2023, 3, 7)
-    , 'prv_mo_2': date(2023, 3, 14)
-    , 'six_mo_1': date(2022, 9, 29)
-    , 'six_mo_2': date(2022, 9, 5)
+    , 'prv_mo_2': date(2023, 3, 21)
+    , 'six_mo_1': date(2022, 11, 25)
+    , 'six_mo_2': date(2022, 11, 8)
     , 'prv_yr_1': date(2022, 1, 4)
     , 'prv_yr_2': date(2022, 1, 28)
 }
@@ -52,13 +52,13 @@ def get_net_data():
         print(k, v.strftime("%d-%m-%Y"))
         d[k] = {x[0]: x[9] for x in get_bhavcopy(
             date=v.strftime(
-                "%d-%m-%Y")).values.tolist()}
+                "%d-%m-%Y")).values.tolist() if x[1].strip() == 'EQ'}
 
     with open('out.json', 'w') as f:
         f.write(json.dumps(d, indent=2))
 
 
-# get_net_data()
+get_net_data()
 scrip_ar = []
 
 with open('out.json', 'r') as f:
@@ -73,7 +73,9 @@ for k in d['latest'].keys():
 def clause_1(scrip_ar):
     out = []
     for s in scrip_ar:
-        if s.latest < 5000 and s.prv_yr < s.six_mo and s.prv_mo > s.latest:
+        if s.latest < 5000 and s.prv_yr < s.six_mo and s.prv_mo > s.latest \
+                and s.latest < s.six_mo:
+            print(s.nm,s.latest,s.prv_mo,s.six_mo)
             out.append([s.nm, s.latest, s.prv_mo, -(s.prv_mo * 1.0) / s.latest])
     return out
 
@@ -86,8 +88,8 @@ def clause_2(scrip_ar):
             out.append([s.nm, s.latest, s.six_mo, -(s.six_mo * 1.0) / s.latest])
     return out
 
-#out = clause_1(scrip_ar)
-out = clause_2(scrip_ar)
+out = clause_1(scrip_ar)
+#out = clause_2(scrip_ar)
 
 for row in sorted(out, key=lambda x: x[3]):
     print(row)

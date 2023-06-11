@@ -5,7 +5,7 @@ snsk_hin_cmb_nm = 'ssh.7 ssh.8'
 lang_grp_nm = 'fin.mar.1 fin.hin.1 fin.eng.1'
 mat_grp_nm = 'fin.mat.1 fin.sci.1'
 smj_nm = 'fin.smj.1'
-grade_nm = 'fin.aro.1 fin.jals.1 fin.ncc.1'
+grade_nm = 'fin.aro.1 fin.ncc.1'
 six_sub_nm = f'{lang_grp_nm} {mat_grp_nm} {smj_nm}'
 all_sub_nm = f'{six_sub_nm} {grade_nm}'
 
@@ -22,7 +22,6 @@ def calc_final_step_1(md):
     add(md, 'fin.sci.1', 'sci.8')
     oneof(md, 'fin.smj.1', 'soc.15 tec.6')
     add(md, 'fin.aro.1', 'aro.4')
-    add(md, 'fin.jals.1', 'jals.4')
     add(md, 'fin.ncc.1', 'ncc.4')
 
 

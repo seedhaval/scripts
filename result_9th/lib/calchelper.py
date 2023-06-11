@@ -23,13 +23,13 @@ def auto_condo(md, nm, sub):
         md[nm] = 35
 
 
-def get_grade(md, nm, base):
+def get_grade(md, nm, base, total=100):
     type, cols = (md['type'], md['cols'])
     if type != 'all' and nm not in cols:
         return
     if base not in md:
         return
-    marks = md[base]
+    marks = md[base] * (100/total)
     if marks >= 60:
         val = 'अ'
     elif marks >= 45:
