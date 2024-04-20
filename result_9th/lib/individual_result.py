@@ -1,4 +1,5 @@
 import openpyxl
+from collections import defaultdict
 
 from lib import db
 from lib.calculatedmarks import calculate
@@ -10,10 +11,26 @@ from lib.uihelper import MyApp
 d = {}
 
 
+def adjust_height(sht, ir):
+    sht.row_dimensions[ir + 1].height = 24
+    sht.row_dimensions[ir + 6].height = 24
+    sht.row_dimensions[ir + 14].height = 24
+
+
+def add_logo(sht, ir, left):
+    img = openpyxl.drawing.image.Image(f"{data_path}/logo.jpg")
+    img.height = 50.0
+    img.width = 60.0
+    sht.add_image(img, Cell(ir, left, sht).nm)
+
+
 def draw_excel_populate_marks(wb, ir, student, left):
     sid, roll, nm = student
-    md = d['marksMap'][sid]
+    md = defaultdict(str)
+    md.update(d['marksMap'][sid])
     sht = wb.active
+    adjust_height(sht, ir)
+    add_logo(sht, ir, left)
     Cell(ir + 4, left + 1, sht).set(roll)
     Cell(ir + 4, left + 4, sht).set("तुकडी - " + d['ddDivision'].get())
     Cell(ir + 5, left + 2, sht).set(nm)

@@ -20,6 +20,7 @@ class Cell:
         self.sht = sht
         self.row = row
         self.col = col
+        self.nm = self.cell.column_letter + str(row)
 
     def wrap(self):
         self.cell.alignment = Alignment(wrap_text=True)
