@@ -133,6 +133,10 @@ student_info_delete = """
 delete from student_info
 """
 
+reg_info_delete = """
+delete from reg_info
+"""
+
 student_marks_delete = """
 delete from student_marks
 """
@@ -144,4 +148,24 @@ select
       else exam_category || ' - ' || exam_sub_category end as exam_name
   ,total_marks
 from exam_details
+"""
+
+check_if_reg_info_exists = """
+SELECT name 
+FROM sqlite_master 
+WHERE type='table' 
+AND name='reg_info' 
+limit 1
+"""
+
+create_reg_info = """
+create table reg_info (
+  student_id integer primary key,
+  student_id_19_digit decimal (30,0),
+  reg_id integer
+)
+"""
+
+get_reg_info = """
+select student_id, student_id_19_digit, reg_id from reg_info
 """

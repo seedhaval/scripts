@@ -37,6 +37,7 @@ def get_exam_map(subject):
     data = [tuple(x) for x in fetch_sqlite_rows(qry, args)]
     return {x[0]: (x[1], x[2]) for x in data}
 
+
 def get_exam_map_for_all_subjects():
     qry = sql_template.get_exam_info_for_all_subjects
     data = [tuple(x) for x in fetch_sqlite_rows(qry, [])]
@@ -111,3 +112,28 @@ def bulk_insert_student_info(ar):
 def student_marks_delete():
     qry = sql_template.student_marks_delete
     sqlite_exec_query(qry, ())
+
+
+def bulk_insert_reg_info(ar):
+    qry = "insert into reg_info values " + ",\n".join(ar)
+    sqlite_exec_query(qry, ())
+
+
+def reg_info_delete():
+    qry = sql_template.reg_info_delete
+    sqlite_exec_query(qry, ())
+
+
+def create_reg_info_if_not_exists():
+    qry = sql_template.check_if_reg_info_exists
+    exst = len([x for x in fetch_sqlite_rows(qry, [])])
+    if exst == 0:
+        qry = sql_template.create_reg_info
+        sqlite_exec_query(qry, [])
+
+def get_reg_info():
+    qry = sql_template.get_reg_info
+    out = defaultdict(lambda: ('',''))
+    for row in fetch_sqlite_rows(qry, []):
+        out[str(row[0])] = (row[1], row[2])
+    return out

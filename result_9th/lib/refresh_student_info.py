@@ -42,3 +42,15 @@ def new_year(app: MyApp):
                          [1, 1, 1, 1])
     d['txtCode'] = frm_select.add_text("txtCode", "", 5, 1, [2, 1, 1, 1])
     frm_select.add_button("btnConfirm", "Confirm", do_new_year, [3, 1, 1, 1])
+
+
+def update_reg():
+    backup_database(False)
+    db.create_reg_info_if_not_exists()
+    data = excelhelper.read_all_rows(
+        f"{data_path}\\result_reference_data.xlsx", "reg_info")
+    db.reg_info_delete()
+    ar = []
+    for row in data[1:]:
+        ar.append(f"({row[0]},{row[1]},{row[2]})")
+    db.bulk_insert_reg_info(ar)

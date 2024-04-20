@@ -26,11 +26,14 @@ def add_logo(sht, ir, left):
 
 def draw_excel_populate_marks(wb, ir, student, left):
     sid, roll, nm = student
+    sid19, regid = d['reginfo'][str(sid)]
     md = defaultdict(str)
     md.update(d['marksMap'][sid])
     sht = wb.active
     adjust_height(sht, ir)
     add_logo(sht, ir, left)
+    Cell(ir + 2, left + 1, sht).set(str(sid19))
+    Cell(ir + 2, left + 4, sht).set(str(regid))
     Cell(ir + 4, left + 1, sht).set(roll)
     Cell(ir + 4, left + 4, sht).set("तुकडी - " + d['ddDivision'].get())
     Cell(ir + 5, left + 2, sht).set(nm)
@@ -60,6 +63,7 @@ def load_data():
     d['marksMap'] = db.get_marks_map_for_all_subjects(d['ddDivision'].get())
     d['tmplt'] = load_template(data_path + "\\template.xlsx", "reportcard",
                                2, 2, 7, 33)
+    d['reginfo'] = db.get_reg_info()
     calculate_marks()
 
 

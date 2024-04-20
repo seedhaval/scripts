@@ -26,6 +26,8 @@ menu_ar = [
      refresh_student_info.update],
     ["Reference Data", "Refresh student info - New year",
      lambda: refresh_student_info.new_year(app)],
+    ['Reference Data', "Refresh Registration info",
+     refresh_student_info.update_reg],
     ["Database", "Backup", lambda: backup_database(True)],
     ["Database", "Restore", restore_database],
     ["Developer", "Get Column IDs", get_column_ids]
