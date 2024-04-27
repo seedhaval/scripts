@@ -52,5 +52,5 @@ def update_reg():
     db.reg_info_delete()
     ar = []
     for row in data[1:]:
-        ar.append(f"({row[0]},{row[1]},{row[2]})")
+        ar.append(f"({row[0]},{row[1].replace('ID:','')},{row[2]})")
     db.bulk_insert_reg_info(ar)
