@@ -4,7 +4,7 @@ Step 1 - Install docker from https://docs.docker.com/desktop/install/windows-ins
 
 Step 2 - Open docker desktop and ensure that the docker engine is in running state
 
-Step 3 - Pull the bitname spark docker container. Run below command on terminal
+Step 3 - Pull the bitnami spark docker container. Run below command on terminal
 
     docker pull bitnami/spark
 
