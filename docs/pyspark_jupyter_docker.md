@@ -14,10 +14,12 @@ Step 4 - Run spark container interactively
 
 Step 5 - Install and start Jupyter notebook in the container
 
+```python
     pip install jupyter
     pip install py4j
     export PATH="$PATH:/.local/bin"
     jupyter notebook --ip=0.0.0.0 --port=8888 --no-browser --allow-root
+```
 
 Take a note of the token as it will be required in next step.
 
