@@ -27,6 +27,7 @@ class Character():
         self.x = x
         self.y = y
         self.person_name = prsn
+        self.nm = prsn
         self.font_clr = (255, 255, 255)
 
     def check_if_point_contains(self, pos):
@@ -39,12 +40,13 @@ class Character():
 
 
 class ResizableImage:
-    def __init__(self, fl, x, y, max_width, max_height):
+    def __init__(self, fl, x, y, max_width, max_height, nm=None):
         self.x = x
         self.y = y
         self.max_width = max_width
         self.max_height = max_height
         self.fl = fl
+        self.nm = nm
         self.recalc()
 
     def recalc(self):
@@ -61,8 +63,9 @@ class ResizableImage:
         self.offset_x = (self.max_width - scale_width) // 2
         self.offset_y = (self.max_height - scale_height) // 2
 
-    def update_fl(self, fl):
+    def update_fl(self, fl, nm=None):
         self.fl = fl
+        self.nm = nm
         self.recalc()
 
     def show(self):
@@ -75,7 +78,8 @@ class ResizableImage:
 class BaseScene:
     def __init__(self):
         menu_top = cfg.screen_height - 125
-        self.bigpart = ResizableImage(get_card_file("selopt"), 0, 0, cfg.screen_width,
+        self.bigpart = ResizableImage(get_card_file("selopt"), 0, 0,
+                                      cfg.screen_width,
                                       cfg.screen_height - 150)
         self.actor = ResizableImage(get_card_file("actor"), 0, menu_top, 100,
                                     100)
@@ -104,8 +108,11 @@ class BaseScene:
             gvar["char_mode_obj"] = self.actee
             gvar["current_scene"] = "sel_char"
         elif self.action.check_if_point_contains(event.pos):
-            gvar["carousal_mode_obj"] = self.action
+            gvar["carousal_mode_obj"] = [self.action]
             gvar["current_scene"] = "sel_action"
+        elif self.part.check_if_point_contains(event.pos):
+            gvar["carousal_mode_obj"] = [self.part, self.bigpart]
+            gvar["current_scene"] = "sel_part"
 
 
 class SelActionScene:
@@ -130,7 +137,34 @@ class SelActionScene:
     def check_click(self, event):
         for elm in self.ar:
             if elm.check_if_point_contains(event.pos):
-                gvar["carousal_mode_obj"].update_fl(elm.fl)
+                for obj in gvar["carousal_mode_obj"]:
+                    obj.update_fl(elm.fl)
+                gvar["current_scene"] = "base"
+
+
+class SelPartScene:
+    def show(self):
+        nm = gvar["scenes"]["base"].actee.nm
+        self.ar = []
+        x = 0
+        y = 0
+        for fl in (cfg.data_dir / f"img/bp/{nm}/").glob("*.*"):
+            self.ar.append(ResizableImage(str(fl), x, y, 200, 200))
+            if x >= (cfg.screen_width - 200):
+                x = 0
+                y += 200
+            else:
+                x += 200
+        screen.fill((0, 0, 0))
+        for elm in self.ar:
+            elm.show()
+        pygame.display.flip()
+
+    def check_click(self, event):
+        for elm in self.ar:
+            if elm.check_if_point_contains(event.pos):
+                for obj in gvar["carousal_mode_obj"]:
+                    obj.update_fl(elm.fl)
                 gvar["current_scene"] = "base"
 
 
@@ -155,7 +189,7 @@ class SceneSelectCharacter:
     def check_click(self, event):
         for k, v in gvar["pobj"].items():
             if v.check_if_point_contains(event.pos):
-                gvar["char_mode_obj"].update_fl(v.fl)
+                gvar["char_mode_obj"].update_fl(v.fl, v.nm)
                 gvar["current_scene"] = "base"
 
 
@@ -180,7 +214,8 @@ if __name__ == '__main__':
     gvar["scenes"] = {
         "sel_char": SceneSelectCharacter(),
         "base": BaseScene(),
-        "sel_action": SelActionScene()
+        "sel_action": SelActionScene(),
+        "sel_part": SelPartScene()
     }
     gvar["current_scene"] = "base"
     gvar["scenes"][gvar["current_scene"]].show()
