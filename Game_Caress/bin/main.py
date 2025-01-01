@@ -1,7 +1,5 @@
 import pygame
-
 import cfg
-
 import base_scene
 import sel_char_scene
 import sel_part_scene
@@ -16,14 +14,16 @@ gvar = {"screen": screen}
 def start():
     running = True
     updated = False
+    clock = pygame.time.Clock()
     while running:
+        gvar["dt"] = clock.tick(cfg.FPS) / 1000
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
             if event.type == pygame.MOUSEBUTTONDOWN:
                 gvar["scenes"][gvar["current_scene"]].check_click(event)
                 updated = True
-        if updated:
+        if updated or gvar["scenes"]["base"].animating == True:
             gvar["scenes"][gvar["current_scene"]].show()
             updated = False
     pygame.quit()
