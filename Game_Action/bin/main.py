@@ -11,13 +11,15 @@ def start():
     running = True
     updated = False
     while running:
+        clock = pygame.time.Clock()
+        clock.tick(cfg.fps)
         for event in pygame.event.get():
             if event.type == pygame.QUIT:
                 running = False
             if event.type == pygame.MOUSEBUTTONDOWN:
                 gvar["scenes"][gvar["current_scene"]].check_click(event)
                 updated = True
-        if updated:
+        if updated or gvar["scenes"]["base"].is_animating:
             gvar["scenes"][gvar["current_scene"]].show()
             updated = False
     pygame.quit()

@@ -4,6 +4,7 @@ import cfg
 from pathlib import Path
 from random import shuffle
 
+
 class SelSceneScene:
     def __init__(self, gvar):
         self.gvar = gvar
@@ -12,11 +13,12 @@ class SelSceneScene:
         self.ar = []
         x = 0
         y = 0
-        fl_ar = sorted([str(x) for x in (cfg.data_dir / "scenes").rglob("00.png")])
+        fl_ar = sorted(
+            [str(x) for x in (cfg.data_dir / "scenes").rglob("00.png")])
         if len(fl_ar) > 24:
             out_ar = fl_ar[:-3]
             shuffle(out_ar)
-            out_ar = [*out_ar[:21],*fl_ar[-3:]]
+            out_ar = [*out_ar[:21], *fl_ar[-3:]]
         else:
             out_ar = fl_ar
 
@@ -44,3 +46,4 @@ class SelSceneScene:
                 self.gvar["current_scene"] = "base"
                 self.gvar["scene.idx"] = 0
                 self.gvar["scene.file.ar"] = sorted([str(x) for x in file_ar])
+                self.gvar["scenes"]["base"].start_animation()
