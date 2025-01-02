@@ -1,7 +1,8 @@
 from helper import ResizableImage
 import pygame
 import cfg
-
+from pathlib import Path
+from random import shuffle
 
 class SelSceneScene:
     def __init__(self, gvar):
@@ -11,15 +12,23 @@ class SelSceneScene:
         self.ar = []
         x = 0
         y = 0
-        for fl in (cfg.data_dir / f"scenes").rglob("00.png"):
-            nm = fl.parent.name
-            self.ar.append(ResizableImage(str(fl), x, y, 200, 200, self.gvar,
+        fl_ar = sorted([str(x) for x in (cfg.data_dir / "scenes").rglob("00.png")])
+        if len(fl_ar) > 24:
+            out_ar = fl_ar[:-3]
+            shuffle(out_ar)
+            out_ar = [*out_ar[:21],*fl_ar[-3:]]
+        else:
+            out_ar = fl_ar
+
+        for fl in out_ar:
+            nm = Path(fl).parent.name
+            self.ar.append(ResizableImage(str(fl), x, y, 320, 180, self.gvar,
                                           nm))
-            if x >= (cfg.screen_width - 200):
+            if x >= (cfg.screen_width - 340):
                 x = 0
                 y += 200
             else:
-                x += 200
+                x += 340
         self.gvar["screen"].fill((0, 0, 0))
         for elm in self.ar:
             elm.show()
