@@ -1,3 +1,5 @@
+import shutil
+
 import cfg
 from helper import ResizableImage, get_card_file
 import pygame
@@ -18,9 +20,10 @@ class BaseScene:
         self.gvar["scene.idx"] = 0
         self.gvar["scene.file.ar"] = []
         self.is_animating = False
-        self.speed_ar = [0.25, 0.5, 1]
-        self.speed_idx = 2
+        self.speed_ar = [0.5, 1, 0.25]
+        self.speed_idx = 0
         self.recalc_wait_parms()
+        self.cur_nm = ""
 
     def recalc_wait_parms(self):
         self.wait_sec = self.speed_ar[self.speed_idx]
@@ -51,19 +54,26 @@ class BaseScene:
     def stop_animation(self):
         self.is_animating = False
 
+    def load_next_tmp_scene(self):
+        self.stop_animation()
+        fldr = [x for x in (cfg.data_dir / "tmp").glob("*") if x.is_dir()][0]
+        fls = [str(x) for x in fldr.glob("*.png")]
+        self.gvar["scene.file.ar"] = fls
+        self.gvar["scene.idx"] = 0
+        self.cur_nm = fldr.name
+        self.start_animation()
+
     def check_click(self, event):
         if self.prev_btn.collidepoint(event.pos):
-            if self.gvar["scene.idx"] > 0:
-                self.gvar["scene.idx"] -= 1
-                fl = self.gvar["scene.file.ar"][self.gvar["scene.idx"]]
-                self.bigpart.update_fl(fl)
-            self.stop_animation()
+            if self.cur_nm != "":
+                shutil.rmtree(cfg.data_dir / "tmp" / self.cur_nm)
+            self.load_next_tmp_scene()
         elif self.next_btn.collidepoint(event.pos):
-            if self.gvar["scene.idx"] + 1 < len(self.gvar["scene.file.ar"]):
-                self.gvar["scene.idx"] += 1
-                fl = self.gvar["scene.file.ar"][self.gvar["scene.idx"]]
-                self.bigpart.update_fl(fl)
-            self.stop_animation()
+            if self.cur_nm != "":
+                shutil.copytree(cfg.data_dir / "tmp" / self.cur_nm,
+                                cfg.data_dir / "scenes" / self.cur_nm)
+                shutil.rmtree(cfg.data_dir / "tmp" / self.cur_nm)
+            self.load_next_tmp_scene()
         elif self.scene.check_if_point_contains(event.pos):
             self.gvar["current_scene"] = "sel_scene"
             self.gvar["carousal_mode_obj"] = [self.bigpart]
