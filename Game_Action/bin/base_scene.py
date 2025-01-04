@@ -3,7 +3,8 @@ import shutil
 import cfg
 from helper import ResizableImage, get_card_file
 import pygame
-
+from pathlib import Path
+from random import choice
 
 class BaseScene:
     def __init__(self, gvar):
@@ -24,6 +25,7 @@ class BaseScene:
         self.speed_idx = 0
         self.recalc_wait_parms()
         self.cur_nm = ""
+        self.mode = "tmp"
 
     def recalc_wait_parms(self):
         self.wait_sec = self.speed_ar[self.speed_idx]
@@ -34,9 +36,9 @@ class BaseScene:
         self.gvar["screen"].fill((0, 0, 0))
         self.bigpart.show()
         self.scene.show()
-        pygame.draw.rect(self.gvar["screen"], (224, 215, 255), self.prev_btn)
-        pygame.draw.rect(self.gvar["screen"], (250, 255, 199), self.next_btn)
-        pygame.draw.rect(self.gvar["screen"], (186, 255, 201), self.go_btn)
+        pygame.draw.rect(self.gvar["screen"], (254, 130, 170), self.prev_btn)
+        pygame.draw.rect(self.gvar["screen"], (186, 255, 201), self.next_btn)
+        pygame.draw.rect(self.gvar["screen"], (250, 255, 199), self.go_btn)
         if self.is_animating:
             self.wait_counter -= 1
             if self.wait_counter < 0:
@@ -65,19 +67,34 @@ class BaseScene:
 
     def check_click(self, event):
         if self.prev_btn.collidepoint(event.pos):
+            if self.mode == "scene":
+                self.stop_animation()
+                fldr = cfg.data_dir / "scenes" / Path(self.bigpart.fl).parent.name
+                shutil.rmtree(fldr)
+                self.bigpart.update_fl(get_card_file('selopt'))
+                self.mode = "tmp"
+                return 
             if self.cur_nm != "":
                 shutil.rmtree(cfg.data_dir / "tmp" / self.cur_nm)
             self.load_next_tmp_scene()
+            self.mode = "tmp"
         elif self.next_btn.collidepoint(event.pos):
             if self.cur_nm != "":
                 shutil.copytree(cfg.data_dir / "tmp" / self.cur_nm,
                                 cfg.data_dir / "scenes" / self.cur_nm)
                 shutil.rmtree(cfg.data_dir / "tmp" / self.cur_nm)
-            self.load_next_tmp_scene()
+            self.load_next_tmp_scene()           
         elif self.scene.check_if_point_contains(event.pos):
-            self.gvar["current_scene"] = "sel_scene"
-            self.gvar["carousal_mode_obj"] = [self.bigpart]
             self.stop_animation()
+            self.mode = "scene"
+            self.cur_nm = ""
+            fl = choice(
+            [x for x in (cfg.data_dir / "scenes").rglob("00.png")])            
+            self.bigpart.update_fl(str(fl))
+            file_ar = fl.parent.glob("*.*")
+            self.gvar["scene.idx"] = 0
+            self.gvar["scene.file.ar"] = sorted([str(x) for x in file_ar])
+            self.start_animation()
         elif self.go_btn.collidepoint(event.pos):
             self.speed_idx = (self.speed_idx + 1) % len(self.speed_ar)
             self.recalc_wait_parms()

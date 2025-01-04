@@ -48,13 +48,13 @@ def main():
         print("Invalid video duration. Check the input file.")
         return
 
-    for i in range(1, 101):
+    for i in range(1, 31):
         start_time = random.uniform(0, max(0, duration - 2))
         sample_dir = os.path.join(output_dir, f"{(int(time.time()))}_{i}")
         os.makedirs(sample_dir, exist_ok=True)
         print(f"Extracting sample {i} starting at {start_time:.2f} seconds...")
         extract_frames(input_file, start_time, sample_dir, i)
-
+    os.remove(input_file)
     print("Frame extraction complete.")
 
 
