@@ -22,7 +22,11 @@ class LocationScene(GameActionObject):
     def handle_user_selected_loc(self, sel):
         self.gvar["location.path"].append(sel["idx"])
         self.gvar["current_scene"] = "location"
-        self.show()
+        if len(self.gvar["map"]["location"][sel["idx"]]["children"]) == 0:
+            self.gvar["current_scene"] = "action"
+            self.gvar["scenes"]["action"].show()
+        else:
+            self.show()
 
     def show(self):
         get_user_selection(self.get_location_list(), self.gvar,

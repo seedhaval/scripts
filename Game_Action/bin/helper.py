@@ -93,7 +93,8 @@ class SelectableImage(GameActionObject):
 class PersistentSelectableImage(SelectableImage):
     def __init__(self, gvar, idx, img, nm, x, y):
         super().__init__(gvar, idx, img, nm, x, y)
-        self.img_obj = ResizableImage(img, x, y, 200, 200, gvar)
+        self.frame_obj = ResizableImage("frame1", x, y, 300, 300, gvar)
+        self.img_obj = ResizableImage(img, x + 10, y + 10, 260, 260, gvar)
         self.is_selected = True
 
     def show(self):
@@ -137,6 +138,11 @@ class OnOffSwitch(ResizableImage):
     def off(self):
         self.status = "off"
         self.update_fl(self.off_nm)
+
+    def check_if_point_contains(self, pos):
+        if self.status == "off":
+            return False
+        return super().check_if_point_contains(pos)
 
 
 def load_map():

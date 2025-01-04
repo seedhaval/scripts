@@ -3,6 +3,7 @@ import pygame.freetype
 import cfg
 import helper
 from scene_location import LocationScene
+from scene_action import ActionScene
 
 screen = pygame.display.set_mode((cfg.screen_width, cfg.screen_height))
 pygame.init()
@@ -11,6 +12,7 @@ gvar = {
     "map": helper.load_map(),
     "font": pygame.freetype.Font(cfg.cfg_dir / "fonts" / "Roboto.ttf", 36)
 }
+
 
 def start():
     running = True
@@ -30,7 +32,8 @@ def start():
 
 if __name__ == '__main__':
     gvar["scenes"] = {
-        "location": LocationScene(gvar)
+        "location": LocationScene(gvar),
+        "action": ActionScene(gvar)
     }
     gvar["current_scene"] = "location"
     gvar["scenes"][gvar["current_scene"]].show()
