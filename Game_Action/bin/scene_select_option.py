@@ -30,7 +30,6 @@ class OptionSelectScene(GameActionObject):
 
     def load_page(self):
         self.img_ar = []
-        print(self.pages[self.cur_page])
         for ir, row in enumerate(self.pages[self.cur_page]):
             for ic, elm in enumerate(row):
                 x = (self.xtop) + (400 * ic)
@@ -42,6 +41,14 @@ class OptionSelectScene(GameActionObject):
                 self.img_ar.append(obj)
 
     def show_switches(self):
+        if self.cur_page == 0:
+            self.prev.off()
+        else:
+            self.prev.on()
+        if self.cur_page + 1 < len(self.pages):
+            self.nxt.on()
+        else:
+            self.nxt.off()
         self.prev.show()
         self.nxt.show()
 
@@ -54,6 +61,12 @@ class OptionSelectScene(GameActionObject):
         for img in self.img_ar:
             if img.is_clicked(pos):
                 self.cb_func(img.get_dict())
+        if self.prev.check_if_point_contains(pos):
+            self.cur_page -= 1
+            self.load_page()
+        elif self.nxt.check_if_point_contains(pos):
+            self.cur_page += 1
+            self.load_page()
 
     def show(self):
         self.screen.fill((0, 0, 0))
@@ -66,5 +79,4 @@ def get_user_selection(lst, gvar, cb_func):
     scn = OptionSelectScene(lst, gvar, cb_func)
     gvar["scenes"]["select"] = scn
     gvar["current_scene"] = "select"
-    scn = OptionSelectScene(lst, gvar, cb_func)
     scn.show()
