@@ -82,6 +82,13 @@ class SelectableImage(GameActionObject):
         if self.img is not None:
             self.img_obj.update_fl(img)
 
+    def get_dict(self):
+        return {
+            "idx": self.idx,
+            "name": self.nm,
+            "img": self.img
+        }
+
 
 class PersistentSelectableImage(SelectableImage):
     def __init__(self, gvar, idx, img, nm, x, y):

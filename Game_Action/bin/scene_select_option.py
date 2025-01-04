@@ -49,6 +49,12 @@ class OptionSelectScene(GameActionObject):
         for elm in self.img_ar:
             elm.show()
 
+    def check_click(self, event):
+        pos = event.pos
+        for img in self.img_ar:
+            if img.is_clicked(pos):
+                self.cb_func(img.get_dict())
+
     def show(self):
         self.screen.fill((0, 0, 0))
         self.show_switches()
