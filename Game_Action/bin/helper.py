@@ -146,4 +146,32 @@ class OnOffSwitch(ResizableImage):
 
 
 def load_map():
-    return json.loads((cfg.cfg_dir / "map.json").read_text())
+    ln_ar = (cfg.cfg_dir / "map.txt").read_text().splitlines()
+    data = {
+        "person": {},
+        "location": {},
+        "action": {}
+    }
+    for ln in ln_ar:
+        ar = ln.strip().split(",")
+        if len(ar) == 0:
+            continue
+        if ar[0] == "p":
+            data["person"][ar[1]] = {
+                "gender": ar[2]
+            }
+        elif ar[0] == "l":
+            data["location"][ar[1]] = {
+                "name": ar[2],
+                "img": ar[3],
+                "children": ar[4].split(),
+                "actions": ar[5].split()
+            }
+        elif ar[0] == "a":
+            data["action"][ar[1]] = {
+                "name": ar[2],
+                "img": ar[3],
+                "children": ar[4].split(),
+                "allowed_genders": ar[5].split()
+            }
+    return data
