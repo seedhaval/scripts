@@ -94,7 +94,7 @@ class PersistentSelectableImage(SelectableImage):
     def __init__(self, gvar, idx, img, nm, x, y):
         super().__init__(gvar, idx, img, nm, x, y)
         self.frame_obj = ResizableImage("frame1", x, y, 300, 300, gvar)
-        self.img_obj = ResizableImage(img, x + 10, y + 10, 260, 260, gvar)
+        self.img_obj = ResizableImage(img, x + 20, y + 20, 260, 260, gvar)
         self.is_selected = True
 
     def show(self):

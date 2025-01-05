@@ -14,7 +14,7 @@ class ActionScene(GameActionObject):
                                             ytop)
         self.p2 = PersistentSelectableImage(gvar, "plus", "plus", "plus",
                                             xtop + 300, ytop)
-        self.swap = ResizableImage("oriana", xtop, ytop + 400, 200, 200, gvar)
+        self.swap = ResizableImage("swap", xtop, ytop + 400, 200, 200, gvar)
         self.home = ResizableImage("home", xtop + 200, ytop + 400, 200, 200,
                                    gvar)
         self.doact = OnOffSwitch(gvar, xtop + 400, ytop + 400, 200, 200,
