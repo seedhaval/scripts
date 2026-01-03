@@ -3,6 +3,9 @@
 <head>
 <meta charset="UTF-8" />
 <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/awesomplete/1.1.5/awesomplete.min.js"></script>
+
 <title>Trigger Based To-Do</title>
 
 <style>
@@ -297,5 +300,34 @@ function clearData() {
     }
 }
 </script>
+<script>
+document.addEventListener("DOMContentLoaded", function() {
+    // Only initialize on mobile browsers
+    var isMobile = /iPhone|iPad|iPod|Android/i.test(navigator.userAgent);
+    if (!isMobile) return; // Desktop keeps native datalist
+
+    // Find all inputs with datalist
+    var inputs = document.querySelectorAll('input[list]');
+    inputs.forEach(function(input) {
+        var listId = input.getAttribute('list');
+        var datalist = document.getElementById(listId);
+        if (!datalist) return;
+
+        // Get all options
+        var options = Array.from(datalist.options).map(function(opt) { return opt.value; });
+
+        // Initialize Awesomplete
+        new Awesomplete(input, {
+            list: options,
+            minChars: 0,   // show dropdown on focus
+            autoFirst: true
+        });
+
+        // Optional: show suggestions on focus
+        input.addEventListener('focus', function(){ this.awesomplete.open(); });
+    });
+});
+</script>
+
 </body>
 </html>
