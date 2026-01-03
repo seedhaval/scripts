@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Trigger Based To-Do</title>
+
+<style>
+	body {
+		font-family: system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+		margin: 0;
+		padding: 12px;
+		background: #f4f4f4;
+	}
+
+	h2 {
+		text-align: center;
+		margin-bottom: 12px;
+	}
+
+	.container {
+		max-width: 520px;
+		margin: auto;
+		background: #fff;
+		padding: 16px;
+		border-radius: 10px;
+		box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+	}
+
+	/* Inputs & Buttons (Top Section) */
+	input, button {
+		width: 100%;
+		padding: 10px;
+		margin: 6px 0;
+		font-size: 16px;
+		box-sizing: border-box;
+	}
+
+	button {
+		background: #1976d2;
+		color: white;
+		border: none;
+		border-radius: 6px;
+	}
+
+	button.secondary {
+		background: #555;
+	}
+
+	/* Action List */
+	ul {
+		list-style: none;
+		padding: 0;
+		margin: 10px 0 0;
+	}
+
+	li {
+		display: flex;
+		align-items: center;
+		gap: 6px;
+		padding: 6px 0;
+		border-bottom: 1px solid #e0e0e0;
+	}
+
+	/* Checkbox – compact */
+	li input[type="checkbox"] {
+		width: 18px;
+		height: 18px;
+		margin: 0 4px 0 0;
+		flex-shrink: 0;
+	}
+
+	/* Action text (SPAN) – take maximum space */
+	li span {
+		flex: 1 1 auto;
+		min-width: 0;               /* CRITICAL for flex */
+		font-size: 16px;
+		line-height: 1.4;
+		color: #000;
+		word-break: break-word;
+	}
+
+	/* Delete button – icon only, compact */
+	.icon-btn {
+		width: 32px;
+		min-width: 32px;
+		height: 32px;
+		padding: 4px;
+		margin-left: 4px;
+		font-size: 16px;
+		background: transparent;
+		color: #444;
+		border: none;
+		border-radius: 6px;
+		flex-shrink: 0;
+	}
+
+	/* Touch feedback */
+	.icon-btn:active {
+		background: #e0e0e0;
+	}
+
+	/* Mobile optimization */
+	@media (max-width: 600px) {
+		input, button {
+			font-size: 18px;
+		}
+
+		li span {
+			font-size: 17px;
+		}
+	}
+
+</style>
+</head>
+
+<body>
+<div class="container">
+    <h2>Trigger Based To-Do</h2>
+
+    <!-- Trigger Input -->
+    <input
+        list="triggerList"
+        id="triggerInput"
+        placeholder="Select or create trigger (e.g. Inside a car)"
+    />
+    <datalist id="triggerList"></datalist>
+
+    <!-- Action Input -->
+    <input id="actionInput" placeholder="Add action for this trigger" />
+    <button onclick="addAction()">Add Action</button>
+
+    <!-- Actions List -->
+    <ul id="actionList"></ul>
+
+    <!-- Utilities -->
+    <button class="secondary" onclick="exportData()">Export Data</button>
+    <button class="secondary" onclick="importData()">Import Data</button>
+    <button class="secondary" onclick="clearData()">Clear All Data</button>
+
+    <input type="file" id="fileInput" hidden />
+</div>
+
+<script>
+/* ======================
+   Storage Helpers
+====================== */
+
+function getData() {
+    return JSON.parse(localStorage.getItem("triggerTodoData") || "{}");
+}
+
+function saveData(data) {
+    localStorage.setItem("triggerTodoData", JSON.stringify(data));
+}
+
+/* ======================
+   DOM References
+====================== */
+
+const triggerInput = document.getElementById("triggerInput");
+const actionInput = document.getElementById("actionInput");
+const actionList = document.getElementById("actionList");
+const triggerList = document.getElementById("triggerList");
+
+/* ======================
+   Initialization
+====================== */
+
+triggerInput.addEventListener("input", loadActions);
+refreshTriggerList();
+
+/* ======================
+   Trigger Handling
+====================== */
+
+function refreshTriggerList() {
+    triggerList.innerHTML = "";
+    const data = getData();
+    Object.keys(data).forEach(trigger => {
+        const option = document.createElement("option");
+        option.value = trigger;
+        triggerList.appendChild(option);
+    });
+}
+
+/* ======================
+   Action Rendering
+====================== */
+
+function loadActions() {
+    const trigger = triggerInput.value.trim();
+    actionList.innerHTML = "";
+    if (!trigger) return;
+
+    const data = getData();
+    (data[trigger] || []).forEach(action => {
+        actionList.appendChild(createActionElement(action, trigger));
+    });
+}
+
+/* ======================
+   Action CRUD
+====================== */
+
+function addAction() {
+    const trigger = triggerInput.value.trim();
+    const text = actionInput.value.trim();
+    if (!trigger || !text) return;
+
+    const data = getData();
+    data[trigger] = data[trigger] || [];
+    data[trigger].push({
+        id: Date.now(),
+        text
+    });
+
+    saveData(data);
+    actionInput.value = "";
+    refreshTriggerList();
+    loadActions();
+}
+
+function createActionElement(action, trigger) {
+    const li = document.createElement("li");
+
+    const checkbox = document.createElement("input");
+    checkbox.type = "checkbox";
+    checkbox.title = "Mark done (auto delete)";
+    checkbox.onclick = () => deleteAction(action.id, trigger);
+
+    const textSpan = document.createElement("span");
+	textSpan.textContent = action.text;
+	textSpan.style.flex = "1";
+
+    const delBtn = document.createElement("button");
+    delBtn.textContent = "🗑";
+    delBtn.className = "icon-btn";
+    delBtn.onclick = () => deleteAction(action.id, trigger);
+
+    li.append(checkbox, textSpan, delBtn);
+    return li;
+}
+
+function editAction(id, trigger, newText) {
+    const data = getData();
+    const item = data[trigger]?.find(a => a.id === id);
+    if (item) {
+        item.text = newText;
+        saveData(data);
+    }
+}
+
+function deleteAction(id, trigger) {
+    const data = getData();
+    data[trigger] = data[trigger].filter(a => a.id !== id);
+    if (data[trigger].length === 0) delete data[trigger];
+    saveData(data);
+    refreshTriggerList();
+    loadActions();
+}
+
+/* ======================
+   Import / Export / Clear
+====================== */
+
+function exportData() {
+    const content = localStorage.getItem("triggerTodoData") || "{}";
+    const blob = new Blob([content], { type: "text/plain" });
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "trigger-todo-data.txt";
+    link.click();
+}
+
+function importData() {
+    const fileInput = document.getElementById("fileInput");
+    fileInput.onchange = () => {
+        const file = fileInput.files[0];
+        if (!file) return;
+        const reader = new FileReader();
+        reader.onload = e => {
+            localStorage.setItem("triggerTodoData", e.target.result);
+            refreshTriggerList();
+            loadActions();
+        };
+        reader.readAsText(file);
+    };
+    fileInput.click();
+}
+
+function clearData() {
+    if (confirm("This will remove all triggers and actions. Continue?")) {
+        localStorage.removeItem("triggerTodoData");
+        refreshTriggerList();
+        loadActions();
+    }
+}
+</script>
+</body>
+</html>
