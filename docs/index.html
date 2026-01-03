@@ -327,6 +327,20 @@ document.addEventListener("DOMContentLoaded", function() {
         // Optional: show suggestions on focus
         input.addEventListener('focus', function(){ this.awesomplete.open(); });
     });
+	
+	window.addOption = function(value) {
+        // Prevent duplicates
+        if (!Array.from(datalist.options).some(o => o.value === value)) {
+            const option = document.createElement('option');
+            option.value = value;
+            datalist.appendChild(option);
+
+            // Update Awesomplete on mobile
+            if (triggerInput.awesomplete) {
+                triggerInput.awesomplete.list = Array.from(datalist.options).map(o => o.value);
+            }
+        }
+    };
 });
 </script>
 
